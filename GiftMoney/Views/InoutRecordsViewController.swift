@@ -8,12 +8,20 @@
 
 import UIKit
 
-class InoutRecordsViewController: UIViewController {
-
+class InoutRecordsViewController: BaseViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "收支记录"
-        self.view.backgroundColor = UIColor.normalBackground
         
+        
+        let addRecordButton = UIBarButtonItem(title: "新增", style: UIBarButtonItem.Style.plain, target: self, action: #selector(addRecordButtonTapped))
+        self.navigationItem.rightBarButtonItems = [addRecordButton]
+        
+    }
+    
+    @objc func addRecordButtonTapped() {
+        
+        navigationController?.pushViewController(AddTradeViewController(), animated: true)
     }
 }

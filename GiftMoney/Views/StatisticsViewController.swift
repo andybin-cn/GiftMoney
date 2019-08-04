@@ -8,11 +8,10 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController {
+class StatisticsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.normalBackground
         self.title = "统计"
         // Do any additional setup after loading the view.
     }

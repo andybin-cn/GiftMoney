@@ -8,12 +8,11 @@
 
 import UIKit
 
-class AddTradeViewController: UIViewController {
+class AddTradeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        self.title = "新增记录"
     }
 
 }
