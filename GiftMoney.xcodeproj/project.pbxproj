@@ -11,7 +11,6 @@
 		3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75A22F67FB9009AF83F /* SceneDelegate.swift */; };
 		3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75C22F67FB9009AF83F /* ViewController.swift */; };
 		3649C76022F67FB9009AF83F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3649C75E22F67FB9009AF83F /* Main.storyboard */; };
-		3649C76322F67FB9009AF83F /* GiftMoney.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3649C76122F67FB9009AF83F /* GiftMoney.xcdatamodeld */; };
 		3649C76522F67FBD009AF83F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3649C76422F67FBD009AF83F /* Assets.xcassets */; };
 		3649C76822F67FBD009AF83F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */; };
 		3649C77322F67FBD009AF83F /* GiftMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77222F67FBD009AF83F /* GiftMoneyTests.swift */; };
@@ -21,6 +20,8 @@
 		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
 		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
+		369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */; };
+		369DFE2222F6BDD30005B67D /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE2122F6BDD30005B67D /* InputField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,6 @@
 		3649C75A22F67FB9009AF83F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3649C75C22F67FB9009AF83F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3649C75F22F67FB9009AF83F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3649C76222F67FB9009AF83F /* GiftMoney.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GiftMoney.xcdatamodel; sourceTree = "<group>"; };
 		3649C76422F67FBD009AF83F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3649C76722F67FBD009AF83F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3649C76922F67FBD009AF83F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,6 +61,8 @@
 		3649C79122F68679009AF83F /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
+		369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTradeViewController.swift; sourceTree = "<group>"; };
+		369DFE2122F6BDD30005B67D /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +122,6 @@
 				3649C76422F67FBD009AF83F /* Assets.xcassets */,
 				3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */,
 				3649C76922F67FBD009AF83F /* Info.plist */,
-				3649C76122F67FB9009AF83F /* GiftMoney.xcdatamodeld */,
 			);
 			path = GiftMoney;
 			sourceTree = "<group>";
@@ -146,11 +147,13 @@
 		3649C78B22F68531009AF83F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				369DFE2022F6BD9D0005B67D /* components */,
 				3649C78E22F685D6009AF83F /* records */,
 				3649C78C22F68557009AF83F /* TabViewController.swift */,
 				3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */,
 				3649C79122F68679009AF83F /* MineViewController.swift */,
 				3649C79322F6869B009AF83F /* StatisticsViewController.swift */,
+				369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,6 +171,14 @@
 				369DFE1022F68F270005B67D /* UIColor+appTheme.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		369DFE2022F6BD9D0005B67D /* components */ = {
+			isa = PBXGroup;
+			children = (
+				369DFE2122F6BDD30005B67D /* InputField.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,10 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
-				3649C76322F67FB9009AF83F /* GiftMoney.xcdatamodeld in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
 				3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
+				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
 				3649C78D22F68557009AF83F /* TabViewController.swift in Sources */,
@@ -638,19 +650,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3649C76122F67FB9009AF83F /* GiftMoney.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3649C76222F67FB9009AF83F /* GiftMoney.xcdatamodel */,
-			);
-			currentVersion = 3649C76222F67FB9009AF83F /* GiftMoney.xcdatamodel */;
-			path = GiftMoney.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 3649C74D22F67FB9009AF83F /* Project object */;
 }
