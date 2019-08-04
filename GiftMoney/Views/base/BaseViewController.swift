@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Common
 
 class BaseViewController: UIViewController {
     var navigationBar: UIView
