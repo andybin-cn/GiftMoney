@@ -16,6 +16,11 @@
 		3649C76822F67FBD009AF83F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */; };
 		3649C77322F67FBD009AF83F /* GiftMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77222F67FBD009AF83F /* GiftMoneyTests.swift */; };
 		3649C77E22F67FBD009AF83F /* GiftMoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */; };
+		3649C78D22F68557009AF83F /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78C22F68557009AF83F /* TabViewController.swift */; };
+		3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */; };
+		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
+		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
+		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,11 @@
 		3649C77922F67FBD009AF83F /* GiftMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftMoneyUITests.swift; sourceTree = "<group>"; };
 		3649C77F22F67FBD009AF83F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3649C78C22F68557009AF83F /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InoutRecordsViewController.swift; sourceTree = "<group>"; };
+		3649C79122F68679009AF83F /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +111,8 @@
 		3649C75722F67FB9009AF83F /* GiftMoney */ = {
 			isa = PBXGroup;
 			children = (
+				369DFE0F22F68EE90005B67D /* Theme */,
+				3649C78B22F68531009AF83F /* Views */,
 				3649C75822F67FB9009AF83F /* AppDelegate.swift */,
 				3649C75A22F67FB9009AF83F /* SceneDelegate.swift */,
 				3649C75C22F67FB9009AF83F /* ViewController.swift */,
@@ -129,6 +141,33 @@
 				3649C77F22F67FBD009AF83F /* Info.plist */,
 			);
 			path = GiftMoneyUITests;
+			sourceTree = "<group>";
+		};
+		3649C78B22F68531009AF83F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3649C78E22F685D6009AF83F /* records */,
+				3649C78C22F68557009AF83F /* TabViewController.swift */,
+				3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */,
+				3649C79122F68679009AF83F /* MineViewController.swift */,
+				3649C79322F6869B009AF83F /* StatisticsViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3649C78E22F685D6009AF83F /* records */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = records;
+			sourceTree = "<group>";
+		};
+		369DFE0F22F68EE90005B67D /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				369DFE1022F68F270005B67D /* UIColor+appTheme.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +301,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C76322F67FB9009AF83F /* GiftMoney.xcdatamodeld in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */,
+				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
+				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
+				3649C78D22F68557009AF83F /* TabViewController.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
 				INFOPLIST_FILE = GiftMoney/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,6 +504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
 				INFOPLIST_FILE = GiftMoney/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
