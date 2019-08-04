@@ -10,7 +10,7 @@ import Foundation
 
 public extension Array {
     
-    public func findFirst(predicate: (Element) -> Bool) -> Element? {
+    func findFirst(predicate: (Element) -> Bool) -> Element? {
         var result: Element?
         self.forEach { (item) in
             if predicate(item) {

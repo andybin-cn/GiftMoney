@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Dictionary where Key: StringProtocol {
-    public func transformKeyToLowcase() -> [String: Value] {
+    func transformKeyToLowcase() -> [String: Value] {
         var result = [String: Value]()
         for (offset: _, element: (key: key, value: value)) in self.enumerated() {
             result[key.lowercased()] = value

@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIColor {
-    public class func from(hexString: String, alpha: CGFloat = 1.0) -> UIColor {
+    class func from(hexString: String, alpha: CGFloat = 1.0) -> UIColor {
         var cString = hexString.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).uppercased()
         
         cString.dropPrefix("#")
@@ -27,7 +27,7 @@ public extension UIColor {
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
     }
     
-    public func toImage(size: CGSize = CGSize(width: 1.0, height: 1.0)) -> UIImage {
+    func toImage(size: CGSize = CGSize(width: 1.0, height: 1.0)) -> UIImage {
         let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
@@ -38,7 +38,7 @@ public extension UIColor {
         
         return result!
     }
-    public func toCircularImage(size: CGSize = CGSize(width: 20, height: 20)) -> UIImage {
+    func toCircularImage(size: CGSize = CGSize(width: 20, height: 20)) -> UIImage {
         let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
         let path = UIBezierPath(roundedRect: rect, cornerRadius: size.width/2)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
