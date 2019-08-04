@@ -15,8 +15,7 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isNavigationBarHidden = true
-        interactivePopGestureRecognizer?.delegate = self
+//        interactivePopGestureRecognizer?.delegate = self
 //        if #available(iOS 11.0, *) {
 //            self.additionalSafeAreaInsets = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
 //        }

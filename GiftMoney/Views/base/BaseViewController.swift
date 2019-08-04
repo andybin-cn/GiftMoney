@@ -12,16 +12,17 @@ import Common
 class BaseViewController: UIViewController {
     var navigationBar: UIView
     var titleLabel: UILabel
-    override var title: String? {
-        didSet {
-            titleLabel.text = title
-        }
-    }
+//    override var title: String? {
+//        didSet {
+//            titleLabel.text = title
+//        }
+//    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         navigationBar = UIView(frame: CGRect.zero)
         titleLabel = UILabel()
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        hidesBottomBarWhenPushed = true
 //        self.extendedLayoutIncludesOpaqueBars = false
 //        if #available(iOS 11.0, *) {
 //

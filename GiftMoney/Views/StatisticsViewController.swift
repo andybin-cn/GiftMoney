@@ -13,6 +13,7 @@ class StatisticsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "统计"
+        
         // Do any additional setup after loading the view.
     }
 }

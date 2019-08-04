@@ -35,7 +35,7 @@ class ScreenHelp {
     }()
     
     static var statusBarHeight: CGFloat = { () in
-        return UIApplication.shared.statusBarFrame.height
+        return 40
     }()
     
     static var tabBarHeight: CGFloat = { () in
