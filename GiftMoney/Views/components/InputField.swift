@@ -36,7 +36,10 @@ class InputField: UIView {
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.bottom.equalTo(-4)
-            make.top.equalTo(18)
+        }
+        
+        self.snp.makeConstraints { (make) in
+            make.height.equalTo(40)
         }
         
         

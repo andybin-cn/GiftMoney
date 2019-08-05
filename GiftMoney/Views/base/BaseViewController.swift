@@ -36,7 +36,7 @@ class BaseViewController: UIViewController {
     }
     
     deinit {
-        NSLog("\(type(of: self)) released!")
+        SLog.info("\(type(of: self)) released!")
     }
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NSLog("viewDidAppear:\(self.view.frame)")
+        SLog.info("viewDidAppear:\(self.view.frame)")
     }
     
     func addNavigationBar() {

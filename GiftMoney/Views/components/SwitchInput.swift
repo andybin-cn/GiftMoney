@@ -12,21 +12,14 @@ import RxCocoa
 
 class SwitchInput: UIView {
     let label = UILabel()
-    let leftButton = UIButton()
-    let rightButton = UIButton()
-    
-    private(set) var selectedIndex = 0 {
-        didSet {
-            if oldValue != selectedIndex {
-                executeLabelAnimate()
-            }
-        }
+    let switcher = UISegmentedControl(items: ["送礼", "收礼"])
+    var selectedIndex: Int {
+        get { switcher.selectedSegmentIndex }
+        set { switcher.selectedSegmentIndex = newValue }
     }
     
-    init(labelString: String, left: String, right: String) {
+    init(labelString: String) {
         label.text = labelString
-        leftButton.setTitle(left, for: .normal)
-        rightButton.setTitle(right, for: .normal)
         super.init(frame: .zero)
         setupViews()
     }
@@ -51,63 +44,20 @@ class SwitchInput: UIView {
             make.left.equalTo(10)
         }
         
-        let stackView = UIStackView()
-        stackView.apply { (stackView) in
-            stackView.axis = .horizontal
-        }
+        switcher.setWidth(100, forSegmentAt: 0)
+        switcher.setWidth(100, forSegmentAt: 1)
+        switcher.selectedSegmentIndex = 0
+        switcher.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
+        switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
         
-        stackView.addArrangedSubview(leftButton)
-        stackView.addArrangedSubview(rightButton)
-        layoutButtons()
-        
-        addSubview(stackView) { (make) in
+        addSubview(switcher) { (make) in
             make.centerY.equalToSuperview()
             make.right.equalTo(-15)
             make.height.equalTo(35)
-            make.height.lessThanOrEqualToSuperview()
         }
-        
-        _ = leftButton.rx.controlEvent(UIControl.Event.touchUpInside).asObservable().subscribe(onNext: { [weak self] () in
-            self?.selectedIndex = 0
-        })
-        
-        _ = rightButton.rx.controlEvent(UIControl.Event.touchUpInside).asObservable().subscribe(onNext: { [weak self] () in
-            self?.selectedIndex = 1
-        })
-    }
-    
-    func notSelectedStyle(button: UIButton) {
-        button.backgroundColor = UIColor.appGrayBackground
-        button.titleLabel?.textColor = UIColor.appGrayText
-        button.snp.remakeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.2)
-            make.height.equalToSuperview().multipliedBy(0.6)
+        self.snp.makeConstraints { (make) in
+            make.height.equalTo(40)
         }
-    }
-    func selectedStyle(button: UIButton) {
-        button.backgroundColor = UIColor.appTextBlue
-        button.titleLabel?.textColor = UIColor.appText
-        button.snp.remakeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.2)
-            make.height.equalToSuperview().multipliedBy(0.6)
-        }
-    }
-    
-    func layoutButtons() {
-        if selectedIndex == 0 {
-            selectedStyle(button: leftButton)
-            notSelectedStyle(button: rightButton)
-        } else {
-            selectedStyle(button: rightButton)
-            notSelectedStyle(button: leftButton)
-        }
-    }
-    
-    func executeLabelAnimate() {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 8, options: [], animations: {
-            self.layoutButtons()
-            self.layoutIfNeeded()
-        }, completion: nil)
     }
     
 }
