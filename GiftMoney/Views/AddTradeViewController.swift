@@ -12,6 +12,7 @@ class AddTradeViewController: BaseViewController {
 
     let scrollView = UIScrollView()
     
+    let typeSwitch = SwitchInput(labelString: "", left: "送礼", right: "收礼")
     let nameField = InputField(labelString: "姓名")
     let relationshipField = InputField(labelString: "关系")
     
@@ -35,10 +36,16 @@ class AddTradeViewController: BaseViewController {
             }
         }
         
+        typeSwitch.addTo(scrollView) { (make) in
+            make.right.equalTo(-15)
+            make.left.equalTo(15)
+            make.top.equalTo(20)
+            make.width.equalToSuperview()
+        }
         
         nameField.addTo(scrollView) { (make) in
             make.left.equalTo(15)
-            make.top.equalTo(20)
+            make.top.equalTo(typeSwitch.snp.bottom).offset(15)
             make.width.equalTo(self.view.snp.width).multipliedBy(0.5).offset(-22.5)
         }
         

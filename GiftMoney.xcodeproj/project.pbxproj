@@ -30,6 +30,7 @@
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
+		38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */; };
 		9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */; };
 		BEF4A2403A9B9C0A38D74C5F /* Pods_GiftMoneyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6EF788216A996B40FFA38 /* Pods_GiftMoneyUITests.framework */; };
 		CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */; };
@@ -117,6 +118,7 @@
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
+		38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInput.swift; sourceTree = "<group>"; };
 		77429951A2D4E665BC0D3F1C /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyTests.debug.xcconfig"; path = "Target Support Files/Pods-GiftMoneyTests/Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0213D6FF91967F5765DFA8 /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyUITests.release.xcconfig"; path = "Target Support Files/Pods-GiftMoneyUITests/Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				369DFE2122F6BDD30005B67D /* InputField.swift */,
+				38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
 				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
+				38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,

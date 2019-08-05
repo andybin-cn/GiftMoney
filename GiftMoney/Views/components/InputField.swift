@@ -39,11 +39,19 @@ class InputField: UIView {
             make.top.equalTo(18)
         }
         
+        
         textfield.addTarget(self, action: #selector(textfieldChanged), for: UIControl.Event.allEvents)
         
         layer.cornerRadius = 4
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.appGrayLine.cgColor
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onSelfTaped))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func onSelfTaped() {
+        textfield.becomeFirstResponder()
     }
     
     enum LabelPosition {
