@@ -27,6 +27,9 @@
 		369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE3622F6CD930005B67D /* MainTabViewController.swift */; };
 		369DFF2522F7094F0005B67D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; };
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
+		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
+		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
 		9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */; };
 		BEF4A2403A9B9C0A38D74C5F /* Pods_GiftMoneyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6EF788216A996B40FFA38 /* Pods_GiftMoneyUITests.framework */; };
 		CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */; };
@@ -111,6 +114,9 @@
 		369DFE3522F6CD930005B67D /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		369DFE3622F6CD930005B67D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
+		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
+		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
 		77429951A2D4E665BC0D3F1C /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyTests.debug.xcconfig"; path = "Target Support Files/Pods-GiftMoneyTests/Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0213D6FF91967F5765DFA8 /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyUITests.release.xcconfig"; path = "Target Support Files/Pods-GiftMoneyUITests/Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +190,8 @@
 		3649C75722F67FB9009AF83F /* GiftMoney */ = {
 			isa = PBXGroup;
 			children = (
+				38EF4A7722F7D2D6007BB28A /* Realm */,
+				38EF4A7022F7C9A6007BB28A /* Models */,
 				36135D2122F7289800D17330 /* Utils */,
 				369DFE0F22F68EE90005B67D /* Theme */,
 				3649C78B22F68531009AF83F /* Views */,
@@ -286,6 +294,23 @@
 				369DFEBC22F708600005B67D /* CommonTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		38EF4A7022F7C9A6007BB28A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				38EF4A7222F7C9C5007BB28A /* Trade.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		38EF4A7722F7D2D6007BB28A /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				38EF4A7822F7D2D6007BB28A /* RealmManager.swift */,
+				38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		71B545BC70EC9E6699DCFCAF /* Pods */ = {
@@ -568,12 +593,15 @@
 			files = (
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
 				3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
+				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
+				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
