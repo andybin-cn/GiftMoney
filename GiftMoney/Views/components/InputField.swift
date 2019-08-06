@@ -9,12 +9,28 @@
 import UIKit
 import Common
 
-class InputField: UIView {
+class InputField: UIView, FormInput {
+    
+    var fieldName: String
+    var fieldValue: FormValue {
+        get {
+            textfield.text ?? ""
+        }
+        set {
+            textfield.text = newValue as? String
+        }
+    }
+    
+    func validateField() throws -> FormValue {
+        return textfield.text ?? ""
+    }
+    
     
     let label = UILabel()
     let textfield = UITextField()
     
-    init(labelString: String) {
+    init(name: String, labelString: String) {
+        self.fieldName = name
         super.init(frame: .zero)
         
         label.apply { (label) in

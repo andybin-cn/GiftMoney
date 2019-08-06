@@ -16,7 +16,7 @@ protocol TradeItemRowDelegate: class {
 class TradeItemRow: UIView {
     
     let switcher = UISegmentedControl(items: ["红包", "礼物"])
-    let moneyField = InputField(labelString: "金额（元）")
+    let moneyField = InputField(name: "name", labelString: "金额（元）")
     let giftField = UIView()
     let deleteButton = UIButton()
     weak var delegate: TradeItemRowDelegate?
@@ -68,7 +68,7 @@ class TradeItemRow: UIView {
         }
         
         giftField.apply { (giftField) in
-            InputField(labelString: "礼物名称").apply { (field) in
+            InputField(name: "gitfName", labelString: "礼物名称").apply { (field) in
                 field.layer.borderWidth = 0
                 field.addTo(giftField) { (make) in
                     make.left.top.equalToSuperview()
@@ -76,7 +76,7 @@ class TradeItemRow: UIView {
                     make.bottom.equalToSuperview()
                 }
             }
-            InputField(labelString: "礼物数量(份/个)").apply { (field) in
+            InputField(name: "gitfValue", labelString: "礼物数量(份/个)").apply { (field) in
                 field.layer.borderWidth = 0
                 field.addTo(giftField) { (make) in
                     make.right.top.equalToSuperview()

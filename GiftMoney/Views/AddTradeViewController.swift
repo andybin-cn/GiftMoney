@@ -7,20 +7,23 @@
 //
 
 import UIKit
+import Common
 
 class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
 
     let scrollView = UIScrollView()
     
     let typeSwitch = SwitchInput(labelString: "类型：")
-    let nameField = InputField(labelString: "姓名")
-    let relationshipField = InputField(labelString: "关系")
+    let nameField = InputField(name: "name", labelString: "姓名")
+    let relationshipField = InputField(name: "relationship", labelString: "关系")
     let itemsStackView = UIStackView()
     let addItemButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "新增记录"
+        let saveButton = UIBarButtonItem(title: "保存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveButtonTapped))
+        self.navigationItem.rightBarButtonItems = [saveButton]
         
         scrollView.apply { (scrollView) in
             scrollView.showsHorizontalScrollIndicator = false
@@ -90,6 +93,16 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         newRow.delegate = self
         itemsStackView.insertArrangedSubview(newRow, at: itemsStackView.arrangedSubviews.count-1)
     }
+    
+    @objc func saveButtonTapped() {
+        do {
+            let values = try self.validateForm()
+            SLog.info("validateForm: \(values)")
+        } catch let err as NSError {
+            self.showTipsView(text: err.localizedDescription)
+        }
+    }
+    
     
     // MARK: - TradeItemRowDelegate
     func onDeleteButtonTapped(row: TradeItemRow) {
