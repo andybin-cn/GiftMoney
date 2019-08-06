@@ -30,7 +30,7 @@ class SwitchInput: UIView {
     }
     
     func setupViews() {
-        layer.cornerRadius = 4
+        layer.cornerRadius = 6
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.appGrayLine.cgColor
         
@@ -51,9 +51,7 @@ class SwitchInput: UIView {
         switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
         
         addSubview(switcher) { (make) in
-            make.centerY.equalToSuperview()
-            make.right.equalTo(-15)
-            make.height.equalTo(35)
+            make.top.bottom.right.equalToSuperview()
         }
         self.snp.makeConstraints { (make) in
             make.height.equalTo(40)

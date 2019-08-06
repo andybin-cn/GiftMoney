@@ -41,7 +41,7 @@ class TradeItemRow: UIView {
     }
     
     func setupViews() {
-        layer.cornerRadius = 4
+        layer.cornerRadius = 6
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.appGrayLine.cgColor
         
@@ -52,9 +52,7 @@ class TradeItemRow: UIView {
         switcher.addTarget(self, action: #selector(onWwitcherValueChanged), for: .valueChanged)
         
         addSubview(switcher) { (make) in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(15)
-            make.height.equalTo(25)
+            make.left.top.bottom.equalToSuperview()
         }
         
         self.snp.makeConstraints { (make) in

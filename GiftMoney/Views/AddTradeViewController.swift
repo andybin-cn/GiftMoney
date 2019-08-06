@@ -75,7 +75,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
             button.titleLabel?.font = .appFont(ofSize: 13)
             button.layer.borderWidth = 0.5
             button.layer.borderColor = UIColor.appGrayLine.cgColor
-            button.layer.cornerRadius = 4
+            button.layer.cornerRadius = 6
             button.addTarget(self, action: #selector(onAddItemButtonTapped), for: .touchUpInside)
             button.snp.makeConstraints { (make) in
                 make.height.equalTo(40)

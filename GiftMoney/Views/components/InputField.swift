@@ -45,7 +45,7 @@ class InputField: UIView {
         
         textfield.addTarget(self, action: #selector(textfieldChanged), for: UIControl.Event.allEvents)
         
-        layer.cornerRadius = 4
+        layer.cornerRadius = 6
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.appGrayLine.cgColor
         
