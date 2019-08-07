@@ -22,7 +22,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
     let addItemButton = UIButton()
     var trade: Trade?
     
-    init(trade: Trade?) {
+    init(trade: Trade? = nil) {
         self.trade = trade
         super.init(nibName: nil, bundle: nil)
     }

@@ -27,6 +27,7 @@ class InoutRecordsViewController: BaseViewController, UITableViewDelegate, UITab
             tableView.estimatedRowHeight = 80
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.setExtraCellLineHidden()
             
             tableView.addTo(self.view) { (make) in
                 make.edges.equalToSuperview()
@@ -34,22 +35,14 @@ class InoutRecordsViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    override func addNavigationBar() {
-        super.addNavigationBar()
-        let commitButton = UIButton().then { (button) in
-            button.setTitle("新增", for: .normal)
-            button.setEnlargeEdge(top: 10, right: 20, bottom: 10, left: 15)
-            button.addTarget(self, action: #selector(addRecordButtonTapped), for: UIControl.Event.touchUpInside)
-        }
-        navigationBar.addSubview(commitButton) { (make) in
-            make.right.equalTo(-15)
-            make.centerY.equalToSuperview().offset(10)
-        }
-    }
-    
     @objc func addRecordButtonTapped() {
         
         navigationController?.pushViewController(AddTradeViewController(), animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadData()
     }
     
     func loadData() {

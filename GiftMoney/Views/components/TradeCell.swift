@@ -21,10 +21,12 @@ class TradeCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupSubviews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupSubviews()
     }
     
     func setupSubviews() {
@@ -94,6 +96,12 @@ class TradeCell: UITableViewCell {
     
     func configerUI(trade: Trade) {
         self.trade = trade
-        
+        guard let type = trade.type else {
+            return
+        }
+        iconLabel.text = type == .inAccount ? "入" : "出"
+        nameLabel.text = trade.name
+        eventLabel.text = trade.eventName
+        timeLabel.text = trade.eventTime.toString(withFormat: "yyyy-MM-dd")
     }
 }
