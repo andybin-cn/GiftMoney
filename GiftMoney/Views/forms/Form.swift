@@ -29,6 +29,7 @@ extension Double: FormValue {}
 extension Float: FormValue {}
 extension String: FormValue {}
 extension Bool: FormValue {}
+extension Date: FormValue {}
 extension Array: FormValue where Element: FormValue {}
 extension Dictionary: FormValue where Value: FormValue, Key == String {}
 

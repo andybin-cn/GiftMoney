@@ -11,6 +11,7 @@
 		36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2622F728AC00D17330 /* UIFont+appTheme.swift */; };
 		36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D4B22F871B200D17330 /* TradeItemRow.swift */; };
 		36135D5422F9B02100D17330 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D5322F9B02100D17330 /* Form.swift */; };
+		36135D5722FB214700D17330 /* DateInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D5622FB214600D17330 /* DateInputField.swift */; };
 		3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75822F67FB9009AF83F /* AppDelegate.swift */; };
 		3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75A22F67FB9009AF83F /* SceneDelegate.swift */; };
 		3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75C22F67FB9009AF83F /* ViewController.swift */; };
@@ -97,6 +98,7 @@
 		36135D2622F728AC00D17330 /* UIFont+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appTheme.swift"; sourceTree = "<group>"; };
 		36135D4B22F871B200D17330 /* TradeItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItemRow.swift; sourceTree = "<group>"; };
 		36135D5322F9B02100D17330 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		36135D5622FB214600D17330 /* DateInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputField.swift; sourceTree = "<group>"; };
 		3649C75522F67FB9009AF83F /* GiftMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiftMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3649C75822F67FB9009AF83F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3649C75A22F67FB9009AF83F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */,
 				36135D4B22F871B200D17330 /* TradeItemRow.swift */,
 				3818556222FACB6300024542 /* TradeCell.swift */,
+				36135D5622FB214600D17330 /* DateInputField.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
 				36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */,
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
+				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

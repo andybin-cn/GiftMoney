@@ -34,9 +34,12 @@ class TradeCell: UITableViewCell {
         
         iconLabel.apply { (label) in
             label.font = UIFont.appBoldFont(ofSize: 25)
+            label.textColor = .white
             label.layer.cornerRadius = 20
             label.clipsToBounds = true
-            label.layer.borderWidth = 1
+            label.layer.borderWidth = 0.5
+            label.textAlignment = .center
+            label.backgroundColor = .appMainYellow
             
             label.addTo(contentView) { (make) in
                 make.centerY.equalToSuperview()

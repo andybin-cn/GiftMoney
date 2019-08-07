@@ -21,17 +21,21 @@ class SwitchInput: UIView, FormInput {
     var fieldName: String
     var fieldValue: FormValue {
         get {
-            selectedIndex
+            selectedIndex == 0 ? Trade.TradeType.outAccount.rawValue : Trade.TradeType.inAccount.rawValue
         }
         set {
-            if let index = newValue as? Int {
-                selectedIndex = index
+            if let stringValue = newValue as? String {
+                if stringValue == Trade.TradeType.inAccount.rawValue {
+                    selectedIndex = 0
+                } else {
+                    selectedIndex = 1
+                }
             }
         }
     }
     
     func validateField() throws -> FormValue {
-        return selectedIndex
+        return fieldValue
     }
     
     init(name: String, labelString: String) {

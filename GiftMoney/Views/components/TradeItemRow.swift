@@ -69,13 +69,13 @@ class TradeItemRow: UIView, FormInput {
         if let tradeItem = tradeItem, let type = tradeItem.type {
             if type == .money {
                 switcher.selectedSegmentIndex = 0
-                moneyField.textfield.text = tradeItem.value
+                moneyField.fieldValue = tradeItem.value
             } else if type == .gift {
                 switcher.selectedSegmentIndex = 1
-                giftNameField.textfield.text = tradeItem.name
-                giftValueField.textfield.text = tradeItem.value
+                giftNameField.fieldValue = tradeItem.name
+                giftValueField.fieldValue = tradeItem.value
             }
-            onWwitcherValueChanged()
+            onSwitcherValueChanged()
         }
     }
     
@@ -92,7 +92,7 @@ class TradeItemRow: UIView, FormInput {
         switcher.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         switcher.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
         switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
-        switcher.addTarget(self, action: #selector(onWwitcherValueChanged), for: .valueChanged)
+        switcher.addTarget(self, action: #selector(onSwitcherValueChanged), for: .valueChanged)
         
         addSubview(switcher) { (make) in
             make.left.top.bottom.equalToSuperview()
@@ -132,10 +132,10 @@ class TradeItemRow: UIView, FormInput {
             }
         }
         
-        self.onWwitcherValueChanged()
+        self.onSwitcherValueChanged()
     }
     
-    @objc func onWwitcherValueChanged() {
+    @objc func onSwitcherValueChanged() {
         moneyField.isHidden = switcher.selectedSegmentIndex == 1
         giftField.isHidden = switcher.selectedSegmentIndex == 0
         

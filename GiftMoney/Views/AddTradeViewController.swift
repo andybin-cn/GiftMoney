@@ -15,9 +15,11 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
 
     let scrollView = UIScrollView()
     
-    let typeSwitch = SwitchInput(name:"typeString", labelString: "类型：")
+    let typeSwitch = SwitchInput(name:"type", labelString: "类型：")
     let nameField = InputField(name: "name", labelString: "姓名")
     let relationshipField = InputField(name: "relationship", labelString: "关系")
+    let eventNameField = InputField(name: "eventName", labelString: "事件名称")
+    let eventTimeField = DateInputField(name: "eventTime", labelString: "时间")
     let itemsStackView = UIStackView()
     let addItemButton = UIButton()
     var trade: Trade?
@@ -71,6 +73,16 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
             make.width.equalTo(nameField)
         }
         
+        eventNameField.addTo(scrollView) { (make) in
+            make.left.width.equalTo(nameField)
+            make.top.equalTo(nameField.snp.bottom).offset(15)
+        }
+        
+        eventTimeField.addTo(scrollView) { (make) in
+            make.left.width.equalTo(relationshipField)
+            make.top.equalTo(relationshipField.snp.bottom).offset(15)
+        }
+        
 //        FormWrapper(name: "tradeItems")
         
         itemsStackView.apply { (stackView) in
@@ -78,7 +90,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
             stackView.alignment = .fill
             stackView.spacing = 15
             stackView.addTo(scrollView) { (make) in
-                make.top.equalTo(nameField.snp.bottom).offset(15)
+                make.top.equalTo(eventNameField.snp.bottom).offset(15)
                 make.left.equalTo(15)
                 make.right.equalTo(-15)
             }
@@ -106,13 +118,16 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         guard let trade = self.trade else {
             return
         }
-        if trade.type == Trade.TradeType.inAccount {
-            typeSwitch.selectedIndex = 1
-        } else if trade.type == Trade.TradeType.outAccount {
+        if let tradeType = trade.type {
+            typeSwitch.fieldValue = tradeType.rawValue
+        } else {
             typeSwitch.selectedIndex = 0
         }
-        nameField.textfield.text = trade.name
-        relationshipField.textfield.text = trade.relationship
+        nameField.fieldValue = trade.name
+        relationshipField.fieldValue = trade.relationship
+        eventNameField.fieldValue = trade.eventName
+        eventTimeField.fieldValue = trade.eventTime
+        
         if trade.tradeItems.count > 0 {
             itemsStackView.arrangedSubviews.forEach { (arrangedView) in
                 if arrangedView is TradeItemRow {

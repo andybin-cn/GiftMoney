@@ -18,11 +18,12 @@ class InputField: UIView, FormInput {
         }
         set {
             textfield.text = newValue as? String
+            textfieldChanged()
         }
     }
     
     func validateField() throws -> FormValue {
-        return textfield.text ?? ""
+        return fieldValue
     }
     
     

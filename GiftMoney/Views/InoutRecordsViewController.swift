@@ -36,8 +36,7 @@ class InoutRecordsViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     @objc func addRecordButtonTapped() {
-        
-        navigationController?.pushViewController(AddTradeViewController(), animated: true)
+        navigationController?.pushViewController(AddTradeViewController(trade: nil), animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,7 +45,7 @@ class InoutRecordsViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func loadData() {
-        trades = RealmManager.share.realm.objects(Trade.self).filter { _ in true }
+        trades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type != nil }
         tableView.reloadData()
     }
     
