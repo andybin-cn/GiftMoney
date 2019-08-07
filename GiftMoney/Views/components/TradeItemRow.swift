@@ -52,7 +52,7 @@ class TradeItemRow: UIView, FormInput {
     let deleteButton = UIButton()
     weak var delegate: TradeItemRowDelegate?
     
-    init(name: String, canDelete: Bool = false) {
+    init(name: String, tradeItem: TradeItem? = nil,canDelete: Bool = false) {
         fieldName = name
         super.init(frame: .zero)
         setupViews()
@@ -65,6 +65,17 @@ class TradeItemRow: UIView, FormInput {
                     make.width.height.equalTo(18)
                 }
             }
+        }
+        if let tradeItem = tradeItem, let type = tradeItem.type {
+            if type == .money {
+                switcher.selectedSegmentIndex = 0
+                moneyField.textfield.text = tradeItem.value
+            } else if type == .gift {
+                switcher.selectedSegmentIndex = 1
+                giftNameField.textfield.text = tradeItem.name
+                giftValueField.textfield.text = tradeItem.value
+            }
+            onWwitcherValueChanged()
         }
     }
     

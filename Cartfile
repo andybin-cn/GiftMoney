@@ -4,7 +4,7 @@ github "SwiftyBeaver/SwiftyBeaver" >= 1.7.0
 github "suzuki-0000/SKPhotoBrowser" >= 6.1.0
 github "realm/realm-cocoa" >= 3.17.3
 github "ReactiveX/RxSwift" ~> 5.0
-
+github "tristanhimmelman/ObjectMapper" ~> 3.4
 
 #github "soffes/Crypto" >= 0.5.0				
 #github "hemantasapkota/SwiftStore" >= 3.0.0

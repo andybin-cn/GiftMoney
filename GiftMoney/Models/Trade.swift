@@ -8,8 +8,9 @@
 
 import Foundation
 import RealmSwift
+import ObjectMapper
 
-class Trade: Object {
+class Trade: Object, Mappable {
     enum TradeType: String {
         case inAccount = "inAccount"
         case outAccount = "outAccount"
@@ -22,7 +23,22 @@ class Trade: Object {
     @objc dynamic var eventTime: Date = Date()
     @objc dynamic private var typeString: String = ""
     
+    private var _tradeItems: Array<TradeItem> = Array<TradeItem>() {
+        didSet {
+            tradeItems.removeAll()
+            tradeItems.append(objectsIn: _tradeItems)
+        }
+    }
+    private var _tradeMedias: Array<TradeMedia> = Array<TradeMedia>() {
+        didSet {
+            tradeMedias.removeAll()
+            tradeMedias.append(objectsIn: _tradeMedias)
+        }
+    }
+    
     var tradeItems = List<TradeItem>()
+    var tradeMedias = List<TradeMedia>()
+    
     var type: TradeType? {
         get {
             return TradeType.init(rawValue: typeString)
@@ -35,9 +51,24 @@ class Trade: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        relationship <- map["relationship"]
+        eventName <- map["eventName"]
+        eventTime <- map["eventTime"]
+        typeString <- map["type"]
+        _tradeItems <- map["tradeItems"]
+        _tradeMedias <- map["tradeMedias"]
+    }
 }
 
-class TradeItem: Object {
+class TradeItem: Object, Mappable {
     enum ItemType: String {
         case money = "money"
         case gift = "gift"
@@ -57,9 +88,25 @@ class TradeItem: Object {
             typeString = newValue?.rawValue ?? ""
         }
     }
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        value <- map["value"]
+        tradeID <- map["tradeID"]
+        typeString <- map["type"]
+    }
 }
 
-class TradeMedia: Object {
+class TradeMedia: Object, Mappable {
     enum MediaType: String {
         case image = "image"
         case video = "video"
@@ -77,5 +124,20 @@ class TradeMedia: Object {
         set {
             typeString = newValue?.rawValue ?? ""
         }
+    }
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        tradeID <- map["tradeID"]
+        typeString <- map["type"]
+        path <- map["path"]
     }
 }

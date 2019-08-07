@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Common
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.rootViewController = MainTabViewController.shared
         window?.makeKeyAndVisible()
+        
+        SLog.info("NSHomeDirectory: \(NSHomeDirectory())")
         return true
     }
 

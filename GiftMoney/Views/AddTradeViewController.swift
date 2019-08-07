@@ -8,6 +8,8 @@
 
 import UIKit
 import Common
+import ObjectMapper
+import Realm
 
 class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
 
@@ -18,6 +20,16 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
     let relationshipField = InputField(name: "relationship", labelString: "关系")
     let itemsStackView = UIStackView()
     let addItemButton = UIButton()
+    var trade: Trade?
+    
+    init(trade: Trade?) {
+        self.trade = trade
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,10 +100,34 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         }
         itemsStackView.addArrangedSubview(addItemButton)
         
+        fillInFormValues()
+    }
+    func fillInFormValues() {
+        guard let trade = self.trade else {
+            return
+        }
+        if trade.type == Trade.TradeType.inAccount {
+            typeSwitch.selectedIndex = 1
+        } else if trade.type == Trade.TradeType.outAccount {
+            typeSwitch.selectedIndex = 0
+        }
+        nameField.textfield.text = trade.name
+        relationshipField.textfield.text = trade.relationship
+        if trade.tradeItems.count > 0 {
+            itemsStackView.arrangedSubviews.forEach { (arrangedView) in
+                if arrangedView is TradeItemRow {
+                    itemsStackView.removeArrangedSubview(arrangedView)
+                    arrangedView.removeFromSuperview()
+                }
+            }
+            trade.tradeItems.enumerated().forEach { (index, tradeItem) in
+                itemsStackView.addArrangedSubview(TradeItemRow(name: "tradeItems",tradeItem: tradeItem, canDelete: index != 0))
+            }
+        }
     }
     
     @objc func onAddItemButtonTapped() {
-        let newRow = TradeItemRow(name: "tradeItems", canDelete: true)
+        let newRow = TradeItemRow(name: "tradeItems", tradeItem: nil, canDelete: true)
         newRow.delegate = self
         itemsStackView.insertArrangedSubview(newRow, at: itemsStackView.arrangedSubviews.count-1)
     }
@@ -99,7 +135,20 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
     @objc func saveButtonTapped() {
         do {
             let values = try self.validateForm()
-            SLog.info("validateForm: \(values)")
+            
+            guard let newTrade = Trade.init(JSON: values) else {
+                self.showTipsView(text: "数据保存失败，请返回后重试")
+                return
+            }
+            RealmManager.share.realm.beginWrite()
+            if let oldTrade = self.trade {
+                newTrade.id = oldTrade.id
+                RealmManager.share.realm.delete(oldTrade.tradeItems)
+                RealmManager.share.realm.delete(oldTrade.tradeMedias)
+            }
+            RealmManager.share.realm.add(newTrade, update: .all)
+            try RealmManager.share.realm.commitWrite()
+            trade = newTrade
         } catch let err as NSError {
             self.showTipsView(text: err.localizedDescription)
         }
