@@ -13,15 +13,47 @@ protocol TradeItemRowDelegate: class {
     func onDeleteButtonTapped(row: TradeItemRow)
 }
 
-class TradeItemRow: UIView {
+class TradeItemRow: UIView, FormInput {
+    var fieldName: String
+    
+    var tradeItemType: TradeItem.ItemType {
+        return switcher.selectedSegmentIndex == 0 ? TradeItem.ItemType.money : TradeItem.ItemType.gift
+    }
+    var tradeItemName: String {
+        return switcher.selectedSegmentIndex == 0 ? "人民币" : giftNameField.textfield.text ?? ""
+    }
+    var tradeItemValue: String {
+        return switcher.selectedSegmentIndex == 0 ? moneyField.textfield.text ?? "" : giftValueField.textfield.text ?? ""
+    }
+    
+    var fieldValue: FormValue {
+        get {
+            return [
+                "type": tradeItemType.rawValue,
+                "name": tradeItemName,
+                "value": tradeItemValue,
+            ] as FormValue
+        }
+        set {
+            
+        }
+    }
+    
+    func validateField() throws -> FormValue {
+        return fieldValue
+    }
+    
     
     let switcher = UISegmentedControl(items: ["红包", "礼物"])
     let moneyField = InputField(name: "name", labelString: "金额（元）")
     let giftField = UIView()
+    let giftNameField = InputField(name: "gitfName", labelString: "礼物名称")
+    let giftValueField = InputField(name: "gitfValue", labelString: "礼物数量(份/个)")
     let deleteButton = UIButton()
     weak var delegate: TradeItemRowDelegate?
     
-    init(canDelete: Bool = false) {
+    init(name: String, canDelete: Bool = false) {
+        fieldName = name
         super.init(frame: .zero)
         setupViews()
         if canDelete {
@@ -68,7 +100,7 @@ class TradeItemRow: UIView {
         }
         
         giftField.apply { (giftField) in
-            InputField(name: "gitfName", labelString: "礼物名称").apply { (field) in
+            giftNameField.apply { (field) in
                 field.layer.borderWidth = 0
                 field.addTo(giftField) { (make) in
                     make.left.top.equalToSuperview()
@@ -76,7 +108,7 @@ class TradeItemRow: UIView {
                     make.bottom.equalToSuperview()
                 }
             }
-            InputField(name: "gitfValue", labelString: "礼物数量(份/个)").apply { (field) in
+            giftValueField.apply { (field) in
                 field.layer.borderWidth = 0
                 field.addTo(giftField) { (make) in
                     make.right.top.equalToSuperview()

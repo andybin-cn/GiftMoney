@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RxCocoa
 
-class SwitchInput: UIView {
+class SwitchInput: UIView, FormInput {
     let label = UILabel()
     let switcher = UISegmentedControl(items: ["送礼", "收礼"])
     var selectedIndex: Int {
@@ -18,13 +18,31 @@ class SwitchInput: UIView {
         set { switcher.selectedSegmentIndex = newValue }
     }
     
-    init(labelString: String) {
+    var fieldName: String
+    var fieldValue: FormValue {
+        get {
+            selectedIndex
+        }
+        set {
+            if let index = newValue as? Int {
+                selectedIndex = index
+            }
+        }
+    }
+    
+    func validateField() throws -> FormValue {
+        return selectedIndex
+    }
+    
+    init(name: String, labelString: String) {
         label.text = labelString
+        fieldName = name
         super.init(frame: .zero)
         setupViews()
     }
     
     required init?(coder: NSCoder) {
+        fieldName = ""
         super.init(coder: coder)
         setupViews()
     }

@@ -13,7 +13,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
 
     let scrollView = UIScrollView()
     
-    let typeSwitch = SwitchInput(labelString: "类型：")
+    let typeSwitch = SwitchInput(name:"typeString", labelString: "类型：")
     let nameField = InputField(name: "name", labelString: "姓名")
     let relationshipField = InputField(name: "relationship", labelString: "关系")
     let itemsStackView = UIStackView()
@@ -59,6 +59,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
             make.width.equalTo(nameField)
         }
         
+//        FormWrapper(name: "tradeItems")
+        
         itemsStackView.apply { (stackView) in
             stackView.axis = .vertical
             stackView.alignment = .fill
@@ -69,7 +71,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
                 make.right.equalTo(-15)
             }
         }
-        itemsStackView.addArrangedSubview(TradeItemRow(canDelete: false))
+        itemsStackView.addArrangedSubview(TradeItemRow(name: "tradeItems", canDelete: false))
         
         addItemButton.apply { (button) in
             button.setImage(UIImage.init(named: "icons8-add"), for: .normal)
@@ -89,7 +91,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
     }
     
     @objc func onAddItemButtonTapped() {
-        let newRow = TradeItemRow(canDelete: true)
+        let newRow = TradeItemRow(name: "tradeItems", canDelete: true)
         newRow.delegate = self
         itemsStackView.insertArrangedSubview(newRow, at: itemsStackView.arrangedSubviews.count-1)
     }

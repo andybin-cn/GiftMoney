@@ -14,8 +14,8 @@ protocol FormValue {
 }
 
 protocol Form {
-    func formValues() -> [String: FormValue]
-    func validateForm() throws -> [String: FormValue]
+    func formValues() -> [String: Any]
+    func validateForm() throws -> [String: Any]
 }
 
 protocol FormInput {
@@ -29,6 +29,8 @@ extension Double: FormValue {}
 extension Float: FormValue {}
 extension String: FormValue {}
 extension Bool: FormValue {}
+extension Array: FormValue where Element: FormValue {}
+extension Dictionary: FormValue where Value: FormValue, Key == String {}
 
 extension UIView: Form {
     var formInputs: [FormInput] {
@@ -43,18 +45,33 @@ extension UIView: Form {
         return result
     }
     
-    func formValues() -> [String : FormValue] {
-        var result = [String : FormValue]()
+    func formValues() -> Dictionary<String, Any> {
+        var result = [String : Any]()
         formInputs.forEach { (input) in
-            result[input.fieldName] = input.fieldValue
+            if var array = result[input.fieldName] as? Array<FormValue> {
+                array.append(input.fieldValue)
+            } else if result[input.fieldName] != nil {
+                result[input.fieldName] = [result[input.fieldName], input.fieldValue]
+            } else {
+                result[input.fieldName] = input.fieldValue
+            }
         }
         return result
     }
     
-    func validateForm() throws -> [String : FormValue] {
-        var result = [String : FormValue]()
+    func validateForm() throws -> Dictionary<String, Any> {
+        var result = Dictionary<String, Any>()
         for input in formInputs {
-            result[input.fieldName] = try input.validateField()
+            let value = try input.validateField()
+            if var array = result[input.fieldName] as? Array<FormValue> {
+                array.append(value)
+                result[input.fieldName] = array
+            } else if let item = result[input.fieldName] as? FormValue {
+                let array = Array<FormValue>(arrayLiteral: item, value)
+                result[input.fieldName] = array
+            } else {
+                result[input.fieldName] = value
+            }
         }
         return result
     }
@@ -66,13 +83,11 @@ extension UIViewController: Form {
         return view?.formInputs ?? [FormInput]()
     }
 
-    func formValues() -> [String : FormValue] {
-        view?.formValues() ?? [String : FormValue]()
+    func formValues() -> [String : Any] {
+        view?.formValues() ?? [String : Any]()
     }
     
-    func validateForm() throws -> [String : FormValue] {
-        try view?.validateForm() ?? [String : FormValue]()
+    func validateForm() throws -> [String : Any] {
+        try view?.validateForm() ?? [String : Any]()
     }
-
-
 }
