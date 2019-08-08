@@ -31,6 +31,9 @@
 		369DFF2522F7094F0005B67D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; };
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3818556322FACB6300024542 /* TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556222FACB6300024542 /* TradeCell.swift */; };
+		3818556722FBC30700024542 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556622FBC30600024542 /* Event.swift */; };
+		3818556922FBC54C00024542 /* TradeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556822FBC54C00024542 /* TradeItem.swift */; };
+		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -123,6 +126,9 @@
 		369DFE3622F6CD930005B67D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
 		3818556222FACB6300024542 /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
+		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
+		3818556A22FBC57700024542 /* TradeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMedia.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -323,6 +329,9 @@
 			isa = PBXGroup;
 			children = (
 				38EF4A7222F7C9C5007BB28A /* Trade.swift */,
+				3818556622FBC30600024542 /* Event.swift */,
+				3818556822FBC54C00024542 /* TradeItem.swift */,
+				3818556A22FBC57700024542 /* TradeMedia.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -623,6 +632,8 @@
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
 				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
 				38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */,
+				3818556722FBC30700024542 /* Event.swift in Sources */,
+				3818556922FBC54C00024542 /* TradeItem.swift in Sources */,
 				3818556322FACB6300024542 /* TradeCell.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
@@ -637,6 +648,7 @@
 				36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */,
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
 				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
+				3818556B22FBC57700024542 /* TradeMedia.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

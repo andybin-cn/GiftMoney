@@ -19,6 +19,8 @@ class Trade: Object, Mappable {
     @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var name: String = ""
     @objc dynamic var relationship: String = ""
+    @objc dynamic var remark: String = ""
+    @objc dynamic var eventID: String = ""
     @objc dynamic var eventName: String = ""
     @objc dynamic var eventTime: Date = Date()
     @objc dynamic private var typeString: String = ""
@@ -63,6 +65,9 @@ class Trade: Object, Mappable {
     override static func primaryKey() -> String? {
         return "id"
     }
+    override static func indexedProperties() -> [String] {
+        return ["id", "eventID", "name", "relationship", "remark"]
+    }
     
     required convenience init?(map: Map) {
         self.init()
@@ -72,6 +77,7 @@ class Trade: Object, Mappable {
         id <- map["id"]
         name <- map["name"]
         relationship <- map["relationship"]
+        remark <- map["remark"]
         eventName <- map["eventName"]
         eventTime <- map["eventTime"]
         typeString <- map["type"]
@@ -80,76 +86,3 @@ class Trade: Object, Mappable {
     }
 }
 
-class TradeItem: Object, Mappable {
-    enum ItemType: String {
-        case money = "money"
-        case gift = "gift"
-    }
-    
-    @objc dynamic var id: String = NSUUID().uuidString
-    @objc dynamic var tradeID: String = ""
-    @objc dynamic private var typeString: String = ""
-    @objc dynamic var name: String = ""
-    @objc dynamic var value: String = ""
-    
-    var type: ItemType? {
-        get {
-            return ItemType.init(rawValue: typeString)
-        }
-        set {
-            typeString = newValue?.rawValue ?? ""
-        }
-    }
-    
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
-    
-    func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        value <- map["value"]
-        tradeID <- map["tradeID"]
-        typeString <- map["type"]
-    }
-}
-
-class TradeMedia: Object, Mappable {
-    enum MediaType: String {
-        case image = "image"
-        case video = "video"
-    }
-    
-    @objc dynamic var id: String = NSUUID().uuidString
-    @objc dynamic var tradeID: String = ""
-    @objc dynamic private var typeString: String = ""
-    @objc dynamic var path: String = ""
-    
-    var type: MediaType? {
-        get {
-            return MediaType.init(rawValue: typeString)
-        }
-        set {
-            typeString = newValue?.rawValue ?? ""
-        }
-    }
-    
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
-    
-    func mapping(map: Map) {
-        id <- map["id"]
-        tradeID <- map["tradeID"]
-        typeString <- map["type"]
-        path <- map["path"]
-    }
-}
