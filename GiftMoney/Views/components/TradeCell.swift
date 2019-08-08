@@ -102,9 +102,12 @@ class TradeCell: UITableViewCell {
         guard let type = trade.type else {
             return
         }
-        iconLabel.text = type == .inAccount ? "入" : "出"
+        iconLabel.text = type == .inAccount ? "收" : "送"
         nameLabel.text = trade.name
         eventLabel.text = trade.eventName
         timeLabel.text = trade.eventTime.toString(withFormat: "yyyy-MM-dd")
+        gitfLabel.text = "礼物共\(trade.giftCount)件"
+        moneyLabel.text = String.init(format: "¥%0.0f元", trade.totalMoney)
+        
     }
 }

@@ -48,6 +48,18 @@ class Trade: Object, Mappable {
         }
     }
     
+    var giftCount: Int {
+        return tradeItems.filter{ $0.type == TradeItem.ItemType.gift }.count
+    }
+    var totalMoney: Float {
+        return tradeItems.reduce(0.0) { (r, item) -> Float in
+            guard item.type == .money, let money = Float(item.value) else {
+                return r
+            }
+            return r + money
+        }
+    }
+    
     override static func primaryKey() -> String? {
         return "id"
     }

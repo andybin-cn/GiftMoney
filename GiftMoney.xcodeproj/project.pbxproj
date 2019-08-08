@@ -276,10 +276,10 @@
 			isa = PBXGroup;
 			children = (
 				369DFE2122F6BDD30005B67D /* InputField.swift */,
+				36135D5622FB214600D17330 /* DateInputField.swift */,
 				38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */,
 				36135D4B22F871B200D17330 /* TradeItemRow.swift */,
 				3818556222FACB6300024542 /* TradeCell.swift */,
-				36135D5622FB214600D17330 /* DateInputField.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
