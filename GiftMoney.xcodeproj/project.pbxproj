@@ -35,6 +35,7 @@
 		3818556722FBC30700024542 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556622FBC30600024542 /* Event.swift */; };
 		3818556922FBC54C00024542 /* TradeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556822FBC54C00024542 /* TradeItem.swift */; };
 		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
+		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -131,6 +132,7 @@
 		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
 		3818556A22FBC57700024542 /* TradeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMedia.swift; sourceTree = "<group>"; };
+		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		3649C75722F67FB9009AF83F /* GiftMoney */ = {
 			isa = PBXGroup;
 			children = (
+				38236C64230105D700B67B8D /* Services */,
 				38EF4A7722F7D2D6007BB28A /* Realm */,
 				38EF4A7022F7C9A6007BB28A /* Models */,
 				36135D2122F7289800D17330 /* Utils */,
@@ -334,6 +337,14 @@
 				369DFEBC22F708600005B67D /* CommonTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		38236C64230105D700B67B8D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				38236C66230105F000B67B8D /* TradeManger.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		38EF4A7022F7C9A6007BB28A /* Models */ = {
@@ -650,6 +661,7 @@
 				3818556322FACB6300024542 /* TradeCell.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
+				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
 				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
