@@ -20,7 +20,6 @@ class Trade: Object, Mappable {
     @objc dynamic var name: String = ""
     @objc dynamic var relationship: String = ""
     @objc dynamic var remark: String = ""
-    @objc dynamic var eventID: String = ""
     @objc dynamic var eventName: String = ""
     @objc dynamic var eventTime: Date = Date()
     @objc dynamic var updateTime: Date = Date()
@@ -67,7 +66,7 @@ class Trade: Object, Mappable {
         return "id"
     }
     override static func indexedProperties() -> [String] {
-        return ["id", "eventID", "name", "relationship", "remark"]
+        return ["id", "name", "relationship", "remark"]
     }
     
     required convenience init?(map: Map) {

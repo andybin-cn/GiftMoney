@@ -15,6 +15,7 @@ protocol TradeItemRowDelegate: class {
 
 class TradeItemRow: UIView, FormInput {
     var fieldName: String
+    var valueSrtuct: FormInputValueSrtuct { .array }
     
     var tradeItemType: TradeItem.ItemType {
         return switcher.selectedSegmentIndex == 0 ? TradeItem.ItemType.money : TradeItem.ItemType.gift

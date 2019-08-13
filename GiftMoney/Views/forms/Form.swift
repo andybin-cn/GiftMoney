@@ -18,10 +18,23 @@ protocol Form {
     func validateForm() throws -> [String: Any]
 }
 
+enum FormInputValueSrtuct {
+    case sigle
+    case array
+//    case dictionary
+}
+
 protocol FormInput {
     var fieldName: String { get }
+    var valueSrtuct: FormInputValueSrtuct { get }
     var fieldValue: FormValue { get set }
     func validateField() throws -> FormValue
+}
+
+extension FormInput {
+    var valueSrtuct: FormInputValueSrtuct {
+        return FormInputValueSrtuct.sigle
+    }
 }
 
 extension Int: FormValue {}
@@ -49,10 +62,12 @@ extension UIView: Form {
     func formValues() -> Dictionary<String, Any> {
         var result = [String : Any]()
         formInputs.forEach { (input) in
-            if var array = result[input.fieldName] as? Array<FormValue> {
-                array.append(input.fieldValue)
-            } else if result[input.fieldName] != nil {
-                result[input.fieldName] = [result[input.fieldName], input.fieldValue]
+            if input.valueSrtuct == .array {
+                if var array = result[input.fieldName] as? Array<FormValue> {
+                    array.append(input.fieldValue)
+                } else {
+                    result[input.fieldName] = [input.fieldValue]
+                }
             } else {
                 result[input.fieldName] = input.fieldValue
             }
@@ -64,12 +79,12 @@ extension UIView: Form {
         var result = Dictionary<String, Any>()
         for input in formInputs {
             let value = try input.validateField()
-            if var array = result[input.fieldName] as? Array<FormValue> {
-                array.append(value)
-                result[input.fieldName] = array
-            } else if let item = result[input.fieldName] as? FormValue {
-                let array = Array<FormValue>(arrayLiteral: item, value)
-                result[input.fieldName] = array
+            if input.valueSrtuct == .array {
+                if var array = result[input.fieldName] as? Array<FormValue> {
+                    array.append(value)
+                } else {
+                    result[input.fieldName] = [value]
+                }
             } else {
                 result[input.fieldName] = value
             }
