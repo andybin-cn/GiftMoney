@@ -9,7 +9,7 @@
 import UIKit
 import Common
 
-class InoutRecordsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class InAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tableView = UITableView()
     var trades = [Trade]()
@@ -45,7 +45,7 @@ class InoutRecordsViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func loadData() {
-        trades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type != nil }
+        trades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.inAccount }
         tableView.reloadData()
     }
     

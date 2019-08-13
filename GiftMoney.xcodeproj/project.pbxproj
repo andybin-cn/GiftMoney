@@ -20,7 +20,7 @@
 		3649C76822F67FBD009AF83F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */; };
 		3649C77322F67FBD009AF83F /* GiftMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77222F67FBD009AF83F /* GiftMoneyTests.swift */; };
 		3649C77E22F67FBD009AF83F /* GiftMoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */; };
-		3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */; };
+		3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InAccountTradeVC.swift */; };
 		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
 		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
@@ -37,6 +37,8 @@
 		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
 		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
+		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
+		386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865832302A1F9000BBD85 /* AllTradesVC.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -119,7 +121,7 @@
 		3649C77922F67FBD009AF83F /* GiftMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftMoneyUITests.swift; sourceTree = "<group>"; };
 		3649C77F22F67FBD009AF83F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InoutRecordsViewController.swift; sourceTree = "<group>"; };
+		3649C78F22F68644009AF83F /* InAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountTradeVC.swift; sourceTree = "<group>"; };
 		3649C79122F68679009AF83F /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
@@ -135,6 +137,8 @@
 		3818556A22FBC57700024542 /* TradeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMedia.swift; sourceTree = "<group>"; };
 		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
+		386865832302A1F9000BBD85 /* AllTradesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradesVC.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -197,11 +201,13 @@
 		36294C7D2300425200819539 /* scene */ = {
 			isa = PBXGroup;
 			children = (
-				3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */,
 				3649C79122F68679009AF83F /* MineViewController.swift */,
 				3649C79322F6869B009AF83F /* StatisticsViewController.swift */,
 				369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */,
 				36294C7F2300429000819539 /* EventEditeViewController.swift */,
+				3649C78F22F68644009AF83F /* InAccountTradeVC.swift */,
+				3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */,
+				386865832302A1F9000BBD85 /* AllTradesVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -654,7 +660,7 @@
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
-				3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */,
+				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
 				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
 				38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */,
@@ -667,6 +673,7 @@
 				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
 				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
+				386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */,
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
@@ -676,6 +683,7 @@
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
 				36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */,
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
+				386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */,
 				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
 				3818556B22FBC57700024542 /* TradeMedia.swift in Sources */,
 			);

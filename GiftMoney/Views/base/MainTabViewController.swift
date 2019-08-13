@@ -11,7 +11,7 @@ import UIKit
 class MainTabViewController: UITabBarController {
     static let shared: MainTabViewController = MainTabViewController()
     
-    let inoutRecordsVC = InoutRecordsViewController()
+    let inoutRecordsVC = InAccountTradeVC()
     let statisticsVC = StatisticsViewController()
     let mineVC = MineViewController()
     
