@@ -39,6 +39,7 @@
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
 		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
 		386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865832302A1F9000BBD85 /* AllTradesVC.swift */; };
+		386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865862302A3B9000BBD85 /* AllTradeTabbar.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -139,6 +140,7 @@
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
 		386865832302A1F9000BBD85 /* AllTradesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradesVC.swift; sourceTree = "<group>"; };
+		386865862302A3B9000BBD85 /* AllTradeTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradeTabbar.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				36135D4B22F871B200D17330 /* TradeItemRow.swift */,
 				3818556222FACB6300024542 /* TradeCell.swift */,
 				38236C6B23028A8A00B67B8D /* EventCell.swift */,
+				386865862302A3B9000BBD85 /* AllTradeTabbar.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
 				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
+				386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */,
 				38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */,
 				3818556722FBC30700024542 /* Event.swift in Sources */,
 				36294C802300429000819539 /* EventEditeViewController.swift in Sources */,
