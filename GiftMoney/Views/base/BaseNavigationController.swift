@@ -11,7 +11,7 @@ import UIKit
 
 class BaseNavigationController: UINavigationController, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
     
-    static let root: BaseNavigationController = BaseNavigationController(rootViewController: MainTabViewController.shared)
+//    static let root: BaseNavigationController = BaseNavigationController(rootViewController: MainTabViewController.shared)
     
     override func viewDidLoad() {
         super.viewDidLoad()

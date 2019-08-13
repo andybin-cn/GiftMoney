@@ -174,7 +174,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
     }
     
     @objc func oneEventNameFieldtapped() {
-        let editorVC = EventEditeViewController { [weak self] (event) in
+        let editorVC = EventEditeViewController(defaultValue: eventTimeField.textfield.text) { [weak self] (event) in
             self?.eventNameField.fieldValue = event.name
             if let time = event.time {
                 self?.eventTimeField.fieldValue = time

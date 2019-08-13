@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import SnapKit
+import Common
 
 class EventEditeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tableView = UITableView()
+    
+    let inputContainerView = UIView()
     let inputField = UITextField()
     
     var onResult: ((_ event: Event) -> Void)?
     
-    init(onResult: ((_ event: Event) -> Void)?) {
+    init(defaultValue: String? = "", onResult: ((_ event: Event) -> Void)? = nil) {
         self.onResult = onResult
+        inputField.text = defaultValue
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,34 +31,44 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let saveButton = UIBarButtonItem(title: "保存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveButtonTapped))
+        self.navigationItem.rightBarButtonItems = [saveButton]
         
-        let inputView = UIView().then { (inputView) in
+        inputContainerView.apply { (inputView) in
             inputView.backgroundColor = .appMainBackground
             inputView.addTo(view) { (make) in
-                make.left.top.right.equalToSuperview()
-                make.height.equalTo(40)
+                make.left.right.equalToSuperview()
+                make.top.equalTo(ScreenHelp.navBarHeight)
+                make.height.equalTo(42)
             }
         }
         inputField.apply { (inputField) in
-            inputField.layer.cornerRadius = 16
+            inputField.placeholder = "请输入内容（然后直接保存即可）"
+            inputField.font = .appFont(ofSize: 13)
+            inputField.layer.cornerRadius = 18
             inputField.backgroundColor = .white
-            inputField.addTo(inputView) { (make) in
+            inputField.layer.borderWidth = 0.5
+            inputField.layer.borderColor = UIColor.appGrayLine.cgColor
+            inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 18, height: 20))
+            inputField.leftViewMode = .always
+            inputField.addTo(inputContainerView) { (make) in
                 make.centerY.equalToSuperview()
                 make.left.equalTo(15)
                 make.right.equalTo(-15)
-                make.height.equalTo(32)
+                make.height.equalTo(36)
             }
         }
         
         tableView.apply { (tableView) in
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.commonIdentifier)
+            tableView.register(EventCell.self, forCellReuseIdentifier: EventCell.commonIdentifier)
             tableView.estimatedRowHeight = 80
             tableView.delegate = self
             tableView.dataSource = self
             tableView.setExtraCellLineHidden()
             
             tableView.addTo(self.view) { (make) in
-                make.edges.equalToSuperview()
+                make.left.right.bottom.equalToSuperview()
+                make.top.equalTo(inputContainerView.snp.bottom)
             }
         }
     }
@@ -64,6 +79,23 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
             return 2
         }
         return 1
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView().then { (header) in
+            header.backgroundColor = .appGrayLine
+            UILabel().apply { (label) in
+                label.text = section == 0 ? "最近使用" : "内置事件"
+                label.textColor = UIColor.appMainYellow
+                label.font = .appFont(ofSize: 18)
+                label.addTo(header) { (make) in
+                    make.left.equalTo(15)
+                    make.centerY.equalToSuperview()
+                }
+            }
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if Event.latestusedEvents.count > 0, section == 0  {
@@ -79,7 +111,7 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
         } else {
             event = Event.systemEvents[indexPath.row]
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.commonIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: EventCell.commonIdentifier, for: indexPath) as! EventCell
         cell.textLabel?.text = event.name
         cell.detailTextLabel?.text = event.time?.toString(withFormat: "yyyy-MM-dd")
         return cell
@@ -91,6 +123,16 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
         } else {
             event = Event.systemEvents[indexPath.row]
         }
+        self.onResult?(event)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func saveButtonTapped() {
+        guard let name = inputField.text else {
+            self.showTipsView(text: "请输入内容或者选择一个选项")
+            return
+        }
+        let event = Event(name: name)
         self.onResult?(event)
         self.navigationController?.popViewController(animated: true)
     }
