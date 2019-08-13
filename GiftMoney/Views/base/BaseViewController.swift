@@ -36,12 +36,12 @@ class BaseViewController: UIViewController {
     }
     
     deinit {
-        NSLog("\(type(of: self)) released!")
+        SLog.info("\(type(of: self)) released!")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.normalBackground
+        view.backgroundColor = UIColor.appMainBackground
         //        if let delegate = self as? UIGestureRecognizerDelegate {
         //            self.navigationController?.interactivePopGestureRecognizer?.delegate = delegate
         //        }
@@ -50,7 +50,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NSLog("viewDidAppear:\(self.view.frame)")
+        SLog.info("viewDidAppear:\(self.view.frame)")
     }
     
     func addNavigationBar() {

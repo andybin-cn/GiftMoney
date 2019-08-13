@@ -11,9 +11,6 @@ import UIKit
 import Common
 
 extension UIColor {
-    class var normalBackground: UIColor {
-        UIColor.white
-    }
     public static var appMainYellow: UIColor {
         return UIColor.from(hexString: "#FDBB0A")
     }

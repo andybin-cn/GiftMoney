@@ -2,7 +2,7 @@
 //  DeviceSupport.swift
 //  GradingTest
 //
-//  Created by Leo on 2016/10/10.
+//  Created by andy.bin on 2016/10/10.
 //  Copyright © 2016年 DoSoMi. All rights reserved.
 //
 

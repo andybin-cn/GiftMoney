@@ -2,7 +2,7 @@
 //  PropertySetterSupport.swift
 //  AnYou
 //
-//  Created by Leo on 2017/3/4.
+//  Created by andy.bin on 2017/3/4.
 //  Copyright © 2017年 binea. All rights reserved.
 //
 

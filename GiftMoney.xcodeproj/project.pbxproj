@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2222F7289800D17330 /* ScreenHelp.swift */; };
 		36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2622F728AC00D17330 /* UIFont+appTheme.swift */; };
+		36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D4B22F871B200D17330 /* TradeItemRow.swift */; };
+		36135D5422F9B02100D17330 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D5322F9B02100D17330 /* Form.swift */; };
+		36135D5722FB214700D17330 /* DateInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D5622FB214600D17330 /* DateInputField.swift */; };
+		36294C802300429000819539 /* EventEditeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36294C7F2300429000819539 /* EventEditeViewController.swift */; };
 		3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75822F67FB9009AF83F /* AppDelegate.swift */; };
 		3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75A22F67FB9009AF83F /* SceneDelegate.swift */; };
 		3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75C22F67FB9009AF83F /* ViewController.swift */; };
@@ -16,7 +20,7 @@
 		3649C76822F67FBD009AF83F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */; };
 		3649C77322F67FBD009AF83F /* GiftMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77222F67FBD009AF83F /* GiftMoneyTests.swift */; };
 		3649C77E22F67FBD009AF83F /* GiftMoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */; };
-		3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */; };
+		3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InAccountTradeVC.swift */; };
 		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
 		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
@@ -27,6 +31,18 @@
 		369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE3622F6CD930005B67D /* MainTabViewController.swift */; };
 		369DFF2522F7094F0005B67D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; };
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3818556322FACB6300024542 /* TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556222FACB6300024542 /* TradeCell.swift */; };
+		3818556722FBC30700024542 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556622FBC30600024542 /* Event.swift */; };
+		3818556922FBC54C00024542 /* TradeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556822FBC54C00024542 /* TradeItem.swift */; };
+		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
+		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
+		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
+		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
+		386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865832302A1F9000BBD85 /* AllTradesVC.swift */; };
+		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
+		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
+		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
+		38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */; };
 		9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */; };
 		BEF4A2403A9B9C0A38D74C5F /* Pods_GiftMoneyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6EF788216A996B40FFA38 /* Pods_GiftMoneyUITests.framework */; };
 		CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */; };
@@ -88,6 +104,10 @@
 		0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoneyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36135D2222F7289800D17330 /* ScreenHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelp.swift; sourceTree = "<group>"; };
 		36135D2622F728AC00D17330 /* UIFont+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appTheme.swift"; sourceTree = "<group>"; };
+		36135D4B22F871B200D17330 /* TradeItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItemRow.swift; sourceTree = "<group>"; };
+		36135D5322F9B02100D17330 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		36135D5622FB214600D17330 /* DateInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputField.swift; sourceTree = "<group>"; };
+		36294C7F2300429000819539 /* EventEditeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditeViewController.swift; sourceTree = "<group>"; };
 		3649C75522F67FB9009AF83F /* GiftMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiftMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3649C75822F67FB9009AF83F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3649C75A22F67FB9009AF83F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +121,7 @@
 		3649C77922F67FBD009AF83F /* GiftMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftMoneyUITests.swift; sourceTree = "<group>"; };
 		3649C77F22F67FBD009AF83F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InoutRecordsViewController.swift; sourceTree = "<group>"; };
+		3649C78F22F68644009AF83F /* InAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountTradeVC.swift; sourceTree = "<group>"; };
 		3649C79122F68679009AF83F /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
@@ -111,6 +131,18 @@
 		369DFE3522F6CD930005B67D /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		369DFE3622F6CD930005B67D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
+		3818556222FACB6300024542 /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
+		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
+		3818556A22FBC57700024542 /* TradeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMedia.swift; sourceTree = "<group>"; };
+		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
+		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
+		386865832302A1F9000BBD85 /* AllTradesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradesVC.swift; sourceTree = "<group>"; };
+		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
+		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
+		38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInput.swift; sourceTree = "<group>"; };
 		77429951A2D4E665BC0D3F1C /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyTests.debug.xcconfig"; path = "Target Support Files/Pods-GiftMoneyTests/Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0213D6FF91967F5765DFA8 /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyUITests.release.xcconfig"; path = "Target Support Files/Pods-GiftMoneyUITests/Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +190,28 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		36135D5122F9B00D00D17330 /* forms */ = {
+			isa = PBXGroup;
+			children = (
+				36135D5322F9B02100D17330 /* Form.swift */,
+			);
+			path = forms;
+			sourceTree = "<group>";
+		};
+		36294C7D2300425200819539 /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				3649C79122F68679009AF83F /* MineViewController.swift */,
+				3649C79322F6869B009AF83F /* StatisticsViewController.swift */,
+				369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */,
+				36294C7F2300429000819539 /* EventEditeViewController.swift */,
+				3649C78F22F68644009AF83F /* InAccountTradeVC.swift */,
+				3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */,
+				386865832302A1F9000BBD85 /* AllTradesVC.swift */,
+			);
+			path = scene;
+			sourceTree = "<group>";
+		};
 		3649C74C22F67FB9009AF83F = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +238,9 @@
 		3649C75722F67FB9009AF83F /* GiftMoney */ = {
 			isa = PBXGroup;
 			children = (
+				38236C64230105D700B67B8D /* Services */,
+				38EF4A7722F7D2D6007BB28A /* Realm */,
+				38EF4A7022F7C9A6007BB28A /* Models */,
 				36135D2122F7289800D17330 /* Utils */,
 				369DFE0F22F68EE90005B67D /* Theme */,
 				3649C78B22F68531009AF83F /* Views */,
@@ -218,13 +275,11 @@
 		3649C78B22F68531009AF83F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				36294C7D2300425200819539 /* scene */,
+				36135D5122F9B00D00D17330 /* forms */,
 				369DFE3322F6CD930005B67D /* base */,
 				369DFE2022F6BD9D0005B67D /* components */,
 				3649C78E22F685D6009AF83F /* records */,
-				3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */,
-				3649C79122F68679009AF83F /* MineViewController.swift */,
-				3649C79322F6869B009AF83F /* StatisticsViewController.swift */,
-				369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,6 +304,11 @@
 			isa = PBXGroup;
 			children = (
 				369DFE2122F6BDD30005B67D /* InputField.swift */,
+				36135D5622FB214600D17330 /* DateInputField.swift */,
+				38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */,
+				36135D4B22F871B200D17330 /* TradeItemRow.swift */,
+				3818556222FACB6300024542 /* TradeCell.swift */,
+				38236C6B23028A8A00B67B8D /* EventCell.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -286,6 +346,34 @@
 				369DFEBC22F708600005B67D /* CommonTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		38236C64230105D700B67B8D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				38236C66230105F000B67B8D /* TradeManger.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		38EF4A7022F7C9A6007BB28A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				38EF4A7222F7C9C5007BB28A /* Trade.swift */,
+				3818556622FBC30600024542 /* Event.swift */,
+				3818556822FBC54C00024542 /* TradeItem.swift */,
+				3818556A22FBC57700024542 /* TradeMedia.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		38EF4A7722F7D2D6007BB28A /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				38EF4A7822F7D2D6007BB28A /* RealmManager.swift */,
+				38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		71B545BC70EC9E6699DCFCAF /* Pods */ = {
@@ -505,6 +593,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 			);
 			name = "[CP] Copy Carthage Frameworks";
 			outputFileListPaths = (
@@ -568,18 +658,34 @@
 			files = (
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
-				3649C79022F68644009AF83F /* InoutRecordsViewController.swift in Sources */,
+				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
+				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
+				38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */,
+				3818556722FBC30700024542 /* Event.swift in Sources */,
+				36294C802300429000819539 /* EventEditeViewController.swift in Sources */,
+				3818556922FBC54C00024542 /* TradeItem.swift in Sources */,
+				3818556322FACB6300024542 /* TradeCell.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
+				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
+				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
+				386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */,
+				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
+				38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
+				36135D5422F9B02100D17330 /* Form.swift in Sources */,
 				36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */,
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
+				386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */,
+				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
+				3818556B22FBC57700024542 /* TradeMedia.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@
 //  ScreenHelp.swift
 //  AnYou
 //
-//  Created by Leo on 2017/5/3.
+//  Created by andy.bin on 2017/5/3.
 //  Copyright © 2017年 binea. All rights reserved.
 //
 

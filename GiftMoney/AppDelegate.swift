@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Common
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.rootViewController = MainTabViewController.shared
         window?.makeKeyAndVisible()
+        
+        IQKeyboardManager.shared.enable = true
+        
+        SLog.info("NSHomeDirectory: \(NSHomeDirectory())")
         return true
     }
 
