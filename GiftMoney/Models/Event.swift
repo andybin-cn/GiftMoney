@@ -10,40 +10,29 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-class Event: Object, Mappable {
-    enum EventType: String {
-        case builtIn
-        case recentlyUsed
-        case associated
+struct Event {
+    var name: String = ""
+    var time: Date?
+    init(name: String, time: Date? = nil) {
+        self.name = name
+        self.time = time
     }
+}
+
+private let eventName = ["参加婚礼", "宝宝出生", "宝宝满月", "宝宝周岁", "老人办寿", "乔迁新居", "金榜题名", "新店开业", "小孩升学", "压岁钱", "参加葬礼", "探望病人", "其他"]
+
+extension Event {
+    static var systemEvents: [Event] = eventName.map { Event(name: $0) }
     
-    
-    dynamic var id: String = NSUUID().uuidString
-    @objc dynamic var name: String = ""
-    @objc dynamic var actorName: String = ""
-    @objc dynamic private var typeString: String = ""
-    @objc dynamic var address: String = ""
-    @objc dynamic var time: String = ""
-    
-    var type: EventType {
-        get { EventType.init(rawValue: typeString) ?? .recentlyUsed }
-        set { typeString = newValue.rawValue }
-    }
-    
-    required convenience init?(map: Map) {
-        self.init()
-    }
-    
-    func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        actorName <- map["actorName"]
-        address <- map["address"]
-        time <- map["time"]
-        typeString <- map["typeString"]
-    }
-    
-    override static func primaryKey() -> String? {
-        return "id"
+    static var latestusedEvents: [Event] {
+        var allEvents = TradeManger.shared.inTradeGroups.keys.map { Event(name: $0.name, time: $0.lastUseTime) }
+            + TradeManger.shared.outTradeGroups.keys.map { Event(name: $0.name, time: $0.lastUseTime) }
+        allEvents.sort { (a, b) -> Bool in
+            guard let t1 = a.time, let t2 = b.time else {
+                return false
+            }
+            return t1 > t2
+        }
+        return allEvents
     }
 }

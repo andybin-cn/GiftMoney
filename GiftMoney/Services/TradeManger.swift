@@ -17,6 +17,8 @@ struct TradeEventGroupKey: Hashable {
         hasher.combine(name)
         hasher.combine(time.toString(withFormat: "yyyy-MM-dd"))
     }
+    
+    
 }
 
 

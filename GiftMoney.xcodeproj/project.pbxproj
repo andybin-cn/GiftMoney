@@ -192,12 +192,16 @@
 			path = forms;
 			sourceTree = "<group>";
 		};
-		36294C7D2300425200819539 /* coomonViews */ = {
+		36294C7D2300425200819539 /* scene */ = {
 			isa = PBXGroup;
 			children = (
+				3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */,
+				3649C79122F68679009AF83F /* MineViewController.swift */,
+				3649C79322F6869B009AF83F /* StatisticsViewController.swift */,
+				369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */,
 				36294C7F2300429000819539 /* EventEditeViewController.swift */,
 			);
-			path = coomonViews;
+			path = scene;
 			sourceTree = "<group>";
 		};
 		3649C74C22F67FB9009AF83F = {
@@ -263,15 +267,11 @@
 		3649C78B22F68531009AF83F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				36294C7D2300425200819539 /* coomonViews */,
+				36294C7D2300425200819539 /* scene */,
 				36135D5122F9B00D00D17330 /* forms */,
 				369DFE3322F6CD930005B67D /* base */,
 				369DFE2022F6BD9D0005B67D /* components */,
 				3649C78E22F685D6009AF83F /* records */,
-				3649C78F22F68644009AF83F /* InoutRecordsViewController.swift */,
-				3649C79122F68679009AF83F /* MineViewController.swift */,
-				3649C79322F6869B009AF83F /* StatisticsViewController.swift */,
-				369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

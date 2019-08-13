@@ -73,6 +73,9 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
             make.width.equalTo(nameField)
         }
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(oneEventNameFieldtapped))
+        eventNameField.addGestureRecognizer(tapGesture)
+        eventNameField.textfield.isUserInteractionEnabled = false
         eventNameField.addTo(scrollView) { (make) in
             make.left.width.equalTo(nameField)
             make.top.equalTo(nameField.snp.bottom).offset(15)
@@ -164,9 +167,20 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
             RealmManager.share.realm.add(newTrade, update: .all)
             try RealmManager.share.realm.commitWrite()
             trade = newTrade
+            self.navigationController?.popViewController(animated: true)
         } catch let err as NSError {
             self.showTipsView(text: err.localizedDescription)
         }
+    }
+    
+    @objc func oneEventNameFieldtapped() {
+        let editorVC = EventEditeViewController { [weak self] (event) in
+            self?.eventNameField.fieldValue = event.name
+            if let time = event.time {
+                self?.eventTimeField.fieldValue = time
+            }
+        }
+        self.navigationController?.pushViewController(editorVC, animated: true)
     }
     
     

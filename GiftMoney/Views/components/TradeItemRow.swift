@@ -87,11 +87,17 @@ class TradeItemRow: UIView, FormInput {
         layer.cornerRadius = 6
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.appGrayLine.cgColor
+        self.clipsToBounds = true
         
+        switcher.layer.cornerRadius = 6
+        switcher.layer.masksToBounds = true
         switcher.selectedSegmentIndex = 0
         switcher.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        switcher.tintColor = UIColor.appGrayBackground
+        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         switcher.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
         switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
+        
         switcher.addTarget(self, action: #selector(onSwitcherValueChanged), for: .valueChanged)
         
         addSubview(switcher) { (make) in
@@ -103,6 +109,7 @@ class TradeItemRow: UIView, FormInput {
         }
         
         moneyField.apply { (field) in
+            field.textfield.keyboardType = .numberPad
             field.layer.borderWidth = 0
             field.addTo(self) { (make) in
                 make.left.equalTo(switcher.snp.right).offset(20)
@@ -120,6 +127,7 @@ class TradeItemRow: UIView, FormInput {
                 }
             }
             giftValueField.apply { (field) in
+                field.textfield.keyboardType = .numberPad
                 field.layer.borderWidth = 0
                 field.addTo(giftField) { (make) in
                     make.right.top.equalToSuperview()

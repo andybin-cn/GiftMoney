@@ -68,7 +68,11 @@ class SwitchInput: UIView, FormInput {
         
         switcher.setWidth(100, forSegmentAt: 0)
         switcher.setWidth(100, forSegmentAt: 1)
+        switcher.layer.cornerRadius = 6
+        switcher.layer.masksToBounds = true
         switcher.selectedSegmentIndex = 0
+        switcher.tintColor = UIColor.appGrayBackground
+        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         switcher.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
         switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
         
