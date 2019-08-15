@@ -160,6 +160,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 itemsStackView.insertArrangedSubview(row, at: index)
             }
         }
+        medias = trade.tradeMedias.map { $0 }
+        imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
     }
     
     @objc func onAddItemButtonTapped() {
@@ -176,16 +178,14 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 self.showTipsView(text: "数据保存失败，请返回后重试")
                 return
             }
-            RealmManager.share.realm.beginWrite()
-            if let oldTrade = self.trade {
-                newTrade.id = oldTrade.id
-                RealmManager.share.realm.delete(oldTrade.tradeItems)
-                RealmManager.share.realm.delete(oldTrade.tradeMedias)
-            }
-            RealmManager.share.realm.add(newTrade, update: .all)
-            try RealmManager.share.realm.commitWrite()
-            trade = newTrade
-            self.navigationController?.popViewController(animated: true)
+            newTrade.tradeMedias.append(objectsIn: medias)
+            self.showLoadingIndicator()
+            TradeManger.shared.saveTrade(trade: newTrade, oldTrade: self.trade).subscribe(onCompleted: { [weak self] in
+                self?.navigationController?.showTipsView(text: "保存成功")
+                self?.navigationController?.popViewController(animated: true)
+            }) { [weak self] (error) in
+                self?.showTipsView(text: error.localizedDescription)
+            }.disposed(by: disposeBag)
         } catch let err as NSError {
             self.showTipsView(text: err.localizedDescription)
         }

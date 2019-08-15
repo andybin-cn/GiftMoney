@@ -8,10 +8,13 @@
 
 import UIKit
 import Common
+import RxSwift
 
 class BaseViewController: UIViewController {
     var navigationBar: UIView
     var titleLabel: UILabel
+    let disposeBag: DisposeBag = DisposeBag()
+    
 //    override var title: String? {
 //        didSet {
 //            titleLabel.text = title

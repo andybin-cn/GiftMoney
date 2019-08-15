@@ -27,17 +27,19 @@ extension AVAsset {
 
 extension UIImageView {
     func ab_setImage(media: TradeMedia) {
+        let path = media.path
+        image = UIImage(named: "placeHoldeImage")
         if media.hasSaved {
             if media.type == TradeMedia.MediaType.image {
                 DispatchQueue.global().async { [weak self] in
-                    let image = UIImage(contentsOfFile: media.path)
+                    let image = UIImage(contentsOfFile: path)
                     DispatchQueue.main.sync { [weak self] in
                         self?.image = image
                     }
                 }
             } else if media.type == TradeMedia.MediaType.video {
                 DispatchQueue.global().async { [weak self] in
-                    let image = AVAsset(url: URL(fileURLWithPath: media.path)).thumbnailImage
+                    let image = AVAsset(url: URL(fileURLWithPath: path)).thumbnailImage
                     DispatchQueue.main.sync { [weak self] in
                         self?.image = image
                     }
