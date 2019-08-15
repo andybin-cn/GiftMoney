@@ -232,9 +232,37 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     //MARK: - TZImagePickerControllerDelegate
     var selectedAssets: NSMutableArray = []
     var selectedPhotos: [UIImage] = []
+    var medias: [TradeMedia] = []
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
         self.selectedAssets = NSMutableArray(array: assets)
         self.selectedPhotos = photos
-//        imageSetView.setImageViews(showImages: photos, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+        
+        medias.removeAll { !$0.hasSaved && $0.type == .image }
+        
+        photos.forEach { (image) in
+            let media = TradeMedia()
+            media.phImage = image
+            media.type = .image
+            medias.append(media)
+        }
+        imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+    }
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingVideo coverImage: UIImage!, sourceAssets asset: PHAsset!) {
+        let media = TradeMedia()
+        media.phAsset = asset
+        media.type = .video
+        medias.append(media)
+        imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+        
+//        PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { (asset, audioMix, info) in
+//            if let urlAsset = asset as? AVURLAsset {
+//                let localVideoUrl = urlAsset.url
+//                SLog.info("VIDEO URL: \(localVideoUrl) ")
+//                SLog.info("VIDEO URL path: \(localVideoUrl.path) ")
+//                SLog.info("VIDEO URL absoluteString: \(localVideoUrl.absoluteString) ")
+//            } else {
+//                //nil
+//            }
+//        }
     }
 }
