@@ -22,7 +22,17 @@ class TradeMedia: Object, Mappable {
     @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var tradeID: String = ""
     @objc dynamic private var typeString: String = ""
-    @objc dynamic var path: String = ""
+    var path: String {
+        let suffix = type == .image ? ".png" : ".mp4"
+        return "\(NSHomeDirectory())/Documents/\(id)\(suffix)"
+    }
+    var url: URL {
+        var url = URL(fileURLWithPath: "\(NSHomeDirectory())/Documents")
+        let suffix = type == .image ? "png" : "mp4"
+        url.appendPathComponent(id)
+        url.appendPathExtension(suffix)
+        return url
+    }
     
     var phAsset: PHAsset?
     var phImage: UIImage?
@@ -51,7 +61,7 @@ class TradeMedia: Object, Mappable {
         id <- map["id"]
         tradeID <- map["tradeID"]
         typeString <- map["type"]
-        path <- map["path"]
+//        path <- map["path"]
     }
     
     func saveResourceIntoApp() -> Observable<TradeMedia> {

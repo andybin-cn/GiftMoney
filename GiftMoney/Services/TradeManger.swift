@@ -34,16 +34,16 @@ class TradeManger {
     var outTrades = [Trade]()
     
     private init() {
-        let intTrades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.inAccount }
-        intTrades.forEach { (trade) in
-            let groupKey = TradeEventGroupKey(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
-            if var tradeGroup = inTradeGroups[groupKey] {
-                tradeGroup.append(trade)
-            } else {
-                inTradeGroups[groupKey] = [trade]
-            }
-        }
-        outTrades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.outAccount }
+//        let intTrades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.inAccount }
+//        intTrades.forEach { (trade) in
+//            let groupKey = TradeEventGroupKey(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
+//            if var tradeGroup = inTradeGroups[groupKey] {
+//                tradeGroup.append(trade)
+//            } else {
+//                inTradeGroups[groupKey] = [trade]
+//            }
+//        }
+//        outTrades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.outAccount }
     }
     
     func saveTrade(trade: Trade, oldTrade: Trade?) -> Completable {
@@ -59,10 +59,10 @@ class TradeManger {
             RealmManager.share.realm.delete(deletedMedias)
         }
         let medias: [TradeMedia] = trade.tradeMedias.filter { !$0.hasSaved }
-        medias.forEach { (media) in
-            let suffix = media.type == .image ? ".png" : ".mov"
-            media.path = URL(string: NSHomeDirectory() + "/Documents/\(NSUUID().uuidString)\(suffix)")?.path ?? ""
-        }
+//        medias.forEach { (media) in
+//            let suffix = media.type == .image ? ".png" : ".mov"
+//            media.path = URL(string: NSHomeDirectory() + "/Documents/\(NSUUID().uuidString)\(suffix)")?.path ?? ""
+//        }
         RealmManager.share.realm.add(trade, update: .all)
         do {
             try RealmManager.share.realm.commitWrite()

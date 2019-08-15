@@ -14,7 +14,7 @@ import TZImagePickerController
 import SKPhotoBrowser
 import PhotosUI
 
-class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSetViewDelegate, TZImagePickerControllerDelegate {
+class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSetViewDelegate, TZImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate {
 
     let scrollView = UIScrollView()
     
@@ -218,15 +218,27 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         self.present(picker, animated: true, completion: nil)
     }
     func imageSet(view: ImageSetView, didSelectMedia media: TradeMedia, atIndex index: Int) {
-        var photos = [SKPhoto]()
-        for imageUrl in self.selectedPhotos {
-            let photo = SKPhoto.photoWithImage(imageUrl)
-            photo.shouldCachePhotoURLImage = true
-            photos.append(photo)
-        }
-        let photoBrowser = SKPhotoBrowser(photos: photos)
-        photoBrowser.initializePageIndex(index)
-        self.present(photoBrowser, animated: true, completion: nil)
+        let controller = UIDocumentInteractionController(url: media.url)
+        controller.delegate = self
+        controller.presentPreview(animated: true)
+        
+        
+//        var photos = [SKPhoto]()
+//        for imageUrl in self.selectedPhotos {
+//            let photo = SKPhoto.photoWithImage(imageUrl)
+//            photo.shouldCachePhotoURLImage = true
+//            photos.append(photo)
+//        }
+//        let photoBrowser = SKPhotoBrowser(photos: photos)
+//        photoBrowser.initializePageIndex(index)
+//        self.present(photoBrowser, animated: true, completion: nil)
+    }
+    
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
+    func documentInteractionControllerRectForPreview(_ controller: UIDocumentInteractionController) -> CGRect {
+        return view.bounds
     }
     
     //MARK: - TZImagePickerControllerDelegate
