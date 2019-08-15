@@ -10,8 +10,11 @@ import UIKit
 import Common
 import ObjectMapper
 import Realm
+import TZImagePickerController
+import SKPhotoBrowser
+import PhotosUI
 
-class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
+class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSetViewDelegate, TZImagePickerControllerDelegate {
 
     let scrollView = UIScrollView()
     
@@ -22,6 +25,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
     let eventTimeField = DateInputField(name: "eventTime", labelString: "时间")
     let itemsStackView = UIStackView()
     let addItemButton = UIButton()
+    let imageSetView: ImageSetView = ImageSetView()
+    
     var trade: Trade?
     
     init(trade: Trade? = nil) {
@@ -115,6 +120,18 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         }
         itemsStackView.addArrangedSubview(addItemButton)
         
+        imageSetView.apply { (setView) in
+            setView.delegate = self
+            setView.addTo(scrollView, layout: { (make) in
+                make.top.equalTo(itemsStackView.snp.bottom).offset(15)
+                make.left.equalTo(15)
+                make.right.equalTo(-15)
+            })
+        }
+        let width = (UIScreen.main.bounds.size.width - 30) / 4 - 10
+        let imageSize = CGSize(width: width, height: width)
+        imageSetView.setImageViews(showMedias: [], imageSize: imageSize, imageCountInLine: 4, isShowAddButton: true)
+        
         fillInFormValues()
     }
     func fillInFormValues() {
@@ -139,7 +156,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
                 }
             }
             trade.tradeItems.enumerated().forEach { (index, tradeItem) in
-                itemsStackView.addArrangedSubview(TradeItemRow(name: "tradeItems",tradeItem: tradeItem, canDelete: index != 0))
+                let row = TradeItemRow(name: "tradeItems",tradeItem: tradeItem, canDelete: index != 0)
+                itemsStackView.insertArrangedSubview(row, at: index)
             }
         }
     }
@@ -190,4 +208,33 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         row.removeFromSuperview()
     }
     
+    //MARK: - ImageSetViewDelegate
+    func imageSetDidAddbuttonTapped(view: ImageSetView) {
+        let picker = TZImagePickerController(maxImagesCount: 9, delegate: self)!
+        picker.selectedAssets = self.selectedAssets
+        picker.allowPickingVideo = true
+        //        picker.photoWidth = 1080
+        picker.navigationBar.barTintColor = UIColor.appMainYellow
+        self.present(picker, animated: true, completion: nil)
+    }
+    func imageSet(view: ImageSetView, didSelectMedia media: TradeMedia, atIndex index: Int) {
+        var photos = [SKPhoto]()
+        for imageUrl in self.selectedPhotos {
+            let photo = SKPhoto.photoWithImage(imageUrl)
+            photo.shouldCachePhotoURLImage = true
+            photos.append(photo)
+        }
+        let photoBrowser = SKPhotoBrowser(photos: photos)
+        photoBrowser.initializePageIndex(index)
+        self.present(photoBrowser, animated: true, completion: nil)
+    }
+    
+    //MARK: - TZImagePickerControllerDelegate
+    var selectedAssets: NSMutableArray = []
+    var selectedPhotos: [UIImage] = []
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
+        self.selectedAssets = NSMutableArray(array: assets)
+        self.selectedPhotos = photos
+//        imageSetView.setImageViews(showImages: photos, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+    }
 }

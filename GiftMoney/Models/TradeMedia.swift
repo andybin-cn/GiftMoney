@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import ObjectMapper
-
+import UIKit
 
 class TradeMedia: Object, Mappable {
     enum MediaType: String {
@@ -21,6 +21,9 @@ class TradeMedia: Object, Mappable {
     @objc dynamic var tradeID: String = ""
     @objc dynamic private var typeString: String = ""
     @objc dynamic var path: String = ""
+    
+    var originImage: UIImage?
+    var originVidei: UIImage?
     
     var type: MediaType? {
         get {

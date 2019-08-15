@@ -40,6 +40,8 @@
 		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
 		386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865832302A1F9000BBD85 /* AllTradesVC.swift */; };
 		386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865862302A3B9000BBD85 /* AllTradeTabbar.swift */; };
+		3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868658B2303AE40000BBD85 /* ImageSetView.swift */; };
+		386865912303D273000BBD85 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865902303D273000BBD85 /* DispatchQueue.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -141,6 +143,8 @@
 		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
 		386865832302A1F9000BBD85 /* AllTradesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradesVC.swift; sourceTree = "<group>"; };
 		386865862302A3B9000BBD85 /* AllTradeTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradeTabbar.swift; sourceTree = "<group>"; };
+		3868658B2303AE40000BBD85 /* ImageSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSetView.swift; sourceTree = "<group>"; };
+		386865902303D273000BBD85 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				36135D2222F7289800D17330 /* ScreenHelp.swift */,
+				386865902303D273000BBD85 /* DispatchQueue.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				3818556222FACB6300024542 /* TradeCell.swift */,
 				38236C6B23028A8A00B67B8D /* EventCell.swift */,
 				386865862302A3B9000BBD85 /* AllTradeTabbar.swift */,
+				3868658B2303AE40000BBD85 /* ImageSetView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -598,6 +604,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TZImagePickerController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SKPhotoBrowser.framework",
 			);
 			name = "[CP] Copy Carthage Frameworks";
 			outputFileListPaths = (
@@ -682,6 +690,8 @@
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
 				38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */,
+				386865912303D273000BBD85 /* DispatchQueue.swift in Sources */,
+				3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
