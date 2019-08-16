@@ -15,6 +15,7 @@ import SKPhotoBrowser
 import PhotosUI
 import RxSwift
 import QuickLook
+import SnapKit
 
 class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSetViewDelegate, TZImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate, QLPreviewControllerDataSource {
 
@@ -38,6 +39,14 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        if let trade = self.trade, trade.type == nil {
+            RealmManager.share.realm.beginWrite()
+            RealmManager.share.realm.delete(trade)
+            try? RealmManager.share.realm.commitWrite()
+        }
     }
     
     override func viewDidLoad() {
@@ -128,6 +137,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 make.top.equalTo(itemsStackView.snp.bottom).offset(15)
                 make.left.equalTo(15)
                 make.right.equalTo(-15)
+                make.bottom.equalTo(-40).priority(ConstraintPriority.low)
             })
         }
         let width = (UIScreen.main.bounds.size.width - 30) / 4 - 10
@@ -159,6 +169,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             }
             trade.tradeItems.enumerated().forEach { (index, tradeItem) in
                 let row = TradeItemRow(name: "tradeItems",tradeItem: tradeItem, canDelete: index != 0)
+                row.delegate = self
                 itemsStackView.insertArrangedSubview(row, at: index)
             }
         }
@@ -220,12 +231,6 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         self.present(picker, animated: true, completion: nil)
     }
     func imageSet(view: ImageSetView, didSelectMedia media: TradeMedia, atIndex index: Int) {
-//        let url = media.originURL ?? media.url
-//        let controller = UIDocumentInteractionController(url: url)
-//        controller.delegate = self
-//        controller.presentPreview(animated: true)
-
-//
         let controller = QLPreviewController()
         controller.dataSource = self
         controller.currentPreviewItemIndex = index
@@ -251,13 +256,18 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         guard let trade = self.trade else {
             return
         }
-        self.showLoadingIndicator()
+        previewController?.showLoadingIndicator()
         TradeManger.shared.deleteTradeMedias(trade: trade, tradeMedia: media).subscribe(onError: { [unowned self] (error) in
-            self.hiddenLoadingIndicator()
-            self.medias.removeAll { $0.id == media.id }
-            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+            self.previewController?.hiddenLoadingIndicator()
         }, onCompleted: { [unowned self] in
-            self.hiddenLoadingIndicator()
+            self.previewController?.hiddenLoadingIndicator()
+            self.medias = trade.tradeMedias.map { $0 }
+            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+            if self.medias.count > 0 {
+                self.previewController?.reloadData()
+            } else {
+                self.previewController?.dismiss(animated: true, completion: nil)
+            }
         }).disposed(by: disposeBag)
         
     }
@@ -268,21 +278,21 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     var medias: [TradeMedia] = []
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
         
-        photos.enumerated().forEach { (index, photo) in
+        let newMedias = photos.enumerated().map { (index, photo) -> TradeMedia in
             let media = TradeMedia()
             media.phAsset = assets[index] as? PHAsset
             media.phImage = photo
             media.type = .image
-            medias.append(media)
+            return media
         }
         
         self.showLoadingIndicator()
-        TradeManger.shared.saveTradeMedias(trade: self.trade, tradeMedias: self.medias).subscribe(onNext: { [unowned self] (trade) in
+        TradeManger.shared.saveTradeMedias(trade: self.trade, newMedias: newMedias).subscribe(onNext: { [unowned self] (trade) in
             self.trade = trade
+            self.medias = trade.tradeMedias.map { $0 }
             self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
             self.hiddenLoadingIndicator()
         }, onError: { [unowned self] (error) in
-            self.medias.removeAll { !$0.hasSaved && $0.type == .image }
             self.showTipsView(text: "图片保存失败，请重试。")
         }).disposed(by: disposeBag)
     }
@@ -291,15 +301,14 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         let media = TradeMedia()
         media.phAsset = asset
         media.type = .video
-        self.medias.append(media)
         
         self.showLoadingIndicator()
-        TradeManger.shared.saveTradeMedias(trade: self.trade, tradeMedias: self.medias).subscribe(onNext: { [unowned self] (trade) in
+        TradeManger.shared.saveTradeMedias(trade: self.trade, newMedias: [media]).subscribe(onNext: { [unowned self] (trade) in
             self.trade = trade
+            self.medias = trade.tradeMedias.map { $0 }
             self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
             self.hiddenLoadingIndicator()
         }, onError: { [unowned self] (error) in
-            self.medias.removeAll { !$0.hasSaved && $0.type == .image }
             self.showTipsView(text: "图片保存失败，请重试。")
         }).disposed(by: disposeBag)
     }

@@ -29,35 +29,19 @@ extension UIImageView {
     func ab_setImage(media: TradeMedia) {
         let path = media.path
         image = UIImage(named: "placeHoldeImage")
-        if media.hasSaved {
-            if media.type == TradeMedia.MediaType.image {
-                DispatchQueue.global().async { [weak self] in
-                    let image = UIImage(contentsOfFile: path)
-                    DispatchQueue.main.sync { [weak self] in
-                        self?.image = image
-                    }
-                }
-            } else if media.type == TradeMedia.MediaType.video {
-                DispatchQueue.global().async { [weak self] in
-                    let image = AVAsset(url: URL(fileURLWithPath: path)).thumbnailImage
-                    DispatchQueue.main.sync { [weak self] in
-                        self?.image = image
-                    }
+        if media.type == TradeMedia.MediaType.image {
+            DispatchQueue.global().async { [weak self] in
+                let image = UIImage(contentsOfFile: path)
+                DispatchQueue.main.sync { [weak self] in
+                    self?.image = image
                 }
             }
-        } else {
-            if media.type == TradeMedia.MediaType.video, let asset = media.phAsset {
-                DispatchQueue.global().async { [weak self] in
-                    PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { (asset, audioMix, info) in
-                        if let urlAsset = asset as? AVURLAsset, let image = urlAsset.thumbnailImage {
-                            DispatchQueue.main.sync { [weak self] in
-                                self?.image = image
-                            }
-                        }
-                    }
+        } else if media.type == TradeMedia.MediaType.video {
+            DispatchQueue.global().async { [weak self] in
+                let image = AVAsset(url: URL(fileURLWithPath: path)).thumbnailImage
+                DispatchQueue.main.sync { [weak self] in
+                    self?.image = image
                 }
-            } else if media.type == TradeMedia.MediaType.image, let image = media.phImage {
-                self.image = image
             }
         }
     }

@@ -73,6 +73,8 @@ class TradeManger {
                 RealmManager.share.realm.add(trade, update: .modified)
                 RealmManager.share.realm.delete(tradeMedia)
                 try RealmManager.share.realm.commitWrite()
+                observable.onNext(trade)
+                observable.onCompleted()
             } catch let error {
                 observable.onError(error)
             }
@@ -80,17 +82,17 @@ class TradeManger {
         }
     }
     
-    func saveTradeMedias(trade: Trade?, tradeMedias: [TradeMedia]) -> Observable<Trade> {
+    func saveTradeMedias(trade: Trade?, newMedias: [TradeMedia]) -> Observable<Trade> {
         return Observable<Trade>.create { (observable) -> Disposable in
             RealmManager.share.realm.beginWrite()
             let newTrade = trade ?? Trade()
-            newTrade.tradeMedias.removeAll()
-            newTrade.tradeMedias.append(objectsIn: tradeMedias)
+            newTrade.tradeMedias.append(objectsIn: newMedias)
             RealmManager.share.realm.add(newTrade, update: .all)
+            
             var dispose: Disposable?
             do {
                 try RealmManager.share.realm.commitWrite()
-                dispose = Observable<TradeMedia>.from(tradeMedias)
+                dispose = Observable<TradeMedia>.from(newMedias)
                     .flatMap { $0.prepareForOriginUrl().concat($0.saveResourceIntoApp()) }
                     .ignoreElements()
                     .subscribe(onCompleted: {

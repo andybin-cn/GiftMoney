@@ -38,9 +38,6 @@ class TradeMedia: Object, Mappable, QLPreviewItem {
     var phAsset: PHAsset?
     var phImage: UIImage?
     var originURL: URL?
-    var hasSaved: Bool {
-        return phAsset == nil && phImage == nil
-    }
     
     var type: MediaType? {
         get {
@@ -90,7 +87,7 @@ class TradeMedia: Object, Mappable, QLPreviewItem {
     func saveResourceIntoApp() -> Observable<TradeMedia> {
         return Observable<TradeMedia>.create { (observable) -> Disposable in
             let destURL = self.url
-            if !self.hasSaved, let originURL = self.originURL {
+            if let originURL = self.originURL {
                 DispatchQueue.global().async {
                     do {
                         try FileManager.default.copyItem(at: originURL, to: destURL)
@@ -112,11 +109,7 @@ class TradeMedia: Object, Mappable, QLPreviewItem {
     
     //MARK: - QLPreviewItem
     var previewItemURL: URL? {
-        if hasSaved {
-            return url
-        } else {
-            return originURL
-        }
+        return url
     }
     var previewItemTitle: String? {
         switch type {
