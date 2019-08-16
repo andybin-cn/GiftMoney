@@ -36,8 +36,10 @@ class DateInputField: InputField {
         datePicker.datePickerMode = .date
 //        datePicker.minuteInterval = 30
         datePicker.addTarget(self, action: #selector(onDatePickerChanged(sender:)), for: UIControl.Event.valueChanged)
-        
         textfield.inputView = datePicker
+        
+        textfield.text = date.toString(withFormat: "yyyy-MM-dd")
+        textfieldChanged()
     }
     
     required init?(coder: NSCoder) {

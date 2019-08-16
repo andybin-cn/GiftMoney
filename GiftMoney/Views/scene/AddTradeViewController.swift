@@ -82,15 +82,17 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             make.top.equalTo(typeSwitch.snp.bottom).offset(15)
             make.width.equalTo(self.view.snp.width).multipliedBy(0.5).offset(-22.5)
         }
-        
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(onRelationshipFieldtapped))
+        relationshipField.addGestureRecognizer(tapGesture1)
+        relationshipField.textfield.isUserInteractionEnabled = false
         relationshipField.addTo(scrollView) { (make) in
             make.right.equalTo(-15)
             make.centerY.equalTo(nameField)
             make.width.equalTo(nameField)
         }
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(oneEventNameFieldtapped))
-        eventNameField.addGestureRecognizer(tapGesture)
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(onEventNameFieldtapped))
+        eventNameField.addGestureRecognizer(tapGesture2)
         eventNameField.textfield.isUserInteractionEnabled = false
         eventNameField.addTo(scrollView) { (make) in
             make.left.width.equalTo(nameField)
@@ -177,6 +179,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
     }
     
+    //MARK: - controller actions
+    
     @objc func onAddItemButtonTapped() {
         let newRow = TradeItemRow(name: "tradeItems", tradeItem: nil, canDelete: true)
         newRow.delegate = self
@@ -204,12 +208,18 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         }
     }
     
-    @objc func oneEventNameFieldtapped() {
-        let editorVC = EventEditeViewController(defaultValue: eventTimeField.textfield.text) { [weak self] (event) in
+    @objc func onEventNameFieldtapped() {
+        let editorVC = EventEditeViewController(defaultValue: eventNameField.textfield.text) { [weak self] (event) in
             self?.eventNameField.fieldValue = event.name
             if let time = event.time {
                 self?.eventTimeField.fieldValue = time
             }
+        }
+        self.navigationController?.pushViewController(editorVC, animated: true)
+    }
+    @objc func onRelationshipFieldtapped() {
+        let editorVC = RelationEditeVC(defaultValue: relationshipField.textfield.text) { [weak self] (relation) in
+            self?.relationshipField.fieldValue = relation.name
         }
         self.navigationController?.pushViewController(editorVC, animated: true)
     }

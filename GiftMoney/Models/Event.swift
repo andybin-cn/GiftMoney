@@ -10,12 +10,20 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-struct Event {
+struct Event: Hashable {
     var name: String = ""
     var time: Date?
-    init(name: String, time: Date? = nil) {
+    var lastUseTime: Date?
+    
+    init(name: String, time: Date? = nil, lastUseTime: Date? = nil) {
         self.name = name
         self.time = time
+        self.lastUseTime = lastUseTime
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(time?.toString(withFormat: "yyyy-MM-dd"))
     }
 }
 
@@ -25,14 +33,25 @@ extension Event {
     static var systemEvents: [Event] = eventName.map { Event(name: $0) }
     
     static var latestusedEvents: [Event] {
-        var allEvents = TradeManger.shared.inTradeGroups.keys.map { Event(name: $0.name, time: $0.lastUseTime) }
-            + TradeManger.shared.outTradeGroups.keys.map { Event(name: $0.name, time: $0.lastUseTime) }
-        allEvents.sort { (a, b) -> Bool in
-            guard let t1 = a.time, let t2 = b.time else {
+        var tradeGroups = Dictionary<Event, [Trade]>()
+        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''"))
+        trades.forEach { (trade) in
+            let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
+            if var tradeGroup = tradeGroups[groupKey] {
+                tradeGroup.append(trade)
+            } else {
+                tradeGroups[groupKey] = [trade]
+            }
+        }
+        
+        return tradeGroups.keys.sorted { (a, b) -> Bool in
+            guard let t1 = a.lastUseTime else {
                 return false
+            }
+            guard let t2 = b.lastUseTime else {
+                return true
             }
             return t1 > t2
         }
-        return allEvents
     }
 }
