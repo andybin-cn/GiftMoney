@@ -220,22 +220,46 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         self.present(picker, animated: true, completion: nil)
     }
     func imageSet(view: ImageSetView, didSelectMedia media: TradeMedia, atIndex index: Int) {
+//        let url = media.originURL ?? media.url
+//        let controller = UIDocumentInteractionController(url: url)
+//        controller.delegate = self
+//        controller.presentPreview(animated: true)
+
+//
         let controller = QLPreviewController()
         controller.dataSource = self
         controller.currentPreviewItemIndex = index
         controller.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "删除", style: UIBarButtonItem.Style.plain, target: self, action: #selector(onImageDeletetapped))
+        previewController = controller
         self.present(controller, animated: true, completion: nil)
     }
     
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        return self
-    }
-    func documentInteractionControllerRectForPreview(_ controller: UIDocumentInteractionController) -> CGRect {
-        return view.bounds
+    weak var previewController: QLPreviewController?
+    @objc func onImageDeletetapped() {
+        previewController?.showAlertView(title: "确定删除图片么？", message: nil, actions: [
+            UIAlertAction(title: "取消", style: .cancel, handler: nil),
+            UIAlertAction(title: "删除", style: .destructive, handler: { [weak self] (_) in
+                guard let controller = self?.previewController, let media = controller.currentPreviewItem as? TradeMedia else {
+                    return
+                }
+                self?.deleteTradeMedia(media: media)
+            })
+        ])
     }
     
-    @objc func onImageDeletetapped() {
-        SLog.info("onImageDeletetapped")
+    func deleteTradeMedia(media: TradeMedia) {
+        guard let trade = self.trade else {
+            return
+        }
+        self.showLoadingIndicator()
+        TradeManger.shared.deleteTradeMedias(trade: trade, tradeMedia: media).subscribe(onError: { [unowned self] (error) in
+            self.hiddenLoadingIndicator()
+            self.medias.removeAll { $0.id == media.id }
+            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+        }, onCompleted: { [unowned self] in
+            self.hiddenLoadingIndicator()
+        }).disposed(by: disposeBag)
+        
     }
     
     //MARK: - TZImagePickerControllerDelegate
@@ -243,27 +267,24 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     var selectedPhotos: [UIImage] = []
     var medias: [TradeMedia] = []
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
-        self.selectedAssets = NSMutableArray(array: assets)
-        self.selectedPhotos = photos
         
-        medias.removeAll { !$0.hasSaved && $0.type == .image }
-        
-        let newMedias: [TradeMedia] = photos.enumerated().map { (index, photo) -> TradeMedia in
+        photos.enumerated().forEach { (index, photo) in
             let media = TradeMedia()
             media.phAsset = assets[index] as? PHAsset
             media.phImage = photo
             media.type = .image
             medias.append(media)
-            return media
         }
         
         self.showLoadingIndicator()
-        Observable<TradeMedia>.from(newMedias).flatMap { $0.prepareForOriginUrl() }.ignoreElements().subscribe(onCompleted: {
+        TradeManger.shared.saveTradeMedias(trade: self.trade, tradeMedias: self.medias).subscribe(onNext: { [unowned self] (trade) in
+            self.trade = trade
             self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
             self.hiddenLoadingIndicator()
-        }) { [unowned self] (error) in
-            self.showTipsView(text: error.localizedDescription)
-        }.disposed(by: disposeBag)
+        }, onError: { [unowned self] (error) in
+            self.medias.removeAll { !$0.hasSaved && $0.type == .image }
+            self.showTipsView(text: "图片保存失败，请重试。")
+        }).disposed(by: disposeBag)
     }
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingVideo coverImage: UIImage!, sourceAssets asset: PHAsset!) {
         self.showLoadingIndicator()
@@ -271,12 +292,16 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         media.phAsset = asset
         media.type = .video
         self.medias.append(media)
-        media.prepareForOriginUrl().ignoreElements().subscribe(onCompleted: {
+        
+        self.showLoadingIndicator()
+        TradeManger.shared.saveTradeMedias(trade: self.trade, tradeMedias: self.medias).subscribe(onNext: { [unowned self] (trade) in
+            self.trade = trade
             self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
             self.hiddenLoadingIndicator()
-        }) { [unowned self] (error) in
-            self.showTipsView(text: error.localizedDescription)
-        }.disposed(by: disposeBag)
+        }, onError: { [unowned self] (error) in
+            self.medias.removeAll { !$0.hasSaved && $0.type == .image }
+            self.showTipsView(text: "图片保存失败，请重试。")
+        }).disposed(by: disposeBag)
     }
     
     //MARK: - QLPreviewControllerDataSource
@@ -284,7 +309,6 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         return medias.count
     }
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        SLog.info("previewItemURL:\(medias[index].previewItemURL)")
         return medias[index]
     }
 }

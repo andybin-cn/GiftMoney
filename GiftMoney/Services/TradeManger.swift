@@ -51,26 +51,60 @@ class TradeManger {
         if let oldTrade = oldTrade {
             trade.id = oldTrade.id
             RealmManager.share.realm.delete(oldTrade.tradeItems)
-            let deletedMedias = oldTrade.tradeMedias.filter{ (oldMedia) -> Bool in
-                return !trade.tradeMedias.contains { (newMedia) -> Bool in
-                    return oldMedia.id == newMedia.id
-                }
-            }
-            RealmManager.share.realm.delete(deletedMedias)
         }
-        let medias: [TradeMedia] = trade.tradeMedias.filter { !$0.hasSaved }
-//        medias.forEach { (media) in
-//            let suffix = media.type == .image ? ".png" : ".mov"
-//            media.path = URL(string: NSHomeDirectory() + "/Documents/\(NSUUID().uuidString)\(suffix)")?.path ?? ""
-//        }
         RealmManager.share.realm.add(trade, update: .all)
         do {
             try RealmManager.share.realm.commitWrite()
         } catch let error {
             return Completable.error(error)
         }
-        return Observable<TradeMedia>.from(medias).flatMap { (media) -> Observable<TradeMedia> in
-            return media.saveResourceIntoApp()
-        }.ignoreElements()
+        return Completable.empty()
+    }
+    
+    func deleteTradeMedias(trade: Trade, tradeMedia: TradeMedia) -> Observable<Trade> {
+        return Observable<Trade>.create { (observable) -> Disposable in
+            do {
+                try FileManager.default.removeItem(at: tradeMedia.url)
+                
+                RealmManager.share.realm.beginWrite()
+                if let index = trade.tradeMedias.index(of: tradeMedia) {
+                    trade.tradeMedias.remove(at: index)
+                }
+                RealmManager.share.realm.add(trade, update: .modified)
+                RealmManager.share.realm.delete(tradeMedia)
+                try RealmManager.share.realm.commitWrite()
+            } catch let error {
+                observable.onError(error)
+            }
+            return Disposables.create { }
+        }
+    }
+    
+    func saveTradeMedias(trade: Trade?, tradeMedias: [TradeMedia]) -> Observable<Trade> {
+        return Observable<Trade>.create { (observable) -> Disposable in
+            RealmManager.share.realm.beginWrite()
+            let newTrade = trade ?? Trade()
+            newTrade.tradeMedias.removeAll()
+            newTrade.tradeMedias.append(objectsIn: tradeMedias)
+            RealmManager.share.realm.add(newTrade, update: .all)
+            var dispose: Disposable?
+            do {
+                try RealmManager.share.realm.commitWrite()
+                dispose = Observable<TradeMedia>.from(tradeMedias)
+                    .flatMap { $0.prepareForOriginUrl().concat($0.saveResourceIntoApp()) }
+                    .ignoreElements()
+                    .subscribe(onCompleted: {
+                        observable.onNext(newTrade)
+                        observable.onCompleted()
+                    }) { (error) in
+                        observable.onError(error)
+                    }
+            } catch let error {
+                observable.onError(error)
+            }
+            return Disposables.create {
+                dispose?.dispose()
+            }
+        }
     }
 }
