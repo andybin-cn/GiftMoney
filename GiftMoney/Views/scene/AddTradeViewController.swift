@@ -13,8 +13,10 @@ import Realm
 import TZImagePickerController
 import SKPhotoBrowser
 import PhotosUI
+import RxSwift
+import QuickLook
 
-class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSetViewDelegate, TZImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate {
+class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSetViewDelegate, TZImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate, QLPreviewControllerDataSource {
 
     let scrollView = UIScrollView()
     
@@ -218,20 +220,11 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         self.present(picker, animated: true, completion: nil)
     }
     func imageSet(view: ImageSetView, didSelectMedia media: TradeMedia, atIndex index: Int) {
-        let controller = UIDocumentInteractionController(url: media.url)
-        controller.delegate = self
-        controller.presentPreview(animated: true)
-        
-        
-//        var photos = [SKPhoto]()
-//        for imageUrl in self.selectedPhotos {
-//            let photo = SKPhoto.photoWithImage(imageUrl)
-//            photo.shouldCachePhotoURLImage = true
-//            photos.append(photo)
-//        }
-//        let photoBrowser = SKPhotoBrowser(photos: photos)
-//        photoBrowser.initializePageIndex(index)
-//        self.present(photoBrowser, animated: true, completion: nil)
+        let controller = QLPreviewController()
+        controller.dataSource = self
+        controller.currentPreviewItemIndex = index
+        controller.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "删除", style: UIBarButtonItem.Style.plain, target: self, action: #selector(onImageDeletetapped))
+        self.present(controller, animated: true, completion: nil)
     }
     
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
@@ -239,6 +232,10 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     }
     func documentInteractionControllerRectForPreview(_ controller: UIDocumentInteractionController) -> CGRect {
         return view.bounds
+    }
+    
+    @objc func onImageDeletetapped() {
+        SLog.info("onImageDeletetapped")
     }
     
     //MARK: - TZImagePickerControllerDelegate
@@ -251,30 +248,43 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         
         medias.removeAll { !$0.hasSaved && $0.type == .image }
         
-        photos.forEach { (image) in
+        let newMedias: [TradeMedia] = photos.enumerated().map { (index, photo) -> TradeMedia in
             let media = TradeMedia()
-            media.phImage = image
+            media.phAsset = assets[index] as? PHAsset
+            media.phImage = photo
             media.type = .image
             medias.append(media)
+            return media
         }
-        imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+        
+        self.showLoadingIndicator()
+        Observable<TradeMedia>.from(newMedias).flatMap { $0.prepareForOriginUrl() }.ignoreElements().subscribe(onCompleted: {
+            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+            self.hiddenLoadingIndicator()
+        }) { [unowned self] (error) in
+            self.showTipsView(text: error.localizedDescription)
+        }.disposed(by: disposeBag)
     }
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingVideo coverImage: UIImage!, sourceAssets asset: PHAsset!) {
+        self.showLoadingIndicator()
         let media = TradeMedia()
         media.phAsset = asset
         media.type = .video
-        medias.append(media)
-        imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
-        
-//        PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { (asset, audioMix, info) in
-//            if let urlAsset = asset as? AVURLAsset {
-//                let localVideoUrl = urlAsset.url
-//                SLog.info("VIDEO URL: \(localVideoUrl) ")
-//                SLog.info("VIDEO URL path: \(localVideoUrl.path) ")
-//                SLog.info("VIDEO URL absoluteString: \(localVideoUrl.absoluteString) ")
-//            } else {
-//                //nil
-//            }
-//        }
+        self.medias.append(media)
+        media.prepareForOriginUrl().ignoreElements().subscribe(onCompleted: {
+            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+            self.hiddenLoadingIndicator()
+        }) { [unowned self] (error) in
+            self.showTipsView(text: error.localizedDescription)
+        }.disposed(by: disposeBag)
+    }
+    
+    //MARK: - QLPreviewControllerDataSource
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return medias.count
+    }
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        SLog.info("previewItemURL:\(medias[index].previewItemURL)")
+        return medias[index]
     }
 }

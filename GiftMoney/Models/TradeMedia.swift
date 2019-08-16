@@ -12,8 +12,9 @@ import ObjectMapper
 import PhotosUI
 import RxSwift
 import Common
+import QuickLook
 
-class TradeMedia: Object, Mappable {
+class TradeMedia: Object, Mappable, QLPreviewItem {
     enum MediaType: String {
         case image = "image"
         case video = "video"
@@ -36,6 +37,7 @@ class TradeMedia: Object, Mappable {
     
     var phAsset: PHAsset?
     var phImage: UIImage?
+    var originURL: URL?
     var hasSaved: Bool {
         return phAsset == nil && phImage == nil
     }
@@ -63,36 +65,68 @@ class TradeMedia: Object, Mappable {
         typeString <- map["type"]
 //        path <- map["path"]
     }
-    
-    func saveResourceIntoApp() -> Observable<TradeMedia> {
+    func prepareForOriginUrl() -> Observable<TradeMedia> {
         return Observable<TradeMedia>.create { (observable) -> Disposable in
             if self.type == TradeMedia.MediaType.video, let asset = self.phAsset {
-                PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { (asset, audioMix, info) in
+                PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { [weak self] (asset, audioMix, info) in
                     if let urlAsset = asset as? AVURLAsset {
-                        do {
-                            try FileManager.default.copyItem(at: urlAsset.url, to: URL(fileURLWithPath: self.path))
+                        self?.originURL = urlAsset.url
+                        DispatchQueue.main.sync {
                             observable.onCompleted()
-                        } catch let error {
-                            observable.onError(error)
                         }
                     }
                 }
-            } else if self.type == TradeMedia.MediaType.image, let image = self.phImage {
-                let path = self.path
+            } else if self.type == TradeMedia.MediaType.image, let asset = self.phAsset {
+                asset.requestContentEditingInput(with: nil) { [weak self] (input, info) in
+                    self?.originURL = input?.fullSizeImageURL
+                    observable.onCompleted()
+                }
+            } else {
+                observable.onCompleted()
+            }
+            return Disposables.create { }
+        }
+    }
+    func saveResourceIntoApp() -> Observable<TradeMedia> {
+        return Observable<TradeMedia>.create { (observable) -> Disposable in
+            let destURL = self.url
+            if !self.hasSaved, let originURL = self.originURL {
                 DispatchQueue.global().async {
                     do {
-                        try image.write(toFile: path, format: ImageFormat.png)
+                        try FileManager.default.copyItem(at: originURL, to: destURL)
+                        DispatchQueue.main.sync {
+                            observable.onCompleted()
+                        }
                     } catch let error {
                         DispatchQueue.main.sync {
                             observable.onError(error)
                         }
                     }
-                    DispatchQueue.main.sync {
-                        observable.onCompleted()
-                    }
                 }
+            } else {
+                observable.onCompleted()
             }
             return Disposables.create { }
         }
     }
+    
+    //MARK: - QLPreviewItem
+    var previewItemURL: URL? {
+        if hasSaved {
+            return url
+        } else {
+            return originURL
+        }
+    }
+    var previewItemTitle: String? {
+        switch type {
+        case .some(.image):
+            return "图片"
+        case .some(.video):
+            return "视频"
+        default:
+            return "未知"
+        }
+    }
+    
 }
