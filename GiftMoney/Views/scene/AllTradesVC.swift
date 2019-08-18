@@ -21,6 +21,14 @@ class AllTradesVC: BaseViewController {
         super.viewDidLoad()
         title = ""
         
+//        UIButton().apply { (button) in
+//            button.addTarget(self, action: #selector(addRecordButtonTapped), for: .touchUpInside)
+//            button.setTitle("新增", for: .normal)
+//            button.setTitleColor(UIColor.appMainYellow, for: .normal)
+//            let addRecordButton = UIBarButtonItem(customView: button)
+//            self.navigationItem.rightBarButtonItems = [addRecordButton]
+//        }
+        
         let addRecordButton = UIBarButtonItem(title: "新增", style: UIBarButtonItem.Style.plain, target: self, action: #selector(addRecordButtonTapped))
         self.navigationItem.rightBarButtonItems = [addRecordButton]
         
@@ -40,6 +48,14 @@ class AllTradesVC: BaseViewController {
         segmented.tintColor = .appMainYellow
         segmented.addTarget(self, action: #selector(onSegmentedChanged), for: UIControl.Event.valueChanged)
         segmented.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .normal)
+        if #available(iOS 13, *) {
+            segmented.layer.borderColor = UIColor.appMainYellow.cgColor
+            segmented.layer.borderWidth = 1
+            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .selected)
+            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainYellow, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .normal)
+            segmented.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
+            segmented.setBackgroundImage(UIColor.white.toImage(), for: .normal, barMetrics: .default)
+        }
         segmented.apply { (segmented) in
             segmented.snp.makeConstraints { (make) in
                 make.height.equalTo(35)
