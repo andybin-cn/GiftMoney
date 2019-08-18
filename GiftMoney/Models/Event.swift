@@ -21,6 +21,10 @@ struct Event: Hashable {
         self.lastUseTime = lastUseTime
     }
     
+    static func == (lhs: Event, rhs: Event) -> Bool {
+        return lhs.name == rhs.name && lhs.time?.toString(withFormat: "yyyy-MM-dd") == rhs.time?.toString(withFormat: "yyyy-MM-dd")
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
         hasher.combine(time?.toString(withFormat: "yyyy-MM-dd"))
@@ -34,7 +38,7 @@ extension Event {
     
     static var latestusedEvents: [Event] {
         var tradeGroups = Dictionary<Event, [Trade]>()
-        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''"))
+        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''")).sorted(byKeyPath: "updateTime", ascending: false)
         trades.forEach { (trade) in
             let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
             if var tradeGroup = tradeGroups[groupKey] {

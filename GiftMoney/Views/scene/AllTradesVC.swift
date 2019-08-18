@@ -13,8 +13,9 @@ class AllTradesVC: BaseViewController {
     let tabbar = UIView()
     let segmented = UISegmentedControl(items: ["送出的", "收到的"])
     let containerView = UIView()
-    let inAccountVC = InAccountTradeVC()
+//    let inAccountVC = InAccountTradeVC()
     let outAccountVC = OutAccountTradeVC()
+    let inAccountGroupVC = InAccountEventGroupVC()
     var currentVC: UIViewController?
     
     override func viewDidLoad() {
@@ -84,11 +85,12 @@ class AllTradesVC: BaseViewController {
     }
     
     @objc func addRecordButtonTapped() {
-        navigationController?.pushViewController(AddTradeViewController(trade: nil), animated: true)
+        let type = segmented.selectedSegmentIndex == 0 ? Trade.TradeType.outAccount :  Trade.TradeType.inAccount
+        navigationController?.pushViewController(AddTradeViewController(tradeType: type, event: nil), animated: true)
     }
     
     @objc func onSegmentedChanged() {
-        let newVC = segmented.selectedSegmentIndex == 0 ? outAccountVC : inAccountVC
+        let newVC = segmented.selectedSegmentIndex == 0 ? outAccountVC : inAccountGroupVC
         if newVC == currentVC {
             return
         }

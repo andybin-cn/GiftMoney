@@ -11,25 +11,25 @@ import PhotosUI
 import Common
 import RxSwift
 
-struct TradeEventGroupKey: Hashable {
-    var name: String
-    var time: Date
-    var lastUseTime: Date
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-        hasher.combine(time.toString(withFormat: "yyyy-MM-dd"))
-    }
-}
+//struct TradeEventGroupKey: Hashable {
+//    var name: String
+//    var time: Date
+//    var lastUseTime: Date
+//
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(name)
+//        hasher.combine(time.toString(withFormat: "yyyy-MM-dd"))
+//    }
+//}
 
 
 
 
 class TradeManger {
     static let shared = TradeManger()
-    var inTradeGroups = Dictionary<TradeEventGroupKey, [Trade]>()
-    var outTradeGroups = Dictionary<TradeEventGroupKey, [Trade]>()
-    var outTrades = [Trade]()
+//    var inTradeGroups = Dictionary<TradeEventGroupKey, [Trade]>()
+//    var outTradeGroups = Dictionary<TradeEventGroupKey, [Trade]>()
+//    var outTrades = [Trade]()
     
     private init() {
 //        let intTrades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.inAccount }
@@ -44,12 +44,27 @@ class TradeManger {
 //        outTrades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.outAccount }
     }
     
+    func eventsGroup() -> Dictionary<Event, [Trade]> {
+        var tradeGroups = Dictionary<Event, [Trade]>()
+        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", Trade.TradeType.inAccount.rawValue)).sorted(byKeyPath: "updateTime", ascending: false)
+        trades.forEach { (trade) in
+            let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
+            if tradeGroups[groupKey] != nil {
+                tradeGroups[groupKey]?.append(trade)
+            } else {
+                tradeGroups[groupKey] = [trade]
+            }
+        }
+        return tradeGroups
+    }
+    
     func saveTrade(trade: Trade, oldTrade: Trade?) -> Completable {
         RealmManager.share.realm.beginWrite()
         if let oldTrade = oldTrade {
             trade.id = oldTrade.id
             RealmManager.share.realm.delete(oldTrade.tradeItems)
         }
+        trade.updateTime = Date()
         RealmManager.share.realm.add(trade, update: .all)
         do {
             try RealmManager.share.realm.commitWrite()

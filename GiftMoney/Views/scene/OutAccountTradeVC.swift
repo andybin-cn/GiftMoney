@@ -42,7 +42,7 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     func loadData() {
-        trades = RealmManager.share.realm.objects(Trade.self).filter { item in item.type == Trade.TradeType.outAccount }
+        trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", Trade.TradeType.outAccount.rawValue)).sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
         tableView.reloadData()
     }
     

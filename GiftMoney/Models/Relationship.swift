@@ -28,7 +28,7 @@ extension Relationship {
     
     static var latestusedRelationships: [Relationship] {
         var tradeGroups = Dictionary<Relationship, [Trade]>()
-        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "relationship != ''"))
+        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "relationship != ''")).sorted(byKeyPath: "updateTime", ascending: false)
         trades.forEach { (trade) in
             let groupKey = Relationship(name: trade.relationship, time: trade.updateTime)
             if var tradeGroup = tradeGroups[groupKey] {

@@ -32,8 +32,17 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     var trade: Trade?
     
+    var defaultType: Trade.TradeType?
+    var defaultEvent: Event?
+    
     init(trade: Trade? = nil) {
         self.trade = trade
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(tradeType: Trade.TradeType, event: Event?) {
+        self.defaultType = tradeType
+        self.defaultEvent = event
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -149,6 +158,13 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         fillInFormValues()
     }
     func fillInFormValues() {
+        if let tradeType = defaultType {
+            typeSwitch.fieldValue = tradeType.rawValue
+        }
+        if let event = defaultEvent {
+            eventNameField.fieldValue = event.name
+            eventTimeField.fieldValue = event.time ?? Date()
+        }
         guard let trade = self.trade else {
             return
         }
@@ -198,8 +214,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             newTrade.tradeMedias.append(objectsIn: medias)
             self.showLoadingIndicator()
             TradeManger.shared.saveTrade(trade: newTrade, oldTrade: self.trade).subscribe(onCompleted: { [weak self] in
-                self?.navigationController?.showTipsView(text: "保存成功")
                 self?.navigationController?.popViewController(animated: true)
+                self?.showTipsView(text: "保存成功")
             }) { [weak self] (error) in
                 self?.showTipsView(text: error.localizedDescription)
             }.disposed(by: disposeBag)

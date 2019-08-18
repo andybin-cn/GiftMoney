@@ -23,6 +23,8 @@
 		3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InAccountTradeVC.swift */; };
 		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
+		3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */; };
+		3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D92309112600AC2044 /* EventsGroupCell.swift */; };
 		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
 		369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */; };
 		369DFE2222F6BDD30005B67D /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE2122F6BDD30005B67D /* InputField.swift */; };
@@ -129,6 +131,8 @@
 		3649C78F22F68644009AF83F /* InAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountTradeVC.swift; sourceTree = "<group>"; };
 		3649C79122F68679009AF83F /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountEventGroupVC.swift; sourceTree = "<group>"; };
+		3695D2D92309112600AC2044 /* EventsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsGroupCell.swift; sourceTree = "<group>"; };
 		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
 		369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTradeViewController.swift; sourceTree = "<group>"; };
 		369DFE2122F6BDD30005B67D /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */,
 				386865832302A1F9000BBD85 /* AllTradesVC.swift */,
 				3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */,
+				3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 				38236C6B23028A8A00B67B8D /* EventCell.swift */,
 				386865862302A3B9000BBD85 /* AllTradeTabbar.swift */,
 				3868658B2303AE40000BBD85 /* ImageSetView.swift */,
+				3695D2D92309112600AC2044 /* EventsGroupCell.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -675,6 +681,7 @@
 			files = (
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
 				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
@@ -695,6 +702,7 @@
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
+				3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */,
 				3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */,
 				38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */,
 				386865912303D273000BBD85 /* DispatchQueue.swift in Sources */,
