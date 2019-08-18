@@ -43,7 +43,7 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             }
         }
         inputField.apply { (inputField) in
-            inputField.placeholder = "请输入内容（然后直接保存即可）"
+            inputField.placeholder = "自定义关系（直接保存即可）"
             inputField.font = .appFont(ofSize: 13)
             inputField.layer.cornerRadius = 18
             inputField.backgroundColor = .white

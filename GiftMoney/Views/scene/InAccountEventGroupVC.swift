@@ -44,7 +44,6 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         }
         tableView.reloadData()
     }
-    
     //MARK: - UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -55,8 +54,8 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventGroupCell.commonIdentifier, for: indexPath) as! EventGroupCell
         let event = keys[indexPath.row]
-        cell.textLabel?.text = event.name
-        cell.detailTextLabel?.text = event.time?.toString(withFormat: "yyyy-MM-dd")
+//        cell.delegate = self
+        cell.event = event
         return cell
     }
     
@@ -65,6 +64,13 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         let event = keys[indexPath.row]
         let trades = eventsGroup[event]
         let controller = InAccountTradeVC(event: event, trades: trades)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let event = keys[indexPath.row]
+        let trades = eventsGroup[event] ?? [Trade]()
+        let controller = EventGroupModifyVC(event: event, trades: trades)
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }
