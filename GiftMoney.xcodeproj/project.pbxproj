@@ -25,6 +25,7 @@
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
 		3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */; };
 		3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D92309112600AC2044 /* EventsGroupCell.swift */; };
+		3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2DC23093E6D00AC2044 /* TextInput.swift */; };
 		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
 		369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */; };
 		369DFE2222F6BDD30005B67D /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE2122F6BDD30005B67D /* InputField.swift */; };
@@ -133,6 +134,7 @@
 		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountEventGroupVC.swift; sourceTree = "<group>"; };
 		3695D2D92309112600AC2044 /* EventsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsGroupCell.swift; sourceTree = "<group>"; };
+		3695D2DC23093E6D00AC2044 /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
 		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
 		369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTradeViewController.swift; sourceTree = "<group>"; };
 		369DFE2122F6BDD30005B67D /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				386865862302A3B9000BBD85 /* AllTradeTabbar.swift */,
 				3868658B2303AE40000BBD85 /* ImageSetView.swift */,
 				3695D2D92309112600AC2044 /* EventsGroupCell.swift */,
+				3695D2DC23093E6D00AC2044 /* TextInput.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
 				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
+				3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
 				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
 				386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */,

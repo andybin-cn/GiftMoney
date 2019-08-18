@@ -29,6 +29,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     let itemsStackView = UIStackView()
     let addItemButton = UIButton()
     let imageSetView: ImageSetView = ImageSetView()
+    let remarkField = TextInput(name: "remark", labelString: "备注")
     
     var trade: Trade?
     
@@ -148,12 +149,21 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 make.top.equalTo(itemsStackView.snp.bottom).offset(15)
                 make.left.equalTo(15)
                 make.right.equalTo(-15)
-                make.bottom.equalTo(-40).priority(ConstraintPriority.low)
+                
             })
         }
         let width = (UIScreen.main.bounds.size.width - 30) / 4 - 10
         let imageSize = CGSize(width: width, height: width)
         imageSetView.setImageViews(showMedias: [], imageSize: imageSize, imageCountInLine: 4, isShowAddButton: true)
+        
+        remarkField.apply { (field) in
+            field.addTo(scrollView) { (make) in
+                make.top.equalTo(imageSetView.snp.bottom).offset(15)
+                make.left.equalTo(15)
+                make.right.equalTo(-15)
+                make.bottom.equalTo(-40).priority(ConstraintPriority.low)
+            }
+        }
         
         fillInFormValues()
     }
@@ -177,6 +187,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         relationshipField.fieldValue = trade.relationship
         eventNameField.fieldValue = trade.eventName
         eventTimeField.fieldValue = trade.eventTime
+        remarkField.fieldValue = trade.remark
         
         if trade.tradeItems.count > 0 {
             itemsStackView.arrangedSubviews.forEach { (arrangedView) in
