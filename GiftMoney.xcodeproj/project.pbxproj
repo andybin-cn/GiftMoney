@@ -23,6 +23,10 @@
 		3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InAccountTradeVC.swift */; };
 		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
+		3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */; };
+		3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D92309112600AC2044 /* EventsGroupCell.swift */; };
+		3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2DC23093E6D00AC2044 /* TextInput.swift */; };
+		3695D2E023098E5F00AC2044 /* EventGroupModifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */; };
 		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
 		369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */; };
 		369DFE2222F6BDD30005B67D /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE2122F6BDD30005B67D /* InputField.swift */; };
@@ -39,6 +43,11 @@
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
 		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
 		386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865832302A1F9000BBD85 /* AllTradesVC.swift */; };
+		386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865862302A3B9000BBD85 /* AllTradeTabbar.swift */; };
+		3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868658B2303AE40000BBD85 /* ImageSetView.swift */; };
+		386865912303D273000BBD85 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865902303D273000BBD85 /* DispatchQueue.swift */; };
+		3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */; };
+		3870C2C02306A1C8000C1996 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2BF2306A1C8000C1996 /* Relationship.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -124,6 +133,10 @@
 		3649C78F22F68644009AF83F /* InAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountTradeVC.swift; sourceTree = "<group>"; };
 		3649C79122F68679009AF83F /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountEventGroupVC.swift; sourceTree = "<group>"; };
+		3695D2D92309112600AC2044 /* EventsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsGroupCell.swift; sourceTree = "<group>"; };
+		3695D2DC23093E6D00AC2044 /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
+		3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGroupModifyVC.swift; sourceTree = "<group>"; };
 		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
 		369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTradeViewController.swift; sourceTree = "<group>"; };
 		369DFE2122F6BDD30005B67D /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
@@ -139,6 +152,11 @@
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
 		386865832302A1F9000BBD85 /* AllTradesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradesVC.swift; sourceTree = "<group>"; };
+		386865862302A3B9000BBD85 /* AllTradeTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradeTabbar.swift; sourceTree = "<group>"; };
+		3868658B2303AE40000BBD85 /* ImageSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSetView.swift; sourceTree = "<group>"; };
+		386865902303D273000BBD85 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
+		3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationEditeVC.swift; sourceTree = "<group>"; };
+		3870C2BF2306A1C8000C1996 /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -186,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				36135D2222F7289800D17330 /* ScreenHelp.swift */,
+				386865902303D273000BBD85 /* DispatchQueue.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -208,6 +227,9 @@
 				3649C78F22F68644009AF83F /* InAccountTradeVC.swift */,
 				3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */,
 				386865832302A1F9000BBD85 /* AllTradesVC.swift */,
+				3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */,
+				3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */,
+				3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -309,6 +331,10 @@
 				36135D4B22F871B200D17330 /* TradeItemRow.swift */,
 				3818556222FACB6300024542 /* TradeCell.swift */,
 				38236C6B23028A8A00B67B8D /* EventCell.swift */,
+				386865862302A3B9000BBD85 /* AllTradeTabbar.swift */,
+				3868658B2303AE40000BBD85 /* ImageSetView.swift */,
+				3695D2D92309112600AC2044 /* EventsGroupCell.swift */,
+				3695D2DC23093E6D00AC2044 /* TextInput.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -363,6 +389,7 @@
 				3818556622FBC30600024542 /* Event.swift */,
 				3818556822FBC54C00024542 /* TradeItem.swift */,
 				3818556A22FBC57700024542 /* TradeMedia.swift */,
+				3870C2BF2306A1C8000C1996 /* Relationship.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -595,6 +622,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TZImagePickerController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SKPhotoBrowser.framework",
 			);
 			name = "[CP] Copy Carthage Frameworks";
 			outputFileListPaths = (
@@ -658,11 +687,14 @@
 			files = (
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
 				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
+				3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
 				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
+				386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */,
 				38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */,
 				3818556722FBC30700024542 /* Event.swift in Sources */,
 				36294C802300429000819539 /* EventEditeViewController.swift in Sources */,
@@ -677,11 +709,17 @@
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
+				3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */,
+				3695D2E023098E5F00AC2044 /* EventGroupModifyVC.swift in Sources */,
+				3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */,
 				38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */,
+				386865912303D273000BBD85 /* DispatchQueue.swift in Sources */,
+				3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
 				36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */,
+				3870C2C02306A1C8000C1996 /* Relationship.swift in Sources */,
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
 				386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */,
 				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
@@ -858,6 +896,7 @@
 			baseConfigurationReference = B12DA1992B17A1CABDA11D8E /* Pods-GiftMoney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
 				INFOPLIST_FILE = GiftMoney/Info.plist;
@@ -868,6 +907,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -878,6 +918,7 @@
 			baseConfigurationReference = FE4753A816F5D3C0997C58EC /* Pods-GiftMoney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
 				INFOPLIST_FILE = GiftMoney/Info.plist;
@@ -888,6 +929,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

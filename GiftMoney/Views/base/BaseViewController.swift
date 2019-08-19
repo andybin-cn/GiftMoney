@@ -8,10 +8,13 @@
 
 import UIKit
 import Common
+import RxSwift
 
 class BaseViewController: UIViewController {
     var navigationBar: UIView
     var titleLabel: UILabel
+    let disposeBag: DisposeBag = DisposeBag()
+    
 //    override var title: String? {
 //        didSet {
 //            titleLabel.text = title
@@ -47,48 +50,4 @@ class BaseViewController: UIViewController {
         //        }
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        SLog.info("viewDidAppear:\(self.view.frame)")
-    }
-    
-    func addNavigationBar() {
-        navigationBar.backgroundColor = UIColor.gray
-        
-        view.addSubview(navigationBar)
-        view.addSubview(navigationBar) { (make) in
-            make.left.top.right.equalToSuperview()
-            make.height.equalTo(ScreenHelp.navBarHeight)
-        }
-        titleLabel.font = UIFont.appBoldFont(ofSize: 20)
-        titleLabel.textColor = UIColor.appText
-        navigationBar.addSubview(titleLabel) { (make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-10)
-        }
-    }
-    
-    let backButton = UIButton()
-    func setDefaultBackButton() {
-        backButton.apply { (button) in
-            button.setImage(#imageLiteral(resourceName: "fanhui").ui_renderImage(tintColor: UIColor.appText), for: UIControl.State.normal)
-            button.setEnlargeEdge(top: 10, right: 20, bottom: 10, left: 15)
-            button.addTarget(self, action: #selector(defaultBackButtonTapped(sender:)), for: UIControl.Event.touchUpInside)
-        }
-        navigationBar.addSubview(backButton) { (make) in
-            make.left.equalTo(15)
-            make.bottom.equalTo(titleLabel.snp.bottom)
-        }
-    }
-    
-    @objc func defaultBackButtonTapped(sender: Any) {
-        if (navigationController?.children.count ?? 0) > 1 {
-            _ = navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-    }
-    
 }

@@ -26,9 +26,9 @@ class SwitchInput: UIView, FormInput {
         set {
             if let stringValue = newValue as? String {
                 if stringValue == Trade.TradeType.inAccount.rawValue {
-                    selectedIndex = 0
-                } else {
                     selectedIndex = 1
+                } else {
+                    selectedIndex = 0
                 }
             }
         }

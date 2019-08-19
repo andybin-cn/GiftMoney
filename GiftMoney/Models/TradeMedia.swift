@@ -9,9 +9,12 @@
 import Foundation
 import RealmSwift
 import ObjectMapper
+import PhotosUI
+import RxSwift
+import Common
+import QuickLook
 
-
-class TradeMedia: Object, Mappable {
+class TradeMedia: Object, Mappable, QLPreviewItem {
     enum MediaType: String {
         case image = "image"
         case video = "video"
@@ -20,7 +23,21 @@ class TradeMedia: Object, Mappable {
     @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var tradeID: String = ""
     @objc dynamic private var typeString: String = ""
-    @objc dynamic var path: String = ""
+    var path: String {
+        let suffix = type == .image ? ".png" : ".mp4"
+        return "\(NSHomeDirectory())/Documents/\(id)\(suffix)"
+    }
+    var url: URL {
+        var url = URL(fileURLWithPath: "\(NSHomeDirectory())/Documents")
+        let suffix = type == .image ? "png" : "mp4"
+        url.appendPathComponent(id)
+        url.appendPathExtension(suffix)
+        return url
+    }
+    
+    var phAsset: PHAsset?
+    var phImage: UIImage?
+    var originURL: URL?
     
     var type: MediaType? {
         get {
@@ -43,6 +60,66 @@ class TradeMedia: Object, Mappable {
         id <- map["id"]
         tradeID <- map["tradeID"]
         typeString <- map["type"]
-        path <- map["path"]
+//        path <- map["path"]
     }
+    func prepareForOriginUrl() -> Observable<TradeMedia> {
+        return Observable<TradeMedia>.create { (observable) -> Disposable in
+            if self.type == TradeMedia.MediaType.video, let asset = self.phAsset {
+                PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { [weak self] (asset, audioMix, info) in
+                    if let urlAsset = asset as? AVURLAsset {
+                        self?.originURL = urlAsset.url
+                        DispatchQueue.main.sync {
+                            observable.onCompleted()
+                        }
+                    }
+                }
+            } else if self.type == TradeMedia.MediaType.image, let asset = self.phAsset {
+                asset.requestContentEditingInput(with: nil) { [weak self] (input, info) in
+                    self?.originURL = input?.fullSizeImageURL
+                    observable.onCompleted()
+                }
+            } else {
+                observable.onCompleted()
+            }
+            return Disposables.create { }
+        }
+    }
+    func saveResourceIntoApp() -> Observable<TradeMedia> {
+        return Observable<TradeMedia>.create { (observable) -> Disposable in
+            let destURL = self.url
+            if let originURL = self.originURL {
+                DispatchQueue.global().async {
+                    do {
+                        try FileManager.default.copyItem(at: originURL, to: destURL)
+                        DispatchQueue.main.sync {
+                            observable.onCompleted()
+                        }
+                    } catch let error {
+                        DispatchQueue.main.sync {
+                            observable.onError(error)
+                        }
+                    }
+                }
+            } else {
+                observable.onCompleted()
+            }
+            return Disposables.create { }
+        }
+    }
+    
+    //MARK: - QLPreviewItem
+    var previewItemURL: URL? {
+        return url
+    }
+    var previewItemTitle: String? {
+        switch type {
+        case .some(.image):
+            return "图片"
+        case .some(.video):
+            return "视频"
+        default:
+            return "未知"
+        }
+    }
+    
 }

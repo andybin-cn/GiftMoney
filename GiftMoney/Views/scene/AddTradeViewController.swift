@@ -10,8 +10,14 @@ import UIKit
 import Common
 import ObjectMapper
 import Realm
+import TZImagePickerController
+import SKPhotoBrowser
+import PhotosUI
+import RxSwift
+import QuickLook
+import SnapKit
 
-class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
+class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSetViewDelegate, TZImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate, QLPreviewControllerDataSource {
 
     let scrollView = UIScrollView()
     
@@ -22,15 +28,35 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
     let eventTimeField = DateInputField(name: "eventTime", labelString: "时间")
     let itemsStackView = UIStackView()
     let addItemButton = UIButton()
+    let imageSetView: ImageSetView = ImageSetView()
+    let remarkField = TextInput(name: "remark", labelString: "备注")
+    
     var trade: Trade?
+    
+    var defaultType: Trade.TradeType?
+    var defaultEvent: Event?
     
     init(trade: Trade? = nil) {
         self.trade = trade
         super.init(nibName: nil, bundle: nil)
     }
     
+    init(tradeType: Trade.TradeType, event: Event?) {
+        self.defaultType = tradeType
+        self.defaultEvent = event
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        if let trade = self.trade, trade.type == nil {
+            RealmManager.share.realm.beginWrite()
+            RealmManager.share.realm.delete(trade)
+            try? RealmManager.share.realm.commitWrite()
+        }
     }
     
     override func viewDidLoad() {
@@ -66,15 +92,17 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
             make.top.equalTo(typeSwitch.snp.bottom).offset(15)
             make.width.equalTo(self.view.snp.width).multipliedBy(0.5).offset(-22.5)
         }
-        
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(onRelationshipFieldtapped))
+        relationshipField.addGestureRecognizer(tapGesture1)
+        relationshipField.textfield.isUserInteractionEnabled = false
         relationshipField.addTo(scrollView) { (make) in
             make.right.equalTo(-15)
             make.centerY.equalTo(nameField)
             make.width.equalTo(nameField)
         }
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(oneEventNameFieldtapped))
-        eventNameField.addGestureRecognizer(tapGesture)
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(onEventNameFieldtapped))
+        eventNameField.addGestureRecognizer(tapGesture2)
         eventNameField.textfield.isUserInteractionEnabled = false
         eventNameField.addTo(scrollView) { (make) in
             make.left.width.equalTo(nameField)
@@ -115,9 +143,38 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         }
         itemsStackView.addArrangedSubview(addItemButton)
         
+        imageSetView.apply { (setView) in
+            setView.delegate = self
+            setView.addTo(scrollView, layout: { (make) in
+                make.top.equalTo(itemsStackView.snp.bottom).offset(15)
+                make.left.equalTo(15)
+                make.right.equalTo(-15)
+                
+            })
+        }
+        let width = (UIScreen.main.bounds.size.width - 30) / 4 - 10
+        let imageSize = CGSize(width: width, height: width)
+        imageSetView.setImageViews(showMedias: [], imageSize: imageSize, imageCountInLine: 4, isShowAddButton: true)
+        
+        remarkField.apply { (field) in
+            field.addTo(scrollView) { (make) in
+                make.top.equalTo(imageSetView.snp.bottom).offset(15)
+                make.left.equalTo(15)
+                make.right.equalTo(-15)
+                make.bottom.equalTo(-40).priority(ConstraintPriority.low)
+            }
+        }
+        
         fillInFormValues()
     }
     func fillInFormValues() {
+        if let tradeType = defaultType {
+            typeSwitch.fieldValue = tradeType.rawValue
+        }
+        if let event = defaultEvent {
+            eventNameField.fieldValue = event.name
+            eventTimeField.fieldValue = event.time ?? Date()
+        }
         guard let trade = self.trade else {
             return
         }
@@ -130,6 +187,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         relationshipField.fieldValue = trade.relationship
         eventNameField.fieldValue = trade.eventName
         eventTimeField.fieldValue = trade.eventTime
+        remarkField.fieldValue = trade.remark
         
         if trade.tradeItems.count > 0 {
             itemsStackView.arrangedSubviews.forEach { (arrangedView) in
@@ -139,10 +197,16 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
                 }
             }
             trade.tradeItems.enumerated().forEach { (index, tradeItem) in
-                itemsStackView.addArrangedSubview(TradeItemRow(name: "tradeItems",tradeItem: tradeItem, canDelete: index != 0))
+                let row = TradeItemRow(name: "tradeItems",tradeItem: tradeItem, canDelete: index != 0)
+                row.delegate = self
+                itemsStackView.insertArrangedSubview(row, at: index)
             }
         }
+        medias = trade.tradeMedias.map { $0 }
+        imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
     }
+    
+    //MARK: - controller actions
     
     @objc func onAddItemButtonTapped() {
         let newRow = TradeItemRow(name: "tradeItems", tradeItem: nil, canDelete: true)
@@ -158,27 +222,31 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
                 self.showTipsView(text: "数据保存失败，请返回后重试")
                 return
             }
-            RealmManager.share.realm.beginWrite()
-            if let oldTrade = self.trade {
-                newTrade.id = oldTrade.id
-                RealmManager.share.realm.delete(oldTrade.tradeItems)
-                RealmManager.share.realm.delete(oldTrade.tradeMedias)
-            }
-            RealmManager.share.realm.add(newTrade, update: .all)
-            try RealmManager.share.realm.commitWrite()
-            trade = newTrade
-            self.navigationController?.popViewController(animated: true)
+            newTrade.tradeMedias.append(objectsIn: medias)
+            self.showLoadingIndicator()
+            TradeManger.shared.saveTrade(trade: newTrade, oldTrade: self.trade).subscribe(onCompleted: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+                self?.showTipsView(text: "保存成功")
+            }) { [weak self] (error) in
+                self?.showTipsView(text: error.localizedDescription)
+            }.disposed(by: disposeBag)
         } catch let err as NSError {
             self.showTipsView(text: err.localizedDescription)
         }
     }
     
-    @objc func oneEventNameFieldtapped() {
-        let editorVC = EventEditeViewController(defaultValue: eventTimeField.textfield.text) { [weak self] (event) in
+    @objc func onEventNameFieldtapped() {
+        let editorVC = EventEditeViewController(defaultValue: eventNameField.textfield.text) { [weak self] (event) in
             self?.eventNameField.fieldValue = event.name
             if let time = event.time {
                 self?.eventTimeField.fieldValue = time
             }
+        }
+        self.navigationController?.pushViewController(editorVC, animated: true)
+    }
+    @objc func onRelationshipFieldtapped() {
+        let editorVC = RelationEditeVC(defaultValue: relationshipField.textfield.text) { [weak self] (relation) in
+            self?.relationshipField.fieldValue = relation.name
         }
         self.navigationController?.pushViewController(editorVC, animated: true)
     }
@@ -190,4 +258,103 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate {
         row.removeFromSuperview()
     }
     
+    //MARK: - ImageSetViewDelegate
+    func imageSetDidAddbuttonTapped(view: ImageSetView) {
+        let picker = TZImagePickerController(maxImagesCount: 9, delegate: self)!
+        picker.selectedAssets = self.selectedAssets
+        picker.allowPickingVideo = true
+        //        picker.photoWidth = 1080
+        picker.navigationBar.barTintColor = UIColor.appMainYellow
+        self.present(picker, animated: true, completion: nil)
+    }
+    func imageSet(view: ImageSetView, didSelectMedia media: TradeMedia, atIndex index: Int) {
+        let controller = QLPreviewController()
+        controller.dataSource = self
+        controller.currentPreviewItemIndex = index
+        controller.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "删除", style: UIBarButtonItem.Style.plain, target: self, action: #selector(onImageDeletetapped))
+        previewController = controller
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    weak var previewController: QLPreviewController?
+    @objc func onImageDeletetapped() {
+        previewController?.showAlertView(title: "确定删除图片么？", message: nil, actions: [
+            UIAlertAction(title: "取消", style: .cancel, handler: nil),
+            UIAlertAction(title: "删除", style: .destructive, handler: { [weak self] (_) in
+                guard let controller = self?.previewController, let media = controller.currentPreviewItem as? TradeMedia else {
+                    return
+                }
+                self?.deleteTradeMedia(media: media)
+            })
+        ])
+    }
+    
+    func deleteTradeMedia(media: TradeMedia) {
+        guard let trade = self.trade else {
+            return
+        }
+        previewController?.showLoadingIndicator()
+        TradeManger.shared.deleteTradeMedias(trade: trade, tradeMedia: media).subscribe(onError: { [unowned self] (error) in
+            self.previewController?.hiddenLoadingIndicator()
+        }, onCompleted: { [unowned self] in
+            self.previewController?.hiddenLoadingIndicator()
+            self.medias = trade.tradeMedias.map { $0 }
+            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+            if self.medias.count > 0 {
+                self.previewController?.reloadData()
+            } else {
+                self.previewController?.dismiss(animated: true, completion: nil)
+            }
+        }).disposed(by: disposeBag)
+        
+    }
+    
+    //MARK: - TZImagePickerControllerDelegate
+    var selectedAssets: NSMutableArray = []
+    var selectedPhotos: [UIImage] = []
+    var medias: [TradeMedia] = []
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
+        
+        let newMedias = photos.enumerated().map { (index, photo) -> TradeMedia in
+            let media = TradeMedia()
+            media.phAsset = assets[index] as? PHAsset
+            media.phImage = photo
+            media.type = .image
+            return media
+        }
+        
+        self.showLoadingIndicator()
+        TradeManger.shared.saveTradeMedias(trade: self.trade, newMedias: newMedias).subscribe(onNext: { [unowned self] (trade) in
+            self.trade = trade
+            self.medias = trade.tradeMedias.map { $0 }
+            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+            self.hiddenLoadingIndicator()
+        }, onError: { [unowned self] (error) in
+            self.showTipsView(text: "图片保存失败，请重试。")
+        }).disposed(by: disposeBag)
+    }
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingVideo coverImage: UIImage!, sourceAssets asset: PHAsset!) {
+        self.showLoadingIndicator()
+        let media = TradeMedia()
+        media.phAsset = asset
+        media.type = .video
+        
+        self.showLoadingIndicator()
+        TradeManger.shared.saveTradeMedias(trade: self.trade, newMedias: [media]).subscribe(onNext: { [unowned self] (trade) in
+            self.trade = trade
+            self.medias = trade.tradeMedias.map { $0 }
+            self.imageSetView.setImageViews(showMedias: self.medias, imageSize: self.imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
+            self.hiddenLoadingIndicator()
+        }, onError: { [unowned self] (error) in
+            self.showTipsView(text: "图片保存失败，请重试。")
+        }).disposed(by: disposeBag)
+    }
+    
+    //MARK: - QLPreviewControllerDataSource
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return medias.count
+    }
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return medias[index]
+    }
 }

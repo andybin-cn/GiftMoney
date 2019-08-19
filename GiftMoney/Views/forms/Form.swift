@@ -65,6 +65,7 @@ extension UIView: Form {
             if input.valueSrtuct == .array {
                 if var array = result[input.fieldName] as? Array<FormValue> {
                     array.append(input.fieldValue)
+                    result[input.fieldName] = array
                 } else {
                     result[input.fieldName] = [input.fieldValue]
                 }
@@ -82,6 +83,7 @@ extension UIView: Form {
             if input.valueSrtuct == .array {
                 if var array = result[input.fieldName] as? Array<FormValue> {
                     array.append(value)
+                    result[input.fieldName] = array
                 } else {
                     result[input.fieldName] = [value]
                 }
