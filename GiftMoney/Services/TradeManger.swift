@@ -49,7 +49,7 @@ class TradeManger {
         return Completable.empty()
     }
     
-    func deleteTradeMedias(trade: Trade, tradeMedia: TradeMedia) -> Observable<Trade> {
+    func deleteTradeMedia(trade: Trade, tradeMedia: TradeMedia) -> Observable<Trade> {
         return Observable<Trade>.create { (observable) -> Disposable in
             do {
                 try FileManager.default.removeItem(at: tradeMedia.url)
@@ -67,6 +67,21 @@ class TradeManger {
                 observable.onError(error)
             }
             return Disposables.create { }
+        }
+    }
+    func deleteTrade(trade: Trade) -> Completable {
+        do {
+            for tradeMedia in trade.tradeMedias {
+                try FileManager.default.removeItem(at: tradeMedia.url)
+            }
+            RealmManager.share.realm.beginWrite()
+            RealmManager.share.realm.delete(trade)
+            RealmManager.share.realm.delete(trade.tradeMedias)
+            RealmManager.share.realm.delete(trade.tradeItems)
+            try RealmManager.share.realm.commitWrite()
+            return Completable.empty()
+        } catch let error {
+            return Completable.error(error)
         }
     }
     
@@ -96,5 +111,10 @@ class TradeManger {
                 dispose?.dispose()
             }
         }
+    }
+    
+    func searchTrade(keyword: String) -> [Trade] {
+        let predicate = NSPredicate(format: "name CONTAINS %@ OR relationship CONTAINS %@ OR eventName CONTAINS %@ OR remark CONTAINS %@", keyword, keyword, keyword, keyword)
+        return RealmManager.share.realm.objects(Trade.self).filter(predicate).filter { $0.type != nil }
     }
 }

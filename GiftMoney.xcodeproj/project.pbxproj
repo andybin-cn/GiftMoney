@@ -45,9 +45,17 @@
 		386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865832302A1F9000BBD85 /* AllTradesVC.swift */; };
 		386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865862302A3B9000BBD85 /* AllTradeTabbar.swift */; };
 		3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868658B2303AE40000BBD85 /* ImageSetView.swift */; };
-		386865912303D273000BBD85 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865902303D273000BBD85 /* DispatchQueue.swift */; };
 		3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */; };
 		3870C2C02306A1C8000C1996 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2BF2306A1C8000C1996 /* Relationship.swift */; };
+		3870C2C7230A3C79000C1996 /* SearchTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */; };
+		3870C2CA230A86EA000C1996 /* MineSwitchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2C9230A86EA000C1996 /* MineSwitchRow.swift */; };
+		3870C2D5230A8766000C1996 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2CF230A8766000C1996 /* DispatchQueue+Extensions.swift */; };
+		3870C2D6230A8766000C1996 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2D0230A8766000C1996 /* String+Extensions.swift */; };
+		3870C2D9230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2D3230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift */; };
+		3870C2DA230A8766000C1996 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2D4230A8766000C1996 /* UILabel+Extensions.swift */; };
+		3870C2DC230A88E2000C1996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3870C2DB230A88E2000C1996 /* Main.storyboard */; };
+		3870C2DE230A8A7C000C1996 /* MineTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2DD230A8A7C000C1996 /* MineTextRow.swift */; };
+		3870C2E0230A8FFC000C1996 /* MineDescriptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -154,9 +162,17 @@
 		386865832302A1F9000BBD85 /* AllTradesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradesVC.swift; sourceTree = "<group>"; };
 		386865862302A3B9000BBD85 /* AllTradeTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradeTabbar.swift; sourceTree = "<group>"; };
 		3868658B2303AE40000BBD85 /* ImageSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSetView.swift; sourceTree = "<group>"; };
-		386865902303D273000BBD85 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationEditeVC.swift; sourceTree = "<group>"; };
 		3870C2BF2306A1C8000C1996 /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
+		3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTradeVC.swift; sourceTree = "<group>"; };
+		3870C2C9230A86EA000C1996 /* MineSwitchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSwitchRow.swift; sourceTree = "<group>"; };
+		3870C2CF230A8766000C1996 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
+		3870C2D0230A8766000C1996 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		3870C2D3230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ConstraintMakerRelatable+Extensions.swift"; sourceTree = "<group>"; };
+		3870C2D4230A8766000C1996 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		3870C2DB230A88E2000C1996 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3870C2DD230A8A7C000C1996 /* MineTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTextRow.swift; sourceTree = "<group>"; };
+		3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineDescriptionRow.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -204,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				36135D2222F7289800D17330 /* ScreenHelp.swift */,
-				386865902303D273000BBD85 /* DispatchQueue.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -230,6 +245,7 @@
 				3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */,
 				3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */,
 				3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */,
+				3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -260,6 +276,7 @@
 		3649C75722F67FB9009AF83F /* GiftMoney */ = {
 			isa = PBXGroup;
 			children = (
+				3870C2CE230A8766000C1996 /* Extensions */,
 				38236C64230105D700B67B8D /* Services */,
 				38EF4A7722F7D2D6007BB28A /* Realm */,
 				38EF4A7022F7C9A6007BB28A /* Models */,
@@ -272,6 +289,7 @@
 				3649C76422F67FBD009AF83F /* Assets.xcassets */,
 				3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */,
 				3649C76922F67FBD009AF83F /* Info.plist */,
+				3870C2DB230A88E2000C1996 /* Main.storyboard */,
 			);
 			path = GiftMoney;
 			sourceTree = "<group>";
@@ -335,6 +353,9 @@
 				3868658B2303AE40000BBD85 /* ImageSetView.swift */,
 				3695D2D92309112600AC2044 /* EventsGroupCell.swift */,
 				3695D2DC23093E6D00AC2044 /* TextInput.swift */,
+				3870C2C9230A86EA000C1996 /* MineSwitchRow.swift */,
+				3870C2DD230A8A7C000C1996 /* MineTextRow.swift */,
+				3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -380,6 +401,17 @@
 				38236C66230105F000B67B8D /* TradeManger.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		3870C2CE230A8766000C1996 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3870C2CF230A8766000C1996 /* DispatchQueue+Extensions.swift */,
+				3870C2D0230A8766000C1996 /* String+Extensions.swift */,
+				3870C2D3230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift */,
+				3870C2D4230A8766000C1996 /* UILabel+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		38EF4A7022F7C9A6007BB28A /* Models */ = {
@@ -559,6 +591,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3870C2DC230A88E2000C1996 /* Main.storyboard in Resources */,
 				3649C76822F67FBD009AF83F /* LaunchScreen.storyboard in Resources */,
 				3649C76522F67FBD009AF83F /* Assets.xcassets in Resources */,
 			);
@@ -687,12 +720,16 @@
 			files = (
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				3870C2DA230A8766000C1996 /* UILabel+Extensions.swift in Sources */,
 				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
+				3870C2C7230A3C79000C1996 /* SearchTradeVC.swift in Sources */,
+				3870C2DE230A8A7C000C1996 /* MineTextRow.swift in Sources */,
 				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
 				3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
+				3870C2D5230A8766000C1996 /* DispatchQueue+Extensions.swift in Sources */,
 				38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */,
 				386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */,
 				38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */,
@@ -700,6 +737,7 @@
 				36294C802300429000819539 /* EventEditeViewController.swift in Sources */,
 				3818556922FBC54C00024542 /* TradeItem.swift in Sources */,
 				3818556322FACB6300024542 /* TradeCell.swift in Sources */,
+				3870C2D6230A8766000C1996 /* String+Extensions.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
 				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
@@ -713,16 +751,18 @@
 				3695D2E023098E5F00AC2044 /* EventGroupModifyVC.swift in Sources */,
 				3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */,
 				38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */,
-				386865912303D273000BBD85 /* DispatchQueue.swift in Sources */,
 				3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */,
+				3870C2D9230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
+				3870C2CA230A86EA000C1996 /* MineSwitchRow.swift in Sources */,
 				36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */,
 				3870C2C02306A1C8000C1996 /* Relationship.swift in Sources */,
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
 				386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */,
 				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
+				3870C2E0230A8FFC000C1996 /* MineDescriptionRow.swift in Sources */,
 				3818556B22FBC57700024542 /* TradeMedia.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -53,9 +53,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     deinit {
         if let trade = self.trade, trade.type == nil {
-            RealmManager.share.realm.beginWrite()
-            RealmManager.share.realm.delete(trade)
-            try? RealmManager.share.realm.commitWrite()
+            _ = TradeManger.shared.deleteTrade(trade: trade).subscribe()
         }
     }
     
@@ -294,7 +292,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             return
         }
         previewController?.showLoadingIndicator()
-        TradeManger.shared.deleteTradeMedias(trade: trade, tradeMedia: media).subscribe(onError: { [unowned self] (error) in
+        TradeManger.shared.deleteTradeMedia(trade: trade, tradeMedia: media).subscribe(onError: { [unowned self] (error) in
             self.previewController?.hiddenLoadingIndicator()
         }, onCompleted: { [unowned self] in
             self.previewController?.hiddenLoadingIndicator()

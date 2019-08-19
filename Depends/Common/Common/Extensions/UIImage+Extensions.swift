@@ -33,7 +33,6 @@ extension UIImage {
         
         let result = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         return result!
     }
     
