@@ -1,9 +1,9 @@
 //
-//  DispatchQueue.swift
-//  GiftMoney
+//  DispatchQueue+Extensions.swift
+//  AnYou
 //
-//  Created by andy.bin on 2019/8/14.
-//  Copyright © 2019 binea. All rights reserved.
+//  Created by binea on 2017/7/15.
+//  Copyright © 2017年 binea. All rights reserved.
 //
 
 import Foundation
