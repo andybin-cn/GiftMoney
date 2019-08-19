@@ -29,6 +29,8 @@ class AllTradesVC: BaseViewController {
 //            let addRecordButton = UIBarButtonItem(customView: button)
 //            self.navigationItem.rightBarButtonItems = [addRecordButton]
 //        }
+//        let searchButton = UIBarButtonItem(image: UIImage(named: "icons8-search"), style: .done, target: self, action: #selector(searchButtonTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         
         let addRecordButton = UIBarButtonItem(title: "新增", style: UIBarButtonItem.Style.plain, target: self, action: #selector(addRecordButtonTapped))
         self.navigationItem.rightBarButtonItems = [addRecordButton]
@@ -82,6 +84,11 @@ class AllTradesVC: BaseViewController {
         view.bringSubviewToFront(tabbar)
         
         onSegmentedChanged()
+    }
+    
+    @objc func searchButtonTapped() {
+        let controller = SearchTradeVC()
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func addRecordButtonTapped() {

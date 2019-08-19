@@ -97,4 +97,9 @@ class TradeManger {
             }
         }
     }
+    
+    func searchTrade(keyword: String) -> [Trade] {
+        let predicate = NSPredicate(format: "name CONTAINS %@ OR relationship CONTAINS %@ OR eventName CONTAINS %@ OR remark CONTAINS %@", keyword, keyword, keyword, keyword)
+        return RealmManager.share.realm.objects(Trade.self).filter(predicate).filter { $0.type != nil }
+    }
 }

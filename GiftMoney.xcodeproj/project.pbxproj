@@ -48,6 +48,7 @@
 		386865912303D273000BBD85 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865902303D273000BBD85 /* DispatchQueue.swift */; };
 		3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */; };
 		3870C2C02306A1C8000C1996 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2BF2306A1C8000C1996 /* Relationship.swift */; };
+		3870C2C7230A3C79000C1996 /* SearchTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -157,6 +158,7 @@
 		386865902303D273000BBD85 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationEditeVC.swift; sourceTree = "<group>"; };
 		3870C2BF2306A1C8000C1996 /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
+		3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTradeVC.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				3870C2BD2306A0EB000C1996 /* RelationEditeVC.swift */,
 				3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */,
 				3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */,
+				3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
+				3870C2C7230A3C79000C1996 /* SearchTradeVC.swift in Sources */,
 				3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */,
 				3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */,
 				3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */,
