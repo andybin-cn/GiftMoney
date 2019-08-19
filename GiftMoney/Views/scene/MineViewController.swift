@@ -28,7 +28,7 @@ class MineViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "普通用户（升级VIP体验更多功能）"
+        self.navigationItem.title = "普通用户（升级VIP体验更多功能）"
         
         scrollView.apply { (scrollView) in
             scrollView.showsHorizontalScrollIndicator = false

@@ -20,7 +20,6 @@ class AllTradesVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = ""
         
 //        UIButton().apply { (button) in
 //            button.addTarget(self, action: #selector(addRecordButtonTapped), for: .touchUpInside)
