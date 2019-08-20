@@ -9,8 +9,10 @@
 import UIKit
 import SnapKit
 import RxCocoa
+import MessageUI
+import Social
 
-class MineViewController: BaseViewController {
+class MineViewController: BaseViewController, MFMailComposeViewControllerDelegate {
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
@@ -105,5 +107,31 @@ class MineViewController: BaseViewController {
                 MainTabViewController.shared.showLocalAuthView(viewMode: .close)
             }
         }).disposed(by: disposeBag)
+        
+        share.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            let controller = UIActivityViewController(activityItems: [URL(string: "http://www.baidu.com")!], applicationActivities: nil)
+            self.present(controller, animated: true, completion: nil)
+        }).disposed(by: disposeBag)
+        
+        feedBack.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self
+            
+            mailComposerVC.setToRecipients(["810018715@qq.com"])
+            mailComposerVC.setSubject("【礼尚往来App】意见反馈")
+            mailComposerVC.setMessageBody("\n\n感谢您的宝贵意见，我们会尽快给您回复。谢谢！", isHTML: false)
+            
+            if MFMailComposeViewController.canSendMail() {
+                self.present(mailComposerVC, animated: true, completion: nil)
+            } else {
+                
+            }
+        }).disposed(by: disposeBag)
+        
+    }
+    
+    //MARK: - MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
