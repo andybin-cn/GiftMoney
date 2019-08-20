@@ -19,13 +19,21 @@ class MineViewController: BaseViewController {
     let desc1 = MineDescriptionRow(text: "购买服务，永久解锁Excel导入/导出功能。")
     let backupData = MineTextRow(title: "备份数据到Apple Cloud", image: UIImage(named: "icons8-cloud_database"))
     let recoverData = MineTextRow(title: "从Apple Cloud恢复数据", image: UIImage(named: "icons8-data_recovery"))
-    let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，我们的App是离线的，没有任何后台服务，所有的数据都是保存在本地。备份服务会降数据保存至Apple的iCloud上，请放心使用！")
+    let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
     
-    let faceID = MineSwitchRow(title: "FaceID解锁", image: UIImage(named: "icons8-lock2"))
+    let faceID: MineSwitchRow
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
     let feedBack = MineTextRow(title: "意见反馈", image: UIImage(named: "icons8-feedback"))
     
+    init() {
+        let biometryString = LocalAuthManager.shared.biometryType == .faceID ? "FaceID解锁" : "指纹解锁"
+        faceID = MineSwitchRow(title: biometryString, image: UIImage(named: "icons8-lock2"))
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +75,15 @@ class MineViewController: BaseViewController {
         stackView.addArrangedSubview(share)
         stackView.addArrangedSubview(feedBack)
         
+        faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
+        
         addEvents()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
     }
     
     func addEvents() {
@@ -75,6 +91,18 @@ class MineViewController: BaseViewController {
             if MaketManager.shared.currentLevel == .free {
                 let controller = MarketVC()
                 MainTabViewController.shared.present(controller, animated: true, completion: nil)
+            }
+        }).disposed(by: disposeBag)
+        
+        faceID.switcher.rx.isOn.asObservable().subscribe(onNext: { [unowned self] (isOn) in
+            if isOn {
+                if !LocalAuthManager.shared.localAuthAvailability {
+                    self.faceID.switcher.isOn = false
+                } else if !LocalAuthManager.shared.localAuthEnabled {
+                    MainTabViewController.shared.showLocalAuthView(viewMode: .open)
+                }
+            } else if LocalAuthManager.shared.localAuthEnabled {
+                MainTabViewController.shared.showLocalAuthView(viewMode: .close)
             }
         }).disposed(by: disposeBag)
     }

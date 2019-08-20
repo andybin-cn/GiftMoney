@@ -25,7 +25,7 @@ class MainTabViewController: UITabBarController {
         mineVC.hidesBottomBarWhenPushed = false
         
         let inoutRecordsNav = BaseNavigationController(rootViewController: inoutRecordsVC)
-        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
+//        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
         let mineNav = BaseNavigationController(rootViewController: mineVC)
 
         let barItem1 = UITabBarItem(title: "礼尚往来", image: UIImage(named: "icons8-wish_list")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-wish_list")?.ui_renderImage(tintColor: UIColor.appMainYellow).withRenderingMode(.alwaysOriginal))
@@ -51,6 +51,24 @@ class MainTabViewController: UITabBarController {
 //        mineVC.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.featured, tag: 2)
 //
 //        self.viewControllers = [inoutRecordsVC, statisticsVC, mineVC]
+        
     }
-
+    
+    var localAuthVC: LocalAuthVC?
+    func showLocalAuthView(viewMode: LocalAuthVC.ViewMode) {
+        if localAuthVC == nil {
+            let controller = LocalAuthVC(viewMode: viewMode)
+            controller.viewMode = viewMode
+            localAuthVC = controller
+            self.view.addSubview(controller.view) { (make) in
+                make.edges.equalToSuperview()
+            }
+            controller.authWithIPhone()
+        }
+    }
+    
+    func hideLocalAuthView() {
+        localAuthVC?.view.removeFromSuperview()
+        localAuthVC = nil
+    }
 }

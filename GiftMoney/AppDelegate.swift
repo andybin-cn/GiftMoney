@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         SLog.info("NSHomeDirectory: \(NSHomeDirectory())")
+        
+        if LocalAuthManager.shared.localAuthEnabled {
+            MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
+        }
         return true
     }
 
