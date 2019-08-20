@@ -20,7 +20,7 @@ class SearchTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         inputField.apply { (inputField) in
             inputField.leftViewMode = .always
-            let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 28))
+            let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
             let icon = UIImageView(frame: CGRect(x: 8, y: 8, width: 20, height: 20))
             icon.image = UIImage(named: "icons8-search")
             containerView.addSubview(icon)
