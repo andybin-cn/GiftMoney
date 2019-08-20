@@ -14,6 +14,7 @@ class MarketVC: BaseViewController {
     
     let scrollView = UIScrollView()
     let closeButton = UIButton()
+    let recoverButton = UIButton()
     let stackView = UIStackView()
     
     let freeGroup: MarketServiceGroup
@@ -103,10 +104,24 @@ class MarketVC: BaseViewController {
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             }
         }
+        
+        recoverButton.apply { (button) in
+            button.setTitle("恢复购买", for: UIControl.State.normal)
+            button.addTarget(self, action: #selector(onRecoverButtonTapped), for: .touchUpInside)
+            button.addTo(view) { (make) in
+                make.right.equalTo(-15)
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            }
+        }
     }
     
     @objc func onCloseButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func onRecoverButtonTapped() {
+        
+    }
+    
     
 }
