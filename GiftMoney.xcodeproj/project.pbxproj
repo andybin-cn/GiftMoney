@@ -56,6 +56,9 @@
 		3870C2DC230A88E2000C1996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3870C2DB230A88E2000C1996 /* Main.storyboard */; };
 		3870C2DE230A8A7C000C1996 /* MineTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2DD230A8A7C000C1996 /* MineTextRow.swift */; };
 		3870C2E0230A8FFC000C1996 /* MineDescriptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */; };
+		3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E3230B8C22000C1996 /* MarketVC.swift */; };
+		3870C2E7230B8CD5000C1996 /* MaketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E6230B8CD5000C1996 /* MaketManager.swift */; };
+		3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -173,6 +176,9 @@
 		3870C2DB230A88E2000C1996 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3870C2DD230A8A7C000C1996 /* MineTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTextRow.swift; sourceTree = "<group>"; };
 		3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineDescriptionRow.swift; sourceTree = "<group>"; };
+		3870C2E3230B8C22000C1996 /* MarketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVC.swift; sourceTree = "<group>"; };
+		3870C2E6230B8CD5000C1996 /* MaketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaketManager.swift; sourceTree = "<group>"; };
+		3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketServiceGroup.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -246,6 +252,7 @@
 				3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */,
 				3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */,
 				3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */,
+				3870C2E3230B8C22000C1996 /* MarketVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -356,6 +363,7 @@
 				3870C2C9230A86EA000C1996 /* MineSwitchRow.swift */,
 				3870C2DD230A8A7C000C1996 /* MineTextRow.swift */,
 				3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */,
+				3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -399,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				38236C66230105F000B67B8D /* TradeManger.swift */,
+				3870C2E6230B8CD5000C1996 /* MaketManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -739,12 +748,15 @@
 				3818556322FACB6300024542 /* TradeCell.swift in Sources */,
 				3870C2D6230A8766000C1996 /* String+Extensions.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
+				3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
 				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
 				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
+				3870C2E7230B8CD5000C1996 /* MaketManager.swift in Sources */,
 				386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */,
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
+				3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
 				3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */,

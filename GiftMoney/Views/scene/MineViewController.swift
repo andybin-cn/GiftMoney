@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import RxCocoa
 
 class MineViewController: BaseViewController {
     
@@ -65,5 +66,16 @@ class MineViewController: BaseViewController {
         stackView.addArrangedSubview(faceID)
         stackView.addArrangedSubview(share)
         stackView.addArrangedSubview(feedBack)
+        
+        addEvents()
+    }
+    
+    func addEvents() {
+        importiAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { (_) in
+            if MaketManager.shared.currentLevel == .free {
+                let controller = MarketVC()
+                MainTabViewController.shared.present(controller, animated: true, completion: nil)
+            }
+        }).disposed(by: disposeBag)
     }
 }
