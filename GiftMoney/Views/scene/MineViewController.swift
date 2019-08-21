@@ -140,10 +140,10 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     func exportXLSX() {
         self.showLoadingIndicator()
         let url = NSTemporaryDirectory() + "\(NSUUID().uuidString).xlsx"
-        XLSXManager.shared.exportXLSX(fileUrl: URL(fileURLWithPath: url)).subscribe(onNext: { (url) in
+        XLSXManager.shared.exportXLSX(fileUrl: URL(fileURLWithPath: url)).subscribe(onNext: { [unowned self] (url) in
             self.hiddenLoadingIndicator()
-            SLog.info("exportXSLX success:\(url)")
-        }, onError: { (error) in
+            self.present(TempExcelPreviewVC(url: url), animated: true, completion: nil)
+        }, onError: { [unowned self] (error) in
             self.showTipsView(text: error.localizedDescription)
         }).disposed(by: disposeBag)
     }

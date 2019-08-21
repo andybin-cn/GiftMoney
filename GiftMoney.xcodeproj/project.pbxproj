@@ -62,6 +62,7 @@
 		3870C2EB230BD117000C1996 /* LocalAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EA230BD117000C1996 /* LocalAuthManager.swift */; };
 		3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */; };
 		3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2F7230CDD2A000C1996 /* XLSXManager.swift */; };
+		38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -186,6 +187,7 @@
 		3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthVC.swift; sourceTree = "<group>"; };
 		3870C2F7230CDD2A000C1996 /* XLSXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XLSXManager.swift; sourceTree = "<group>"; };
 		3870C2F9230CDEBB000C1996 /* GiftMoney-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GiftMoney-Bridging-Header.h"; sourceTree = "<group>"; };
+		38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempExcelPreviewVC.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				3870C2C6230A3C79000C1996 /* SearchTradeVC.swift */,
 				3870C2E3230B8C22000C1996 /* MarketVC.swift */,
 				3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */,
+				38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -811,6 +814,7 @@
 				3870C2C02306A1C8000C1996 /* Relationship.swift in Sources */,
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
 				386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */,
+				38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */,
 				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
 				3870C2E0230A8FFC000C1996 /* MineDescriptionRow.swift in Sources */,
 				3818556B22FBC57700024542 /* TradeMedia.swift in Sources */,
