@@ -486,6 +486,7 @@
 				3649C75322F67FB9009AF83F /* Resources */,
 				369DFF2222F708D70005B67D /* [CP] Copy Carthage Frameworks */,
 				369DFF2722F7094F0005B67D /* Embed Frameworks */,
+				4CD2F51439ED1C411DE930BF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -681,6 +682,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		4CD2F51439ED1C411DE930BF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/libxlsxwriter/xlsxwriter.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/xlsxwriter.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		7C75B91B77296367744C9D9C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

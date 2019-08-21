@@ -10,7 +10,7 @@ target 'GiftMoney' do
 #  pod 'SKPhotoBrowser','~> 6.1.0'
 #  pod 'MBProgressHUD','~> 1.1.0'
 #  pod 'SwiftyBeaver','~> 1.7.0'
-  
+  pod 'libxlsxwriter', '~> 0.8.7'
 
 
 

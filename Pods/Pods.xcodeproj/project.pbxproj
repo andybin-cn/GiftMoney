@@ -7,95 +7,290 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D2DCEAA5B0E63DAD75FBFD459ED7110 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		1DB22C472798DDE929C4CE4B890CBE72 /* Pods-CommonTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B4D75D9B5A7C7AB146373D785B883C /* Pods-CommonTests-dummy.m */; };
-		2420F5BAADDE68F0F7DD76FC1EF3F8D4 /* Pods-GiftMoneyUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6842BDE638414A1EF669736AEE3D2E0B /* Pods-GiftMoneyUITests-dummy.m */; };
+		00CC10604FC56ED58E0B697546F965CE /* tree.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EFB7497076244EFD6E4FCA32DB4416 /* tree.h */; };
+		0588A313B61CCA97E8E991E7DD5A32C4 /* packager.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 42B2A1A5AA87760D4CA7942862EA1543 /* packager.h */; };
+		0EDB84A1157EDC124E6F3E27AA51AF97 /* Pods-GiftMoney-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F6C0074277767D8981818A8C6C3FC5EC /* Pods-GiftMoney-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0FD5D341CDE66381DC74A615E16E71C4 /* shared_strings.c in Sources */ = {isa = PBXBuildFile; fileRef = F14E862A1AA49CA6A4BA8749686EFF03 /* shared_strings.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		12EBFF07B41478D11549FC43FDE6E04E /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8F0B820C146B801FB1D8D68B02E94 /* ioapi.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		140A31347634D84168FAC57B8417E1AB /* content_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 786FED81FA67C9E5DD46B70E10298E77 /* content_types.h */; };
+		1642F36509DB40F4DDD74422F936B612 /* theme.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = DF99450057DA34362FE3954F3CBF679A /* theme.h */; };
+		16707318C2392C5E2409EA1CB8C72A3F /* custom.c in Sources */ = {isa = PBXBuildFile; fileRef = AFF8D9C5CE79EE3A1824BF6B3DB845E2 /* custom.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		1C79D3781D6794D26F87E41E22317E00 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = EF2040A6F547620DD4099FA0ABF7AE12 /* zip.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		1CDA0FEE9D72EE97C22CB2444F11605B /* relationships.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C3844E4CAC0B73E30EC69D10BEBCDDE /* relationships.h */; };
+		1DB22C472798DDE929C4CE4B890CBE72 /* Pods-CommonTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 703025364EBB5129255A6AD3A7036982 /* Pods-CommonTests-dummy.m */; };
+		1FEF1CFA24DA1FBEEA60F124A25669A7 /* libxlsxwriter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E31DF01BF45558A6CC308A890F6A5190 /* libxlsxwriter-umbrella.h */; };
+		21C0304E1C2B8DE192C1394F19E941D0 /* queue.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB03F832B722181FFF628336ED3E18A /* queue.h */; };
+		22125E7238A249B388934D500F381340 /* worksheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 81DE36C54466C2E9E57A1B67D20C0C63 /* worksheet.h */; };
+		234AA3E8C6777100ADF535C7592871C2 /* content_types.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 786FED81FA67C9E5DD46B70E10298E77 /* content_types.h */; };
+		2420F5BAADDE68F0F7DD76FC1EF3F8D4 /* Pods-GiftMoneyUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A44BBE18E638F78D0C15A0E2DD31B /* Pods-GiftMoneyUITests-dummy.m */; };
+		2A89751EE757C69B8CB22D2F06308202 /* zip.h in Copy xlsxwriter/third_party Public Headers */ = {isa = PBXBuildFile; fileRef = E5616CD3D74F2C1FA5AB96D8D398DC48 /* zip.h */; };
+		2ADD3FB2D9B8004D4B242C909AEA005A /* chartsheet.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C15FEDF26E11D7DAE3D5717CBC2F0F5 /* chartsheet.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		2BFDD1A3BDF002AFDDAA6C1BDCB21496 /* xlsxwriter.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = E57399AC0F39FC21A9B1E020FB4D3350 /* xlsxwriter.h */; };
+		33450C371EC14712C9F4E9C4B91A0075 /* worksheet.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 81DE36C54466C2E9E57A1B67D20C0C63 /* worksheet.h */; };
+		343456D4E2DF2E97256371002428F418 /* drawing.h in Headers */ = {isa = PBXBuildFile; fileRef = A2661E39DFB98215DAE1753E9B8BFFB3 /* drawing.h */; };
+		363F8FEA697BFA510443E3BA821869C6 /* workbook.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 1AEB39F593954A034ABC765D92BA47D2 /* workbook.h */; };
 		3911B943BC68AB0100F9890468E1BB5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		4CC31AEE38AF8FA892105E4F54A722F8 /* Pods-Common-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 731FF7CDF5A9851E18BB67D086E7A300 /* Pods-Common-dummy.m */; };
-		5CEBD9B23186C6A47A6A54DBBD710664 /* Pods-Common-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BC15BFFD44F71F69FEBD2E5F20DA69B4 /* Pods-Common-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		64EC9B389ED9D7C1494EBF1394C8FB97 /* Pods-GiftMoneyUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3B83A1CAA79DF4F4CDE6C8F59788C2 /* Pods-GiftMoneyUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6770737506815E8E229E2FA3C024A26E /* Pods-CommonTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 34693217F06C37ED9BDCFB4637A35A65 /* Pods-CommonTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		83AEA8367BB7FF56DE863C8B4665A30A /* Pods-GiftMoney-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 910F9A39EF1893FBBEBC219F4012BBEA /* Pods-GiftMoney-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0FA2C22F2778D841340A3965BC46A9 /* tree.h in Copy xlsxwriter/third_party Public Headers */ = {isa = PBXBuildFile; fileRef = A6EFB7497076244EFD6E4FCA32DB4416 /* tree.h */; };
+		3FFC5775F6759385612EE7F16C6BC416 /* theme.h in Headers */ = {isa = PBXBuildFile; fileRef = DF99450057DA34362FE3954F3CBF679A /* theme.h */; };
+		427606379F89CD845C9E14742454E6CD /* shared_strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FD69AE24FEA1DEB872EA1CC6C3A0984 /* shared_strings.h */; };
+		46AA49BD9D823D932AAB4C30C226FBD7 /* workbook.c in Sources */ = {isa = PBXBuildFile; fileRef = 63F05C3467561C283885C5276E8D8FF5 /* workbook.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		4BF428AD600863AC28C748C77314BA03 /* hash_table.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = BFD1D5C27B072884F647788E770D96C6 /* hash_table.h */; };
+		4CC31AEE38AF8FA892105E4F54A722F8 /* Pods-Common-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA699184D4D167A0651297DA470AD86 /* Pods-Common-dummy.m */; };
+		4CD382ED8CB686A79361D684413B01D0 /* core.h in Headers */ = {isa = PBXBuildFile; fileRef = E521B96F8278D30B02B5E873D8C3C598 /* core.h */; };
+		586DCE53815CD1514984F69995005621 /* utility.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CAD4C4D85DDCF3F77E88F09BADEE6D /* utility.h */; };
+		5CEBD9B23186C6A47A6A54DBBD710664 /* Pods-Common-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CAB61422AB0A9D9EA06FFA4F80C25D24 /* Pods-Common-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5F6FA1C4EB57764FA612B72058B29F4F /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 37FCF68530EA6497943032EC99980BDB /* utility.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		64EC9B389ED9D7C1494EBF1394C8FB97 /* Pods-GiftMoneyUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A1177AE2C67E0A17B4F4A6490815CF5 /* Pods-GiftMoneyUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		655B8337275CE334C3C3DF3118C68624 /* libxlsxwriter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A04732EFC048C43081E4BB0B05C896 /* libxlsxwriter-dummy.m */; };
+		6770737506815E8E229E2FA3C024A26E /* Pods-CommonTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DAA7F1EB4DEB4FF840D889DBFE481C6 /* Pods-CommonTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6AC5DED887338DAA7C10A6B965F73051 /* packager.c in Sources */ = {isa = PBXBuildFile; fileRef = B9BB336166A6F964B54524F90D6A073C /* packager.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		6C6D127B15C5346AA99A8820003ECE08 /* content_types.c in Sources */ = {isa = PBXBuildFile; fileRef = AA27280F202D31CFD64C6E95C3BB14E3 /* content_types.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		6FD45AC29154DA5C265D8F597AC2DEB5 /* core.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = E521B96F8278D30B02B5E873D8C3C598 /* core.h */; };
+		74F28D585B503DFB47E7743318ADA6E9 /* tmpfileplus.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AE8D7F7B6F7B85754D8A08A71FEDD05 /* tmpfileplus.h */; };
+		75DB43B283ACACEBB1AA47A32C6A3D19 /* shared_strings.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 9FD69AE24FEA1DEB872EA1CC6C3A0984 /* shared_strings.h */; };
+		76A08F67CF540A0B7DF0035BBFBB278B /* tmpfileplus.c in Sources */ = {isa = PBXBuildFile; fileRef = F1CD87E243D6424678D9685485EE0AB5 /* tmpfileplus.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		77B60763979F31D49C654DD6B1BD72EC /* format.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = DF434CE65BA60C950358B267E6CCEBD7 /* format.h */; };
+		78497D73E2D3047A93C6A65B152007DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		79EF109FECA34E3191C8E6570C61E5A5 /* styles.c in Sources */ = {isa = PBXBuildFile; fileRef = 3970D48A7E6D018A6D65917D74B9F163 /* styles.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		824FA9C3291D0855D904B6A5929B6D57 /* app.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 5A980598AAC09EE1AFB7949D0CDBEFCA /* app.h */; };
+		86ABBC89991387EAD55715F330246897 /* chart.c in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC3B4CBA16A28804A698F6B52DB5D7 /* chart.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
 		8AE54C93F51F4D83A11667606492334D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		A2496C81F72B16CFFE00421AEAC18035 /* Pods-GiftMoneyTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CEB5BDB9D6D8C131765BCEC671BE70DA /* Pods-GiftMoneyTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A967A4465705C81060882BFD486C633C /* Pods-GiftMoney-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3A6B46F38CFBE0FEDC44B4630F0BC7 /* Pods-GiftMoney-dummy.m */; };
+		8BAF4F8CD395BF43FC79C4DDDF1B9D9D /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = FB7747FBF1EDF2E0E6C772D79F501CF0 /* ioapi.h */; };
+		8CDFFEF40797637F26B1A60C42C08E8F /* queue.h in Copy xlsxwriter/third_party Public Headers */ = {isa = PBXBuildFile; fileRef = 0CB03F832B722181FFF628336ED3E18A /* queue.h */; };
+		90101D85096E3D69A4C2E36AC10C24FC /* Pods-GiftMoney-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D862D0DC1D18BCFB72160B462F0442 /* Pods-GiftMoney-dummy.m */; };
+		914C4E13EB9CA1127FB744FCF4423DD7 /* drawing.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = A2661E39DFB98215DAE1753E9B8BFFB3 /* drawing.h */; };
+		929B415CFDB799D62237994CB1772AE9 /* common.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 6A7EC027713BCC1438AE2DFF93A3F2C4 /* common.h */; };
+		9F392CE84F9F968A458AFDCDBC4A2466 /* relationships.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 9C3844E4CAC0B73E30EC69D10BEBCDDE /* relationships.h */; };
+		A2496C81F72B16CFFE00421AEAC18035 /* Pods-GiftMoneyTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 57FEEFB7AB404CB5B086AC0C6537A2A1 /* Pods-GiftMoneyTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E04A1F1F51D2C4F715A740FB66287F /* relationships.c in Sources */ = {isa = PBXBuildFile; fileRef = E03D48BD0CA546D2F60E405CB2782342 /* relationships.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		A51AF77DC618B77FF0614EAD9B8439C4 /* hash_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 552EEFEE58BE6DF12F38F426638CF8BC /* hash_table.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		A9EF1808F6AAC9BB6219DEA08265B1FA /* xmlwriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCA591FB59B904E3EC286A68E6F8589 /* xmlwriter.h */; };
+		AD8B327CF467C960F48FECB456CB0C25 /* format.c in Sources */ = {isa = PBXBuildFile; fileRef = 78A3E1CB11A150FEE8144A638BB3698D /* format.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		AE288F78AAD0FAD542D5CF3D2AEEE9EF /* utility.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 11CAD4C4D85DDCF3F77E88F09BADEE6D /* utility.h */; };
+		B20A923DA1B9E2318236122BAAFF2E5C /* custom.h in Headers */ = {isa = PBXBuildFile; fileRef = 4728CBA591D87D848735B9339E7E0CA7 /* custom.h */; };
+		B40B70634D3C2384F927A1CE39C7EA4F /* xmlwriter.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 8FCA591FB59B904E3EC286A68E6F8589 /* xmlwriter.h */; };
+		BB0ED638DF00C183BF7CEF4AD10FA05D /* worksheet.c in Sources */ = {isa = PBXBuildFile; fileRef = C1A637EEA5CB92505A49F9D8243660A2 /* worksheet.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		BC9A6AC2513B8BC12A03A1F17C7E0F1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		BCF83ADC879B4C0A23F45795B77955E6 /* drawing.c in Sources */ = {isa = PBXBuildFile; fileRef = 26C40C85A8B87BF8099EB6340E641F8C /* drawing.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
 		C11171AF80A4AB4F598F15365F9B2401 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		C36ED33258BA61DAED81D35786CBB7BD /* hash_table.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD1D5C27B072884F647788E770D96C6 /* hash_table.h */; };
+		C75CDC4B989E4F753A9E453E87308C0F /* xlsxwriter.h in Headers */ = {isa = PBXBuildFile; fileRef = E57399AC0F39FC21A9B1E020FB4D3350 /* xlsxwriter.h */; };
+		C7ED012494EF9DCF8720E812863E53B5 /* workbook.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AEB39F593954A034ABC765D92BA47D2 /* workbook.h */; };
+		C887A2A3FC5A45283117149E84FE3F90 /* packager.h in Headers */ = {isa = PBXBuildFile; fileRef = 42B2A1A5AA87760D4CA7942862EA1543 /* packager.h */; };
+		C91325A11108EE9156C728C39EABF948 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = E5616CD3D74F2C1FA5AB96D8D398DC48 /* zip.h */; };
+		CA412E828173D32FD11D2292C35E6645 /* core.c in Sources */ = {isa = PBXBuildFile; fileRef = CFDDB3C97C64B3E4E32302171873DB95 /* core.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		CBBCB66E664CF9EB3BC24365F1E957C9 /* ioapi.h in Copy xlsxwriter/third_party Public Headers */ = {isa = PBXBuildFile; fileRef = FB7747FBF1EDF2E0E6C772D79F501CF0 /* ioapi.h */; };
+		D772476B80BD48015DAFE96C10EF3B5F /* chartsheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 280A43478638B20CC616BD852D87E7CE /* chartsheet.h */; };
+		D8D09A2D975631CF9FA7810AF33E2C35 /* styles.h in Headers */ = {isa = PBXBuildFile; fileRef = A10827D1E5E12FCDF40C60341DC155BA /* styles.h */; };
+		DA03670590DAA493C69EBCC829F785AE /* chart.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA0DBF08A77A3D94F97D1CA100CF41C /* chart.h */; };
+		DB460D86B27BF548292220470FAEA2A2 /* styles.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = A10827D1E5E12FCDF40C60341DC155BA /* styles.h */; };
+		DEEB67CCADAE76FDB39F6E2C04A85695 /* libxlsxwriter-umbrella.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = E31DF01BF45558A6CC308A890F6A5190 /* libxlsxwriter-umbrella.h */; };
 		DF10903A72766F812229C41EB6098ADC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		E44D0BD16D2B7150599D9D643089D9C8 /* Pods-GiftMoneyTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F95E00B7038742FC6798CCA7992718 /* Pods-GiftMoneyTests-dummy.m */; };
+		DFA99FA4FE09EA06531C26D27F0D7C89 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A7EC027713BCC1438AE2DFF93A3F2C4 /* common.h */; };
+		E021F2C460C81BC22B86DA100E27FE08 /* custom.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 4728CBA591D87D848735B9339E7E0CA7 /* custom.h */; };
+		E44D0BD16D2B7150599D9D643089D9C8 /* Pods-GiftMoneyTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CCFA82087A6D5123BB1DF63319FC4 /* Pods-GiftMoneyTests-dummy.m */; };
+		E4FA6C2C22D1019D096EC7488F7224EF /* app.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A980598AAC09EE1AFB7949D0CDBEFCA /* app.h */; };
+		E7D8B06BEE47F64CB35DDBFA8693EE34 /* chart.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 2DA0DBF08A77A3D94F97D1CA100CF41C /* chart.h */; };
+		EC7E3B4E58E0E85D8834088D90141800 /* theme.c in Sources */ = {isa = PBXBuildFile; fileRef = E729CB93D303024ADC4DC2534C63A5EB /* theme.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		EC929543D4B3254A3B1F059A40DB533A /* xmlwriter.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A18AA0D6E73740EDDB2542029496936 /* xmlwriter.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
+		F0A331DD05BE3C6FF808A2DB654A5AB1 /* tmpfileplus.h in Copy xlsxwriter/third_party Public Headers */ = {isa = PBXBuildFile; fileRef = 6AE8D7F7B6F7B85754D8A08A71FEDD05 /* tmpfileplus.h */; };
+		F34ACD41F44EC4805E85C4B6607EAE6F /* chartsheet.h in Copy xlsxwriter Public Headers */ = {isa = PBXBuildFile; fileRef = 280A43478638B20CC616BD852D87E7CE /* chartsheet.h */; };
+		F38AA6607F0D7008424A1619AC75791C /* format.h in Headers */ = {isa = PBXBuildFile; fileRef = DF434CE65BA60C950358B267E6CCEBD7 /* format.h */; };
+		FA82E1B77A63E7EC4177DF9EF2136094 /* app.c in Sources */ = {isa = PBXBuildFile; fileRef = EC44376B0B5E7D832C9333C308E62DD4 /* app.c */; settings = {COMPILER_FLAGS = "-DNOCRYPT=1 -DNOUNCRYPT=1"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		26F7376FDFB4F00472D7EA8548FA8611 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6523EDB7807C0436BC90158A47741ED5;
+			remoteInfo = libxlsxwriter;
+		};
 		87107F43FB60036CAA5DF1D0A74ED501 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 490CFCA3DA2CB6EB09C943B9F18FE35B;
+			remoteGlobalIDString = 7C925064D01AF03B672F00963C04B3EE;
 			remoteInfo = "Pods-GiftMoney";
 		};
 		AA7DFF6827D7500B360F4F8E74EADF52 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DD7DFA994AEB239315477135259D90B6;
+			remoteGlobalIDString = 560CF91FE745BC9EF7277A6E463684A1;
 			remoteInfo = "Pods-Common";
 		};
 		AF297B7CE8F470F39C871068154C145D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 490CFCA3DA2CB6EB09C943B9F18FE35B;
+			remoteGlobalIDString = 7C925064D01AF03B672F00963C04B3EE;
 			remoteInfo = "Pods-GiftMoney";
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		276B8362F6A4ADCD0A0F73B88B0B277A /* Copy xlsxwriter Public Headers */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(PUBLIC_HEADERS_FOLDER_PATH)/xlsxwriter";
+			dstSubfolderSpec = 16;
+			files = (
+				824FA9C3291D0855D904B6A5929B6D57 /* app.h in Copy xlsxwriter Public Headers */,
+				E7D8B06BEE47F64CB35DDBFA8693EE34 /* chart.h in Copy xlsxwriter Public Headers */,
+				F34ACD41F44EC4805E85C4B6607EAE6F /* chartsheet.h in Copy xlsxwriter Public Headers */,
+				929B415CFDB799D62237994CB1772AE9 /* common.h in Copy xlsxwriter Public Headers */,
+				234AA3E8C6777100ADF535C7592871C2 /* content_types.h in Copy xlsxwriter Public Headers */,
+				6FD45AC29154DA5C265D8F597AC2DEB5 /* core.h in Copy xlsxwriter Public Headers */,
+				E021F2C460C81BC22B86DA100E27FE08 /* custom.h in Copy xlsxwriter Public Headers */,
+				914C4E13EB9CA1127FB744FCF4423DD7 /* drawing.h in Copy xlsxwriter Public Headers */,
+				77B60763979F31D49C654DD6B1BD72EC /* format.h in Copy xlsxwriter Public Headers */,
+				4BF428AD600863AC28C748C77314BA03 /* hash_table.h in Copy xlsxwriter Public Headers */,
+				DEEB67CCADAE76FDB39F6E2C04A85695 /* libxlsxwriter-umbrella.h in Copy xlsxwriter Public Headers */,
+				0588A313B61CCA97E8E991E7DD5A32C4 /* packager.h in Copy xlsxwriter Public Headers */,
+				9F392CE84F9F968A458AFDCDBC4A2466 /* relationships.h in Copy xlsxwriter Public Headers */,
+				75DB43B283ACACEBB1AA47A32C6A3D19 /* shared_strings.h in Copy xlsxwriter Public Headers */,
+				DB460D86B27BF548292220470FAEA2A2 /* styles.h in Copy xlsxwriter Public Headers */,
+				1642F36509DB40F4DDD74422F936B612 /* theme.h in Copy xlsxwriter Public Headers */,
+				AE288F78AAD0FAD542D5CF3D2AEEE9EF /* utility.h in Copy xlsxwriter Public Headers */,
+				363F8FEA697BFA510443E3BA821869C6 /* workbook.h in Copy xlsxwriter Public Headers */,
+				33450C371EC14712C9F4E9C4B91A0075 /* worksheet.h in Copy xlsxwriter Public Headers */,
+				B40B70634D3C2384F927A1CE39C7EA4F /* xmlwriter.h in Copy xlsxwriter Public Headers */,
+			);
+			name = "Copy xlsxwriter Public Headers";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		885659B1353E9E8612CD4A77E06F70A5 /* Copy xlsxwriter/third_party Public Headers */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(PUBLIC_HEADERS_FOLDER_PATH)/xlsxwriter/third_party";
+			dstSubfolderSpec = 16;
+			files = (
+				CBBCB66E664CF9EB3BC24365F1E957C9 /* ioapi.h in Copy xlsxwriter/third_party Public Headers */,
+				8CDFFEF40797637F26B1A60C42C08E8F /* queue.h in Copy xlsxwriter/third_party Public Headers */,
+				F0A331DD05BE3C6FF808A2DB654A5AB1 /* tmpfileplus.h in Copy xlsxwriter/third_party Public Headers */,
+				3A0FA2C22F2778D841340A3965BC46A9 /* tree.h in Copy xlsxwriter/third_party Public Headers */,
+				2A89751EE757C69B8CB22D2F06308202 /* zip.h in Copy xlsxwriter/third_party Public Headers */,
+			);
+			name = "Copy xlsxwriter/third_party Public Headers";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C48F8F64B05A5B0EC63CB74D72BDEA9 /* Copy . Public Headers */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(PUBLIC_HEADERS_FOLDER_PATH)/.";
+			dstSubfolderSpec = 16;
+			files = (
+				2BFDD1A3BDF002AFDDAA6C1BDCB21496 /* xlsxwriter.h in Copy . Public Headers */,
+			);
+			name = "Copy . Public Headers";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		03ACE5D9DF41D239705096AE62B390B5 /* Pods-Common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Common.release.xcconfig"; sourceTree = "<group>"; };
-		07333EE90DFFDBBAAAF40F28EC371841 /* Pods-Common.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Common.modulemap"; sourceTree = "<group>"; };
-		0F4D620C44EF1CE7342240BAC295F02A /* Pods_Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Common.framework; path = "Pods-Common.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05911D0025CC734D5AEB37759D734471 /* Pods-CommonTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CommonTests.modulemap"; sourceTree = "<group>"; };
+		06C068DD668F06ACC85EADEC3B7F06DC /* Pods-Common-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Common-acknowledgements.plist"; sourceTree = "<group>"; };
+		085C312DC9883E4CD27791605E0B93EB /* Pods-CommonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CommonTests.release.xcconfig"; sourceTree = "<group>"; };
+		090D6931B0656F252EEF1BD044C6C12F /* Pods-Common-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Common-Info.plist"; sourceTree = "<group>"; };
+		09CED3104288C3FC3D1391F722C44345 /* Pods-GiftMoneyTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiftMoneyTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0BAE0D2F8728A4007AA684CC26BD467B /* Pods-GiftMoneyTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiftMoneyTests.modulemap"; sourceTree = "<group>"; };
+		0CB03F832B722181FFF628336ED3E18A /* queue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = queue.h; path = include/xlsxwriter/third_party/queue.h; sourceTree = "<group>"; };
+		1088C2E98D201713F35066886125DB4A /* Pods-GiftMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoney.debug.xcconfig"; sourceTree = "<group>"; };
+		11CAD4C4D85DDCF3F77E88F09BADEE6D /* utility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = utility.h; path = include/xlsxwriter/utility.h; sourceTree = "<group>"; };
+		1A1177AE2C67E0A17B4F4A6490815CF5 /* Pods-GiftMoneyUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiftMoneyUITests-umbrella.h"; sourceTree = "<group>"; };
+		1AEB39F593954A034ABC765D92BA47D2 /* workbook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = workbook.h; path = include/xlsxwriter/workbook.h; sourceTree = "<group>"; };
+		1F1AA4B6E6348E15AC3795773ACB450F /* Pods-Common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Common.release.xcconfig"; sourceTree = "<group>"; };
+		26C40C85A8B87BF8099EB6340E641F8C /* drawing.c */ = {isa = PBXFileReference; includeInIndex = 1; name = drawing.c; path = src/drawing.c; sourceTree = "<group>"; };
+		280A43478638B20CC616BD852D87E7CE /* chartsheet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = chartsheet.h; path = include/xlsxwriter/chartsheet.h; sourceTree = "<group>"; };
+		2C7BC7B98CF2644C48488698E9DB3B6B /* libxlsxwriter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = libxlsxwriter.xcconfig; sourceTree = "<group>"; };
+		2DA0DBF08A77A3D94F97D1CA100CF41C /* chart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = chart.h; path = include/xlsxwriter/chart.h; sourceTree = "<group>"; };
+		2F2A44BBE18E638F78D0C15A0E2DD31B /* Pods-GiftMoneyUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiftMoneyUITests-dummy.m"; sourceTree = "<group>"; };
+		31AC92231BA88309787A2AC15E8B17A9 /* Pods-Common.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Common.debug.xcconfig"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		34693217F06C37ED9BDCFB4637A35A65 /* Pods-CommonTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CommonTests-umbrella.h"; sourceTree = "<group>"; };
-		35D977F8AC4B6A6806084FD7D382EA07 /* Pods-CommonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CommonTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3A2B6756E4CBA0D6CBD6721D6D5244DB /* Pods-CommonTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CommonTests-Info.plist"; sourceTree = "<group>"; };
-		410E84523DF7FF21AFE15674C0742FD1 /* Pods-GiftMoney-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoney-Info.plist"; sourceTree = "<group>"; };
-		4EC5AB02C7F2F318829A375DC7183CCB /* Pods-Common-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Common-acknowledgements.markdown"; sourceTree = "<group>"; };
-		568A7D23803B57BFA2D58323547DC757 /* Pods-GiftMoney-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoney-acknowledgements.plist"; sourceTree = "<group>"; };
-		5E2B5163D4D2696A66D11AEA227C4D66 /* Pods-GiftMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoney.debug.xcconfig"; sourceTree = "<group>"; };
-		5F2D406BC68CF2A503743BA481BA73B6 /* Pods-GiftMoney.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiftMoney.modulemap"; sourceTree = "<group>"; };
-		6329469672DEEB8904CACC01E2BBACE0 /* Pods-GiftMoneyUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		63638518688183E5E27DE8F6619DA81C /* Pods-GiftMoneyTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiftMoneyTests.modulemap"; sourceTree = "<group>"; };
-		638E955DFD79D74E97AEC10EE084E5AA /* Pods-Common-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Common-acknowledgements.plist"; sourceTree = "<group>"; };
-		66B4D75D9B5A7C7AB146373D785B883C /* Pods-CommonTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CommonTests-dummy.m"; sourceTree = "<group>"; };
-		6842BDE638414A1EF669736AEE3D2E0B /* Pods-GiftMoneyUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiftMoneyUITests-dummy.m"; sourceTree = "<group>"; };
-		6D8D96A1F86FC63387206BB83F18BED0 /* Pods-GiftMoneyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyTests.release.xcconfig"; sourceTree = "<group>"; };
-		70548A891E91C7A7DC17931BF6F05EC4 /* Pods-GiftMoney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoney.release.xcconfig"; sourceTree = "<group>"; };
-		731FF7CDF5A9851E18BB67D086E7A300 /* Pods-Common-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Common-dummy.m"; sourceTree = "<group>"; };
-		7BBAB2387E2589730410FF8AA1FE0763 /* Pods-GiftMoneyTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		80D5FA63E63F445AA2C32FAC043AF82C /* Pods-GiftMoneyTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyTests-Info.plist"; sourceTree = "<group>"; };
-		8B3B83A1CAA79DF4F4CDE6C8F59788C2 /* Pods-GiftMoneyUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiftMoneyUITests-umbrella.h"; sourceTree = "<group>"; };
-		8B973C4B8528380C9591261325581E1D /* Pods_GiftMoneyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiftMoneyUITests.framework; path = "Pods-GiftMoneyUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D03296DFC678E9A6A37105A84458E9E /* Pods-GiftMoneyUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiftMoneyUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		90AC15D1F8A59AB8D380E4F94BF6A3CD /* Pods_GiftMoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiftMoneyTests.framework; path = "Pods-GiftMoneyTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		90B1A1AE94164D0C46BD44D941C01682 /* Pods_GiftMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiftMoney.framework; path = "Pods-GiftMoney.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		910F9A39EF1893FBBEBC219F4012BBEA /* Pods-GiftMoney-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiftMoney-umbrella.h"; sourceTree = "<group>"; };
-		969C86824A464CBDA79850C6D2E18692 /* Pods-CommonTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CommonTests.modulemap"; sourceTree = "<group>"; };
-		9CA471FB5B6DBBD21D02D878C2645715 /* Pods-GiftMoneyTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiftMoneyTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		37FCF68530EA6497943032EC99980BDB /* utility.c */ = {isa = PBXFileReference; includeInIndex = 1; name = utility.c; path = src/utility.c; sourceTree = "<group>"; };
+		380A276421A5E503DF2840222E97C970 /* Pods-GiftMoneyTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyTests-Info.plist"; sourceTree = "<group>"; };
+		3970D48A7E6D018A6D65917D74B9F163 /* styles.c */ = {isa = PBXFileReference; includeInIndex = 1; name = styles.c; path = src/styles.c; sourceTree = "<group>"; };
+		41624B419F9BEA9D7F2F3B9A93CD89E9 /* Pods_GiftMoneyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiftMoneyUITests.framework; path = "Pods-GiftMoneyUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		42B2A1A5AA87760D4CA7942862EA1543 /* packager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = packager.h; path = include/xlsxwriter/packager.h; sourceTree = "<group>"; };
+		46D862D0DC1D18BCFB72160B462F0442 /* Pods-GiftMoney-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiftMoney-dummy.m"; sourceTree = "<group>"; };
+		4728CBA591D87D848735B9339E7E0CA7 /* custom.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = custom.h; path = include/xlsxwriter/custom.h; sourceTree = "<group>"; };
+		4A7D6CBF0B551EB3BFAFF89D3CB5ABCE /* Pods-CommonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CommonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		527BB5C7E9433A9CE68176E0D7288539 /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		552EEFEE58BE6DF12F38F426638CF8BC /* hash_table.c */ = {isa = PBXFileReference; includeInIndex = 1; name = hash_table.c; path = src/hash_table.c; sourceTree = "<group>"; };
+		561E1E3C1DD5020B80EE0A70EA28F114 /* Pods_CommonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CommonTests.framework; path = "Pods-CommonTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		570051A2E67ED4BC8B269DE2A093F1EB /* libxlsxwriter-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "libxlsxwriter-Info.plist"; sourceTree = "<group>"; };
+		57FEEFB7AB404CB5B086AC0C6537A2A1 /* Pods-GiftMoneyTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiftMoneyTests-umbrella.h"; sourceTree = "<group>"; };
+		5A980598AAC09EE1AFB7949D0CDBEFCA /* app.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = app.h; path = include/xlsxwriter/app.h; sourceTree = "<group>"; };
+		60662E7E310D033760444960025947C4 /* libxlsxwriter-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "libxlsxwriter-prefix.pch"; sourceTree = "<group>"; };
+		63F05C3467561C283885C5276E8D8FF5 /* workbook.c */ = {isa = PBXFileReference; includeInIndex = 1; name = workbook.c; path = src/workbook.c; sourceTree = "<group>"; };
+		6A7EC027713BCC1438AE2DFF93A3F2C4 /* common.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = common.h; path = include/xlsxwriter/common.h; sourceTree = "<group>"; };
+		6AE8D7F7B6F7B85754D8A08A71FEDD05 /* tmpfileplus.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tmpfileplus.h; path = include/xlsxwriter/third_party/tmpfileplus.h; sourceTree = "<group>"; };
+		6C15FEDF26E11D7DAE3D5717CBC2F0F5 /* chartsheet.c */ = {isa = PBXFileReference; includeInIndex = 1; name = chartsheet.c; path = src/chartsheet.c; sourceTree = "<group>"; };
+		6DAA7F1EB4DEB4FF840D889DBFE481C6 /* Pods-CommonTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CommonTests-umbrella.h"; sourceTree = "<group>"; };
+		6FA699184D4D167A0651297DA470AD86 /* Pods-Common-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Common-dummy.m"; sourceTree = "<group>"; };
+		703025364EBB5129255A6AD3A7036982 /* Pods-CommonTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CommonTests-dummy.m"; sourceTree = "<group>"; };
+		7389A17C3358E777537D398407343FF4 /* Pods-GiftMoney.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiftMoney.modulemap"; sourceTree = "<group>"; };
+		75D91AC85364DCF88A6FCF71837BD31B /* Pods-Common.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Common.modulemap"; sourceTree = "<group>"; };
+		761D23299D1FBF362134EEC3B350341A /* Pods-GiftMoney-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoney-acknowledgements.plist"; sourceTree = "<group>"; };
+		786FED81FA67C9E5DD46B70E10298E77 /* content_types.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = content_types.h; path = include/xlsxwriter/content_types.h; sourceTree = "<group>"; };
+		78A3E1CB11A150FEE8144A638BB3698D /* format.c */ = {isa = PBXFileReference; includeInIndex = 1; name = format.c; path = src/format.c; sourceTree = "<group>"; };
+		7EAC3B4CBA16A28804A698F6B52DB5D7 /* chart.c */ = {isa = PBXFileReference; includeInIndex = 1; name = chart.c; path = src/chart.c; sourceTree = "<group>"; };
+		81DE36C54466C2E9E57A1B67D20C0C63 /* worksheet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = worksheet.h; path = include/xlsxwriter/worksheet.h; sourceTree = "<group>"; };
+		845252EEF48DF7B15D3205D5BF4BA607 /* xlsxwriter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = xlsxwriter.framework; path = libxlsxwriter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85F5B9B6A900A5774BF287ABCE3BBE02 /* Pods_GiftMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiftMoney.framework; path = "Pods-GiftMoney.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8930304C08059ABF5739F6492A6EC578 /* libxlsxwriter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = libxlsxwriter.modulemap; sourceTree = "<group>"; };
+		8A18AA0D6E73740EDDB2542029496936 /* xmlwriter.c */ = {isa = PBXFileReference; includeInIndex = 1; name = xmlwriter.c; path = src/xmlwriter.c; sourceTree = "<group>"; };
+		8B52F2AA4888CB33B19CE83667BF55B9 /* Pods_Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Common.framework; path = "Pods-Common.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DA8F0B820C146B801FB1D8D68B02E94 /* ioapi.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ioapi.c; path = third_party/minizip/ioapi.c; sourceTree = "<group>"; };
+		8E2E3B407C953AE4E1CA54A0794AE0DD /* Pods-GiftMoney-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GiftMoney-frameworks.sh"; sourceTree = "<group>"; };
+		8F4E48A5B1370F3F03EA32032381BB56 /* Pods-GiftMoneyUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		8FCA591FB59B904E3EC286A68E6F8589 /* xmlwriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = xmlwriter.h; path = include/xlsxwriter/xmlwriter.h; sourceTree = "<group>"; };
+		91C3A9948F8A23BE3DA66BD1308D80BB /* Pods-GiftMoneyUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyUITests-Info.plist"; sourceTree = "<group>"; };
+		951AAFAFD46626B2674C3DE3FF1CF2F4 /* Pods-GiftMoneyTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		9C3844E4CAC0B73E30EC69D10BEBCDDE /* relationships.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = relationships.h; path = include/xlsxwriter/relationships.h; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A6CB3C52EBF0DE68076FE7E14E034909 /* Pods-GiftMoneyUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiftMoneyUITests.modulemap"; sourceTree = "<group>"; };
-		AE7646DE6FCCC358BC0A3E202C761D42 /* Pods_CommonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CommonTests.framework; path = "Pods-CommonTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB892801B40C3EBFA2A007274559588E /* Pods-Common.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Common.debug.xcconfig"; sourceTree = "<group>"; };
-		BC15BFFD44F71F69FEBD2E5F20DA69B4 /* Pods-Common-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Common-umbrella.h"; sourceTree = "<group>"; };
-		BF05BE566CA5A081EA1B601BB5CBE118 /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
-		C56007FBF577C60E1C4CF305B299D644 /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C73A9C612E132406453AA6BE298C0BF3 /* Pods-GiftMoney-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiftMoney-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C90BB43F24D04CC989DDE520F33A4AF7 /* Pods-CommonTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CommonTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CEB5BDB9D6D8C131765BCEC671BE70DA /* Pods-GiftMoneyTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiftMoneyTests-umbrella.h"; sourceTree = "<group>"; };
-		D4904AAD094BE933973394437D65946C /* Pods-CommonTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CommonTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		D5D170C8242A2F445508839691CA0FB5 /* Pods-CommonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CommonTests.release.xcconfig"; sourceTree = "<group>"; };
-		DA7E22FE4236DA5404EA3709F9D06750 /* Pods-GiftMoneyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		DCF40AFCD419A701F01F665A03AEF9FF /* Pods-GiftMoneyUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoneyUITests-Info.plist"; sourceTree = "<group>"; };
-		E0F95E00B7038742FC6798CCA7992718 /* Pods-GiftMoneyTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiftMoneyTests-dummy.m"; sourceTree = "<group>"; };
-		EB3A6B46F38CFBE0FEDC44B4630F0BC7 /* Pods-GiftMoney-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiftMoney-dummy.m"; sourceTree = "<group>"; };
-		EE26F1702AD312132DB7DB322AB12233 /* Pods-Common-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Common-Info.plist"; sourceTree = "<group>"; };
+		9FD69AE24FEA1DEB872EA1CC6C3A0984 /* shared_strings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = shared_strings.h; path = include/xlsxwriter/shared_strings.h; sourceTree = "<group>"; };
+		A10827D1E5E12FCDF40C60341DC155BA /* styles.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = styles.h; path = include/xlsxwriter/styles.h; sourceTree = "<group>"; };
+		A1AFC8152787446D4732824E00139CC9 /* Pods_GiftMoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GiftMoneyTests.framework; path = "Pods-GiftMoneyTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2661E39DFB98215DAE1753E9B8BFFB3 /* drawing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = drawing.h; path = include/xlsxwriter/drawing.h; sourceTree = "<group>"; };
+		A6EFB7497076244EFD6E4FCA32DB4416 /* tree.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tree.h; path = include/xlsxwriter/third_party/tree.h; sourceTree = "<group>"; };
+		AA27280F202D31CFD64C6E95C3BB14E3 /* content_types.c */ = {isa = PBXFileReference; includeInIndex = 1; name = content_types.c; path = src/content_types.c; sourceTree = "<group>"; };
+		AA7C2AE60F17FCE4CADE4B934FB23017 /* Pods-GiftMoneyUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GiftMoneyUITests.modulemap"; sourceTree = "<group>"; };
+		AD2AA297677FF0B4B496D4AE8E6924DC /* Pods-GiftMoneyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyTests.release.xcconfig"; sourceTree = "<group>"; };
+		AFF8D9C5CE79EE3A1824BF6B3DB845E2 /* custom.c */ = {isa = PBXFileReference; includeInIndex = 1; name = custom.c; path = src/custom.c; sourceTree = "<group>"; };
+		B9BB336166A6F964B54524F90D6A073C /* packager.c */ = {isa = PBXFileReference; includeInIndex = 1; name = packager.c; path = src/packager.c; sourceTree = "<group>"; };
+		BB6CB02543148BF7F113B445A33F5114 /* Pods-Common-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Common-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BFD1D5C27B072884F647788E770D96C6 /* hash_table.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = hash_table.h; path = include/xlsxwriter/hash_table.h; sourceTree = "<group>"; };
+		C1A637EEA5CB92505A49F9D8243660A2 /* worksheet.c */ = {isa = PBXFileReference; includeInIndex = 1; name = worksheet.c; path = src/worksheet.c; sourceTree = "<group>"; };
+		C621830B2A3F6940DB6C7044D985CED4 /* Pods-GiftMoneyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CAB61422AB0A9D9EA06FFA4F80C25D24 /* Pods-Common-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Common-umbrella.h"; sourceTree = "<group>"; };
+		CB5CCFA82087A6D5123BB1DF63319FC4 /* Pods-GiftMoneyTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GiftMoneyTests-dummy.m"; sourceTree = "<group>"; };
+		CFDDB3C97C64B3E4E32302171873DB95 /* core.c */ = {isa = PBXFileReference; includeInIndex = 1; name = core.c; path = src/core.c; sourceTree = "<group>"; };
+		D3A04732EFC048C43081E4BB0B05C896 /* libxlsxwriter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "libxlsxwriter-dummy.m"; sourceTree = "<group>"; };
+		D5C8ED4F4507D489F2A11BE782F06E40 /* Pods-CommonTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CommonTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DB0A69D183B36F7CFEC98D6F54761EF4 /* Pods-GiftMoneyUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiftMoneyUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DF434CE65BA60C950358B267E6CCEBD7 /* format.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = format.h; path = include/xlsxwriter/format.h; sourceTree = "<group>"; };
+		DF99450057DA34362FE3954F3CBF679A /* theme.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = theme.h; path = include/xlsxwriter/theme.h; sourceTree = "<group>"; };
+		DFB14CA65C3C37AB2722E56C6B2594F8 /* Pods-GiftMoney-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GiftMoney-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E03D48BD0CA546D2F60E405CB2782342 /* relationships.c */ = {isa = PBXFileReference; includeInIndex = 1; name = relationships.c; path = src/relationships.c; sourceTree = "<group>"; };
+		E0CE6BD8A05B77C89993810346CF63D5 /* Pods-GiftMoney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoney.release.xcconfig"; sourceTree = "<group>"; };
+		E31DF01BF45558A6CC308A890F6A5190 /* libxlsxwriter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "libxlsxwriter-umbrella.h"; path = "include/xlsxwriter/libxlsxwriter-umbrella.h"; sourceTree = "<group>"; };
+		E521B96F8278D30B02B5E873D8C3C598 /* core.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = core.h; path = include/xlsxwriter/core.h; sourceTree = "<group>"; };
+		E5616CD3D74F2C1FA5AB96D8D398DC48 /* zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zip.h; path = include/xlsxwriter/third_party/zip.h; sourceTree = "<group>"; };
+		E57399AC0F39FC21A9B1E020FB4D3350 /* xlsxwriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = xlsxwriter.h; path = include/xlsxwriter.h; sourceTree = "<group>"; };
+		E5D84D1745DAEF57D6080B5CE1AF30BA /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E729CB93D303024ADC4DC2534C63A5EB /* theme.c */ = {isa = PBXFileReference; includeInIndex = 1; name = theme.c; path = src/theme.c; sourceTree = "<group>"; };
+		EC44376B0B5E7D832C9333C308E62DD4 /* app.c */ = {isa = PBXFileReference; includeInIndex = 1; name = app.c; path = src/app.c; sourceTree = "<group>"; };
+		EEF5CD2F01499686EB3174BB7F145272 /* Pods-GiftMoney-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GiftMoney-Info.plist"; sourceTree = "<group>"; };
+		EF2040A6F547620DD4099FA0ABF7AE12 /* zip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = zip.c; path = third_party/minizip/zip.c; sourceTree = "<group>"; };
+		F14E862A1AA49CA6A4BA8749686EFF03 /* shared_strings.c */ = {isa = PBXFileReference; includeInIndex = 1; name = shared_strings.c; path = src/shared_strings.c; sourceTree = "<group>"; };
+		F15761579FC8496489BD3959153CCAB9 /* Pods-CommonTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CommonTests-Info.plist"; sourceTree = "<group>"; };
+		F1CD87E243D6424678D9685485EE0AB5 /* tmpfileplus.c */ = {isa = PBXFileReference; includeInIndex = 1; name = tmpfileplus.c; path = third_party/tmpfileplus/tmpfileplus.c; sourceTree = "<group>"; };
+		F6C0074277767D8981818A8C6C3FC5EC /* Pods-GiftMoney-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GiftMoney-umbrella.h"; sourceTree = "<group>"; };
+		FB7747FBF1EDF2E0E6C772D79F501CF0 /* ioapi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = include/xlsxwriter/third_party/ioapi.h; sourceTree = "<group>"; };
+		FD5BABDE8D23A437FF4A5665F6BBB776 /* Pods-CommonTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CommonTests-acknowledgements.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,19 +302,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		625391DDA19649ED04214B6EE1FD1707 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC9A6AC2513B8BC12A03A1F17C7E0F1B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67801BA819C149FC2A066D723EC7E8B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DF10903A72766F812229C41EB6098ADC /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		814D677FB83BFE81742483C4DC595C12 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D2DCEAA5B0E63DAD75FBFD459ED7110 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,79 +334,155 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FF76E5A79B7CFE74A04BE3B62868B5AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78497D73E2D3047A93C6A65B152007DC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D49D497580C3784B79D5B19B871B594 /* Targets Support Files */ = {
+		01966CE59D012FF4CEF102251BA5866B /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				F18C48BF5C5DB23917692E0C582F18E1 /* Pods-Common */,
-				A5F04C49FAC5FE491D7197F772E98A0C /* Pods-CommonTests */,
-				42B42BD8A14872E3729F4246BF0C2276 /* Pods-GiftMoney */,
-				E60E04947C5D90C6D80A66CA6B19C03C /* Pods-GiftMoneyTests */,
-				4BCA7EBDFDCA6F7934587DAF8B1B0256 /* Pods-GiftMoneyUITests */,
+				A90D88C45B6CEBF9176CB276CB09B48C /* Pods-Common */,
+				44620EA12D6752C00205A212AE5F0CD4 /* Pods-CommonTests */,
+				CEAEEE4FB9E550A8750164FF028E5FCF /* Pods-GiftMoney */,
+				724FB001147D6C6A6EC343D181545452 /* Pods-GiftMoneyTests */,
+				06F341AE4F4EDF4D58BAA7B9E4AE3165 /* Pods-GiftMoneyUITests */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		42B42BD8A14872E3729F4246BF0C2276 /* Pods-GiftMoney */ = {
+		06F341AE4F4EDF4D58BAA7B9E4AE3165 /* Pods-GiftMoneyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5F2D406BC68CF2A503743BA481BA73B6 /* Pods-GiftMoney.modulemap */,
-				C73A9C612E132406453AA6BE298C0BF3 /* Pods-GiftMoney-acknowledgements.markdown */,
-				568A7D23803B57BFA2D58323547DC757 /* Pods-GiftMoney-acknowledgements.plist */,
-				EB3A6B46F38CFBE0FEDC44B4630F0BC7 /* Pods-GiftMoney-dummy.m */,
-				410E84523DF7FF21AFE15674C0742FD1 /* Pods-GiftMoney-Info.plist */,
-				910F9A39EF1893FBBEBC219F4012BBEA /* Pods-GiftMoney-umbrella.h */,
-				5E2B5163D4D2696A66D11AEA227C4D66 /* Pods-GiftMoney.debug.xcconfig */,
-				70548A891E91C7A7DC17931BF6F05EC4 /* Pods-GiftMoney.release.xcconfig */,
-			);
-			name = "Pods-GiftMoney";
-			path = "Target Support Files/Pods-GiftMoney";
-			sourceTree = "<group>";
-		};
-		4BCA7EBDFDCA6F7934587DAF8B1B0256 /* Pods-GiftMoneyUITests */ = {
-			isa = PBXGroup;
-			children = (
-				A6CB3C52EBF0DE68076FE7E14E034909 /* Pods-GiftMoneyUITests.modulemap */,
-				8D03296DFC678E9A6A37105A84458E9E /* Pods-GiftMoneyUITests-acknowledgements.markdown */,
-				6329469672DEEB8904CACC01E2BBACE0 /* Pods-GiftMoneyUITests-acknowledgements.plist */,
-				6842BDE638414A1EF669736AEE3D2E0B /* Pods-GiftMoneyUITests-dummy.m */,
-				DCF40AFCD419A701F01F665A03AEF9FF /* Pods-GiftMoneyUITests-Info.plist */,
-				8B3B83A1CAA79DF4F4CDE6C8F59788C2 /* Pods-GiftMoneyUITests-umbrella.h */,
-				DA7E22FE4236DA5404EA3709F9D06750 /* Pods-GiftMoneyUITests.debug.xcconfig */,
-				BF05BE566CA5A081EA1B601BB5CBE118 /* Pods-GiftMoneyUITests.release.xcconfig */,
+				AA7C2AE60F17FCE4CADE4B934FB23017 /* Pods-GiftMoneyUITests.modulemap */,
+				DB0A69D183B36F7CFEC98D6F54761EF4 /* Pods-GiftMoneyUITests-acknowledgements.markdown */,
+				8F4E48A5B1370F3F03EA32032381BB56 /* Pods-GiftMoneyUITests-acknowledgements.plist */,
+				2F2A44BBE18E638F78D0C15A0E2DD31B /* Pods-GiftMoneyUITests-dummy.m */,
+				91C3A9948F8A23BE3DA66BD1308D80BB /* Pods-GiftMoneyUITests-Info.plist */,
+				1A1177AE2C67E0A17B4F4A6490815CF5 /* Pods-GiftMoneyUITests-umbrella.h */,
+				C621830B2A3F6940DB6C7044D985CED4 /* Pods-GiftMoneyUITests.debug.xcconfig */,
+				E5D84D1745DAEF57D6080B5CE1AF30BA /* Pods-GiftMoneyUITests.release.xcconfig */,
 			);
 			name = "Pods-GiftMoneyUITests";
 			path = "Target Support Files/Pods-GiftMoneyUITests";
 			sourceTree = "<group>";
 		};
-		93FF60E1D974A69091886BA8FE3FE4E9 /* Products */ = {
+		2FC6B601CA6390E9B20A80D661174023 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0F4D620C44EF1CE7342240BAC295F02A /* Pods_Common.framework */,
-				AE7646DE6FCCC358BC0A3E202C761D42 /* Pods_CommonTests.framework */,
-				90B1A1AE94164D0C46BD44D941C01682 /* Pods_GiftMoney.framework */,
-				90AC15D1F8A59AB8D380E4F94BF6A3CD /* Pods_GiftMoneyTests.framework */,
-				8B973C4B8528380C9591261325581E1D /* Pods_GiftMoneyUITests.framework */,
+				7FA8452515A42A19EF498CCF1DE2A050 /* libxlsxwriter */,
 			);
-			name = Products;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		A5F04C49FAC5FE491D7197F772E98A0C /* Pods-CommonTests */ = {
+		44620EA12D6752C00205A212AE5F0CD4 /* Pods-CommonTests */ = {
 			isa = PBXGroup;
 			children = (
-				969C86824A464CBDA79850C6D2E18692 /* Pods-CommonTests.modulemap */,
-				C90BB43F24D04CC989DDE520F33A4AF7 /* Pods-CommonTests-acknowledgements.markdown */,
-				D4904AAD094BE933973394437D65946C /* Pods-CommonTests-acknowledgements.plist */,
-				66B4D75D9B5A7C7AB146373D785B883C /* Pods-CommonTests-dummy.m */,
-				3A2B6756E4CBA0D6CBD6721D6D5244DB /* Pods-CommonTests-Info.plist */,
-				34693217F06C37ED9BDCFB4637A35A65 /* Pods-CommonTests-umbrella.h */,
-				35D977F8AC4B6A6806084FD7D382EA07 /* Pods-CommonTests.debug.xcconfig */,
-				D5D170C8242A2F445508839691CA0FB5 /* Pods-CommonTests.release.xcconfig */,
+				05911D0025CC734D5AEB37759D734471 /* Pods-CommonTests.modulemap */,
+				D5C8ED4F4507D489F2A11BE782F06E40 /* Pods-CommonTests-acknowledgements.markdown */,
+				FD5BABDE8D23A437FF4A5665F6BBB776 /* Pods-CommonTests-acknowledgements.plist */,
+				703025364EBB5129255A6AD3A7036982 /* Pods-CommonTests-dummy.m */,
+				F15761579FC8496489BD3959153CCAB9 /* Pods-CommonTests-Info.plist */,
+				6DAA7F1EB4DEB4FF840D889DBFE481C6 /* Pods-CommonTests-umbrella.h */,
+				4A7D6CBF0B551EB3BFAFF89D3CB5ABCE /* Pods-CommonTests.debug.xcconfig */,
+				085C312DC9883E4CD27791605E0B93EB /* Pods-CommonTests.release.xcconfig */,
 			);
 			name = "Pods-CommonTests";
 			path = "Target Support Files/Pods-CommonTests";
+			sourceTree = "<group>";
+		};
+		724FB001147D6C6A6EC343D181545452 /* Pods-GiftMoneyTests */ = {
+			isa = PBXGroup;
+			children = (
+				0BAE0D2F8728A4007AA684CC26BD467B /* Pods-GiftMoneyTests.modulemap */,
+				09CED3104288C3FC3D1391F722C44345 /* Pods-GiftMoneyTests-acknowledgements.markdown */,
+				951AAFAFD46626B2674C3DE3FF1CF2F4 /* Pods-GiftMoneyTests-acknowledgements.plist */,
+				CB5CCFA82087A6D5123BB1DF63319FC4 /* Pods-GiftMoneyTests-dummy.m */,
+				380A276421A5E503DF2840222E97C970 /* Pods-GiftMoneyTests-Info.plist */,
+				57FEEFB7AB404CB5B086AC0C6537A2A1 /* Pods-GiftMoneyTests-umbrella.h */,
+				527BB5C7E9433A9CE68176E0D7288539 /* Pods-GiftMoneyTests.debug.xcconfig */,
+				AD2AA297677FF0B4B496D4AE8E6924DC /* Pods-GiftMoneyTests.release.xcconfig */,
+			);
+			name = "Pods-GiftMoneyTests";
+			path = "Target Support Files/Pods-GiftMoneyTests";
+			sourceTree = "<group>";
+		};
+		7FA8452515A42A19EF498CCF1DE2A050 /* libxlsxwriter */ = {
+			isa = PBXGroup;
+			children = (
+				EC44376B0B5E7D832C9333C308E62DD4 /* app.c */,
+				5A980598AAC09EE1AFB7949D0CDBEFCA /* app.h */,
+				7EAC3B4CBA16A28804A698F6B52DB5D7 /* chart.c */,
+				2DA0DBF08A77A3D94F97D1CA100CF41C /* chart.h */,
+				6C15FEDF26E11D7DAE3D5717CBC2F0F5 /* chartsheet.c */,
+				280A43478638B20CC616BD852D87E7CE /* chartsheet.h */,
+				6A7EC027713BCC1438AE2DFF93A3F2C4 /* common.h */,
+				AA27280F202D31CFD64C6E95C3BB14E3 /* content_types.c */,
+				786FED81FA67C9E5DD46B70E10298E77 /* content_types.h */,
+				CFDDB3C97C64B3E4E32302171873DB95 /* core.c */,
+				E521B96F8278D30B02B5E873D8C3C598 /* core.h */,
+				AFF8D9C5CE79EE3A1824BF6B3DB845E2 /* custom.c */,
+				4728CBA591D87D848735B9339E7E0CA7 /* custom.h */,
+				26C40C85A8B87BF8099EB6340E641F8C /* drawing.c */,
+				A2661E39DFB98215DAE1753E9B8BFFB3 /* drawing.h */,
+				78A3E1CB11A150FEE8144A638BB3698D /* format.c */,
+				DF434CE65BA60C950358B267E6CCEBD7 /* format.h */,
+				552EEFEE58BE6DF12F38F426638CF8BC /* hash_table.c */,
+				BFD1D5C27B072884F647788E770D96C6 /* hash_table.h */,
+				8DA8F0B820C146B801FB1D8D68B02E94 /* ioapi.c */,
+				FB7747FBF1EDF2E0E6C772D79F501CF0 /* ioapi.h */,
+				E31DF01BF45558A6CC308A890F6A5190 /* libxlsxwriter-umbrella.h */,
+				B9BB336166A6F964B54524F90D6A073C /* packager.c */,
+				42B2A1A5AA87760D4CA7942862EA1543 /* packager.h */,
+				0CB03F832B722181FFF628336ED3E18A /* queue.h */,
+				E03D48BD0CA546D2F60E405CB2782342 /* relationships.c */,
+				9C3844E4CAC0B73E30EC69D10BEBCDDE /* relationships.h */,
+				F14E862A1AA49CA6A4BA8749686EFF03 /* shared_strings.c */,
+				9FD69AE24FEA1DEB872EA1CC6C3A0984 /* shared_strings.h */,
+				3970D48A7E6D018A6D65917D74B9F163 /* styles.c */,
+				A10827D1E5E12FCDF40C60341DC155BA /* styles.h */,
+				E729CB93D303024ADC4DC2534C63A5EB /* theme.c */,
+				DF99450057DA34362FE3954F3CBF679A /* theme.h */,
+				F1CD87E243D6424678D9685485EE0AB5 /* tmpfileplus.c */,
+				6AE8D7F7B6F7B85754D8A08A71FEDD05 /* tmpfileplus.h */,
+				A6EFB7497076244EFD6E4FCA32DB4416 /* tree.h */,
+				37FCF68530EA6497943032EC99980BDB /* utility.c */,
+				11CAD4C4D85DDCF3F77E88F09BADEE6D /* utility.h */,
+				63F05C3467561C283885C5276E8D8FF5 /* workbook.c */,
+				1AEB39F593954A034ABC765D92BA47D2 /* workbook.h */,
+				C1A637EEA5CB92505A49F9D8243660A2 /* worksheet.c */,
+				81DE36C54466C2E9E57A1B67D20C0C63 /* worksheet.h */,
+				E57399AC0F39FC21A9B1E020FB4D3350 /* xlsxwriter.h */,
+				8A18AA0D6E73740EDDB2542029496936 /* xmlwriter.c */,
+				8FCA591FB59B904E3EC286A68E6F8589 /* xmlwriter.h */,
+				EF2040A6F547620DD4099FA0ABF7AE12 /* zip.c */,
+				E5616CD3D74F2C1FA5AB96D8D398DC48 /* zip.h */,
+				C99B9A7B7391C10B03D995FCA709DC47 /* Support Files */,
+			);
+			name = libxlsxwriter;
+			path = libxlsxwriter;
+			sourceTree = "<group>";
+		};
+		A90D88C45B6CEBF9176CB276CB09B48C /* Pods-Common */ = {
+			isa = PBXGroup;
+			children = (
+				75D91AC85364DCF88A6FCF71837BD31B /* Pods-Common.modulemap */,
+				BB6CB02543148BF7F113B445A33F5114 /* Pods-Common-acknowledgements.markdown */,
+				06C068DD668F06ACC85EADEC3B7F06DC /* Pods-Common-acknowledgements.plist */,
+				6FA699184D4D167A0651297DA470AD86 /* Pods-Common-dummy.m */,
+				090D6931B0656F252EEF1BD044C6C12F /* Pods-Common-Info.plist */,
+				CAB61422AB0A9D9EA06FFA4F80C25D24 /* Pods-Common-umbrella.h */,
+				31AC92231BA88309787A2AC15E8B17A9 /* Pods-Common.debug.xcconfig */,
+				1F1AA4B6E6348E15AC3795773ACB450F /* Pods-Common.release.xcconfig */,
+			);
+			name = "Pods-Common";
+			path = "Target Support Files/Pods-Common";
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -222,13 +493,44 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		C99B9A7B7391C10B03D995FCA709DC47 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8930304C08059ABF5739F6492A6EC578 /* libxlsxwriter.modulemap */,
+				2C7BC7B98CF2644C48488698E9DB3B6B /* libxlsxwriter.xcconfig */,
+				D3A04732EFC048C43081E4BB0B05C896 /* libxlsxwriter-dummy.m */,
+				570051A2E67ED4BC8B269DE2A093F1EB /* libxlsxwriter-Info.plist */,
+				60662E7E310D033760444960025947C4 /* libxlsxwriter-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/libxlsxwriter";
+			sourceTree = "<group>";
+		};
+		CEAEEE4FB9E550A8750164FF028E5FCF /* Pods-GiftMoney */ = {
+			isa = PBXGroup;
+			children = (
+				7389A17C3358E777537D398407343FF4 /* Pods-GiftMoney.modulemap */,
+				DFB14CA65C3C37AB2722E56C6B2594F8 /* Pods-GiftMoney-acknowledgements.markdown */,
+				761D23299D1FBF362134EEC3B350341A /* Pods-GiftMoney-acknowledgements.plist */,
+				46D862D0DC1D18BCFB72160B462F0442 /* Pods-GiftMoney-dummy.m */,
+				8E2E3B407C953AE4E1CA54A0794AE0DD /* Pods-GiftMoney-frameworks.sh */,
+				EEF5CD2F01499686EB3174BB7F145272 /* Pods-GiftMoney-Info.plist */,
+				F6C0074277767D8981818A8C6C3FC5EC /* Pods-GiftMoney-umbrella.h */,
+				1088C2E98D201713F35066886125DB4A /* Pods-GiftMoney.debug.xcconfig */,
+				E0CE6BD8A05B77C89993810346CF63D5 /* Pods-GiftMoney.release.xcconfig */,
+			);
+			name = "Pods-GiftMoney";
+			path = "Target Support Files/Pods-GiftMoney";
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				93FF60E1D974A69091886BA8FE3FE4E9 /* Products */,
-				3D49D497580C3784B79D5B19B871B594 /* Targets Support Files */,
+				2FC6B601CA6390E9B20A80D661174023 /* Pods */,
+				F5052127428E5107BC6EC01D3A26359C /* Products */,
+				01966CE59D012FF4CEF102251BA5866B /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -240,36 +542,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E60E04947C5D90C6D80A66CA6B19C03C /* Pods-GiftMoneyTests */ = {
+		F5052127428E5107BC6EC01D3A26359C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				63638518688183E5E27DE8F6619DA81C /* Pods-GiftMoneyTests.modulemap */,
-				9CA471FB5B6DBBD21D02D878C2645715 /* Pods-GiftMoneyTests-acknowledgements.markdown */,
-				7BBAB2387E2589730410FF8AA1FE0763 /* Pods-GiftMoneyTests-acknowledgements.plist */,
-				E0F95E00B7038742FC6798CCA7992718 /* Pods-GiftMoneyTests-dummy.m */,
-				80D5FA63E63F445AA2C32FAC043AF82C /* Pods-GiftMoneyTests-Info.plist */,
-				CEB5BDB9D6D8C131765BCEC671BE70DA /* Pods-GiftMoneyTests-umbrella.h */,
-				C56007FBF577C60E1C4CF305B299D644 /* Pods-GiftMoneyTests.debug.xcconfig */,
-				6D8D96A1F86FC63387206BB83F18BED0 /* Pods-GiftMoneyTests.release.xcconfig */,
+				8B52F2AA4888CB33B19CE83667BF55B9 /* Pods_Common.framework */,
+				561E1E3C1DD5020B80EE0A70EA28F114 /* Pods_CommonTests.framework */,
+				85F5B9B6A900A5774BF287ABCE3BBE02 /* Pods_GiftMoney.framework */,
+				A1AFC8152787446D4732824E00139CC9 /* Pods_GiftMoneyTests.framework */,
+				41624B419F9BEA9D7F2F3B9A93CD89E9 /* Pods_GiftMoneyUITests.framework */,
+				845252EEF48DF7B15D3205D5BF4BA607 /* xlsxwriter.framework */,
 			);
-			name = "Pods-GiftMoneyTests";
-			path = "Target Support Files/Pods-GiftMoneyTests";
-			sourceTree = "<group>";
-		};
-		F18C48BF5C5DB23917692E0C582F18E1 /* Pods-Common */ = {
-			isa = PBXGroup;
-			children = (
-				07333EE90DFFDBBAAAF40F28EC371841 /* Pods-Common.modulemap */,
-				4EC5AB02C7F2F318829A375DC7183CCB /* Pods-Common-acknowledgements.markdown */,
-				638E955DFD79D74E97AEC10EE084E5AA /* Pods-Common-acknowledgements.plist */,
-				731FF7CDF5A9851E18BB67D086E7A300 /* Pods-Common-dummy.m */,
-				EE26F1702AD312132DB7DB322AB12233 /* Pods-Common-Info.plist */,
-				BC15BFFD44F71F69FEBD2E5F20DA69B4 /* Pods-Common-umbrella.h */,
-				BB892801B40C3EBFA2A007274559588E /* Pods-Common.debug.xcconfig */,
-				03ACE5D9DF41D239705096AE62B390B5 /* Pods-Common.release.xcconfig */,
-			);
-			name = "Pods-Common";
-			path = "Target Support Files/Pods-Common";
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,19 +574,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3A93C80E1C850E004A09CEC509D5EAAE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4FA6C2C22D1019D096EC7488F7224EF /* app.h in Headers */,
+				DA03670590DAA493C69EBCC829F785AE /* chart.h in Headers */,
+				D772476B80BD48015DAFE96C10EF3B5F /* chartsheet.h in Headers */,
+				DFA99FA4FE09EA06531C26D27F0D7C89 /* common.h in Headers */,
+				140A31347634D84168FAC57B8417E1AB /* content_types.h in Headers */,
+				4CD382ED8CB686A79361D684413B01D0 /* core.h in Headers */,
+				B20A923DA1B9E2318236122BAAFF2E5C /* custom.h in Headers */,
+				343456D4E2DF2E97256371002428F418 /* drawing.h in Headers */,
+				F38AA6607F0D7008424A1619AC75791C /* format.h in Headers */,
+				C36ED33258BA61DAED81D35786CBB7BD /* hash_table.h in Headers */,
+				8BAF4F8CD395BF43FC79C4DDDF1B9D9D /* ioapi.h in Headers */,
+				1FEF1CFA24DA1FBEEA60F124A25669A7 /* libxlsxwriter-umbrella.h in Headers */,
+				C887A2A3FC5A45283117149E84FE3F90 /* packager.h in Headers */,
+				21C0304E1C2B8DE192C1394F19E941D0 /* queue.h in Headers */,
+				1CDA0FEE9D72EE97C22CB2444F11605B /* relationships.h in Headers */,
+				427606379F89CD845C9E14742454E6CD /* shared_strings.h in Headers */,
+				D8D09A2D975631CF9FA7810AF33E2C35 /* styles.h in Headers */,
+				3FFC5775F6759385612EE7F16C6BC416 /* theme.h in Headers */,
+				74F28D585B503DFB47E7743318ADA6E9 /* tmpfileplus.h in Headers */,
+				00CC10604FC56ED58E0B697546F965CE /* tree.h in Headers */,
+				586DCE53815CD1514984F69995005621 /* utility.h in Headers */,
+				C7ED012494EF9DCF8720E812863E53B5 /* workbook.h in Headers */,
+				22125E7238A249B388934D500F381340 /* worksheet.h in Headers */,
+				C75CDC4B989E4F753A9E453E87308C0F /* xlsxwriter.h in Headers */,
+				A9EF1808F6AAC9BB6219DEA08265B1FA /* xmlwriter.h in Headers */,
+				C91325A11108EE9156C728C39EABF948 /* zip.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B5CEAF0C23476D6939D353EDF81A119 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0EDB84A1157EDC124E6F3E27AA51AF97 /* Pods-GiftMoney-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A2BE5E2AD48E28F5B2B8B2FC867BD22 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5CEBD9B23186C6A47A6A54DBBD710664 /* Pods-Common-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9131B2CEA70680B656AACC8D93D93699 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				83AEA8367BB7FF56DE863C8B4665A30A /* Pods-GiftMoney-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,25 +634,7 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		490CFCA3DA2CB6EB09C943B9F18FE35B /* Pods-GiftMoney */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 99614AB03F989F734C2D151BA5ADBF78 /* Build configuration list for PBXNativeTarget "Pods-GiftMoney" */;
-			buildPhases = (
-				9131B2CEA70680B656AACC8D93D93699 /* Headers */,
-				6527CD396DDF6A98136491F79E5937DC /* Sources */,
-				814D677FB83BFE81742483C4DC595C12 /* Frameworks */,
-				7F7C574F7AEA38FC099A1EF3D93B939B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-GiftMoney";
-			productName = "Pods-GiftMoney";
-			productReference = 90B1A1AE94164D0C46BD44D941C01682 /* Pods_GiftMoney.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7504A7D6DC8693F1F06D2CB890EC702E /* Pods-CommonTests */ = {
+		09016BCD176DB6C504EB051E6A8AEB9C /* Pods-CommonTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 569F8A64C627AF9EA59A641D8F40579D /* Build configuration list for PBXNativeTarget "Pods-CommonTests" */;
 			buildPhases = (
@@ -352,10 +650,68 @@
 			);
 			name = "Pods-CommonTests";
 			productName = "Pods-CommonTests";
-			productReference = AE7646DE6FCCC358BC0A3E202C761D42 /* Pods_CommonTests.framework */;
+			productReference = 561E1E3C1DD5020B80EE0A70EA28F114 /* Pods_CommonTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		88CE800CC52286B6B71BC4B693B0DE8F /* Pods-GiftMoneyTests */ = {
+		560CF91FE745BC9EF7277A6E463684A1 /* Pods-Common */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5254974CA0A8505E3B26CEA3AE6A19F7 /* Build configuration list for PBXNativeTarget "Pods-Common" */;
+			buildPhases = (
+				6A2BE5E2AD48E28F5B2B8B2FC867BD22 /* Headers */,
+				9480608885D82684B4F03BD4CFA7DB5D /* Sources */,
+				902B2C75DEF9B874EE43FC75D377E96A /* Frameworks */,
+				E0C2154DDF20910C70C8DC0FFA66E682 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Common";
+			productName = "Pods-Common";
+			productReference = 8B52F2AA4888CB33B19CE83667BF55B9 /* Pods_Common.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6523EDB7807C0436BC90158A47741ED5 /* libxlsxwriter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E47AD0787E0B52FE1BF552FE894100D5 /* Build configuration list for PBXNativeTarget "libxlsxwriter" */;
+			buildPhases = (
+				3A93C80E1C850E004A09CEC509D5EAAE /* Headers */,
+				6467340B7E2027C70AE7C926689A11D1 /* Sources */,
+				FF76E5A79B7CFE74A04BE3B62868B5AB /* Frameworks */,
+				68C7B54D0D9F9BA2C314D41EC1A5203D /* Resources */,
+				8C48F8F64B05A5B0EC63CB74D72BDEA9 /* Copy . Public Headers */,
+				276B8362F6A4ADCD0A0F73B88B0B277A /* Copy xlsxwriter Public Headers */,
+				885659B1353E9E8612CD4A77E06F70A5 /* Copy xlsxwriter/third_party Public Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libxlsxwriter;
+			productName = libxlsxwriter;
+			productReference = 845252EEF48DF7B15D3205D5BF4BA607 /* xlsxwriter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7C925064D01AF03B672F00963C04B3EE /* Pods-GiftMoney */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9E8CBCCA814FFDB5DEAF3BDB15D363D /* Build configuration list for PBXNativeTarget "Pods-GiftMoney" */;
+			buildPhases = (
+				5B5CEAF0C23476D6939D353EDF81A119 /* Headers */,
+				6D4DC2D92B3A2E5658F5C0F21D9932F9 /* Sources */,
+				625391DDA19649ED04214B6EE1FD1707 /* Frameworks */,
+				731C75A06E69ACFDB390D49FB5DE9A14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E321F6B71CA5264AD2F2490C9FA4B2DF /* PBXTargetDependency */,
+			);
+			name = "Pods-GiftMoney";
+			productName = "Pods-GiftMoney";
+			productReference = 85F5B9B6A900A5774BF287ABCE3BBE02 /* Pods_GiftMoney.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BC2949C9FD3B508CE331692D414B11D9 /* Pods-GiftMoneyTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 075A11CE354974577234DC0A7201C639 /* Build configuration list for PBXNativeTarget "Pods-GiftMoneyTests" */;
 			buildPhases = (
@@ -371,28 +727,10 @@
 			);
 			name = "Pods-GiftMoneyTests";
 			productName = "Pods-GiftMoneyTests";
-			productReference = 90AC15D1F8A59AB8D380E4F94BF6A3CD /* Pods_GiftMoneyTests.framework */;
+			productReference = A1AFC8152787446D4732824E00139CC9 /* Pods_GiftMoneyTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		DD7DFA994AEB239315477135259D90B6 /* Pods-Common */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5254974CA0A8505E3B26CEA3AE6A19F7 /* Build configuration list for PBXNativeTarget "Pods-Common" */;
-			buildPhases = (
-				6A2BE5E2AD48E28F5B2B8B2FC867BD22 /* Headers */,
-				9480608885D82684B4F03BD4CFA7DB5D /* Sources */,
-				902B2C75DEF9B874EE43FC75D377E96A /* Frameworks */,
-				E0C2154DDF20910C70C8DC0FFA66E682 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-Common";
-			productName = "Pods-Common";
-			productReference = 0F4D620C44EF1CE7342240BAC295F02A /* Pods_Common.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		F59181CE75631F66795DD2CA181F60E2 /* Pods-GiftMoneyUITests */ = {
+		E5BC7FA1FDABC1291E6D873FFB22C23E /* Pods-GiftMoneyUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5882C06A73F14D7A45352C05599822E0 /* Build configuration list for PBXNativeTarget "Pods-GiftMoneyUITests" */;
 			buildPhases = (
@@ -408,7 +746,7 @@
 			);
 			name = "Pods-GiftMoneyUITests";
 			productName = "Pods-GiftMoneyUITests";
-			productReference = 8B973C4B8528380C9591261325581E1D /* Pods_GiftMoneyUITests.framework */;
+			productReference = 41624B419F9BEA9D7F2F3B9A93CD89E9 /* Pods_GiftMoneyUITests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -428,28 +766,36 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 93FF60E1D974A69091886BA8FE3FE4E9 /* Products */;
+			productRefGroup = F5052127428E5107BC6EC01D3A26359C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DD7DFA994AEB239315477135259D90B6 /* Pods-Common */,
-				7504A7D6DC8693F1F06D2CB890EC702E /* Pods-CommonTests */,
-				490CFCA3DA2CB6EB09C943B9F18FE35B /* Pods-GiftMoney */,
-				88CE800CC52286B6B71BC4B693B0DE8F /* Pods-GiftMoneyTests */,
-				F59181CE75631F66795DD2CA181F60E2 /* Pods-GiftMoneyUITests */,
+				6523EDB7807C0436BC90158A47741ED5 /* libxlsxwriter */,
+				560CF91FE745BC9EF7277A6E463684A1 /* Pods-Common */,
+				09016BCD176DB6C504EB051E6A8AEB9C /* Pods-CommonTests */,
+				7C925064D01AF03B672F00963C04B3EE /* Pods-GiftMoney */,
+				BC2949C9FD3B508CE331692D414B11D9 /* Pods-GiftMoneyTests */,
+				E5BC7FA1FDABC1291E6D873FFB22C23E /* Pods-GiftMoneyUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7D6431B9137A1A510B684B5ABF6B722E /* Resources */ = {
+		68C7B54D0D9F9BA2C314D41EC1A5203D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7F7C574F7AEA38FC099A1EF3D93B939B /* Resources */ = {
+		731C75A06E69ACFDB390D49FB5DE9A14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D6431B9137A1A510B684B5ABF6B722E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -480,11 +826,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6527CD396DDF6A98136491F79E5937DC /* Sources */ = {
+		6467340B7E2027C70AE7C926689A11D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A967A4465705C81060882BFD486C633C /* Pods-GiftMoney-dummy.m in Sources */,
+				FA82E1B77A63E7EC4177DF9EF2136094 /* app.c in Sources */,
+				86ABBC89991387EAD55715F330246897 /* chart.c in Sources */,
+				2ADD3FB2D9B8004D4B242C909AEA005A /* chartsheet.c in Sources */,
+				6C6D127B15C5346AA99A8820003ECE08 /* content_types.c in Sources */,
+				CA412E828173D32FD11D2292C35E6645 /* core.c in Sources */,
+				16707318C2392C5E2409EA1CB8C72A3F /* custom.c in Sources */,
+				BCF83ADC879B4C0A23F45795B77955E6 /* drawing.c in Sources */,
+				AD8B327CF467C960F48FECB456CB0C25 /* format.c in Sources */,
+				A51AF77DC618B77FF0614EAD9B8439C4 /* hash_table.c in Sources */,
+				12EBFF07B41478D11549FC43FDE6E04E /* ioapi.c in Sources */,
+				655B8337275CE334C3C3DF3118C68624 /* libxlsxwriter-dummy.m in Sources */,
+				6AC5DED887338DAA7C10A6B965F73051 /* packager.c in Sources */,
+				A3E04A1F1F51D2C4F715A740FB66287F /* relationships.c in Sources */,
+				0FD5D341CDE66381DC74A615E16E71C4 /* shared_strings.c in Sources */,
+				79EF109FECA34E3191C8E6570C61E5A5 /* styles.c in Sources */,
+				EC7E3B4E58E0E85D8834088D90141800 /* theme.c in Sources */,
+				76A08F67CF540A0B7DF0035BBFBB278B /* tmpfileplus.c in Sources */,
+				5F6FA1C4EB57764FA612B72058B29F4F /* utility.c in Sources */,
+				46AA49BD9D823D932AAB4C30C226FBD7 /* workbook.c in Sources */,
+				BB0ED638DF00C183BF7CEF4AD10FA05D /* worksheet.c in Sources */,
+				EC929543D4B3254A3B1F059A40DB533A /* xmlwriter.c in Sources */,
+				1C79D3781D6794D26F87E41E22317E00 /* zip.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D4DC2D92B3A2E5658F5C0F21D9932F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90101D85096E3D69A4C2E36AC10C24FC /* Pods-GiftMoney-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,27 +901,33 @@
 		72A5F547848BF4DB468576D2765DB3B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Common";
-			target = DD7DFA994AEB239315477135259D90B6 /* Pods-Common */;
+			target = 560CF91FE745BC9EF7277A6E463684A1 /* Pods-Common */;
 			targetProxy = AA7DFF6827D7500B360F4F8E74EADF52 /* PBXContainerItemProxy */;
 		};
 		A5D0EAF0C1B9CA4C85491EBB78EFCA74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-GiftMoney";
-			target = 490CFCA3DA2CB6EB09C943B9F18FE35B /* Pods-GiftMoney */;
+			target = 7C925064D01AF03B672F00963C04B3EE /* Pods-GiftMoney */;
 			targetProxy = AF297B7CE8F470F39C871068154C145D /* PBXContainerItemProxy */;
 		};
 		B1DE0F2077D727B70AFCF8126D673F8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-GiftMoney";
-			target = 490CFCA3DA2CB6EB09C943B9F18FE35B /* Pods-GiftMoney */;
+			target = 7C925064D01AF03B672F00963C04B3EE /* Pods-GiftMoney */;
 			targetProxy = 87107F43FB60036CAA5DF1D0A74ED501 /* PBXContainerItemProxy */;
+		};
+		E321F6B71CA5264AD2F2490C9FA4B2DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libxlsxwriter;
+			target = 6523EDB7807C0436BC90158A47741ED5 /* libxlsxwriter */;
+			targetProxy = 26F7376FDFB4F00472D7EA8548FA8611 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5C768B7FDD21A1DD4D0C788E526986C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03ACE5D9DF41D239705096AE62B390B5 /* Pods-Common.release.xcconfig */;
+			baseConfigurationReference = 1F1AA4B6E6348E15AC3795773ACB450F /* Pods-Common.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -578,9 +959,9 @@
 			};
 			name = Release;
 		};
-		6AD345B7EAEAE942870AE28B9A8F5EF8 /* Debug */ = {
+		66BA6DC2E9E1F02BA66AEF7732415BFC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E2B5163D4D2696A66D11AEA227C4D66 /* Pods-GiftMoney.debug.xcconfig */;
+			baseConfigurationReference = E0CE6BD8A05B77C89993810346CF63D5 /* Pods-GiftMoney.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -607,14 +988,15 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		6C785FE19C29D5D447B6B97E4750D121 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35D977F8AC4B6A6806084FD7D382EA07 /* Pods-CommonTests.debug.xcconfig */;
+			baseConfigurationReference = 4A7D6CBF0B551EB3BFAFF89D3CB5ABCE /* Pods-CommonTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -647,7 +1029,7 @@
 		};
 		6FED38EC360C95049B1E579A60A02DA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF05BE566CA5A081EA1B601BB5CBE118 /* Pods-GiftMoneyUITests.release.xcconfig */;
+			baseConfigurationReference = E5D84D1745DAEF57D6080B5CE1AF30BA /* Pods-GiftMoneyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -682,7 +1064,7 @@
 		};
 		775A0C6A5EEB9B7A6A528CFB3883BE50 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D8D96A1F86FC63387206BB83F18BED0 /* Pods-GiftMoneyTests.release.xcconfig */;
+			baseConfigurationReference = AD2AA297677FF0B4B496D4AE8E6924DC /* Pods-GiftMoneyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -717,7 +1099,7 @@
 		};
 		872D65DB75195846D5E00A6A62E924AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C56007FBF577C60E1C4CF305B299D644 /* Pods-GiftMoneyTests.debug.xcconfig */;
+			baseConfigurationReference = 527BB5C7E9433A9CE68176E0D7288539 /* Pods-GiftMoneyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -748,6 +1130,39 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		8A411E5F8CD1FCCF5A8CF9DB2C9A955B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C7BC7B98CF2644C48488698E9DB3B6B /* libxlsxwriter.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/libxlsxwriter/libxlsxwriter-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/libxlsxwriter/libxlsxwriter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/libxlsxwriter/libxlsxwriter.modulemap";
+				PRODUCT_MODULE_NAME = xlsxwriter;
+				PRODUCT_NAME = xlsxwriter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -873,44 +1288,9 @@
 			};
 			name = Debug;
 		};
-		97403C8A51CC978839D5A846870F6BA7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70548A891E91C7A7DC17931BF6F05EC4 /* Pods-GiftMoney.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-GiftMoney/Pods-GiftMoney-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-GiftMoney/Pods-GiftMoney.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		AE8D6D31042FAEA3B6E3BE2AAD2618C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA7E22FE4236DA5404EA3709F9D06750 /* Pods-GiftMoneyUITests.debug.xcconfig */;
+			baseConfigurationReference = C621830B2A3F6940DB6C7044D985CED4 /* Pods-GiftMoneyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -942,9 +1322,41 @@
 			};
 			name = Debug;
 		};
+		B41457E7182C89110AEFC2A26C282A46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C7BC7B98CF2644C48488698E9DB3B6B /* libxlsxwriter.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/libxlsxwriter/libxlsxwriter-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/libxlsxwriter/libxlsxwriter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/libxlsxwriter/libxlsxwriter.modulemap";
+				PRODUCT_MODULE_NAME = xlsxwriter;
+				PRODUCT_NAME = xlsxwriter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		C4E4CFD1F138345ABF07AF916C00ADE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB892801B40C3EBFA2A007274559588E /* Pods-Common.debug.xcconfig */;
+			baseConfigurationReference = 31AC92231BA88309787A2AC15E8B17A9 /* Pods-Common.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -975,9 +1387,43 @@
 			};
 			name = Debug;
 		};
+		E185BDDF8015BC09A8FACB96C1A60A19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1088C2E98D201713F35066886125DB4A /* Pods-GiftMoney.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-GiftMoney/Pods-GiftMoney-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-GiftMoney/Pods-GiftMoney.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		F6F262CD8BD4747EFF7321447E0726A8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5D170C8242A2F445508839691CA0FB5 /* Pods-CommonTests.release.xcconfig */;
+			baseConfigurationReference = 085C312DC9883E4CD27791605E0B93EB /* Pods-CommonTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1057,11 +1503,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		99614AB03F989F734C2D151BA5ADBF78 /* Build configuration list for PBXNativeTarget "Pods-GiftMoney" */ = {
+		C9E8CBCCA814FFDB5DEAF3BDB15D363D /* Build configuration list for PBXNativeTarget "Pods-GiftMoney" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6AD345B7EAEAE942870AE28B9A8F5EF8 /* Debug */,
-				97403C8A51CC978839D5A846870F6BA7 /* Release */,
+				E185BDDF8015BC09A8FACB96C1A60A19 /* Debug */,
+				66BA6DC2E9E1F02BA66AEF7732415BFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E47AD0787E0B52FE1BF552FE894100D5 /* Build configuration list for PBXNativeTarget "libxlsxwriter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B41457E7182C89110AEFC2A26C282A46 /* Debug */,
+				8A411E5F8CD1FCCF5A8CF9DB2C9A955B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
