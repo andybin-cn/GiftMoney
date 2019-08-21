@@ -63,6 +63,8 @@
 		3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */; };
 		3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2F7230CDD2A000C1996 /* XLSXManager.swift */; };
 		38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */; };
+		38C84A18230D25BF00900E88 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C84A17230D25A800900E88 /* libiconv.tbd */; };
+		38C84A69230D2C7A00900E88 /* xlsReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C84A37230D28E000900E88 /* xlsReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -108,6 +110,20 @@
 			remoteGlobalIDString = 364F49891E6710E500208E9D;
 			remoteInfo = Common;
 		};
+		38C84A36230D28E000900E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38C84A32230D28E000900E88 /* xlsReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 38C84A23230D28A600900E88;
+			remoteInfo = xlsReader;
+		};
+		38C84A67230D2C7100900E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38C84A32230D28E000900E88 /* xlsReader.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 38C84A22230D28A600900E88;
+			remoteInfo = xlsReader;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -117,6 +133,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				38C84A69230D2C7A00900E88 /* xlsReader.framework in Embed Frameworks */,
 				369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -188,6 +205,9 @@
 		3870C2F7230CDD2A000C1996 /* XLSXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XLSXManager.swift; sourceTree = "<group>"; };
 		3870C2F9230CDEBB000C1996 /* GiftMoney-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GiftMoney-Bridging-Header.h"; sourceTree = "<group>"; };
 		38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempExcelPreviewVC.swift; sourceTree = "<group>"; };
+		38C84A16230D25A800900E88 /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
+		38C84A17230D25A800900E88 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		38C84A32230D28E000900E88 /* xlsReader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = xlsReader.xcodeproj; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -207,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38C84A18230D25BF00900E88 /* libiconv.tbd in Frameworks */,
 				CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */,
 				369DFF2522F7094F0005B67D /* Common.framework in Frameworks */,
 			);
@@ -393,6 +414,7 @@
 		369DFE3D22F708600005B67D /* Depends */ = {
 			isa = PBXGroup;
 			children = (
+				38C84A2E230D28E000900E88 /* xlsReader */,
 				369DFE3E22F708600005B67D /* Common */,
 			);
 			path = Depends;
@@ -437,6 +459,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		38C84A2E230D28E000900E88 /* xlsReader */ = {
+			isa = PBXGroup;
+			children = (
+				38C84A32230D28E000900E88 /* xlsReader.xcodeproj */,
+			);
+			path = xlsReader;
+			sourceTree = "<group>";
+		};
+		38C84A33230D28E000900E88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38C84A37230D28E000900E88 /* xlsReader.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		38EF4A7022F7C9A6007BB28A /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +512,8 @@
 		E63782FD40E14AE5A4748D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38C84A16230D25A800900E88 /* libiconv.2.tbd */,
+				38C84A17230D25A800900E88 /* libiconv.tbd */,
 				7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */,
 				0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */,
 				F2A6EF788216A996B40FFA38 /* Pods_GiftMoneyUITests.framework */,
@@ -499,6 +539,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				38C84A68230D2C7100900E88 /* PBXTargetDependency */,
 				369DFF2422F7093E0005B67D /* PBXTargetDependency */,
 			);
 			name = GiftMoney;
@@ -584,6 +625,10 @@
 					ProductGroup = 369DFE4022F708600005B67D /* Products */;
 					ProjectRef = 369DFE3F22F708600005B67D /* Common.xcodeproj */;
 				},
+				{
+					ProductGroup = 38C84A33230D28E000900E88 /* Products */;
+					ProjectRef = 38C84A32230D28E000900E88 /* xlsReader.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -607,6 +652,13 @@
 			fileType = wrapper.cfbundle;
 			path = CommonTests.xctest;
 			remoteRef = 369DFEBB22F708600005B67D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		38C84A37230D28E000900E88 /* xlsReader.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = xlsReader.framework;
+			remoteRef = 38C84A36230D28E000900E88 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -854,6 +906,11 @@
 			isa = PBXTargetDependency;
 			name = Common;
 			targetProxy = 369DFF2322F7093E0005B67D /* PBXContainerItemProxy */;
+		};
+		38C84A68230D2C7100900E88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = xlsReader;
+			targetProxy = 38C84A67230D2C7100900E88 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
