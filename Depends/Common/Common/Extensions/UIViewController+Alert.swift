@@ -18,4 +18,14 @@ extension UIViewController {
         }
         self.present(alertView, animated: true, completion: nil)
     }
+    
+    public func showActionSheetView(title: String?, message: String? = nil, actions: [UIAlertAction] ) {
+        self.hiddenLoadingIndicator()
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.actionSheet)
+        for action in actions {
+            alertView.addAction(action)
+        }
+        alertView.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alertView, animated: true, completion: nil)
+    }
 }

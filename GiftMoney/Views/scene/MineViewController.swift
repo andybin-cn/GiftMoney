@@ -13,7 +13,7 @@ import MessageUI
 import Social
 import Common
 
-class MineViewController: BaseViewController, MFMailComposeViewControllerDelegate {
+class MineViewController: BaseViewController, MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate {
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
@@ -91,11 +91,19 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     
     func addEvents() {
         importiAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            self.exportXLSX()
+            
 //            if MaketManager.shared.currentLevel == .free {
 //                let controller = MarketVC()
 //                MainTabViewController.shared.present(controller, animated: true, completion: nil)
 //            }
+            self.showActionSheetView(title: "选择", actions: [
+                UIAlertAction(title: "导出Excel数据", style: .default, handler: { (_) in
+                    self.exportXLSX()
+                }),
+                UIAlertAction(title: "从Excel导入数据", style: .default, handler: { (_) in
+                    self.importDdataFromExcel()
+                })
+            ])
         }).disposed(by: disposeBag)
         
         faceID.switcher.rx.isOn.asObservable().subscribe(onNext: { [unowned self] (isOn) in
@@ -147,4 +155,38 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             self.showTipsView(text: error.localizedDescription)
         }).disposed(by: disposeBag)
     }
+    
+    func importDdataFromExcel() {
+//        let documentTypes = ["public.content",
+//                            "public.text",
+//                            "public.source-code",
+//                            "public.image",
+//                            "public.audiovisual-content",
+//                            "com.adobe.pdf",
+//                            "com.apple.keynote.key",
+//                            "com.microsoft.word.doc",
+//                            "com.microsoft.excel.xls",
+//                            "com.microsoft.powerpoint.ppt"
+//        ]
+        let controller = UIDocumentPickerViewController(documentTypes: ["com.microsoft.excel.xls"], in: UIDocumentPickerMode.open)
+        controller.delegate = self
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    //MARK: - UIDocumentPickerDelegate
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let url = urls.first else {
+            return
+        }
+        self.showLoadingIndicator()
+        XLSXManager.shared.importFromXLSX(url: url).subscribe(onNext: { (count) in
+            self.showAlertView(title: "一共导入了\(count)条数据")
+        }, onError: { (error) in
+            self.showTipsView(text: error.localizedDescription)
+        }).disposed(by: disposeBag)
+    }
+
 }

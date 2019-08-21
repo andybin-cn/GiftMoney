@@ -78,7 +78,64 @@ class XLSXManager {
         }
     }
     
-    func importFromXLSX(url: URL) {
-        
+    func importFromXLSX(url: URL) -> Observable<Int> {
+        return Observable<Int>.create { (observable) -> Disposable in
+            DispatchQueue.global().async {
+                let spreadsheet = BRAOfficeDocumentPackage.open(url.path)
+                guard let firstWorksheet = spreadsheet?.workbook.worksheets?.first as? BRAWorksheet else {
+                    DispatchQueue.main.async {
+                        observable.onError(CommonError(message: "导入失败"))
+                    }
+                    return
+                }
+                var trades = [Trade]()
+                var index = 1
+                while let cell = firstWorksheet.cell(forCellReference: "A\(index)"), !cell.hasError, let firstValue = cell.stringValue(), !firstValue.isEmpty {
+                    let trade = Trade()
+                    trade.id = firstWorksheet.cell(forCellReference: "A\(index)")?.stringValue() ?? ""
+                    trade.name = firstWorksheet.cell(forCellReference: "B\(index)")?.stringValue() ?? ""
+                    trade.relationship = firstWorksheet.cell(forCellReference: "C\(index)")?.stringValue() ?? ""
+                    trade.eventName = firstWorksheet.cell(forCellReference: "D\(index)")?.stringValue() ?? ""
+                    let eventTime = firstWorksheet.cell(forCellReference: "E\(index)")?.stringValue()?.toDate(withFormat: "yyyy-MM-dd")
+                    trade.remark = firstWorksheet.cell(forCellReference: "F\(index)")?.stringValue() ?? ""
+                    let typeString = firstWorksheet.cell(forCellReference: "G\(index)")?.stringValue() ?? ""
+                    let createTime = firstWorksheet.cell(forCellReference: "H\(index)")?.stringValue()?.toDate(withFormat: "yyyy-MM-dd")
+                    let updateTime = firstWorksheet.cell(forCellReference: "I\(index)")?.stringValue()?.toDate(withFormat: "yyyy-MM-dd")
+                    let tradeItemsString = firstWorksheet.cell(forCellReference: "J\(index)")?.stringValue() ?? ""
+                    let tradeMediasString = firstWorksheet.cell(forCellReference: "K\(index)")?.stringValue() ?? ""
+                    index += 1
+                    guard let eventTime1 = eventTime, let createTime1 = createTime, let updateTime1 = updateTime else {
+                        continue
+                    }
+                    guard let type = Trade.TradeType(rawValue: typeString) else {
+                        continue
+                    }
+                    let tradeItems = [TradeItem].init(JSONString: tradeItemsString) ?? [TradeItem]()
+                    let tradeMedias = [TradeMedia].init(JSONString: tradeMediasString) ?? [TradeMedia]()
+                    
+                    trade.type = type
+                    trade.eventTime = eventTime1
+                    trade.createTime = createTime1
+                    trade.updateTime = updateTime1
+                    trade.tradeItems.append(objectsIn: tradeItems)
+                    trade.tradeMedias.append(objectsIn: tradeMedias)
+                    
+                    do {
+                        RealmManager.share.realm.beginWrite()
+                        RealmManager.share.realm.add(trade)
+                        try RealmManager.share.realm.commitWrite()
+                        trades.append(trade)
+                    } catch _ {
+                        
+                    }
+                }
+                let count = trades.count
+                DispatchQueue.main.async {
+                    observable.onNext(count)
+                    observable.onCompleted()
+                }
+            }
+            return Disposables.create {  }
+        }
     }
 }
