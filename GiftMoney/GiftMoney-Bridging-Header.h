@@ -3,3 +3,4 @@
 //
 
 #import "xlsxwriter.h"
+#import "XlsxReaderWriter-swift-bridge.h"

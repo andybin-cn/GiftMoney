@@ -41,6 +41,8 @@
 		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
 		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
+		384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */; };
+		384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA21230D3643006F0E3E /* libz.tbd */; };
 		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
 		386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865832302A1F9000BBD85 /* AllTradesVC.swift */; };
 		386865872302A3B9000BBD85 /* AllTradeTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386865862302A3B9000BBD85 /* AllTradeTabbar.swift */; };
@@ -108,6 +110,27 @@
 			remoteGlobalIDString = 364F49891E6710E500208E9D;
 			remoteInfo = Common;
 		};
+		384CCA18230D35DD006F0E3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45B6E23A1A148F7500288A78;
+			remoteInfo = XlsxReaderWriter;
+		};
+		384CCA1C230D35DD006F0E3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22156D581C46B42500BB5779;
+			remoteInfo = "XlsxReaderWriter Mac";
+		};
+		384CCA1E230D362B006F0E3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B6E2391A148F7500288A78;
+			remoteInfo = XlsxReaderWriter;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -165,6 +188,8 @@
 		3818556A22FBC57700024542 /* TradeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMedia.swift; sourceTree = "<group>"; };
 		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = XlsxReaderWriter.xcodeproj; sourceTree = "<group>"; };
+		384CCA21230D3643006F0E3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
 		386865832302A1F9000BBD85 /* AllTradesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradesVC.swift; sourceTree = "<group>"; };
 		386865862302A3B9000BBD85 /* AllTradeTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTradeTabbar.swift; sourceTree = "<group>"; };
@@ -207,6 +232,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */,
+				384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */,
 				CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */,
 				369DFF2522F7094F0005B67D /* Common.framework in Frameworks */,
 			);
@@ -393,6 +420,7 @@
 		369DFE3D22F708600005B67D /* Depends */ = {
 			isa = PBXGroup;
 			children = (
+				384CCA0F230D35B4006F0E3E /* XlsxReaderWriter */,
 				369DFE3E22F708600005B67D /* Common */,
 			);
 			path = Depends;
@@ -424,6 +452,23 @@
 				3870C2F7230CDD2A000C1996 /* XLSXManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		384CCA0F230D35B4006F0E3E /* XlsxReaderWriter */ = {
+			isa = PBXGroup;
+			children = (
+				384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */,
+			);
+			path = XlsxReaderWriter;
+			sourceTree = "<group>";
+		};
+		384CCA12230D35DD006F0E3E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */,
+				384CCA1D230D35DD006F0E3E /* XlsxReaderWriter.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3870C2CE230A8766000C1996 /* Extensions */ = {
@@ -474,6 +519,7 @@
 		E63782FD40E14AE5A4748D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				384CCA21230D3643006F0E3E /* libz.tbd */,
 				7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */,
 				0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */,
 				F2A6EF788216A996B40FFA38 /* Pods_GiftMoneyUITests.framework */,
@@ -499,6 +545,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				384CCA1F230D362B006F0E3E /* PBXTargetDependency */,
 				369DFF2422F7093E0005B67D /* PBXTargetDependency */,
 			);
 			name = GiftMoney;
@@ -584,6 +631,10 @@
 					ProductGroup = 369DFE4022F708600005B67D /* Products */;
 					ProjectRef = 369DFE3F22F708600005B67D /* Common.xcodeproj */;
 				},
+				{
+					ProductGroup = 384CCA12230D35DD006F0E3E /* Products */;
+					ProjectRef = 384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -607,6 +658,20 @@
 			fileType = wrapper.cfbundle;
 			path = CommonTests.xctest;
 			remoteRef = 369DFEBB22F708600005B67D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libXlsxReaderWriter.a;
+			remoteRef = 384CCA18230D35DD006F0E3E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		384CCA1D230D35DD006F0E3E /* XlsxReaderWriter.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XlsxReaderWriter.framework;
+			remoteRef = 384CCA1C230D35DD006F0E3E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -855,6 +920,11 @@
 			name = Common;
 			targetProxy = 369DFF2322F7093E0005B67D /* PBXContainerItemProxy */;
 		};
+		384CCA1F230D362B006F0E3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XlsxReaderWriter;
+			targetProxy = 384CCA1E230D362B006F0E3E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -994,11 +1064,24 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/libxlsxwriter/xlsxwriter.framework/Headers\"",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/XlsxReaderWriter",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/ThirdParties/**",
+				);
 				INFOPLIST_FILE = GiftMoney/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"xlsxwriter\"",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1019,11 +1102,24 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/libxlsxwriter/xlsxwriter.framework/Headers\"",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/XlsxReaderWriter",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/ThirdParties/**",
+				);
 				INFOPLIST_FILE = GiftMoney/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"xlsxwriter\"",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
