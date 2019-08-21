@@ -78,5 +78,7 @@ class XLSXManager {
         }
     }
     
-    
+    func importFromXLSX(url: URL) {
+        
+    }
 }

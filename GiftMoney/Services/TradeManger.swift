@@ -70,19 +70,35 @@ class TradeManger {
         }
     }
     func deleteTrade(trade: Trade) -> Completable {
-        do {
-            for tradeMedia in trade.tradeMedias {
-                try FileManager.default.removeItem(at: tradeMedia.url)
+        let tradeID = trade.id
+        return Observable<Any>.create { (observable) -> Disposable in
+            DispatchQueue.global().async {
+                do {
+                    guard let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) else {
+                        DispatchQueue.main.async {
+                            observable.onCompleted()
+                        }
+                        return
+                    }
+                    for tradeMedia in trade.tradeMedias {
+                        try? FileManager.default.removeItem(at: tradeMedia.url)
+                    }
+                    RealmManager.share.realm.beginWrite()
+                    RealmManager.share.realm.delete(trade.tradeMedias)
+                    RealmManager.share.realm.delete(trade.tradeItems)
+                    RealmManager.share.realm.delete(trade)
+                    try RealmManager.share.realm.commitWrite()
+                    DispatchQueue.main.async {
+                        observable.onCompleted()
+                    }
+                } catch let error {
+                    DispatchQueue.main.async {
+                        observable.onError(error)
+                    }
+                }
             }
-            RealmManager.share.realm.beginWrite()
-            RealmManager.share.realm.delete(trade)
-            RealmManager.share.realm.delete(trade.tradeMedias)
-            RealmManager.share.realm.delete(trade.tradeItems)
-            try RealmManager.share.realm.commitWrite()
-            return Completable.empty()
-        } catch let error {
-            return Completable.error(error)
-        }
+            return Disposables.create { }
+        }.ignoreElements()
     }
     
     func saveTradeMedias(trade: Trade?, newMedias: [TradeMedia]) -> Observable<Trade> {
