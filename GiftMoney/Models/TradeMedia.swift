@@ -57,7 +57,11 @@ class TradeMedia: Object, Mappable, QLPreviewItem {
     }
     
     func mapping(map: Map) {
-        id <- map["id"]
+        if map.mappingType == .fromJSON {
+            id <- map["id"]
+        } else {
+            id >>> map["id"]
+        }
         tradeID <- map["tradeID"]
         typeString <- map["type"]
 //        path <- map["path"]

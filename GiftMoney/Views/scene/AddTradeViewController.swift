@@ -293,7 +293,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         }
         previewController?.showLoadingIndicator()
         TradeManger.shared.deleteTradeMedia(trade: trade, tradeMedia: media).subscribe(onError: { [unowned self] (error) in
-            self.previewController?.hiddenLoadingIndicator()
+            SLog.error(error.localizedDescription)
+            self.previewController?.showTipsView(text: "删除失败")
         }, onCompleted: { [unowned self] in
             self.previewController?.hiddenLoadingIndicator()
             self.medias = trade.tradeMedias.map { $0 }

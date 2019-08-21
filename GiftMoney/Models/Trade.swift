@@ -75,7 +75,11 @@ class Trade: Object, Mappable {
     }
     
     func mapping(map: Map) {
-        id <- map["id"]
+        if map.mappingType == .fromJSON {
+            id <- map["id"]
+        } else {
+            id >>> map["id"]
+        }
         name <- map["name"]
         relationship <- map["relationship"]
         remark <- map["remark"]

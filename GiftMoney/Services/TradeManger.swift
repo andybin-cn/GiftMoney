@@ -52,7 +52,7 @@ class TradeManger {
     func deleteTradeMedia(trade: Trade, tradeMedia: TradeMedia) -> Observable<Trade> {
         return Observable<Trade>.create { (observable) -> Disposable in
             do {
-                try FileManager.default.removeItem(at: tradeMedia.url)
+                try? FileManager.default.removeItem(at: tradeMedia.url)
                 
                 RealmManager.share.realm.beginWrite()
                 if let index = trade.tradeMedias.index(of: tradeMedia) {

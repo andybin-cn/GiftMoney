@@ -52,8 +52,12 @@ class XLSXManager {
     }
     
     func save(trade: Trade, to worksheet: UnsafeMutablePointer<lxw_worksheet>?, index: Int) {
-//        let tradeItems: [TradeItem] = trade.tradeItems.map{ $0 }
-//        let tradeMedias: [TradeMedia] = trade.tradeMedias.map{ $0 }
+        let tradeItems: [TradeItem] = trade.tradeItems.map { $0 }
+        let tradeMedias: [TradeMedia] = trade.tradeMedias.map{ $0 }
+        RealmManager.share.realm.beginWrite()
+        let tradeItemsValue: String = tradeItems.toJSONString(prettyPrint: false) ?? ""
+        let tradeMediasValue: String = tradeMedias.toJSONString(prettyPrint: false) ?? ""
+        RealmManager.share.realm.cancelWrite()
         
         let values: [String] = [
             trade.id,
@@ -65,8 +69,8 @@ class XLSXManager {
             trade.type?.rawValue ?? "",
             trade.createTime.toString(withFormat: "yyyy-MM-dd"),
             trade.updateTime.toString(withFormat: "yyyy-MM-dd"),
-//            tradeItems.toJSONString(prettyPrint: false) ?? "",
-//            tradeMedias.toJSONString(prettyPrint: false) ?? ""
+            tradeItemsValue,
+            tradeMediasValue
         ]
         
         values.enumerated().forEach { (col, item) in
