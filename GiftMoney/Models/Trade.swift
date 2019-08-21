@@ -23,6 +23,7 @@ class Trade: Object, Mappable {
     @objc dynamic var eventName: String = ""
     @objc dynamic var eventTime: Date = Date()
     @objc dynamic var updateTime: Date = Date()
+    @objc dynamic var createTime: Date = Date()
     @objc dynamic private var typeString: String = ""
     
     private var _tradeItems: Array<TradeItem> = Array<TradeItem>() {

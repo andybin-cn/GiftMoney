@@ -26,6 +26,7 @@
 		36E6F0111E7AB30A0046327F /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6F00E1E7AB30A0046327F /* UIViewController+Alert.swift */; };
 		36E6F0121E7AB30A0046327F /* UIViewController+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6F00F1E7AB30A0046327F /* UIViewController+HUD.swift */; };
 		36E76FB61E800E080025F73C /* Prototyping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E76FB51E800E080025F73C /* Prototyping.swift */; };
+		3870C300230CECB3000C1996 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2FF230CECB3000C1996 /* CommonError.swift */; };
 		3A3D5476DDF12B78F12F4786 /* Pods_Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07945F3384AC87493E1AC6B /* Pods_Common.framework */; };
 		B32F84601E6ACE4800CDF465 /* String+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32F84591E6ACE4800CDF465 /* String+Extentions.swift */; };
 		B32F84611E6ACE4800CDF465 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32F845A1E6ACE4800CDF465 /* UIColor+Extensions.swift */; };
@@ -92,6 +93,7 @@
 		36E6F00E1E7AB30A0046327F /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		36E6F00F1E7AB30A0046327F /* UIViewController+HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+HUD.swift"; sourceTree = "<group>"; };
 		36E76FB51E800E080025F73C /* Prototyping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prototyping.swift; sourceTree = "<group>"; };
+		3870C2FF230CECB3000C1996 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		8B9F1A09284CFC95C3798ABF /* Pods-Common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Common.release.xcconfig"; path = "Target Support Files/Pods-Common/Pods-Common.release.xcconfig"; sourceTree = "<group>"; };
 		A07945F3384AC87493E1AC6B /* Pods_Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32F84591E6ACE4800CDF465 /* String+Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extentions.swift"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		364F498C1E6710E500208E9D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3870C2FE230CEC9E000C1996 /* model */,
 				B32F84581E6ACE4800CDF465 /* Extensions */,
 				B32F845C1E6ACE4800CDF465 /* Utils */,
 				364F498D1E6710E500208E9D /* Common.h */,
@@ -173,6 +176,14 @@
 				CE0C231D2A7AEC7457F1A10E /* Pods_CommonTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3870C2FE230CEC9E000C1996 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				3870C2FF230CECB3000C1996 /* CommonError.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		807335352B9148E4E2FFAE10 /* Pods */ = {
@@ -408,6 +419,7 @@
 				36E76FB61E800E080025F73C /* Prototyping.swift in Sources */,
 				B32F84631E6ACE4800CDF465 /* Procedural.swift in Sources */,
 				B32F84641E6ACE4800CDF465 /* PropertySetterSupport.swift in Sources */,
+				3870C300230CECB3000C1996 /* CommonError.swift in Sources */,
 				360914E31E79895E00121052 /* CGSize+Extensions.swift in Sources */,
 				B32F84651E6ACE4800CDF465 /* Then.swift in Sources */,
 			);

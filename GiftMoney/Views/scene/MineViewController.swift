@@ -11,6 +11,7 @@ import SnapKit
 import RxCocoa
 import MessageUI
 import Social
+import Common
 
 class MineViewController: BaseViewController, MFMailComposeViewControllerDelegate {
     
@@ -89,11 +90,12 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     }
     
     func addEvents() {
-        importiAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { (_) in
-            if MaketManager.shared.currentLevel == .free {
-                let controller = MarketVC()
-                MainTabViewController.shared.present(controller, animated: true, completion: nil)
-            }
+        importiAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            self.exportXLSX()
+//            if MaketManager.shared.currentLevel == .free {
+//                let controller = MarketVC()
+//                MainTabViewController.shared.present(controller, animated: true, completion: nil)
+//            }
         }).disposed(by: disposeBag)
         
         faceID.switcher.rx.isOn.asObservable().subscribe(onNext: { [unowned self] (isOn) in
@@ -133,5 +135,16 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     //MARK: - MFMailComposeViewControllerDelegate
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func exportXLSX() {
+        self.showLoadingIndicator()
+        let url = NSTemporaryDirectory() + "\(NSUUID().uuidString).xlsx"
+        XLSXManager.shared.exportXLSX(fileUrl: URL(fileURLWithPath: url)).subscribe(onNext: { (url) in
+            self.hiddenLoadingIndicator()
+            SLog.info("exportXSLX success:\(url)")
+        }, onError: { (error) in
+            self.showTipsView(text: error.localizedDescription)
+        }).disposed(by: disposeBag)
     }
 }

@@ -61,6 +61,7 @@
 		3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */; };
 		3870C2EB230BD117000C1996 /* LocalAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EA230BD117000C1996 /* LocalAuthManager.swift */; };
 		3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */; };
+		3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2F7230CDD2A000C1996 /* XLSXManager.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
@@ -183,6 +184,8 @@
 		3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketServiceGroup.swift; sourceTree = "<group>"; };
 		3870C2EA230BD117000C1996 /* LocalAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthManager.swift; sourceTree = "<group>"; };
 		3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthVC.swift; sourceTree = "<group>"; };
+		3870C2F7230CDD2A000C1996 /* XLSXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XLSXManager.swift; sourceTree = "<group>"; };
+		3870C2F9230CDEBB000C1996 /* GiftMoney-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GiftMoney-Bridging-Header.h"; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 				3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */,
 				3649C76922F67FBD009AF83F /* Info.plist */,
 				3870C2DB230A88E2000C1996 /* Main.storyboard */,
+				3870C2F9230CDEBB000C1996 /* GiftMoney-Bridging-Header.h */,
 			);
 			path = GiftMoney;
 			sourceTree = "<group>";
@@ -414,6 +418,7 @@
 				38236C66230105F000B67B8D /* TradeManger.swift */,
 				3870C2E6230B8CD5000C1996 /* MaketManager.swift */,
 				3870C2EA230BD117000C1996 /* LocalAuthManager.swift */,
+				3870C2F7230CDD2A000C1996 /* XLSXManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				TargetAttributes = {
 					3649C75422F67FB9009AF83F = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 					3649C76D22F67FBD009AF83F = {
 						CreatedOnToolsVersion = 11.0;
@@ -758,6 +764,7 @@
 			files = (
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
+				3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */,
 				3870C2DA230A8766000C1996 /* UILabel+Extensions.swift in Sources */,
 				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
@@ -979,6 +986,7 @@
 			baseConfigurationReference = B12DA1992B17A1CABDA11D8E /* Pods-GiftMoney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
@@ -991,6 +999,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1001,6 +1011,7 @@
 			baseConfigurationReference = FE4753A816F5D3C0997C58EC /* Pods-GiftMoney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
@@ -1013,6 +1024,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
