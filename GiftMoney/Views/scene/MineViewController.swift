@@ -94,10 +94,10 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     
     func addEvents() {
         excelImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-//            if MaketManager.shared.currentLevel == .free {
-//                let controller = MarketVC()
-//                MainTabViewController.shared.present(controller, animated: true, completion: nil)
-//            } else {
+            if MaketManager.shared.currentLevel == .free {
+                let controller = MarketVC()
+                MainTabViewController.shared.present(controller, animated: true, completion: nil)
+            } else {
                 self.showActionSheetView(title: "选择", actions: [
                     UIAlertAction(title: "导出Excel数据", style: .default, handler: { (_) in
                         self.exportXLSX()
@@ -106,23 +106,23 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                         self.importDataFromExcel()
                     })
                 ])
-//            }
+            }
         }).disposed(by: disposeBag)
         
         imageImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            
-            //            if MaketManager.shared.currentLevel == .free {
-            //                let controller = MarketVC()
-            //                MainTabViewController.shared.present(controller, animated: true, completion: nil)
-            //            }
-            self.showActionSheetView(title: "选择", actions: [
-                UIAlertAction(title: "导出图片和视频(.zip文件)", style: .default, handler: { (_) in
-                    self.exportImages()
-                }),
-                UIAlertAction(title: "导入图片和视频(.zip文件)", style: .default, handler: { (_) in
-                    self.importImagesFromZip()
-                })
+            if MaketManager.shared.currentLevel == .free {
+                let controller = MarketVC()
+                MainTabViewController.shared.present(controller, animated: true, completion: nil)
+            } else {
+                self.showActionSheetView(title: "选择", actions: [
+                    UIAlertAction(title: "导出图片和视频(.zip文件)", style: .default, handler: { (_) in
+                        self.exportImages()
+                    }),
+                    UIAlertAction(title: "导入图片和视频(.zip文件)", style: .default, handler: { (_) in
+                        self.importImagesFromZip()
+                    })
                 ])
+            }
         }).disposed(by: disposeBag)
         
         faceID.switcher.rx.isOn.asObservable().subscribe(onNext: { [unowned self] (isOn) in
