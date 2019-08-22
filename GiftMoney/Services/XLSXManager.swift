@@ -18,15 +18,20 @@ class XLSXManager {
     }
     
     func exportXLSX() -> Observable<URL> {
+        let workPath = "\(NSTemporaryDirectory())excelExport"
         let fileName = "礼尚往来-Excel-\(Date().toString(withFormat: "MM月dd日HH-mm")).xlsx"
-        let fileUrl = URL(fileURLWithPath: NSTemporaryDirectory() + "\(fileName)")
+        let fileUrl = URL(fileURLWithPath: "\(workPath)/\(fileName)")
         return Observable<URL>.create { (observable) -> Disposable in
             var inCancel = false
             DispatchQueue.global().async {
                 do {
-                    if FileManager.default.fileExists(atPath: fileUrl.path) {
-                        try FileManager.default.removeItem(at: fileUrl)
+                    if FileManager.default.fileExists(atPath: workPath) {
+                        let contentsOfPath = try FileManager.default.contentsOfDirectory(atPath: workPath)
+                        try contentsOfPath.forEach { (content) in
+                            try FileManager.default.removeItem(atPath: "\(workPath)/\(content)")
+                        }
                     }
+                    try FileManager.default.createDirectory(atPath: workPath, withIntermediateDirectories: true, attributes: nil)
                 } catch _ { }
                 
                 let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''"))
@@ -91,10 +96,18 @@ class XLSXManager {
     
     func importFromXLSX(url: URL) -> Observable<Int> {
         return Observable<Int>.create { (observable) -> Disposable in
-            let tempUrlPath = "\(NSTemporaryDirectory())\(UUID().uuidString).\(url.pathExtension)"
+            let workPath = "\(NSTemporaryDirectory())excelImport"
+            let tempUrlPath = "\(workPath)/\(UUID().uuidString).\(url.pathExtension)"
             let tempUrl = URL(fileURLWithPath: tempUrlPath)
             DispatchQueue.global().async {
                 do {
+                    if FileManager.default.fileExists(atPath: workPath) {
+                        let contentsOfPath = try FileManager.default.contentsOfDirectory(atPath: workPath)
+                        try contentsOfPath.forEach { (content) in
+                            try FileManager.default.removeItem(atPath: "\(workPath)/\(content)")
+                        }
+                    }
+                    try FileManager.default.createDirectory(atPath: workPath, withIntermediateDirectories: true, attributes: nil)
                     try FileManager.default.copyItem(at: url, to: tempUrl)
                 } catch let error {
                     DispatchQueue.main.async {
