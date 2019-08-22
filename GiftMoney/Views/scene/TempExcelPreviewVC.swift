@@ -51,6 +51,6 @@ class TempExcelPreviewVC: QLPreviewController, QLPreviewControllerDataSource, QL
         url
     }
     var previewItemTitle: String? {
-        return "Excel预览"
+        return "导出预览"
     }
 }

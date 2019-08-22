@@ -23,12 +23,8 @@ class TradeMedia: Object, Mappable, QLPreviewItem {
     @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var tradeID: String = ""
     @objc dynamic private var typeString: String = ""
-    var path: String {
-        let suffix = type == .image ? ".png" : ".mp4"
-        return "\(NSHomeDirectory())/Documents/\(id)\(suffix)"
-    }
     var url: URL {
-        var url = URL(fileURLWithPath: "\(NSHomeDirectory())/Documents")
+        var url = URL(fileURLWithPath: "\(NSHomeDirectory())/Documents/Medias")
         let suffix = type == .image ? "png" : "mp4"
         url.appendPathComponent(id)
         url.appendPathExtension(suffix)
@@ -93,14 +89,13 @@ class TradeMedia: Object, Mappable, QLPreviewItem {
             let destURL = self.url
             if let originURL = self.originURL {
                 DispatchQueue.global().async {
-                    do {
-                        try FileManager.default.copyItem(at: originURL, to: destURL)
+                    if ImagesManager.shared.saveMedia(at: originURL, to: destURL) {
                         DispatchQueue.main.sync {
                             observable.onCompleted()
                         }
-                    } catch let error {
+                    } else {
                         DispatchQueue.main.sync {
-                            observable.onError(error)
+                            observable.onError(CommonError(message: "图片资源保存失败"))
                         }
                     }
                 }

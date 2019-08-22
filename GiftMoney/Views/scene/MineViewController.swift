@@ -14,12 +14,14 @@ import Social
 import Common
 
 class MineViewController: BaseViewController, MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate {
+    let documentTypes = ["public.item", "public.content", "public.composite-content", "public.message", "public.contact", "public.archive", "public.disk-image", "public.data", "public.directory", "com.apple.resolvable", "public.symlink", "public.executable", "com.apple.mount-point", "com.apple.alias-file", "com.apple.alias-record", "com.apple.bookmark", "public.url", "public.file-url", "public.text", "public.plain-text", "public.utf8-plain-text", "public.utf16-external-plain-text", "public.utf16-plain-text", "public.delimited-values-text", "public.comma-separated-values-text", "public.tab-separated-values-text", "public.utf8-tab-separated-values-text", "public.rtf", "public.html", "public.xml", "public.source-code", "public.assembly-source", "public.c-source", "public.objective-c-source", "public.swift-source", "public.c-plus-plus-source", "public.objective-c-plus-plus-source", "public.c-header", "public.c-plus-plus-header", "com.sun.java-source", "public.script", "com.apple.applescript.text", "com.apple.applescript.script", "com.apple.applescript.script-bundle", "com.netscape.javascript-source", "public.shell-script", "public.perl-script", "public.python-script", "public.ruby-script", "public.php-script", "public.json", "com.apple.property-list", "com.apple.xml-property-list", "com.apple.binary-property-list", "com.adobe.pdf", "com.apple.rtfd", "com.apple.flat-rtfd", "com.apple.txn.text-multimedia-data", "com.apple.webarchive", "public.image", "public.jpeg", "public.jpeg-2000", "public.tiff", "com.apple.pict", "com.compuserve.gif", "public.png", "com.apple.quicktime-image", "com.apple.icns", "com.microsoft.bmp", "com.microsoft.ico", "public.camera-raw-image", "public.svg-image", "com.apple.live-photo", "public.audiovisual-content", "public.movie", "public.video", "public.audio", "com.apple.quicktime-movie", "public.mpeg", "public.mpeg-2-video", "public.mpeg-2-transport-stream", "public.mp3", "public.mpeg-4", "public.mpeg-4-audio", "com.apple.protected-mpeg-4-audio", "com.apple.protected-mpeg-4-video", "public.avi", "public.aiff-audio", "com.microsoft.waveform-audio", "public.midi-audio", "public.playlist", "public.m3u-playlist", "public.folder", "public.volume", "com.apple.package", "com.apple.bundle", "com.apple.plugin", "com.apple.metadata-importer", "com.apple.quicklook-generator", "com.apple.xpc-service", "com.apple.framework", "com.apple.application", "com.apple.application-bundle", "com.apple.application-file", "public.unix-executable", "com.microsoft.windows-executable", "com.sun.java-class", "com.sun.java-archive", "com.apple.systempreference.prefpane", "org.gnu.gnu-zip-archive", "public.bzip2-archive", "public.zip-archive", "public.spreadsheet", "public.presentation", "public.database", "public.vcard", "public.to-do-item", "public.calendar-event", "public.email-message", "com.apple.internet-location", "com.apple.ink.inktext", "public.font", "public.bookmark", "public.3d-content", "com.rsa.pkcs-12", "public.x509-certificate", "org.idpf.epub-container", "public.log", "com.apple.keynote.key", "com.microsoft.word.doc", "com.microsoft.excel.xls", "com.microsoft.excel.xlsx", "com.microsoft.powerpoint.ppt"]
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
-    let importiAndExport = MineTextRow(title: "Excel导入/导出", image: UIImage(named: "icons8-ms_excel"))
-    let desc1 = MineDescriptionRow(text: "购买服务，永久解锁Excel导入/导出功能。")
+    let excelImportAndExport = MineTextRow(title: "Excel导入/导出", image: UIImage(named: "icons8-ms_excel"))
+    let imageImportAndExport = MineTextRow(title: "图片、视频导入/导出", image: UIImage(named: "icons8-image"))
+    let desc1 = MineDescriptionRow(text: "购买服务，永久解锁数据导入/导出功能。")
     let backupData = MineTextRow(title: "备份数据到Apple Cloud", image: UIImage(named: "icons8-cloud_database"))
     let recoverData = MineTextRow(title: "从Apple Cloud恢复数据", image: UIImage(named: "icons8-data_recovery"))
     let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
@@ -69,7 +71,8 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                 make.bottom.equalToSuperview().offset(-40).priority(ConstraintPriority.low)
             }
         }
-        stackView.addArrangedSubview(importiAndExport)
+        stackView.addArrangedSubview(excelImportAndExport)
+        stackView.addArrangedSubview(imageImportAndExport)
         stackView.addArrangedSubview(desc1)
         stackView.addArrangedSubview(backupData)
         stackView.addArrangedSubview(recoverData)
@@ -90,20 +93,36 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     }
     
     func addEvents() {
-        importiAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            
+        excelImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
 //            if MaketManager.shared.currentLevel == .free {
 //                let controller = MarketVC()
 //                MainTabViewController.shared.present(controller, animated: true, completion: nil)
+//            } else {
+                self.showActionSheetView(title: "选择", actions: [
+                    UIAlertAction(title: "导出Excel数据", style: .default, handler: { (_) in
+                        self.exportXLSX()
+                    }),
+                    UIAlertAction(title: "从Excel导入数据", style: .default, handler: { (_) in
+                        self.importDataFromExcel()
+                    })
+                ])
 //            }
+        }).disposed(by: disposeBag)
+        
+        imageImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            
+            //            if MaketManager.shared.currentLevel == .free {
+            //                let controller = MarketVC()
+            //                MainTabViewController.shared.present(controller, animated: true, completion: nil)
+            //            }
             self.showActionSheetView(title: "选择", actions: [
-                UIAlertAction(title: "导出Excel数据", style: .default, handler: { (_) in
-                    self.exportXLSX()
+                UIAlertAction(title: "导出图片和视频(.zip文件)", style: .default, handler: { (_) in
+                    self.exportImages()
                 }),
-                UIAlertAction(title: "从Excel导入数据", style: .default, handler: { (_) in
-                    self.importDdataFromExcel()
+                UIAlertAction(title: "导入图片和视频(.zip文件)", style: .default, handler: { (_) in
+                    self.importImagesFromZip()
                 })
-            ])
+                ])
         }).disposed(by: disposeBag)
         
         faceID.switcher.rx.isOn.asObservable().subscribe(onNext: { [unowned self] (isOn) in
@@ -147,8 +166,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     
     func exportXLSX() {
         self.showLoadingIndicator()
-        let url = NSTemporaryDirectory() + "\(NSUUID().uuidString).xlsx"
-        XLSXManager.shared.exportXLSX(fileUrl: URL(fileURLWithPath: url)).subscribe(onNext: { [unowned self] (url) in
+        XLSXManager.shared.exportXLSX().subscribe(onNext: { [unowned self] (url) in
             self.hiddenLoadingIndicator()
             self.present(TempExcelPreviewVC(url: url), animated: true, completion: nil)
         }, onError: { [unowned self] (error) in
@@ -156,10 +174,27 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
     }
     
-    func importDdataFromExcel() {
-        let documentTypes = ["public.item", "public.content", "public.composite-content", "public.message", "public.contact", "public.archive", "public.disk-image", "public.data", "public.directory", "com.apple.resolvable", "public.symlink", "public.executable", "com.apple.mount-point", "com.apple.alias-file", "com.apple.alias-record", "com.apple.bookmark", "public.url", "public.file-url", "public.text", "public.plain-text", "public.utf8-plain-text", "public.utf16-external-plain-text", "public.utf16-plain-text", "public.delimited-values-text", "public.comma-separated-values-text", "public.tab-separated-values-text", "public.utf8-tab-separated-values-text", "public.rtf", "public.html", "public.xml", "public.source-code", "public.assembly-source", "public.c-source", "public.objective-c-source", "public.swift-source", "public.c-plus-plus-source", "public.objective-c-plus-plus-source", "public.c-header", "public.c-plus-plus-header", "com.sun.java-source", "public.script", "com.apple.applescript.text", "com.apple.applescript.script", "com.apple.applescript.script-bundle", "com.netscape.javascript-source", "public.shell-script", "public.perl-script", "public.python-script", "public.ruby-script", "public.php-script", "public.json", "com.apple.property-list", "com.apple.xml-property-list", "com.apple.binary-property-list", "com.adobe.pdf", "com.apple.rtfd", "com.apple.flat-rtfd", "com.apple.txn.text-multimedia-data", "com.apple.webarchive", "public.image", "public.jpeg", "public.jpeg-2000", "public.tiff", "com.apple.pict", "com.compuserve.gif", "public.png", "com.apple.quicktime-image", "com.apple.icns", "com.microsoft.bmp", "com.microsoft.ico", "public.camera-raw-image", "public.svg-image", "com.apple.live-photo", "public.audiovisual-content", "public.movie", "public.video", "public.audio", "com.apple.quicktime-movie", "public.mpeg", "public.mpeg-2-video", "public.mpeg-2-transport-stream", "public.mp3", "public.mpeg-4", "public.mpeg-4-audio", "com.apple.protected-mpeg-4-audio", "com.apple.protected-mpeg-4-video", "public.avi", "public.aiff-audio", "com.microsoft.waveform-audio", "public.midi-audio", "public.playlist", "public.m3u-playlist", "public.folder", "public.volume", "com.apple.package", "com.apple.bundle", "com.apple.plugin", "com.apple.metadata-importer", "com.apple.quicklook-generator", "com.apple.xpc-service", "com.apple.framework", "com.apple.application", "com.apple.application-bundle", "com.apple.application-file", "public.unix-executable", "com.microsoft.windows-executable", "com.sun.java-class", "com.sun.java-archive", "com.apple.systempreference.prefpane", "org.gnu.gnu-zip-archive", "public.bzip2-archive", "public.zip-archive", "public.spreadsheet", "public.presentation", "public.database", "public.vcard", "public.to-do-item", "public.calendar-event", "public.email-message", "com.apple.internet-location", "com.apple.ink.inktext", "public.font", "public.bookmark", "public.3d-content", "com.rsa.pkcs-12", "public.x509-certificate", "org.idpf.epub-container", "public.log", "com.apple.keynote.key", "com.microsoft.word.doc", "com.microsoft.excel.xls", "com.microsoft.excel.xlsx", "com.microsoft.powerpoint.ppt"]
+    func importDataFromExcel() {
         let controller = UIDocumentPickerViewController(documentTypes: documentTypes, in: UIDocumentPickerMode.import)
         controller.delegate = self
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    
+    func exportImages() {
+        self.showLoadingIndicator()
+        ImagesManager.shared.exportImages().subscribe(onNext: { [unowned self] (url) in
+            self.hiddenLoadingIndicator()
+            self.present(TempExcelPreviewVC(url: url), animated: true, completion: nil)
+        }, onError: { [unowned self] (error) in
+            self.showTipsView(text: error.localizedDescription)
+        }).disposed(by: disposeBag)
+    }
+    weak var pickerZipController: UIDocumentPickerViewController?
+    func importImagesFromZip() {
+        let controller = UIDocumentPickerViewController(documentTypes: documentTypes, in: UIDocumentPickerMode.import)
+        controller.delegate = self
+        pickerZipController = controller
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -171,12 +206,21 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         guard let url = urls.first else {
             return
         }
-        self.showLoadingIndicator()
-        XLSXManager.shared.importFromXLSX(url: url).subscribe(onNext: { (count) in
-            self.showAlertView(title: "一共导入了\(count)条数据")
-        }, onError: { (error) in
-            self.showTipsView(text: error.localizedDescription)
-        }).disposed(by: disposeBag)
+        if pickerZipController == controller {
+            self.showLoadingIndicator()
+            ImagesManager.shared.importFromZip(url: url).subscribe(onNext: { (count) in
+                self.showAlertView(title: "一共导入了\(count)个图片和视频")
+            }, onError: { (error) in
+                self.showTipsView(text: error.localizedDescription)
+            }).disposed(by: disposeBag)
+        } else {
+            self.showLoadingIndicator()
+            XLSXManager.shared.importFromXLSX(url: url).subscribe(onNext: { (count) in
+                self.showAlertView(title: "一共导入了\(count)条数据")
+            }, onError: { (error) in
+                self.showTipsView(text: error.localizedDescription)
+            }).disposed(by: disposeBag)
+        }
     }
 
 }

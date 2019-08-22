@@ -27,7 +27,7 @@ extension AVAsset {
 
 extension UIImageView {
     func ab_setImage(media: TradeMedia) {
-        let path = media.path
+        let path = media.url.path
         image = UIImage(named: "placeHoldeImage")
         if media.type == TradeMedia.MediaType.image {
             DispatchQueue.global().async { [weak self] in

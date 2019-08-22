@@ -13,10 +13,22 @@ import Common
 class XLSXManager {
     static let shared = XLSXManager()
     
-    func exportXLSX(fileUrl: URL) -> Observable<URL> {
-        Observable<URL>.create { (observable) -> Disposable in
+    private init() {
+        
+    }
+    
+    func exportXLSX() -> Observable<URL> {
+        let fileName = "礼尚往来-Excel-\(Date().toString(withFormat: "MM月dd日HH-mm")).xlsx"
+        let fileUrl = URL(fileURLWithPath: NSTemporaryDirectory() + "\(fileName)")
+        return Observable<URL>.create { (observable) -> Disposable in
             var inCancel = false
             DispatchQueue.global().async {
+                do {
+                    if FileManager.default.fileExists(atPath: fileUrl.path) {
+                        try FileManager.default.removeItem(at: fileUrl)
+                    }
+                } catch _ { }
+                
                 let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''"))
                 let file = NSString(format: "%@", fileUrl.path)
                 let workbook = new_workbook(file.fileSystemRepresentation)
@@ -48,7 +60,6 @@ class XLSXManager {
                 inCancel = true
             }
         }
-        
     }
     
     func save(trade: Trade, to worksheet: UnsafeMutablePointer<lxw_worksheet>?, index: Int) {
@@ -80,7 +91,7 @@ class XLSXManager {
     
     func importFromXLSX(url: URL) -> Observable<Int> {
         return Observable<Int>.create { (observable) -> Disposable in
-            let tempUrlPath = NSTemporaryDirectory() + "\(UUID().uuidString).\(url.pathExtension)"
+            let tempUrlPath = "\(NSTemporaryDirectory())\(UUID().uuidString).\(url.pathExtension)"
             let tempUrl = URL(fileURLWithPath: tempUrlPath)
             DispatchQueue.global().async {
                 do {
@@ -92,9 +103,9 @@ class XLSXManager {
                     return
                 }
                 let spreadsheet = BRAOfficeDocumentPackage.open(tempUrl.path)
-                guard let firstWorksheet = spreadsheet?.workbook.worksheets?.first as? BRAWorksheet else {
+                guard let firstWorksheet = spreadsheet?.workbook?.worksheets?.first as? BRAWorksheet else {
                     DispatchQueue.main.async {
-                        observable.onError(CommonError(message: "导入失败"))
+                        observable.onError(CommonError(message: "无法识别的文件"))
                     }
                     return
                 }
