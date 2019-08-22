@@ -72,16 +72,20 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
         return .delete
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        showLoadingIndicator()
         let trade = trades[indexPath.row]
-        TradeManger.shared.deleteTrade(trade: trade).subscribe(onCompleted: { [weak self] in
-            self?.hiddenLoadingIndicator()
-            self?.trades.remove(at: indexPath.row)
-            tableView.reloadData()
-        }) { [weak self] (error) in
-            self?.showTipsView(text: error.localizedDescription)
-        }.disposed(by: disposeBag)
-        
+        self.showAlertView(title: "确定删除记录【\(trade.name)】么？", message: nil, actions: [
+            UIAlertAction(title: "取消", style: .cancel, handler: nil),
+            UIAlertAction(title: "删除", style: .destructive, handler: { (_) in
+                self.showLoadingIndicator()
+                TradeManger.shared.deleteTrade(trade: trade).subscribe(onCompleted: { [weak self] in
+                    self?.hiddenLoadingIndicator()
+                    self?.trades.remove(at: indexPath.row)
+                    tableView.reloadData()
+                }) { [weak self] (error) in
+                    self?.showTipsView(text: error.localizedDescription)
+                }.disposed(by: self.disposeBag)
+            })
+        ])
     }
     
 }
