@@ -1083,7 +1083,7 @@
 					"\"xlsxwriter\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";
@@ -1121,7 +1121,7 @@
 					"\"xlsxwriter\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";

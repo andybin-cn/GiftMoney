@@ -80,8 +80,18 @@ class XLSXManager {
     
     func importFromXLSX(url: URL) -> Observable<Int> {
         return Observable<Int>.create { (observable) -> Disposable in
+            let tempUrlPath = NSTemporaryDirectory() + "\(UUID().uuidString).\(url.pathExtension)"
+            let tempUrl = URL(fileURLWithPath: tempUrlPath)
             DispatchQueue.global().async {
-                let spreadsheet = BRAOfficeDocumentPackage.open(url.path)
+                do {
+                    try FileManager.default.copyItem(at: url, to: tempUrl)
+                } catch let error {
+                    DispatchQueue.main.async {
+                        observable.onError(error)
+                    }
+                    return
+                }
+                let spreadsheet = BRAOfficeDocumentPackage.open(tempUrl.path)
                 guard let firstWorksheet = spreadsheet?.workbook.worksheets?.first as? BRAWorksheet else {
                     DispatchQueue.main.async {
                         observable.onError(CommonError(message: "导入失败"))
@@ -110,6 +120,10 @@ class XLSXManager {
                     guard let type = Trade.TradeType(rawValue: typeString) else {
                         continue
                     }
+                    if RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: trade.id) != nil {
+                        continue
+                    }
+                    
                     let tradeItems = [TradeItem].init(JSONString: tradeItemsString) ?? [TradeItem]()
                     let tradeMedias = [TradeMedia].init(JSONString: tradeMediasString) ?? [TradeMedia]()
                     
@@ -126,7 +140,7 @@ class XLSXManager {
                         try RealmManager.share.realm.commitWrite()
                         trades.append(trade)
                     } catch _ {
-                        
+                        SLog.info("RealmManager error:")
                     }
                 }
                 let count = trades.count
@@ -135,7 +149,13 @@ class XLSXManager {
                     observable.onCompleted()
                 }
             }
-            return Disposables.create {  }
+            return Disposables.create {
+                do {
+                    try FileManager.default.removeItem(at: tempUrl)
+                } catch _ {
+                    
+                }
+            }
         }
     }
 }
