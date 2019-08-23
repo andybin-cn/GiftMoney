@@ -29,6 +29,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let faceID: MineSwitchRow
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
     let feedBack = MineTextRow(title: "意见反馈", image: UIImage(named: "icons8-feedback"))
+    let aboutUs = MineTextRow(title: "关于我们", image: UIImage(named: "icons8-about"))
     
     init() {
         let biometryString = LocalAuthManager.shared.biometryType == .faceID ? "FaceID解锁" : "指纹解锁"
@@ -91,6 +92,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         stackView.addArrangedSubview(faceID)
         stackView.addArrangedSubview(share)
         stackView.addArrangedSubview(feedBack)
+        stackView.addArrangedSubview(aboutUs)
         
         faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
         
@@ -168,10 +170,20 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             if MFMailComposeViewController.canSendMail() {
                 self.present(mailComposerVC, animated: true, completion: nil)
             } else {
-                
+                self.showAlertView(title: "无法打开邮件，您可以发送邮件至 810018715@qq.com 我们会尽快给您回复!", message: nil, actions: [
+                    UIAlertAction(title: "取消", style: .cancel, handler: nil),
+                    UIAlertAction(title: "复制邮箱地址", style: .destructive, handler: { (_) in
+                        UIPasteboard.general.string = "810018715@qq.com"
+                        self.showTipsView(text: "邮箱地址已经复制的剪切板")
+                    })
+                ])
             }
         }).disposed(by: disposeBag)
         
+        
+        aboutUs.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            self?.navigationController?.pushViewController(AboutUsVC(), animated: true)
+        }).disposed(by: disposeBag)
     }
     
     func backupTradesToCloud() {
