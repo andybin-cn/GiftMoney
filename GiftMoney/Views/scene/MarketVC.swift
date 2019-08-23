@@ -25,7 +25,7 @@ class MarketVC: BaseViewController {
         let freeHeader = MarketServiceHeader(title: "免费试用", image: UIImage(named: "icons8-trial_version")?.ui_renderImage(tintColor: UIColor.white))
         let freeItems: [MarketServiceItem] = [
             MarketServiceItem(title: "自定义关系 4个"),
-            MarketServiceItem(title: "自定义事件 2个"),
+            MarketServiceItem(title: "自定义事件 1个"),
             MarketServiceItem(title: "每条记录最多添加 1张 图片或视频"),
         ]
         freeGroup = MarketServiceGroup(header: freeHeader, items: freeItems, showPay: false)
@@ -33,9 +33,9 @@ class MarketVC: BaseViewController {
         let vip1Header = MarketServiceHeader(title: "购买【白银Vip】  （¥2元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appMainYellow))
         let vip1Items: [MarketServiceItem] = [
             MarketServiceItem(title: "自定义关系 8个"),
-            MarketServiceItem(title: "自定义事件 4个"),
+            MarketServiceItem(title: "自定义事件 2个"),
             MarketServiceItem(title: "解锁批量修改事件名称"),
-            MarketServiceItem(title: "每条记录最多添加 8 张图片或视频"),
+            MarketServiceItem(title: "每条记录最多添加 3 张图片或视频"),
         ]
         vip1Group = MarketServiceGroup(header: vip1Header, items: vip1Items, showPay: true)
         

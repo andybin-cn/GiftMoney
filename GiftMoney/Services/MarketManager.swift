@@ -41,16 +41,16 @@ class MarketManager {
                 return false
             }
         case .relation:
-            if currentLevel == .free && count >= 4 {
-                self.showPayMessage(msg: "免费账号最多只能添加 4个自定义关系，快去购买Vip解除限制吧", controller: controller)
+            if currentLevel == .free && count >= 2 {
+                self.showPayMessage(msg: "免费账号最多只能添加 2个自定义关系，快去购买Vip解除限制吧", controller: controller)
                 return false
             } else if currentLevel == .paid1 && count >= 8 {
                 self.showPayMessage(msg: "【白银Vip】最多只能添加 8个自定义关系，快去升级【黄金Vip】解除限制吧", controller: controller)
                 return false
             }
         case .event:
-            if currentLevel == .free && count >= 2 {
-                self.showPayMessage(msg: "免费账号最多只能添加 2个自定义事件，快去购买Vip解除限制吧", controller: controller)
+            if currentLevel == .free && count >= 1 {
+                self.showPayMessage(msg: "免费账号最多只能添加 1个自定义事件，快去购买Vip解除限制吧", controller: controller)
                 return false
             } else if currentLevel == .paid1 && count >= 4 {
                 self.showPayMessage(msg: "【白银Vip】最多只能添加 4个自定义事件，快去升级【黄金Vip】解除限制吧", controller: controller)
@@ -60,8 +60,8 @@ class MarketManager {
             if currentLevel == .free && count >= 1 {
                 self.showPayMessage(msg: "免费账号最多只能添加 1张图片或视频，快去购买Vip解除限制吧", controller: controller)
                 return false
-            } else if currentLevel == .paid1 && count >= 8 {
-                self.showPayMessage(msg: "【白银Vip】最多只能添加 8张图片或视频，快去升级【黄金Vip】解除限制吧", controller: controller)
+            } else if currentLevel == .paid1 && count >= 3 {
+                self.showPayMessage(msg: "【白银Vip】最多只能添加 3张图片或视频，快去升级【黄金Vip】解除限制吧", controller: controller)
                 return false
             }
         }
