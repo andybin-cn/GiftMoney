@@ -65,6 +65,7 @@
 		3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */; };
 		3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2F7230CDD2A000C1996 /* XLSXManager.swift */; };
 		38775E26230E753800B697F5 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38775E25230E753800B697F5 /* CloudManager.swift */; };
+		38775E4C230FEDDB00B697F5 /* AboutUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */; };
 		387F6101230E333D0057D48F /* ImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F6100230E333D0057D48F /* ImagesManager.swift */; };
 		38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
@@ -215,6 +216,7 @@
 		3870C2F7230CDD2A000C1996 /* XLSXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XLSXManager.swift; sourceTree = "<group>"; };
 		3870C2F9230CDEBB000C1996 /* GiftMoney-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GiftMoney-Bridging-Header.h"; sourceTree = "<group>"; };
 		38775E25230E753800B697F5 /* CloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
+		38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsVC.swift; sourceTree = "<group>"; };
 		387F6100230E333D0057D48F /* ImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesManager.swift; sourceTree = "<group>"; };
 		38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempExcelPreviewVC.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				3870C2E3230B8C22000C1996 /* MarketVC.swift */,
 				3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */,
 				38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */,
+				38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */,
 				3695D2E023098E5F00AC2044 /* EventGroupModifyVC.swift in Sources */,
 				3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */,
+				38775E4C230FEDDB00B697F5 /* AboutUsVC.swift in Sources */,
 				38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */,
 				3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */,
 				3870C2D9230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
