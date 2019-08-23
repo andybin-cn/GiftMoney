@@ -57,8 +57,8 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventGroupCell.commonIdentifier, for: indexPath) as! EventGroupCell
         let event = keys[indexPath.row]
-//        cell.delegate = self
         cell.event = event
+        cell.trades = eventsGroup[event]
         return cell
     }
     

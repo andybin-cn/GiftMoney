@@ -10,19 +10,89 @@ import Foundation
 import UIKit
 
 class EventGroupCell: UITableViewCell {
+    let eventLabel = UILabel()
+    let timeLabel = UILabel()
+    
+    let tradeCountLabel = UILabel()
+    let gitfLabel = UILabel()
+    let moneyLabel = UILabel()
+    
     var event: Event? {
         didSet {
-            textLabel?.text = event?.name
-            detailTextLabel?.text = event?.time?.toString(withFormat: "yyyy-MM-dd")
+            eventLabel.text = event?.name
+            timeLabel.text = event?.time?.toString(withFormat: "yyyy-MM-dd")
+        }
+    }
+    var trades: [Trade]? {
+        didSet {
+            var giftCount = 0
+            var totalMoney: Float = 0
+            trades?.forEach { (trade) in
+                giftCount += trade.giftCount
+                totalMoney += trade.totalMoney
+            }
+            gitfLabel.text = "礼物共\(giftCount)件"
+            tradeCountLabel.text = "共 \(trades?.count ?? 0) 条记录"
+            moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", totalMoney)
         }
     }
 //    let detailButton = UIButton()
 //    weak var delegate: EventGroupCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         self.accessoryType = .detailButton
+        
+        eventLabel.apply { (label) in
+            label.font = UIFont.appFont(ofSize: 13)
+            label.textColor = .appText
+        }
+        timeLabel.apply { (label) in
+            label.font = UIFont.appFont(ofSize: 11)
+            label.textColor = .appGrayText
+        }
+        tradeCountLabel.apply { (label) in
+            label.font = UIFont.appFont(ofSize: 13)
+            label.textColor = .appGrayText
+        }
+        let stackView1 = UIStackView().then { (stackView) in
+            stackView.axis = .vertical
+            stackView.spacing = 6
+            stackView.alignment = .leading
+            stackView.addTo(contentView) { (make) in
+                make.centerY.equalToSuperview()
+                make.left.equalTo(15)
+                make.top.greaterThanOrEqualTo(10)
+                make.bottom.lessThanOrEqualTo(-10)
+            }
+        }
+        stackView1.addArrangedSubview(eventLabel)
+        stackView1.addArrangedSubview(tradeCountLabel)
+        stackView1.addArrangedSubview(timeLabel)
+        
+        
+        let stackView2 = UIStackView().then { (stackView) in
+            stackView.axis = .vertical
+            stackView.spacing = 6
+            stackView.alignment = .trailing
+            stackView.addTo(contentView) { (make) in
+                make.centerY.equalToSuperview()
+                make.right.equalTo(-15)
+                make.top.greaterThanOrEqualTo(10)
+                make.bottom.lessThanOrEqualTo(-10)
+            }
+        }
+        gitfLabel.apply { (label) in
+            label.font = UIFont.appFont(ofSize: 13)
+            label.textColor = .appMainYellow
+        }
+        moneyLabel.apply { (label) in
+            label.font = UIFont.appFont(ofSize: 16)
+            label.textColor = .appMainYellow
+        }
+        stackView2.addArrangedSubview(moneyLabel)
+        stackView2.addArrangedSubview(gitfLabel)
         
 //        detailButton.apply { (button) in
 //            button.addTarget(self, action: #selector(onDetailButtontapped), for: .touchUpInside)
