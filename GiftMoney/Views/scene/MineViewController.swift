@@ -137,6 +137,10 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             }
         }).disposed(by: disposeBag)
         
+        backupData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            self?.backupTradesToCloud()
+        }).disposed(by: disposeBag)
+        
         share.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
             let controller = UIActivityViewController(activityItems: [URL(string: "http://www.baidu.com")!], applicationActivities: nil)
             self.present(controller, animated: true, completion: nil)
@@ -157,6 +161,18 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             }
         }).disposed(by: disposeBag)
         
+    }
+    
+    func backupTradesToCloud() {
+        self.showLoadingIndicator()
+        CloudManager.shared.backupTrades().subscribe(onNext: { (progress) in
+            SLog.info("backupTrades progress:\(progress.finishCount)/\(progress.totoalCount)")
+        }, onError: { (error) in
+            self.showTipsView(text: "备份失败")
+            SLog.error(error.localizedDescription)
+        }, onCompleted: {
+            self.showTipsView(text: "备份完成")
+        }).disposed(by: disposeBag)
     }
     
     //MARK: - MFMailComposeViewControllerDelegate

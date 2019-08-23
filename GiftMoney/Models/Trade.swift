@@ -25,6 +25,7 @@ class Trade: Object, Mappable {
     @objc dynamic var updateTime: Date = Date()
     @objc dynamic var createTime: Date = Date()
     @objc dynamic private var typeString: String = ""
+    @objc dynamic var hasBackupToCloud: Bool = false
     
     private var _tradeItems: Array<TradeItem> = Array<TradeItem>() {
         didSet {
