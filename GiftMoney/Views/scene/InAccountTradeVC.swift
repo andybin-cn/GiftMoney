@@ -27,7 +27,7 @@ class InAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "收支记录"
+        self.title = event?.name ?? "入账流水"
         
         let addRecordButton = UIBarButtonItem(title: "新增", style: UIBarButtonItem.Style.plain, target: self, action: #selector(addRecordButtonTapped))
         self.navigationItem.rightBarButtonItems = [addRecordButton]
