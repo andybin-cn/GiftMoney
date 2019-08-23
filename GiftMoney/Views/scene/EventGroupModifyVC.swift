@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import Common
 
 class EventGroupModifyVC: BaseViewController {
     let scrollView = UIScrollView()
@@ -16,8 +17,10 @@ class EventGroupModifyVC: BaseViewController {
     let event: Event
     let trades: [Trade]
     
+    let tipsLabel = UILabel()
     let eventNameField = InputField(name: "eventName", labelString: "事件名称")
     let eventTimeField = DateInputField(name: "eventTime", labelString: "时间")
+    let saveButton = UIButton()
     
     init(event: Event, trades: [Trade]) {
         self.event = event
@@ -52,20 +55,58 @@ class EventGroupModifyVC: BaseViewController {
             }
         }
         
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(named: "icons8-info")?.ui_renderImage(tintColor: UIColor.red)
+        attachment.bounds = CGRect(x: 0, y: 0, width: 16, height: 16)
+        let tipsString = NSMutableAttributedString(attributedString: NSAttributedString(attachment: attachment))
+        let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13)]
+        tipsString.append(NSAttributedString(string: "【事件名称】和【事件时间】相同的视为同一个事件", attributes: attributes))
+        tipsString.append(NSAttributedString(string: "\n1.修改事件会对此事件下的所有记录进行修改。", attributes: attributes))
+        tipsString.append(NSAttributedString(string: "\n2.删除事件会删除此事件下的所有记录，请谨慎操作！", attributes: attributes))
+        
+        let tipsContianer = UIView().then { (contianer) in
+            contianer.backgroundColor = UIColor.appGrayBackground
+            tipsLabel.attributedText = tipsString
+            tipsLabel.numberOfLines = 0
+
+            
+            contianer.addSubview(tipsLabel) { (make) in
+                make.left.top.equalTo(15)
+                make.right.bottom.equalTo(-15)
+            }
+            contianer.addTo(scrollView) { (make) in
+                make.left.top.right.equalToSuperview()
+            }
+        }
+        
+        
         let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(onEventNameFieldtapped))
         eventNameField.addGestureRecognizer(tapGesture2)
         eventNameField.textfield.isUserInteractionEnabled = false
         eventNameField.addTo(scrollView) { (make) in
             make.left.equalTo(15)
             make.right.equalTo(-15)
-            make.top.equalTo(20)
+            make.top.equalTo(tipsContianer.snp.bottom).offset(20)
         }
         
         eventTimeField.addTo(scrollView) { (make) in
             make.left.equalTo(15)
             make.right.equalTo(-15)
             make.top.equalTo(eventNameField.snp.bottom).offset(15)
-            make.bottom.equalTo(-40).priority(ConstraintPriority.low)
+        }
+        
+        saveButton.apply { (button) in
+            button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+            button.layer.cornerRadius = 6
+            button.layer.masksToBounds = true
+            button.backgroundColor = UIColor.appMainYellow
+            button.setTitle("保   存", for: .normal)
+            button.addTo(scrollView) { (make) in
+                make.left.equalTo(15)
+                make.right.equalTo(-15)
+                make.top.equalTo(eventTimeField.snp.bottom).offset(20)
+                make.bottom.equalTo(-40).priority(ConstraintPriority.low)
+            }
         }
         
         eventNameField.fieldValue = event.name
@@ -73,7 +114,12 @@ class EventGroupModifyVC: BaseViewController {
     }
     
     @objc func onDeleteButtonTapped() {
-        
+        self.showAlertView(title: "确定删除事件【\(event.name)】？", message: "一共包含\(trades.count)条记录", actions: [
+            UIAlertAction.init(title: "取消", style: .cancel, handler: nil),
+            UIAlertAction.init(title: "删除", style: .destructive, handler: { [weak self] (_) in
+                self?.deleteAllEventForTrades()
+            })
+        ])
     }
     
     @objc func onEventNameFieldtapped() {
@@ -87,9 +133,25 @@ class EventGroupModifyVC: BaseViewController {
     }
     
     @objc func saveButtonTapped() {
-        self.modifyAllEventForTrades()
+        if MaketManager.shared.currentLevel == .free {
+            let controller = MarketVC()
+            self.present(controller, animated: true, completion: nil)
+        } else {
+            self.modifyAllEventForTrades()
+        }
     }
     
+    func deleteAllEventForTrades() {
+        do {
+            RealmManager.share.realm.beginWrite()
+            RealmManager.share.realm.delete(trades)
+            try RealmManager.share.realm.commitWrite()
+            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.children.last?.showTipsView(text: "删除成功")
+        } catch let error {
+            self.showTipsView(text: error.localizedDescription)
+        }
+    }
     func modifyAllEventForTrades() {
         do {
             let values = try self.validateForm()
