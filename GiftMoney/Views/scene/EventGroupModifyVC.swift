@@ -133,12 +133,10 @@ class EventGroupModifyVC: BaseViewController {
     }
     
     @objc func saveButtonTapped() {
-        if MarketManager.shared.currentLevel == .free {
-            let controller = MarketVC()
-            self.present(controller, animated: true, completion: nil)
-        } else {
-            self.modifyAllEventForTrades()
+        guard MarketManager.shared.checkAuth(type: .modifyEvent, controller: self) else {
+            return
         }
+        self.modifyAllEventForTrades()
     }
     
     func deleteAllEventForTrades() {

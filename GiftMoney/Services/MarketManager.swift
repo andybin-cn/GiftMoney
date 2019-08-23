@@ -12,6 +12,7 @@ enum MarketServiceType {
     case media
     case event
     case relation
+    case modifyEvent
     case exportAndImport
     case backupAndRecover
 }
@@ -62,6 +63,11 @@ class MarketManager {
                 return false
             } else if currentLevel == .paid1 && count >= 3 {
                 self.showPayMessage(msg: "【白银Vip】最多只能添加 3张图片或视频，快去升级【黄金Vip】解除限制吧", controller: controller)
+                return false
+            }
+        case .modifyEvent:
+            if currentLevel == .free {
+                self.showPayMessage(msg: "免费账号不支持批量修改事件信息，快去购买Vip解除限制吧", controller: controller)
                 return false
             }
         }
