@@ -11,6 +11,7 @@ target 'GiftMoney' do
 #  pod 'MBProgressHUD','~> 1.1.0'
 #  pod 'SwiftyBeaver','~> 1.7.0'
   pod 'libxlsxwriter', '~> 0.8.7'
+  pod 'DZNEmptyDataSet', '~> 1.8.1'
 
 
 

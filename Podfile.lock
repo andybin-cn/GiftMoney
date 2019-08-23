@@ -1,16 +1,20 @@
 PODS:
+  - DZNEmptyDataSet (1.8.1)
   - libxlsxwriter (0.8.7)
 
 DEPENDENCIES:
+  - DZNEmptyDataSet (~> 1.8.1)
   - libxlsxwriter (~> 0.8.7)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DZNEmptyDataSet
     - libxlsxwriter
 
 SPEC CHECKSUMS:
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   libxlsxwriter: a33a49a75979a24438554119f94e5f4096a818f4
 
-PODFILE CHECKSUM: 4d1a392ad19243de7eb5861952b56f28de8bfc3f
+PODFILE CHECKSUM: 9926a97813238a26704ce2f6d92bdd89ca87a72f
 
 COCOAPODS: 1.6.1

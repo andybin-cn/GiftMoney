@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import DZNEmptyDataSet
 
-class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     let tableView = UITableView()
     var eventsGroup = Dictionary<Event, [Trade]>()
@@ -23,6 +24,8 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
             tableView.delegate = self
             tableView.dataSource = self
             tableView.setExtraCellLineHidden()
+            tableView.emptyDataSetDelegate = self
+            tableView.emptyDataSetSource = self
             
             tableView.addTo(view) { (make) in
                 make.edges.equalToSuperview()
@@ -72,5 +75,19 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         let trades = eventsGroup[event] ?? [Trade]()
         let controller = EventGroupModifyVC(event: event, trades: trades)
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    //MARK: - DZNEmptyDataSetDelegate DZNEmptyDataSetSource
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "icons8-paper_plane")
+    }
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "你还没有收到过份子钱？总有一天会赚回来的！", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 14)])
+    }
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
+        return NSAttributedString(string: "添加记录", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.appMainYellow])
+    }
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        navigationController?.pushViewController(AddTradeViewController(tradeType: .inAccount, event: nil), animated: true)
     }
 }

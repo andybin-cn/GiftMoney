@@ -7,11 +7,10 @@
 //
 
 import Foundation
-
-
 import Common
+import DZNEmptyDataSet
 
-class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     let tableView = UITableView()
     var trades = [Trade]()
@@ -25,6 +24,8 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
             tableView.delegate = self
             tableView.dataSource = self
             tableView.setExtraCellLineHidden()
+            tableView.emptyDataSetSource = self
+            tableView.emptyDataSetDelegate = self
             
             tableView.addTo(self.view) { (make) in
                 make.edges.equalToSuperview()
@@ -33,7 +34,7 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func addRecordButtonTapped() {
-        navigationController?.pushViewController(AddTradeViewController(trade: nil), animated: true)
+        navigationController?.pushViewController(AddTradeViewController(tradeType: .outAccount, event: nil), animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,6 +88,18 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
             })
         ])
     }
-    
+    //MARK: - DZNEmptyDataSetDelegate DZNEmptyDataSetSource
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "icons8-paper_plane")
+    }
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "你还没有送出过份子钱？快来记一下吧！", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 14)])
+    }
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
+        return NSAttributedString(string: "添加记录", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.appMainYellow])
+    }
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        navigationController?.pushViewController(AddTradeViewController(tradeType: .outAccount, event: nil), animated: true)
+    }
 }
 
