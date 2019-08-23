@@ -31,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        if LocalAuthManager.shared.localAuthEnabled {
+            MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
+        }
+    }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
