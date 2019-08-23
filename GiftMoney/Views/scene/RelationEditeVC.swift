@@ -16,12 +16,19 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     let inputContainerView = UIView()
     let inputField = UITextField()
+    let latestusedRelationships = Relationship.latestusedRelationships
+    let customRelationships: [Relationship]
     
     var onResult: ((_ relation: Relationship) -> Void)?
     
     init(defaultValue: String? = "", onResult: ((_ relation: Relationship) -> Void)? = nil) {
         self.onResult = onResult
         inputField.text = defaultValue
+        customRelationships = latestusedRelationships.filter({ (relation) -> Bool in
+            return !Relationship.systemRelationship.contains { (systemRelation) -> Bool in
+                relation.name == systemRelation.name
+            }
+        })
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -75,7 +82,7 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     //MARK: - ITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        if Relationship.latestusedRelationships.count > 0 {
+        if latestusedRelationships.count > 0 {
             return 2
         }
         return 1
@@ -98,16 +105,16 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         return 30
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Relationship.latestusedRelationships.count > 0, section == 0  {
-            return Relationship.latestusedRelationships.count
+        if latestusedRelationships.count > 0, section == 0  {
+            return latestusedRelationships.count
         } else {
             return Relationship.systemRelationship.count
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let relation: Relationship
-        if Relationship.latestusedRelationships.count > 0, indexPath.section == 0  {
-            relation = Relationship.latestusedRelationships[indexPath.row]
+        if latestusedRelationships.count > 0, indexPath.section == 0  {
+            relation = latestusedRelationships[indexPath.row]
         } else {
             relation = Relationship.systemRelationship[indexPath.row]
         }
@@ -118,8 +125,8 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let relation: Relationship
-        if Relationship.latestusedRelationships.count > 0, indexPath.section == 0  {
-            relation = Relationship.latestusedRelationships[indexPath.row]
+        if latestusedRelationships.count > 0, indexPath.section == 0  {
+            relation = latestusedRelationships[indexPath.row]
         } else {
             relation = Relationship.systemRelationship[indexPath.row]
         }
@@ -130,6 +137,9 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     @objc func saveButtonTapped() {
         guard let name = inputField.text else {
             self.showTipsView(text: "请输入内容或者选择一个选项")
+            return
+        }
+        guard MarketManager.shared.checkAuth(type: .relation, controller: self, count: customRelationships.count) else {
             return
         }
         let relation = Relationship(name: name)

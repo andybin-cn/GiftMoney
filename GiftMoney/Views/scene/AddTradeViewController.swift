@@ -258,6 +258,10 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     //MARK: - ImageSetViewDelegate
     func imageSetDidAddbuttonTapped(view: ImageSetView) {
+        guard MarketManager.shared.checkAuth(type: .media, controller: self, count: medias.count) else {
+            return
+        }
+        
         let picker = TZImagePickerController(maxImagesCount: 9, delegate: self)!
         picker.selectedAssets = self.selectedAssets
         picker.allowPickingVideo = true

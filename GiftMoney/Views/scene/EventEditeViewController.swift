@@ -16,12 +16,19 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
     
     let inputContainerView = UIView()
     let inputField = UITextField()
+    let latestusedEvents = Event.latestusedEvents
+    let customEvents: [Event]
     
     var onResult: ((_ event: Event) -> Void)?
     
     init(defaultValue: String? = "", onResult: ((_ event: Event) -> Void)? = nil) {
         self.onResult = onResult
         inputField.text = defaultValue
+        customEvents = latestusedEvents.filter({ (event) -> Bool in
+            return !Event.systemEvents.contains { (systemEvent) -> Bool in
+                return event.name == systemEvent.name
+            }
+        })
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -75,7 +82,7 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
     
     //MARK: - ITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        if Event.latestusedEvents.count > 0 {
+        if latestusedEvents.count > 0 {
             return 2
         }
         return 1
@@ -98,16 +105,16 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
         return 30
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Event.latestusedEvents.count > 0, section == 0  {
-            return Event.latestusedEvents.count
+        if latestusedEvents.count > 0, section == 0  {
+            return latestusedEvents.count
         } else {
             return Event.systemEvents.count
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event: Event
-        if Event.latestusedEvents.count > 0, indexPath.section == 0  {
-            event = Event.latestusedEvents[indexPath.row]
+        if latestusedEvents.count > 0, indexPath.section == 0  {
+            event = latestusedEvents[indexPath.row]
         } else {
             event = Event.systemEvents[indexPath.row]
         }
@@ -118,8 +125,8 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event: Event
-        if Event.latestusedEvents.count > 0, indexPath.section == 0  {
-            event = Event.latestusedEvents[indexPath.row]
+        if latestusedEvents.count > 0, indexPath.section == 0  {
+            event = latestusedEvents[indexPath.row]
         } else {
             event = Event.systemEvents[indexPath.row]
         }
@@ -130,6 +137,9 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
     @objc func saveButtonTapped() {
         guard let name = inputField.text else {
             self.showTipsView(text: "请输入内容或者选择一个选项")
+            return
+        }
+        guard MarketManager.shared.checkAuth(type: .event, controller: self, count: customEvents.count) else {
             return
         }
         let event = Event(name: name)

@@ -24,25 +24,28 @@ class MarketVC: BaseViewController {
     init() {
         let freeHeader = MarketServiceHeader(title: "免费试用", image: UIImage(named: "icons8-trial_version")?.ui_renderImage(tintColor: UIColor.white))
         let freeItems: [MarketServiceItem] = [
-            MarketServiceItem(title: "自定义关系 2 个"),
-            MarketServiceItem(title: "自定义事件 1 个")
+            MarketServiceItem(title: "自定义关系 4个"),
+            MarketServiceItem(title: "自定义事件 2个"),
+            MarketServiceItem(title: "每条记录最多添加 1张 图片或视频"),
         ]
         freeGroup = MarketServiceGroup(header: freeHeader, items: freeItems, showPay: false)
         
-        let vip1Header = MarketServiceHeader(title: "购买Vip等级1  （¥2元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appMainYellow))
+        let vip1Header = MarketServiceHeader(title: "购买【白银Vip】  （¥2元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appMainYellow))
         let vip1Items: [MarketServiceItem] = [
-            MarketServiceItem(title: "自定义关系 6 个"),
-            MarketServiceItem(title: "自定义事件 3 个"),
-            MarketServiceItem(title: "批量修改事件名称"),
+            MarketServiceItem(title: "自定义关系 8个"),
+            MarketServiceItem(title: "自定义事件 4个"),
+            MarketServiceItem(title: "解锁批量修改事件名称"),
+            MarketServiceItem(title: "每条记录最多添加 8 张图片或视频"),
         ]
         vip1Group = MarketServiceGroup(header: vip1Header, items: vip1Items, showPay: true)
         
-        let vip2Header = MarketServiceHeader(title: "购买Vip等级2  （¥12元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
+        let vip2Header = MarketServiceHeader(title: "购买【黄金Vip】  （¥12元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
         let vip2Items: [MarketServiceItem] = [
-            MarketServiceItem(title: "Vip等级1的所有功能"),
+            MarketServiceItem(title: "白银Vip的所有功能"),
             MarketServiceItem(title: "数据导入导出功能"),
             MarketServiceItem(title: "不限自定义关系个数"),
             MarketServiceItem(title: "不限自定义事件个数"),
+            MarketServiceItem(title: "不限图片或视频个数"),
         ]
         vip2Group = MarketServiceGroup(header: vip2Header, items: vip2Items, showPay: true)
         

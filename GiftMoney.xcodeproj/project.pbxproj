@@ -59,7 +59,7 @@
 		3870C2DE230A8A7C000C1996 /* MineTextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2DD230A8A7C000C1996 /* MineTextRow.swift */; };
 		3870C2E0230A8FFC000C1996 /* MineDescriptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */; };
 		3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E3230B8C22000C1996 /* MarketVC.swift */; };
-		3870C2E7230B8CD5000C1996 /* MaketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E6230B8CD5000C1996 /* MaketManager.swift */; };
+		3870C2E7230B8CD5000C1996 /* MarketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E6230B8CD5000C1996 /* MarketManager.swift */; };
 		3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */; };
 		3870C2EB230BD117000C1996 /* LocalAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EA230BD117000C1996 /* LocalAuthManager.swift */; };
 		3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */; };
@@ -208,7 +208,7 @@
 		3870C2DD230A8A7C000C1996 /* MineTextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTextRow.swift; sourceTree = "<group>"; };
 		3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineDescriptionRow.swift; sourceTree = "<group>"; };
 		3870C2E3230B8C22000C1996 /* MarketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVC.swift; sourceTree = "<group>"; };
-		3870C2E6230B8CD5000C1996 /* MaketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaketManager.swift; sourceTree = "<group>"; };
+		3870C2E6230B8CD5000C1996 /* MarketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketManager.swift; sourceTree = "<group>"; };
 		3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketServiceGroup.swift; sourceTree = "<group>"; };
 		3870C2EA230BD117000C1996 /* LocalAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthManager.swift; sourceTree = "<group>"; };
 		3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthVC.swift; sourceTree = "<group>"; };
@@ -451,7 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				38236C66230105F000B67B8D /* TradeManger.swift */,
-				3870C2E6230B8CD5000C1996 /* MaketManager.swift */,
+				3870C2E6230B8CD5000C1996 /* MarketManager.swift */,
 				3870C2EA230BD117000C1996 /* LocalAuthManager.swift */,
 				3870C2F7230CDD2A000C1996 /* XLSXManager.swift */,
 				387F6100230E333D0057D48F /* ImagesManager.swift */,
@@ -867,7 +867,7 @@
 				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
 				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
-				3870C2E7230B8CD5000C1996 /* MaketManager.swift in Sources */,
+				3870C2E7230B8CD5000C1996 /* MarketManager.swift in Sources */,
 				386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */,
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */,

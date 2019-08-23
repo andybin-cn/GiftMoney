@@ -40,9 +40,20 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         fatalError("init(coder:) has not been implemented")
     }
     
+    var dynamicTitle: String {
+        switch MarketManager.shared.currentLevel {
+        case .free:
+            return "普通用户（升级VIP体验更多功能）"
+        case .paid1:
+            return "白银Vip"
+        case .paid2:
+            return "黄金Vip"
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "普通用户（升级VIP体验更多功能）"
+        self.navigationItem.title = dynamicTitle
         
         scrollView.apply { (scrollView) in
             scrollView.showsHorizontalScrollIndicator = false
@@ -89,40 +100,37 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.navigationItem.title = dynamicTitle
         faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
     }
     
     func addEvents() {
         excelImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            if MaketManager.shared.currentLevel == .free {
-                let controller = MarketVC()
-                MainTabViewController.shared.present(controller, animated: true, completion: nil)
-            } else {
-                self.showActionSheetView(title: "选择", actions: [
-                    UIAlertAction(title: "导出Excel数据", style: .default, handler: { (_) in
-                        self.exportXLSX()
-                    }),
-                    UIAlertAction(title: "从Excel导入数据", style: .default, handler: { (_) in
-                        self.importDataFromExcel()
-                    })
-                ])
+            guard MarketManager.shared.checkAuth(type: .exportAndImport, controller: MainTabViewController.shared) else {
+                return
             }
+            self.showActionSheetView(title: "选择", actions: [
+                UIAlertAction(title: "导出Excel数据", style: .default, handler: { (_) in
+                    self.exportXLSX()
+                }),
+                UIAlertAction(title: "从Excel导入数据", style: .default, handler: { (_) in
+                    self.importDataFromExcel()
+                })
+            ])
         }).disposed(by: disposeBag)
         
         imageImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            if MaketManager.shared.currentLevel == .free {
-                let controller = MarketVC()
-                MainTabViewController.shared.present(controller, animated: true, completion: nil)
-            } else {
-                self.showActionSheetView(title: "选择", actions: [
-                    UIAlertAction(title: "导出图片和视频(.zip文件)", style: .default, handler: { (_) in
-                        self.exportImages()
-                    }),
-                    UIAlertAction(title: "导入图片和视频(.zip文件)", style: .default, handler: { (_) in
-                        self.importImagesFromZip()
-                    })
-                ])
+            guard MarketManager.shared.checkAuth(type: .exportAndImport, controller: MainTabViewController.shared) else {
+                return
             }
+            self.showActionSheetView(title: "选择", actions: [
+                UIAlertAction(title: "导出图片和视频(.zip文件)", style: .default, handler: { (_) in
+                    self.exportImages()
+                }),
+                UIAlertAction(title: "导入图片和视频(.zip文件)", style: .default, handler: { (_) in
+                    self.importImagesFromZip()
+                })
+            ])
         }).disposed(by: disposeBag)
         
         faceID.switcher.rx.isOn.asObservable().subscribe(onNext: { [unowned self] (isOn) in
@@ -138,6 +146,9 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         backupData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+//            guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
+//                return
+//            }
             self?.backupTradesToCloud()
         }).disposed(by: disposeBag)
         

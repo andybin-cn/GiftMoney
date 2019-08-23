@@ -133,7 +133,7 @@ class EventGroupModifyVC: BaseViewController {
     }
     
     @objc func saveButtonTapped() {
-        if MaketManager.shared.currentLevel == .free {
+        if MarketManager.shared.currentLevel == .free {
             let controller = MarketVC()
             self.present(controller, animated: true, completion: nil)
         } else {
