@@ -46,7 +46,7 @@ class EventGroupCell: UITableViewCell {
         
         eventLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 13)
-            label.textColor = .appText
+            label.textColor = .appDarkText
         }
         timeLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 11)

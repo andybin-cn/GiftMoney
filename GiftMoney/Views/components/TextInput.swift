@@ -44,7 +44,7 @@ class TextInput: UIView, FormInput, UITextViewDelegate {
         textfield.apply { (textfield) in
             textfield.isEditable = true
             textfield.font = UIFont.appFont(ofSize: 13)
-            textfield.textColor = UIColor.appText
+            textfield.textColor = UIColor.appDarkText
         }
         
         addSubview(textfield) { (make) in

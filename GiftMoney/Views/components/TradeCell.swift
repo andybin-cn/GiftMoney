@@ -51,7 +51,7 @@ class TradeCell: UITableViewCell {
         
         nameLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 13)
-            label.textColor = .appText
+            label.textColor = .appDarkText
             
             label.addTo(contentView) { (make) in
                 make.top.greaterThanOrEqualToSuperview().offset(8)

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MineDescriptionRow: UIView {
-    let textLabel = UILabel(textColor: UIColor.appText, font: UIFont.appFont(ofSize: 10))
+    let textLabel = UILabel(textColor: UIColor.appDarkText, font: UIFont.appFont(ofSize: 10))
     init(text: String) {
         super.init(frame: .zero)
         textLabel.text = text

@@ -26,7 +26,7 @@ class LocalAuthVC: BaseViewController {
     init(viewMode: ViewMode) {
         self.viewMode = viewMode
         let descString = LocalAuthManager.shared.biometryType == .faceID ? "点击进行人脸识别" : "点击进行指纹识别"
-        descLabel = UILabel(textColor: UIColor.appTextBlue, font: UIFont.appFont(ofSize: 14), textAlignment: .center, text: descString)
+        descLabel = UILabel(textColor: UIColor.appSecondaryBlue, font: UIFont.appFont(ofSize: 14), textAlignment: .center, text: descString)
         super.init(nibName: nil, bundle: nil)
         
     }

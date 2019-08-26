@@ -12,7 +12,7 @@ import SnapKit
 
 class MineSwitchRow: UIView {
     let icon = UIImageView()
-    let label = UILabel(textColor: UIColor.appText, fontSize: 14)
+    let label = UILabel(textColor: UIColor.appDarkText, fontSize: 14)
     let switcher = UISwitch()
     
     init(title: String, image: UIImage?) {

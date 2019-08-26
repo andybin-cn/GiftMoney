@@ -12,7 +12,7 @@ import SnapKit
 
 class MineTextRow: UIButton {
     let icon = UIImageView()
-    let label = UILabel(textColor: UIColor.appText, fontSize: 14)
+    let label = UILabel(textColor: UIColor.appDarkText, fontSize: 14)
     let subLabel = UILabel(textColor: UIColor.appGrayText, fontSize: 12)
     let accessoryView = UIImageView(image: UIImage(named: "icons8-forward"))
     let loadingView = UIActivityIndicatorView()
