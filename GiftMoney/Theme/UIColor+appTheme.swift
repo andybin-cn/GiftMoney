@@ -11,12 +11,22 @@ import UIKit
 import Common
 
 extension UIColor {
-    public static var appMainYellow: UIColor {
-        return UIColor.from(hexString: "#FDBB0A")
+    public static var appMainRed: UIColor {
+        return UIColor.from(hexString: "#E03636")
     }
-    public static var appMainBackground: UIColor {
-        return UIColor.white
+    public static var appSecondaryRed: UIColor {
+        return UIColor.from(hexString: "#FF534D")
     }
+    public static var appSecondaryGray: UIColor {
+        return UIColor.from(hexString: "#EDD0BE")
+    }
+    public static var appSecondaryYellow: UIColor {
+        return UIColor.from(hexString: "#FFD948")
+    }
+    public static var appSecondaryBlue: UIColor {
+        return UIColor.from(hexString: "#25C6FC")
+    }
+    
     public static var appGrayBackground: UIColor {
         return UIColor.from(hexString: "#DFE0E0")
     }

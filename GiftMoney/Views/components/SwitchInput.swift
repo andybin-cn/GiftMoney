@@ -73,7 +73,7 @@ class SwitchInput: UIView, FormInput {
         switcher.selectedSegmentIndex = 0
         switcher.tintColor = UIColor.appGrayBackground
         switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        switcher.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
+        switcher.setBackgroundImage(UIColor.appSecondaryYellow.toImage(), for: .selected, barMetrics: .default)
         switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
         
         addSubview(switcher) { (make) in

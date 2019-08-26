@@ -99,7 +99,7 @@ class EventGroupModifyVC: BaseViewController {
             button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
             button.layer.cornerRadius = 6
             button.layer.masksToBounds = true
-            button.backgroundColor = UIColor.appMainYellow
+            button.backgroundColor = UIColor.appSecondaryYellow
             button.setTitle("保   存", for: .normal)
             button.addTo(scrollView) { (make) in
                 make.left.equalTo(15)

@@ -42,7 +42,7 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         self.navigationItem.rightBarButtonItems = [saveButton]
         
         inputContainerView.apply { (inputView) in
-            inputView.backgroundColor = .appMainBackground
+            inputView.backgroundColor = .white
             inputView.addTo(view) { (make) in
                 make.left.right.equalToSuperview()
                 make.top.equalTo(ScreenHelp.navBarHeight)
@@ -92,7 +92,7 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             header.backgroundColor = .appGrayLine
             UILabel().apply { (label) in
                 label.text = section == 0 ? "最近使用" : "内置关系"
-                label.textColor = UIColor.appMainYellow
+                label.textColor = UIColor.appSecondaryYellow
                 label.font = .appFont(ofSize: 18)
                 label.addTo(header) { (make) in
                     make.left.equalTo(15)

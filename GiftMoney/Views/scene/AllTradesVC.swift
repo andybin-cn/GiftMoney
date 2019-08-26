@@ -24,7 +24,7 @@ class AllTradesVC: BaseViewController {
 //        UIButton().apply { (button) in
 //            button.addTarget(self, action: #selector(addRecordButtonTapped), for: .touchUpInside)
 //            button.setTitle("新增", for: .normal)
-//            button.setTitleColor(UIColor.appMainYellow, for: .normal)
+//            button.setTitleColor(UIColor.appSecondaryYellow, for: .normal)
 //            let addRecordButton = UIBarButtonItem(customView: button)
 //            self.navigationItem.rightBarButtonItems = [addRecordButton]
 //        }
@@ -47,16 +47,16 @@ class AllTradesVC: BaseViewController {
 //        }
         
         segmented.selectedSegmentIndex = 0
-        segmented.tintColor = .appMainYellow
+        segmented.tintColor = .appSecondaryYellow
         segmented.addTarget(self, action: #selector(onSegmentedChanged), for: UIControl.Event.valueChanged)
         segmented.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .normal)
         if #available(iOS 13, *) {
-            segmented.layer.borderColor = UIColor.appMainYellow.cgColor
+            segmented.layer.borderColor = UIColor.appSecondaryYellow.cgColor
             segmented.layer.borderWidth = 1
-            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .selected)
-            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainYellow, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .normal)
-            segmented.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
-            segmented.setBackgroundImage(UIColor.white.toImage(), for: .normal, barMetrics: .default)
+            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .selected)
+            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .normal)
+            segmented.setBackgroundImage(UIColor.appSecondaryYellow.toImage(), for: .selected, barMetrics: .default)
+            segmented.setBackgroundImage(UIColor.appMainRed.toImage(), for: .normal, barMetrics: .default)
         }
         segmented.apply { (segmented) in
             segmented.snp.makeConstraints { (make) in

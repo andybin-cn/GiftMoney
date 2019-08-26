@@ -44,7 +44,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.appMainBackground
+        view.backgroundColor = UIColor.white
         //        if let delegate = self as? UIGestureRecognizerDelegate {
         //            self.navigationController?.interactivePopGestureRecognizer?.delegate = delegate
         //        }

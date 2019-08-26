@@ -39,7 +39,7 @@ class TradeCell: UITableViewCell {
             label.clipsToBounds = true
             label.layer.borderWidth = 0.5
             label.textAlignment = .center
-            label.backgroundColor = .appMainYellow
+            label.backgroundColor = .appSecondaryYellow
             
             label.addTo(contentView) { (make) in
                 make.centerY.equalToSuperview()
@@ -87,11 +87,11 @@ class TradeCell: UITableViewCell {
         }
         gitfLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 14)
-            label.textColor = .appMainYellow
+            label.textColor = .appSecondaryYellow
         }
         moneyLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 16)
-            label.textColor = .appMainYellow
+            label.textColor = .appSecondaryYellow
         }
         stackView.addArrangedSubview(gitfLabel)
         stackView.addArrangedSubview(moneyLabel)

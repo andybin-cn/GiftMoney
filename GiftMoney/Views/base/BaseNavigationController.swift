@@ -13,6 +13,8 @@ class BaseNavigationController: UINavigationController, UIGestureRecognizerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationBar.tintColor = UIColor.appSecondaryYellow
+        self.navigationBar.barTintColor = UIColor.appMainRed
     }
     
     override func viewDidAppear(_ animated: Bool) {

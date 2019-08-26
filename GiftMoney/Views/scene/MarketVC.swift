@@ -30,7 +30,7 @@ class MarketVC: BaseViewController {
         ]
         freeGroup = MarketServiceGroup(header: freeHeader, items: freeItems, showPay: false)
         
-        let vip1Header = MarketServiceHeader(title: "购买【白银Vip】  （¥2元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appMainYellow))
+        let vip1Header = MarketServiceHeader(title: "购买【白银Vip】  （¥2元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appSecondaryYellow))
         let vip1Items: [MarketServiceItem] = [
             MarketServiceItem(title: "自定义关系 8个"),
             MarketServiceItem(title: "自定义事件 2个"),

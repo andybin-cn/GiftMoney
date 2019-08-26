@@ -96,7 +96,7 @@ class TradeItemRow: UIView, FormInput {
         switcher.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         switcher.tintColor = UIColor.appGrayBackground
         switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        switcher.setBackgroundImage(UIColor.appMainYellow.toImage(), for: .selected, barMetrics: .default)
+        switcher.setBackgroundImage(UIColor.appSecondaryYellow.toImage(), for: .selected, barMetrics: .default)
         switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
         
         switcher.addTarget(self, action: #selector(onSwitcherValueChanged), for: .valueChanged)

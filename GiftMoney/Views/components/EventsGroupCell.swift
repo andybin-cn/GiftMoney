@@ -85,11 +85,11 @@ class EventGroupCell: UITableViewCell {
         }
         gitfLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 13)
-            label.textColor = .appMainYellow
+            label.textColor = .appSecondaryYellow
         }
         moneyLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 16)
-            label.textColor = .appMainYellow
+            label.textColor = .appSecondaryYellow
         }
         stackView2.addArrangedSubview(moneyLabel)
         stackView2.addArrangedSubview(gitfLabel)

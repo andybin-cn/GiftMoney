@@ -96,7 +96,7 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
         return NSAttributedString(string: "你还没有送出过份子钱？快来记一下吧！", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 14)])
     }
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
-        return NSAttributedString(string: "添加记录", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.appMainYellow])
+        return NSAttributedString(string: "添加记录", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.appSecondaryYellow])
     }
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         navigationController?.pushViewController(AddTradeViewController(tradeType: .outAccount, event: nil), animated: true)

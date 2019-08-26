@@ -266,7 +266,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         picker.selectedAssets = self.selectedAssets
         picker.allowPickingVideo = true
         //        picker.photoWidth = 1080
-        picker.navigationBar.barTintColor = UIColor.appMainYellow
+        picker.navigationBar.barTintColor = UIColor.appSecondaryYellow
         self.present(picker, animated: true, completion: nil)
     }
     func imageSet(view: ImageSetView, didSelectMedia media: TradeMedia, atIndex index: Int) {

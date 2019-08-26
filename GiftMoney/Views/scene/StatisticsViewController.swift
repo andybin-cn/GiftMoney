@@ -14,6 +14,6 @@ class StatisticsViewController: BaseViewController {
         super.viewDidLoad()
         self.navigationItem.title = "分类汇总"
         
-        // Do any additional setup after loading the view.
+        
     }
 }
