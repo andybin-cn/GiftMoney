@@ -21,6 +21,8 @@ class TradeFunctionHeader: UITableViewHeaderFooterView {
     let label1 = UILabel(textColor: UIColor.appSecondaryRed, font: .appFont(ofSize: 14))
     let label2 = UILabel(textColor: UIColor.appSecondaryRed, font: .appFont(ofSize: 14))
     
+    weak var parentView: UIView?
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
@@ -119,6 +121,20 @@ class TradeFunctionHeader: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func showFilter() {
+        guard let parentView = parentView else {
+            return
+        }
+        let maskView = UIView()
+        maskView.backgroundColor = UIColor.appGrayBackground.withAlphaComponent(0.7)
+        maskView.addTo(parentView) { (make) in
+            make.top.equalTo(buttonStackView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(0)
+        }
+        parentView.layoutIfNeeded()
     }
     
 }

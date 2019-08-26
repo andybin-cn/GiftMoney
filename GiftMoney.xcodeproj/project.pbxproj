@@ -27,6 +27,8 @@
 		3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D92309112600AC2044 /* EventsGroupCell.swift */; };
 		3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2DC23093E6D00AC2044 /* TextInput.swift */; };
 		3695D2E023098E5F00AC2044 /* EventGroupModifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */; };
+		369923B623142F540000A71A /* TradeFunctionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369923B523142F540000A71A /* TradeFunctionFilterView.swift */; };
+		369923BA231431DD0000A71A /* TradeFunctionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369923B9231431DD0000A71A /* TradeFunctionButtonsView.swift */; };
 		369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1022F68F270005B67D /* UIColor+appTheme.swift */; };
 		369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */; };
 		369DFE2222F6BDD30005B67D /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE2122F6BDD30005B67D /* InputField.swift */; };
@@ -179,6 +181,8 @@
 		3695D2D92309112600AC2044 /* EventsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsGroupCell.swift; sourceTree = "<group>"; };
 		3695D2DC23093E6D00AC2044 /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
 		3695D2DF23098E5F00AC2044 /* EventGroupModifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGroupModifyVC.swift; sourceTree = "<group>"; };
+		369923B523142F540000A71A /* TradeFunctionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionFilterView.swift; sourceTree = "<group>"; };
+		369923B9231431DD0000A71A /* TradeFunctionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionButtonsView.swift; sourceTree = "<group>"; };
 		369DFE1022F68F270005B67D /* UIColor+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+appTheme.swift"; sourceTree = "<group>"; };
 		369DFE1E22F6BD8A0005B67D /* AddTradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTradeViewController.swift; sourceTree = "<group>"; };
 		369DFE2122F6BDD30005B67D /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
@@ -413,6 +417,8 @@
 				3870C2DF230A8FFC000C1996 /* MineDescriptionRow.swift */,
 				3870C2E8230B9BFA000C1996 /* MarketServiceGroup.swift */,
 				38970F242313CA76004E2660 /* TradeFunctionHeader.swift */,
+				369923B523142F540000A71A /* TradeFunctionFilterView.swift */,
+				369923B9231431DD0000A71A /* TradeFunctionButtonsView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -869,9 +875,11 @@
 				3870C2D6230A8766000C1996 /* String+Extensions.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */,
+				369923B623142F540000A71A /* TradeFunctionFilterView.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
 				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
 				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
+				369923BA231431DD0000A71A /* TradeFunctionButtonsView.swift in Sources */,
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
 				3870C2E7230B8CD5000C1996 /* MarketManager.swift in Sources */,
 				386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */,
