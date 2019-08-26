@@ -25,3 +25,7 @@ extension UITableViewCell: ReuseIdentifierEnable {
 extension UICollectionViewCell: ReuseIdentifierEnable {
     
 }
+
+extension UITableViewHeaderFooterView: ReuseIdentifierEnable {
+    
+}
