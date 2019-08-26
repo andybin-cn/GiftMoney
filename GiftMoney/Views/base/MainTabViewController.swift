@@ -33,15 +33,19 @@ class MainTabViewController: UITabBarController {
         
         inoutRecordsNav.tabBarItem = barItem1
 
-//        statisticsNav.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.search, tag: 1)
-
-        let barItem2 = UITabBarItem(title: "设置", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainYellow).withRenderingMode(.alwaysOriginal))
+        
+        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
+        let barItem2 = UITabBarItem(title: "分类汇总", image: UIImage(named: "icons8-financial_analytics")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-financial_analytics")?.ui_renderImage(tintColor: UIColor.appMainYellow).withRenderingMode(.alwaysOriginal))
         barItem2.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainYellow], for: UIControl.State.selected)
+        statisticsNav.tabBarItem = barItem2
+
+        let barItem3 = UITabBarItem(title: "设置", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainYellow).withRenderingMode(.alwaysOriginal))
+        barItem3.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainYellow], for: UIControl.State.selected)
         
         mineNav.tabBarItem = barItem2
 //        UITabBarItem(title: "设置", image: UIImage(named: "icons8-settings"), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainYellow))
 
-        self.viewControllers = [inoutRecordsNav, mineNav]
+        self.viewControllers = [inoutRecordsNav, statisticsNav, mineNav]
         
         
 //        inoutRecordsVC.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.history, tag: 0)

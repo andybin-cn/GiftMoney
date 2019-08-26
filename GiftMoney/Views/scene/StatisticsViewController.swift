@@ -12,7 +12,7 @@ class StatisticsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "统计"
+        self.navigationItem.title = "分类汇总"
         
         // Do any additional setup after loading the view.
     }
