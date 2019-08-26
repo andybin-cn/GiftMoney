@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import RxCocoa
+import RxSwift
 
 class SearchTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -48,10 +50,20 @@ class SearchTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                 make.edges.equalToSuperview()
             }
         }
+        
+        inputField.rx.text.asObservable().debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler()).subscribe(onNext: { [weak self] (text) in
+            if let keyword = text, !keyword.isEmpty {
+                self?.searchTrade(keyword: keyword)
+            }
+        }).disposed(by: disposeBag)
     }
     
     @objc func onSearchButtonTapped() {
-        searchTrade(keyword: inputField.text ?? "")
+        if let keyword = inputField.text, !keyword.isEmpty {
+            searchTrade(keyword: keyword)
+        } else {
+            self.showTipsView(text: "请输入关键字")
+        }
     }
     
     func searchTrade(keyword: String) {
