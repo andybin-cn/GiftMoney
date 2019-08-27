@@ -13,15 +13,14 @@ class MainTabViewController: UITabBarController {
     static let shared: MainTabViewController = MainTabViewController()
     
     let inoutRecordsVC = AllTradesVC()
-    let statisticsVC = StatisticsViewController()
+//    let statisticsVC = StatisticsViewController()
     let mineVC = MineViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        hidesBottomBarWhenPushed = true
         inoutRecordsVC.hidesBottomBarWhenPushed = false
-        statisticsVC.hidesBottomBarWhenPushed = false
+//        statisticsVC.hidesBottomBarWhenPushed = false
         mineVC.hidesBottomBarWhenPushed = false
         
         let inoutRecordsNav = BaseNavigationController(rootViewController: inoutRecordsVC)
@@ -34,28 +33,17 @@ class MainTabViewController: UITabBarController {
         inoutRecordsNav.tabBarItem = barItem1
 
         
-        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
-        let barItem2 = UITabBarItem(title: "统计", image: UIImage(named: "icons8-financial_analytics")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-financial_analytics")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
-        barItem2.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
-        statisticsNav.tabBarItem = barItem2
+//        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
+//        let barItem2 = UITabBarItem(title: "统计", image: UIImage(named: "icons8-financial_analytics")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-financial_analytics")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
+//        barItem2.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
+//        statisticsNav.tabBarItem = barItem2
 
         let barItem3 = UITabBarItem(title: "辅助", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
         barItem3.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
         
         mineNav.tabBarItem = barItem3
-//        UITabBarItem(title: "设置", image: UIImage(named: "icons8-settings"), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appSecondaryYellow))
 
-        self.viewControllers = [inoutRecordsNav, statisticsNav, mineNav]
-        
-        
-//        inoutRecordsVC.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.history, tag: 0)
-//
-//        statisticsVC.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.search, tag: 1)
-//
-//        mineVC.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.featured, tag: 2)
-//
-//        self.viewControllers = [inoutRecordsVC, statisticsVC, mineVC]
-        
+        self.viewControllers = [inoutRecordsNav, mineNav]
     }
     
     var localAuthVC: LocalAuthVC?

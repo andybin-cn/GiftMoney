@@ -57,8 +57,8 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
             totoalAmount += trade.totalMoney
             giftCount += trade.giftCount
         }
-        header.label1.text = String(format: "收到金额 ¥%0.0f元", totoalAmount)
-        header.label2.text = String(format: "收到礼物 %d 件", giftCount)
+        header.label1.text = String(format: "送出金额 ¥%0.0f元", totoalAmount)
+        header.label2.text = String(format: "送出礼物 %d 件", giftCount)
         tableView.reloadData()
     }
     

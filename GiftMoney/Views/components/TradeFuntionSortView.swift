@@ -51,7 +51,7 @@ class TradeFuntionSortView: UIView {
         scrollView.apply { (scrollView) in
             scrollView.alwaysBounceVertical = true
             scrollView.alwaysBounceHorizontal = false
-            scrollView.backgroundColor = UIColor.appGrayBackground
+            scrollView.backgroundColor = UIColor.white
             scrollView.addTo(self) { (make) in
                 make.edges.equalToSuperview()
             }
