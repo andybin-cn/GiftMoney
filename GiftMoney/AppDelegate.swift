@@ -32,9 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        if LocalAuthManager.shared.localAuthEnabled {
-            MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
+    func applicationWillResignActive(_ application: UIApplication) {
+        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "ResignActiveTime")
+    }
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        let resignActiveTime = UserDefaults.standard.double(forKey: "ResignActiveTime")
+        if abs(Date().timeIntervalSince1970 - resignActiveTime) > 60 * 3 {
+            if LocalAuthManager.shared.localAuthEnabled {
+                MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
+            }
         }
     }
 
