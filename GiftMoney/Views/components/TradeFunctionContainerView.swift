@@ -38,6 +38,8 @@ class TradeFunctionContainerView: UIView {
         self.backgroundColor = UIColor.white
         self.layer.cornerRadius = 8
         self.layer.masksToBounds = true
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.appGrayLine.cgColor
         
         header.apply { (header) in
             if showExpand {

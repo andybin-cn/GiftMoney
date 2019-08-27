@@ -32,8 +32,19 @@ extension Relationship: TradeFunctionButtonItem {
 class TradeFunctionButtonsView: UIView {
     let stackView = UIStackView()
     var buttons = [UIButton]()
+    let isMultiple: Bool
+    var selectedIndex: [Int]
+    let items: [TradeFunctionButtonItem]
+    var selectedItems: [TradeFunctionButtonItem] {
+        selectedIndex.map { (index) -> TradeFunctionButtonItem? in
+            index < items.count ? items[index] : nil
+        }.filter { $0 != nil }.map { $0! }
+    }
     
-    init(items: [TradeFunctionButtonItem], selectedIndex: [Int]) {
+    init(items: [TradeFunctionButtonItem], selectedIndex: [Int], isMultiple: Bool = true) {
+        self.items = items
+        self.isMultiple = isMultiple
+        self.selectedIndex = selectedIndex
         super.init(frame: .zero)
         
         stackView.apply { (stackView) in
@@ -70,6 +81,7 @@ class TradeFunctionButtonsView: UIView {
             button.setBackgroundImage(UIColor.appMainRed.toImage(), for: .selected)
             button.setTitle(item.title, for: .normal)
             button.titleLabel?.font = UIFont.appFont(ofSize: 12)
+            button.addTarget(self, action: #selector(onButtonItemTapped(sender:)), for: .touchUpInside)
             button.snp.makeConstraints { (make) in
                 make.height.equalTo(34)
                 make.width.equalTo(itemWidth)
@@ -88,5 +100,23 @@ class TradeFunctionButtonsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    @objc func onButtonItemTapped(sender: UIButton) {
+        if isMultiple {
+            sender.isSelected = !sender.isSelected
+            self.selectedIndex = buttons.filter{ $0.isSelected }.map { $0.tag - 100 }
+        } else {
+            let oldSelected = self.selectedIndex.contains(sender.tag - 100)
+            buttons.forEach { (button) in
+                button.isSelected = false
+            }
+            if oldSelected {
+                self.selectedIndex = []
+            } else {
+                self.selectedIndex = [sender.tag - 100]
+                sender.isSelected = true
+            }
+        }
+    }
     
 }

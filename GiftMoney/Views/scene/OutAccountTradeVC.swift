@@ -10,10 +10,14 @@ import Foundation
 import Common
 import DZNEmptyDataSet
 
-class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
+class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, TradeFunctionHeaderDelegate {
     
     let tableView = UITableView()
     var trades = [Trade]()
+    let header = TradeFunctionHeader(frame: CGRect(x: 0, y: 0, width: ScreenHelp.windowWidth, height: 70))
+    
+    var filter: FilterOption?
+    var sortType: TradeFuntionSort?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,9 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
             tableView.setExtraCellLineHidden()
             tableView.emptyDataSetSource = self
             tableView.emptyDataSetDelegate = self
+            tableView.tableHeaderView = header
+            header.delegate = self
+            header.parentView = MainTabViewController.shared.view
             
             tableView.addTo(self.view) { (make) in
                 make.edges.equalToSuperview()
@@ -43,7 +50,46 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     func loadData() {
-        trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", Trade.TradeType.outAccount.rawValue)).sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
+        var result = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", Trade.TradeType.outAccount.rawValue))
+        if let filter = self.filter {
+            if filter.events.count > 0 {
+                result = result.filter("eventName IN %@", filter.events.map { $0.name })
+            }
+            if filter.relations.count > 0 {
+                result = result.filter("relationship IN %@", filter.relations.map { $0.name })
+            }
+            if let startTime = filter.startTime {
+                result = result.filter("eventTime >= %@", startTime)
+            }
+            if let endTime = filter.endTime {
+                result = result.filter("eventTime <= %@", endTime)
+            }
+        }
+        
+        let sort = self.sortType ?? TradeFuntionSort.timeDescending
+        switch sort {
+        case .timeDescending:
+            trades = result.sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
+        case .timeAscending:
+            trades = result.sorted(byKeyPath: "eventTime", ascending: true).map{ $0 }
+        case .amountAscending:
+            trades = result.sorted(by: { (t1, t2) -> Bool in
+                return t1.totalMoney < t2.totalMoney
+            })
+        case .amountDescending:
+            trades = result.sorted(by: { (t1, t2) -> Bool in
+                return t1.totalMoney > t2.totalMoney
+            })
+        }
+        
+        var totoalAmount: Float = 0.0
+        var giftCount = 0
+        trades.forEach { (trade) in
+            totoalAmount += trade.totalMoney
+            giftCount += trade.giftCount
+        }
+        header.label1.text = String(format: "收到金额 ¥%0.0f元", totoalAmount)
+        header.label2.text = String(format: "收到礼物 %d 件", giftCount)
         tableView.reloadData()
     }
     
@@ -100,6 +146,14 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         navigationController?.pushViewController(AddTradeViewController(tradeType: .outAccount, event: nil), animated: true)
+    }
+    
+    //MARK: - TradeFunctionHeaderDelegate
+    
+    func functionHeaderChanged(header: TradeFunctionHeader, filter: FilterOption, sortType: TradeFuntionSort) {
+        self.filter = filter
+        self.sortType = sortType
+        loadData()
     }
 }
 

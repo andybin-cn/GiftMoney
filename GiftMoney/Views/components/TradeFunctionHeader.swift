@@ -10,6 +10,10 @@ import Foundation
 import Common
 
 
+protocol TradeFunctionHeaderDelegate: class {
+    func functionHeaderChanged(header: TradeFunctionHeader, filter: FilterOption, sortType: TradeFuntionSort)
+}
+
 class TradeFunctionHeader: UIView {
     let buttonStackView = UIStackView()
     let labelsStackView = UIStackView()
@@ -23,7 +27,12 @@ class TradeFunctionHeader: UIView {
     
     let filterView = TradeFunctionFilterView()
     let sortView = TradeFuntionSortView()
+    let toolBar = UIView()
+    let containerMaskView = UIView()
+    let containerView = UIView()
     weak var parentView: UIView?
+    
+    weak var delegate: TradeFunctionHeaderDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -104,42 +113,111 @@ class TradeFunctionHeader: UIView {
                 make.left.equalTo(label1.snp.right)
                 make.centerY.equalToSuperview()
             }
+            label1.textAlignment = .center
+            label2.textAlignment = .center
             stackView.addArrangedSubview(label1)
             stackView.addArrangedSubview(label2)
         }
         
         self.backgroundColor = UIColor.appSecondaryGray
+        
+        containerMaskView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        containerView.backgroundColor = .white
+        toolBar.backgroundColor = .white
+        containerView.addTo(containerMaskView) { (make) in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(ScreenHelp.windoHeight * 0.5)
+        }
+        
+        toolBar.apply { (toolBar) in
+            toolBar.addTo(containerMaskView) { (make) in
+                make.left.right.equalToSuperview()
+                make.top.equalTo(containerView.snp.bottom).offset(0.5)
+                make.height.equalTo(50)
+            }
+            
+            let saveButton = UIButton().then { (button) in
+                button.setTitle("确定", for: .normal)
+                button.setTitleColor(UIColor.white, for: .normal)
+                button.setBackgroundImage(UIColor.appMainRed.toImage(), for: .normal)
+                button.layer.cornerRadius = 17
+                button.layer.masksToBounds = true
+                button.addTarget(self, action: #selector(onSaveButtontapped), for: .touchUpInside)
+                
+                button.addTo(toolBar) { (make) in
+                    make.height.equalTo(34)
+                    make.centerY.equalToSuperview()
+                    make.width.equalTo(80)
+                    make.right.equalTo(-15)
+                }
+            }
+            
+            UIButton().apply { (button) in
+                button.setTitle("重置", for: .normal)
+                button.setTitleColor(UIColor.appMainRed, for: .normal)
+                button.setBackgroundImage(UIColor.white.toImage(), for: .normal)
+                button.layer.borderColor = UIColor.appMainRed.cgColor
+                button.layer.borderWidth = 1
+                button.layer.cornerRadius = 17
+                button.layer.masksToBounds = true
+                button.addTarget(self, action: #selector(onResetButtontapped), for: .touchUpInside)
+                
+                button.addTo(toolBar) { (make) in
+                    make.height.equalTo(34)
+                    make.centerY.equalToSuperview()
+                    make.width.equalTo(80)
+                    make.right.equalTo(saveButton.snp.left).offset(-15)
+                }
+            }
+        }
+        
+        UIView().apply { (view) in
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onContainerMaskViewTapped))
+            view.addGestureRecognizer(tapGesture)
+            view.addTo(containerMaskView) { (make) in
+                make.left.right.bottom.equalToSuperview()
+                make.top.equalTo(toolBar.snp.bottom)
+            }
+        }
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func showFilter() {
+    
+    func showContainerView() {
         guard let parentView = parentView else {
             return
         }
+        if containerMaskView.superview == nil {
+            containerMaskView.addTo(parentView) { (make) in
+                make.left.right.bottom.equalToSuperview()
+                make.top.equalTo(buttonStackView.snp.bottom)
+            }
+        }
+    }
+    
+    func showFilter() {
+        showContainerView()
         sortView.removeFromSuperview()
-        filterView.addTo(parentView) { (make) in
-            make.top.equalTo(buttonStackView.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+        filterView.addTo(containerView) { (make) in
+            make.edges.equalToSuperview()
         }
     }
     
     func showSortView() {
-        guard let parentView = parentView else {
-            return
-        }
+        showContainerView()
         filterView.removeFromSuperview()
-        sortView.addTo(parentView) { (make) in
-            make.top.equalTo(buttonStackView.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+        sortView.addTo(containerView) { (make) in
+            make.edges.equalToSuperview()
         }
     }
     
     @objc func onFilterButtonTapped() {
         if filterView.superview != nil {
-            filterView.removeFromSuperview()
+            dissmisPopup()
         } else {
             showFilter()
         }
@@ -147,9 +225,28 @@ class TradeFunctionHeader: UIView {
     
     @objc func onSortButton() {
         if sortView.superview != nil {
-            sortView.removeFromSuperview()
+            dissmisPopup()
         } else {
             showSortView()
         }
+    }
+    
+    @objc func onSaveButtontapped() {
+        dissmisPopup()
+    }
+    @objc func onResetButtontapped() {
+        filterView.reset()
+        sortView.reset()
+    }
+    @objc func onContainerMaskViewTapped() {
+        dissmisPopup()
+    }
+    
+    func dissmisPopup() {
+        containerMaskView.removeFromSuperview()
+        sortView.removeFromSuperview()
+        filterView.removeFromSuperview()
+        
+        delegate?.functionHeaderChanged(header: self, filter: filterView.filteroptions, sortType: sortView.sortType)
     }
 }

@@ -8,24 +8,52 @@
 
 import Foundation
 
+enum TradeFuntionSort {
+    case timeAscending
+    case timeDescending
+    case amountAscending
+    case amountDescending
+}
+
+extension TradeFuntionSort: TradeFunctionButtonItem {
+    var title: String {
+        switch self {
+        case .timeAscending:
+            return "时间升序"
+        case .timeDescending:
+            return "时间降序"
+        case .amountAscending:
+            return "金额升序"
+        case .amountDescending:
+            return "金额降序"
+        }
+    }
+}
+
 
 class TradeFuntionSortView: UIView {
     let scrollView = UIScrollView()
     let stackView = UIStackView()
+    let items: [TradeFuntionSort] = [.timeDescending, .timeAscending, .amountAscending, .amountDescending]
+    var sortGroup: TradeFunctionContainerView
     
+    var sortType: TradeFuntionSort {
+        if let body = sortGroup.body as? TradeFunctionButtonsView {
+            let selectedItems = body.selectedItems as? [TradeFuntionSort] ?? [TradeFuntionSort]()
+            return selectedItems.first ?? items.first!
+        }
+        return items.first!
+    }
     init() {
+        sortGroup = TradeFunctionContainerView(title: "排序方式", body: TradeFunctionButtonsView(items: items, selectedIndex: [0], isMultiple: false))
         super.init(frame: .zero)
-        
-        let sortGroup = TradeFunctionContainerView(title: "排序方式", body: TradeFunctionButtonsView(items: ["时间升序", "时间降序", "金额升序", "金额降序"], selectedIndex: [2]))
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         
         scrollView.apply { (scrollView) in
             scrollView.alwaysBounceVertical = true
             scrollView.alwaysBounceHorizontal = false
             scrollView.backgroundColor = UIColor.appGrayBackground
             scrollView.addTo(self) { (make) in
-                make.left.top.right.equalToSuperview()
-                make.height.equalTo(ScreenHelp.windoHeight * 0.65)
+                make.edges.equalToSuperview()
             }
             UIView().apply { (widthBound) in
                 widthBound.addTo(scrollView) { (make) in
@@ -50,5 +78,13 @@ class TradeFuntionSortView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func reset() {
+        stackView.removeArrangedSubview(sortGroup)
+        sortGroup.removeFromSuperview()
+        
+        sortGroup = TradeFunctionContainerView(title: "排序方式", body: TradeFunctionButtonsView(items: items, selectedIndex: [0], isMultiple: false))
+        stackView.addArrangedSubview(sortGroup)
     }
 }
