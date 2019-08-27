@@ -58,4 +58,18 @@ extension Event {
             return t1 > t2
         }
     }
+    
+    static var allEventNames: [Event] {
+        var tradeGroups = Dictionary<String, [Trade]>()
+        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''")).sorted(byKeyPath: "updateTime", ascending: false)
+        trades.forEach { (trade) in
+            let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
+            if var tradeGroup = tradeGroups[trade.eventName] {
+                tradeGroup.append(trade)
+            } else {
+                tradeGroups[trade.eventName] = [trade]
+            }
+        }
+        return tradeGroups.keys.map { Event(name: $0) }
+    }
 }

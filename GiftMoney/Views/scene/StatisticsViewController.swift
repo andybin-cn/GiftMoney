@@ -12,20 +12,23 @@ import Common
 class StatisticsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     let tableView = UITableView()
+    let header = TradeFunctionHeader(frame: CGRect(x: 0, y: 0, width: ScreenHelp.windowWidth, height: 70))
     var trades = [Trade]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "分类汇总"
         
+        header.parentView = self.view
+        
         tableView.apply { (tableView) in
             tableView.register(TradeCell.self, forCellReuseIdentifier: TradeCell.commonIdentifier)
-            tableView.register(TradeFunctionHeader.self, forHeaderFooterViewReuseIdentifier: TradeFunctionHeader.commonIdentifier)
             tableView.estimatedRowHeight = 80
             tableView.estimatedSectionHeaderHeight = 60.5
             tableView.delegate = self
             tableView.dataSource = self
             tableView.setExtraCellLineHidden()
+            tableView.tableHeaderView = header
             
             tableView.addTo(self.view) { (make) in
                 make.edges.equalToSuperview()
@@ -62,12 +65,6 @@ class StatisticsViewController: BaseViewController, UITableViewDelegate, UITable
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return 50
 //    }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TradeFunctionHeader.commonIdentifier) as! TradeFunctionHeader
-        
-        return header
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trades.count
     }

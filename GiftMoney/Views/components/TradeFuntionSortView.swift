@@ -1,33 +1,22 @@
 //
-//  TradeFunctionFilterView.swift
+//  TradeFuntionSortView.swift
 //  GiftMoney
 //
-//  Created by binea on 2019/8/26.
+//  Created by andy.bin on 2019/8/27.
 //  Copyright © 2019 binea. All rights reserved.
 //
 
 import Foundation
 
-class FilterOption {
-    var events = [Event]()
-    var relations = [Relationship]()
-    var startTime: Date?
-    var endTime: Date?
-    var minAmount: Float?
-    var maxAmount: Float?
-}
 
-
-class TradeFunctionFilterView: UIView {
-    
+class TradeFuntionSortView: UIView {
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
     init() {
         super.init(frame: .zero)
         
-        let eventGroup = TradeFunctionContainerView(title: "事件类型", body: TradeFunctionButtonsView(items: Event.allEventNames, selectedIndex: [2]))
-        let relationGroup = TradeFunctionContainerView(title: "关系", body: TradeFunctionButtonsView(items: Relationship.latestusedRelationships, selectedIndex: [1]))
+        let sortGroup = TradeFunctionContainerView(title: "排序方式", body: TradeFunctionButtonsView(items: ["时间升序", "时间降序", "金额升序", "金额降序"], selectedIndex: [2]))
         self.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         
         scrollView.apply { (scrollView) in
@@ -56,8 +45,7 @@ class TradeFunctionFilterView: UIView {
             }
         }
         
-        stackView.addArrangedSubview(eventGroup)
-        stackView.addArrangedSubview(relationGroup)
+        stackView.addArrangedSubview(sortGroup)
     }
     
     required init?(coder: NSCoder) {

@@ -19,6 +19,10 @@ struct Relationship: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
     }
+    
+    static func == (lhs: Relationship, rhs: Relationship) -> Bool {
+        return lhs.name == rhs.name
+    }
 }
 
 private let relationName = ["朋友", "同学", "同事", "亲戚", "兄弟", "邻里", "闺蜜", "基友"]
