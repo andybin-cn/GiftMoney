@@ -10,10 +10,12 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 
-struct Event: Hashable {
+class Event: Hashable {
     var name: String = ""
     var time: Date?
     var lastUseTime: Date?
+    var giftCount = 0
+    var totalMoney: Float = 0
     
     init(name: String, time: Date? = nil, lastUseTime: Date? = nil) {
         self.name = name

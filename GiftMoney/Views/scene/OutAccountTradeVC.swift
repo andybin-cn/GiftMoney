@@ -50,38 +50,7 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     func loadData() {
-        var result = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", Trade.TradeType.outAccount.rawValue))
-        if let filter = self.filter {
-            if filter.events.count > 0 {
-                result = result.filter("eventName IN %@", filter.events.map { $0.name })
-            }
-            if filter.relations.count > 0 {
-                result = result.filter("relationship IN %@", filter.relations.map { $0.name })
-            }
-            if let startTime = filter.startTime {
-                result = result.filter("eventTime >= %@", startTime)
-            }
-            if let endTime = filter.endTime {
-                result = result.filter("eventTime <= %@", endTime)
-            }
-        }
-        
-        let sort = self.sortType ?? TradeFuntionSort.timeDescending
-        switch sort {
-        case .timeDescending:
-            trades = result.sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
-        case .timeAscending:
-            trades = result.sorted(byKeyPath: "eventTime", ascending: true).map{ $0 }
-        case .amountAscending:
-            trades = result.sorted(by: { (t1, t2) -> Bool in
-                return t1.totalMoney < t2.totalMoney
-            })
-        case .amountDescending:
-            trades = result.sorted(by: { (t1, t2) -> Bool in
-                return t1.totalMoney > t2.totalMoney
-            })
-        }
-        
+        self.trades = TradeManger.shared.searchTrades(tradeType: .outAccount, filter: filter, sortType: sortType)
         var totoalAmount: Float = 0.0
         var giftCount = 0
         trades.forEach { (trade) in

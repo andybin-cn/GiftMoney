@@ -10,11 +10,17 @@ import Foundation
 import UIKit
 import DZNEmptyDataSet
 
-class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
+class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, TradeFunctionHeaderDelegate {
     
     let tableView = UITableView()
     var eventsGroup = Dictionary<Event, [Trade]>()
     var keys = [Event]()
+    
+    let header = TradeFunctionHeader(frame: CGRect(x: 0, y: 0, width: ScreenHelp.windowWidth, height: 70))
+    
+    var filter: FilterOption?
+    var sortType: TradeFuntionSort?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +32,9 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
             tableView.setExtraCellLineHidden()
             tableView.emptyDataSetDelegate = self
             tableView.emptyDataSetSource = self
+            tableView.tableHeaderView = header
+            header.delegate = self
+            header.parentView = MainTabViewController.shared.view
             
             tableView.addTo(view) { (make) in
                 make.edges.equalToSuperview()
@@ -35,18 +44,50 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        eventsGroup = TradeManger.shared.eventsGroup()
+        loadData()
+    }
+    
+    func loadData() {
+        let trades = TradeManger.shared.searchTrades(tradeType: .inAccount, filter: filter, sortType: sortType)
+        let sortType = self.sortType ?? TradeFuntionSort.timeDescending
+        eventsGroup = TradeManger.shared.eventsGroup(trades: trades)
+        
         keys = eventsGroup.keys.sorted { (a, b) -> Bool in
-            guard let t1 = a.time else {
-                return false
+            switch sortType {
+            case .timeDescending:
+                guard let t1 = a.time else {
+                    return false
+                }
+                guard let t2 = b.time else {
+                    return true
+                }
+                return t1 > t2
+            case .timeAscending:
+                guard let t1 = a.time else {
+                    return false
+                }
+                guard let t2 = b.time else {
+                    return true
+                }
+                return t1 > t2
+            case .amountDescending:
+                return a.totalMoney > b.totalMoney
+            case .amountAscending:
+                return a.totalMoney < b.totalMoney
             }
-            guard let t2 = b.time else {
-                return true
-            }
-            return t1 > t2
         }
+        
+        var totoalAmount: Float = 0.0
+        var giftCount = 0
+        keys.forEach { (key) in
+            totoalAmount += key.totalMoney
+            giftCount += key.giftCount
+        }
+        header.label1.text = String(format: "收到金额 ¥%0.0f元", totoalAmount)
+        header.label2.text = String(format: "收到礼物 %d 件", giftCount)
         tableView.reloadData()
     }
+    
     //MARK: - UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -89,5 +130,13 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     }
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         navigationController?.pushViewController(AddTradeViewController(tradeType: .inAccount, event: nil), animated: true)
+    }
+    
+    //MARK: - TradeFunctionHeaderDelegate
+    
+    func functionHeaderChanged(header: TradeFunctionHeader, filter: FilterOption, sortType: TradeFuntionSort) {
+        self.filter = filter
+        self.sortType = sortType
+        loadData()
     }
 }

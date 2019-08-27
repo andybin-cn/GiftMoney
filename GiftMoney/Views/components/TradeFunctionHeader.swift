@@ -50,6 +50,7 @@ class TradeFunctionHeader: UIView {
         sortButton.apply { (button) in
             button.addTarget(self, action: #selector(onSortButton), for: .touchUpInside)
             button.setTitle("排序", for: .normal)
+            button.titleLabel?.font = UIFont.appFont(ofSize: 13)
             button.setTitleColor(UIColor.appGrayText, for: .normal)
             button.setImage(UIImage(named: "icons8-generic_sorting")?.ui_resizeImage(to: CGSize(width: 18, height: 18)).ui_renderImage(tintColor: UIColor.appGrayText), for: .normal)
             button.contentEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)

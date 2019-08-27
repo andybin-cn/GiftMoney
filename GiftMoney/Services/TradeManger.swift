@@ -19,11 +19,48 @@ class TradeManger {
         
     }
     
-    func eventsGroup() -> Dictionary<Event, [Trade]> {
+    func searchTrades(tradeType: Trade.TradeType, filter: FilterOption?, sortType: TradeFuntionSort?) -> [Trade] {
+        var trades = [Trade]()
+        var result = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", tradeType.rawValue))
+        if let filter = filter {
+            if filter.events.count > 0 {
+                result = result.filter("eventName IN %@", filter.events.map { $0.name })
+            }
+            if filter.relations.count > 0 {
+                result = result.filter("relationship IN %@", filter.relations.map { $0.name })
+            }
+            if let startTime = filter.startTime {
+                result = result.filter("eventTime >= %@", startTime)
+            }
+            if let endTime = filter.endTime {
+                result = result.filter("eventTime <= %@", endTime)
+            }
+        }
+        
+        let sort = sortType ?? TradeFuntionSort.timeDescending
+        switch sort {
+        case .timeDescending:
+            trades = result.sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
+        case .timeAscending:
+            trades = result.sorted(byKeyPath: "eventTime", ascending: true).map{ $0 }
+        case .amountAscending:
+            trades = result.sorted(by: { (t1, t2) -> Bool in
+                return t1.totalMoney < t2.totalMoney
+            })
+        case .amountDescending:
+            trades = result.sorted(by: { (t1, t2) -> Bool in
+                return t1.totalMoney > t2.totalMoney
+            })
+        }
+        return trades
+    }
+    
+    func eventsGroup(trades: [Trade]) -> Dictionary<Event, [Trade]> {
         var tradeGroups = Dictionary<Event, [Trade]>()
-        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", Trade.TradeType.inAccount.rawValue)).sorted(byKeyPath: "updateTime", ascending: false)
         trades.forEach { (trade) in
             let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
+            groupKey.totalMoney += trade.totalMoney
+            groupKey.giftCount += trade.giftCount
             if tradeGroups[groupKey] != nil {
                 tradeGroups[groupKey]?.append(trade)
             } else {
