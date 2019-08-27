@@ -33,7 +33,7 @@ class TradeManger {
                 result = result.filter("eventTime >= %@", startTime)
             }
             if let endTime = filter.endTime {
-                result = result.filter("eventTime <= %@", endTime)
+                result = result.filter("eventTime < %@", endTime)
             }
         }
         

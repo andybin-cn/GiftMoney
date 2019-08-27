@@ -11,8 +11,8 @@ import Foundation
 class FilterOption {
     var events = [Event]()
     var relations = [Relationship]()
-    var startTime: Date?
-    var endTime: Date?
+    var startTime: NSDate?
+    var endTime: NSDate?
     var minAmount: Float?
     var maxAmount: Float?
 }
@@ -24,6 +24,7 @@ class TradeFunctionFilterView: UIView {
     let stackView = UIStackView()
     var eventGroup: TradeFunctionContainerView
     var relationGroup: TradeFunctionContainerView
+    var dateGroup: TradeFunctionContainerView
     var filteroptions: FilterOption {
         let options = FilterOption()
         if let eventsBody = eventGroup.body as? TradeFunctionButtonsView {
@@ -32,12 +33,17 @@ class TradeFunctionFilterView: UIView {
         if let relationsBody = relationGroup.body as? TradeFunctionButtonsView {
             options.relations = relationsBody.selectedItems as? [Relationship] ?? [Relationship]()
         }
+        if let body = dateGroup.body as? TradeFunctionTimeView {
+            options.startTime = body.startTime
+            options.endTime = body.endTime
+        }
         return options
     }
     
     init() {
         eventGroup = TradeFunctionContainerView(title: "事件类型", body: TradeFunctionButtonsView(items: Event.allEventNames, selectedIndex: []))
         relationGroup = TradeFunctionContainerView(title: "关系", body: TradeFunctionButtonsView(items: Relationship.latestusedRelationships, selectedIndex: []))
+        dateGroup = TradeFunctionContainerView(title: "时间区间", body: TradeFunctionTimeView())
         super.init(frame: .zero)
         
         scrollView.apply { (scrollView) in
@@ -67,6 +73,7 @@ class TradeFunctionFilterView: UIView {
         
         stackView.addArrangedSubview(eventGroup)
         stackView.addArrangedSubview(relationGroup)
+        stackView.addArrangedSubview(dateGroup)
     }
     
     required init?(coder: NSCoder) {
@@ -78,12 +85,16 @@ class TradeFunctionFilterView: UIView {
         eventGroup.removeFromSuperview()
         stackView.removeArrangedSubview(relationGroup)
         relationGroup.removeFromSuperview()
+        stackView.removeArrangedSubview(dateGroup)
+        dateGroup.removeFromSuperview()
         
         
         eventGroup = TradeFunctionContainerView(title: "事件类型", body: TradeFunctionButtonsView(items: Event.allEventNames, selectedIndex: []))
         relationGroup = TradeFunctionContainerView(title: "关系", body: TradeFunctionButtonsView(items: Relationship.latestusedRelationships, selectedIndex: []))
+        dateGroup = TradeFunctionContainerView(title: "时间区间", body: TradeFunctionTimeView())
         
         stackView.addArrangedSubview(eventGroup)
         stackView.addArrangedSubview(relationGroup)
+        stackView.addArrangedSubview(dateGroup)
     }
 }

@@ -72,6 +72,7 @@
 		38970F252313CA76004E2660 /* TradeFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F242313CA76004E2660 /* TradeFunctionHeader.swift */; };
 		38970F332314BCDE004E2660 /* TradeFunctionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */; };
 		38970F372314CDC9004E2660 /* TradeFuntionSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F362314CDC9004E2660 /* TradeFuntionSortView.swift */; };
+		38970F3923151E9C004E2660 /* TradeFunctionTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F3823151E9C004E2660 /* TradeFunctionTimeView.swift */; };
 		38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
@@ -228,6 +229,7 @@
 		38970F242313CA76004E2660 /* TradeFunctionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionHeader.swift; sourceTree = "<group>"; };
 		38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionContainerView.swift; sourceTree = "<group>"; };
 		38970F362314CDC9004E2660 /* TradeFuntionSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFuntionSortView.swift; sourceTree = "<group>"; };
+		38970F3823151E9C004E2660 /* TradeFunctionTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionTimeView.swift; sourceTree = "<group>"; };
 		38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempExcelPreviewVC.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				38970F362314CDC9004E2660 /* TradeFuntionSortView.swift */,
 				369923B9231431DD0000A71A /* TradeFunctionButtonsView.swift */,
 				38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */,
+				38970F3823151E9C004E2660 /* TradeFunctionTimeView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */,
 				369923B623142F540000A71A /* TradeFunctionFilterView.swift in Sources */,
+				38970F3923151E9C004E2660 /* TradeFunctionTimeView.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
 				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
 				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
