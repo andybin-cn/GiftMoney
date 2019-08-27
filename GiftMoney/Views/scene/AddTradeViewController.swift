@@ -317,7 +317,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     var selectedPhotos: [UIImage] = []
     var medias: [TradeMedia] = []
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
-        guard MarketManager.shared.checkAuth(type: .media, controller: self, count: medias.count + photos.count) else {
+        guard MarketManager.shared.checkAuth(type: .media, controller: self, count: medias.count + photos.count - 1) else {
             return
         }
         let newMedias = photos.enumerated().map { (index, photo) -> TradeMedia in
