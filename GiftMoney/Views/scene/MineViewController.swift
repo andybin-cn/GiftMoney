@@ -148,15 +148,21 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         backupData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
-//            guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
-//                return
-//            }
+            guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
+                return
+            }
             self?.backupTradesToCloud()
         }).disposed(by: disposeBag)
         
         share.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            let controller = UIActivityViewController(activityItems: [URL(string: "http://www.baidu.com")!], applicationActivities: nil)
-            self.present(controller, animated: true, completion: nil)
+            self.showLoadingIndicator(text: "正在获取邀请码")
+            InviteManager.shared.fetchAndGeneratorInviteCode().subscribe(onNext: { [weak self] (_, _) in
+                self?.hiddenLoadingIndicator()
+                let controller = InviteCodeVC()
+                self?.navigationController?.pushViewController(controller, animated: true)
+            }, onError: { (error) in
+                self.showLoadingIndicator(text: error.localizedDescription)
+            }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
         
         feedBack.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in

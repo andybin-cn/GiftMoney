@@ -28,10 +28,16 @@ class MarketManager {
     static let shared = MarketManager()
     
     private init() {
-        
+        _ = InviteManager.shared.invitedCountRelay.subscribe(onNext: { (count) in
+            if count >= 20 {
+                self.currentLevel = .paid2
+            } else if self.currentLevel == .free && count >= 5 {
+                self.currentLevel = .paid1
+            }
+        })
     }
     
-    var currentLevel = Level.free
+    var currentLevel = Level.paid2
     
     
     func checkAuth(type: MarketServiceType, controller: UIViewController, count: Int = 0) -> Bool {

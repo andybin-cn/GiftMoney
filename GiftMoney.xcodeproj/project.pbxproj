@@ -73,6 +73,9 @@
 		38970F332314BCDE004E2660 /* TradeFunctionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */; };
 		38970F372314CDC9004E2660 /* TradeFuntionSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F362314CDC9004E2660 /* TradeFuntionSortView.swift */; };
 		38970F3923151E9C004E2660 /* TradeFunctionTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F3823151E9C004E2660 /* TradeFunctionTimeView.swift */; };
+		38970F3B2316412A004E2660 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F3A2316412A004E2660 /* AccountManager.swift */; };
+		38970F3D23164137004E2660 /* InviteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F3C23164137004E2660 /* InviteManager.swift */; };
+		38970F3F231647AD004E2660 /* InviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F3E231647AD004E2660 /* InviteCodeVC.swift */; };
 		38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */; };
 		38EF4A7322F7C9C5007BB28A /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7222F7C9C5007BB28A /* Trade.swift */; };
 		38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7822F7D2D6007BB28A /* RealmManager.swift */; };
@@ -230,6 +233,9 @@
 		38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionContainerView.swift; sourceTree = "<group>"; };
 		38970F362314CDC9004E2660 /* TradeFuntionSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFuntionSortView.swift; sourceTree = "<group>"; };
 		38970F3823151E9C004E2660 /* TradeFunctionTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionTimeView.swift; sourceTree = "<group>"; };
+		38970F3A2316412A004E2660 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		38970F3C23164137004E2660 /* InviteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteManager.swift; sourceTree = "<group>"; };
+		38970F3E231647AD004E2660 /* InviteCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeVC.swift; sourceTree = "<group>"; };
 		38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempExcelPreviewVC.swift; sourceTree = "<group>"; };
 		38EF4A7222F7C9C5007BB28A /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		38EF4A7822F7D2D6007BB28A /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -310,6 +316,7 @@
 				3870C2EC230BD4C5000C1996 /* LocalAuthVC.swift */,
 				38C8491D230D0E7B00900E88 /* TempExcelPreviewVC.swift */,
 				38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */,
+				38970F3E231647AD004E2660 /* InviteCodeVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -477,6 +484,8 @@
 				3870C2F7230CDD2A000C1996 /* XLSXManager.swift */,
 				387F6100230E333D0057D48F /* ImagesManager.swift */,
 				38775E25230E753800B697F5 /* CloudManager.swift */,
+				38970F3A2316412A004E2660 /* AccountManager.swift */,
+				38970F3C23164137004E2660 /* InviteManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -864,6 +873,7 @@
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
 				38970F372314CDC9004E2660 /* TradeFuntionSortView.swift in Sources */,
 				3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */,
+				38970F3F231647AD004E2660 /* InviteCodeVC.swift in Sources */,
 				3870C2DA230A8766000C1996 /* UILabel+Extensions.swift in Sources */,
 				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
@@ -883,6 +893,7 @@
 				3818556922FBC54C00024542 /* TradeItem.swift in Sources */,
 				3818556322FACB6300024542 /* TradeCell.swift in Sources */,
 				38970F332314BCDE004E2660 /* TradeFunctionContainerView.swift in Sources */,
+				38970F3D23164137004E2660 /* InviteManager.swift in Sources */,
 				3870C2D6230A8766000C1996 /* String+Extensions.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
 				3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */,
@@ -909,6 +920,7 @@
 				3870C2D9230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
+				38970F3B2316412A004E2660 /* AccountManager.swift in Sources */,
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
 				3870C2CA230A86EA000C1996 /* MineSwitchRow.swift in Sources */,
 				3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */,

@@ -30,7 +30,7 @@ class MarketVC: BaseViewController {
         ]
         freeGroup = MarketServiceGroup(header: freeHeader, items: freeItems, showPay: false)
         
-        let vip1Header = MarketServiceHeader(title: "购买【白银Vip】  （¥2元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appSecondaryYellow))
+        let vip1Header = MarketServiceHeader(title: "购买【黄金Vip】  （¥2元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appSecondaryYellow))
         let vip1Items: [MarketServiceItem] = [
             MarketServiceItem(title: "自定义关系 8个"),
             MarketServiceItem(title: "自定义事件 2个"),
@@ -39,9 +39,9 @@ class MarketVC: BaseViewController {
         ]
         vip1Group = MarketServiceGroup(header: vip1Header, items: vip1Items, showPay: true)
         
-        let vip2Header = MarketServiceHeader(title: "购买【黄金Vip】  （¥12元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
+        let vip2Header = MarketServiceHeader(title: "购买【钻石Vip】  （¥12元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
         let vip2Items: [MarketServiceItem] = [
-            MarketServiceItem(title: "白银Vip的所有功能"),
+            MarketServiceItem(title: "黄金Vip的所有功能"),
             MarketServiceItem(title: "数据导入导出功能"),
             MarketServiceItem(title: "不限自定义关系个数"),
             MarketServiceItem(title: "不限自定义事件个数"),

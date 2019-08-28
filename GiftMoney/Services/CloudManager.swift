@@ -37,10 +37,10 @@ class CloudManager {
     
     func backupTradesInGlobalQueue(observable: AnyObserver<CloudSyncProgress>) -> Disposable {
         let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "hasBackupToCloud == NO")).map { $0 }
-        let publicDB = CKContainer.default().privateCloudDatabase
+        let privateDB = CKContainer.default().privateCloudDatabase
         
         return Observable<Trade>.from(trades).flatMapFirst { (trade) -> Observable<CKRecord> in
-            return self.backuoTrade(trade: trade, dataBase: publicDB)
+            return self.backuoTrade(trade: trade, dataBase: privateDB)
         }.scan(CloudSyncProgress(finishCount: 0, totoalCount: trades.count)) { (progress, record) -> CloudSyncProgress in
             return CloudSyncProgress(finishCount: progress.finishCount + 1, totoalCount: progress.totoalCount)
         }.subscribe(onNext: { (progress) in
@@ -126,5 +126,4 @@ class CloudManager {
         
         return record
     }
-    
 }
