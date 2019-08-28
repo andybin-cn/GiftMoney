@@ -46,9 +46,9 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         case .free:
             return "普通用户（升级VIP体验更多功能）"
         case .paid1:
-            return "白银Vip"
+            return "黄金Vip用户"
         case .paid2:
-            return "黄金Vip"
+            return "砖石Vip用户"
         }
     }
     
@@ -169,17 +169,17 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
             
-            mailComposerVC.setToRecipients(["810018715@qq.com"])
+            mailComposerVC.setToRecipients(["reciprocityApp@163.com"])
             mailComposerVC.setSubject("【礼尚往来App】意见反馈")
             mailComposerVC.setMessageBody("\n\n感谢您的宝贵意见，我们会尽快给您回复。谢谢！", isHTML: false)
             
             if MFMailComposeViewController.canSendMail() {
                 self.present(mailComposerVC, animated: true, completion: nil)
             } else {
-                self.showAlertView(title: "无法打开邮件，您可以发送邮件至 810018715@qq.com 我们会尽快给您回复!", message: nil, actions: [
+                self.showAlertView(title: "无法打开邮件，您可以发送邮件至 reciprocityApp@163.com 我们会尽快给您回复!", message: nil, actions: [
                     UIAlertAction(title: "取消", style: .cancel, handler: nil),
                     UIAlertAction(title: "复制邮箱地址", style: .destructive, handler: { (_) in
-                        UIPasteboard.general.string = "810018715@qq.com"
+                        UIPasteboard.general.string = "reciprocityApp@163.com"
                         self.showTipsView(text: "邮箱地址已经复制的剪切板")
                     })
                 ])

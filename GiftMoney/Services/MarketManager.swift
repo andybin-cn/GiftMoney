@@ -29,7 +29,7 @@ class MarketManager {
     
     private init() {
         _ = InviteManager.shared.invitedCountRelay.subscribe(onNext: { (count) in
-            if count >= 20 {
+            if count >= 30 {
                 self.currentLevel = .paid2
             } else if self.currentLevel == .free && count >= 5 {
                 self.currentLevel = .paid1

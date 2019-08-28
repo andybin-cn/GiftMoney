@@ -39,10 +39,30 @@ class AboutUsVC: BaseViewController {
             stackView.spacing = 10
             
             stackView.addTo(scrollView) { (make) in
-                make.centerX.equalToSuperview()
                 make.top.equalTo(40)
+                make.left.equalTo(20)
+                make.right.equalTo(-20)
+                make.bottom.equalTo(-40)
             }
         }
+        
+        let logo = UIImageView(image: UIImage(named: "logo"))
+        logo.snp.makeConstraints { (make) in
+            make.width.height.equalTo(200)
+        }
+        stackView.addArrangedSubview(logo)
+        
+        stackView.addArrangedSubview(UILabel(textColor: .appDarkText, font: .appBoldFont(ofSize: 20), textAlignment: .center, text: "礼尚往来"))
+        
+        let label1 = UILabel(textColor: .appGrayText, font: .appFont(ofSize: 14), textAlignment: .left, text: "\n我们的App所有的数据都是保存在本机和Apple Cloud上，保证数据的绝对安全，请放心使用！")
+        label1.numberOfLines = 0
+        label1.lineBreakMode = .byWordWrapping
+        stackView.addArrangedSubview(label1)
+        
+        let label2 = UILabel(textColor: .appGrayText, font: .appFont(ofSize: 14), textAlignment: .center, text: "\n\n如遇到任何问题，请发送邮件至：reciprocityApp@163.com\n我们会尽快与您联系")
+        label2.numberOfLines = 0
+        label2.lineBreakMode = .byWordWrapping
+        stackView.addArrangedSubview(label2)
     }
     
 }
