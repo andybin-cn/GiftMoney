@@ -47,6 +47,11 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         loadData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        header.dissmisPopup()
+    }
+    
     func loadData() {
         let trades = TradeManger.shared.searchTrades(tradeType: .inAccount, filter: filter, sortType: sortType)
         let sortType = self.sortType ?? TradeFuntionSort.timeDescending

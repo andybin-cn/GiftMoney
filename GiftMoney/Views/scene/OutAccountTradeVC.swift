@@ -44,6 +44,11 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
         navigationController?.pushViewController(AddTradeViewController(tradeType: .outAccount, event: nil), animated: true)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        header.dissmisPopup()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadData()
@@ -51,6 +56,10 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
     
     func loadData() {
         self.trades = TradeManger.shared.searchTrades(tradeType: .outAccount, filter: filter, sortType: sortType)
+        refreshUI()
+    }
+    
+    func refreshUI() {
         var totoalAmount: Float = 0.0
         var giftCount = 0
         trades.forEach { (trade) in
