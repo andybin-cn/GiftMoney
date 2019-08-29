@@ -9,6 +9,7 @@
 import UIKit
 import Common
 import RxSwift
+import CloudKit
 
 class BaseViewController: UIViewController {
     var navigationBar: UIView
@@ -49,5 +50,19 @@ class BaseViewController: UIViewController {
         //            self.navigationController?.interactivePopGestureRecognizer?.delegate = delegate
         //        }
         
+    }
+}
+
+
+extension UIViewController {
+    func catchError(error: Error) {
+        if let error = error as? CommonError {
+            self.showTipsView(text: error.message)
+        } else if error is CKError {
+            self.showTipsView(text: CommonError.iCloudError.message)
+        } else {
+            SLog.error("catchError:\(String(describing: catchError))")
+            self.showTipsView(text: "未知错误")
+        }
     }
 }

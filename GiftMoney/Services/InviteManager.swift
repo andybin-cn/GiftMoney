@@ -50,14 +50,22 @@ class InviteManager {
     func useInviteCode(code: String) -> Observable<String> {
         AccountManager.shared.fetchUserInfo().flatMap { (record) -> Observable<String> in
             let hasUsedInvitedCode = record.object(forKey: "hasUsedInvitedCode") as? Bool ?? false
-            if hasUsedInvitedCode {
+            let usedInvitedCode = record.object(forKey: "usedInvitedCode") as? String ?? ""
+            if hasUsedInvitedCode, !usedInvitedCode.isEmpty {
+                self.usedCode = usedInvitedCode
                 return Observable<String>.error(CommonError(message: "已经使用过邀请码，无法再次使用"))
             } else {
-                return self.inserInviteCodeToUsedTable(code: code).do(onNext: { (code) in
-                    self.usedCode = code
-                })
+                return self.checkInviteCode(code: code).flatMap { _ in
+                    return self.inserInviteCodeToUsedTable(code: code).do(onNext: { (code) in
+                        self.usedCode = code
+                    }).flatMap { (_) -> Observable<String> in
+                        record.setObject(true as __CKRecordObjCValue, forKey: "hasUsedInvitedCode")
+                        record.setObject(code as __CKRecordObjCValue, forKey: "usedInvitedCode")
+                        return AccountManager.shared.saveUserInfo().map { _ in code }
+                    }
+                }
             }
-        }
+        }.observeOn(MainScheduler())
     }
     
     private func inserInviteCodeToUsedTable(code: String) -> Observable<String> {
@@ -142,6 +150,26 @@ class InviteManager {
         }
     }
     
+    private func checkInviteCode(code: String) -> Observable<String> {
+        return Observable<String>.create { (observer) -> Disposable in
+            if code == self.inviteCode {
+                observer.onError(CommonError(message: "不能使用自己的邀请码!"))
+            } else {
+                let id = CKRecord.ID(recordName: code)
+                let publicDB = CKContainer.default().publicCloudDatabase
+                publicDB.fetch(withRecordID: id) { (record, error) in
+                    if record != nil {
+                        observer.onNext(code)
+                        observer.onCompleted()
+                    } else {
+                        observer.onError(CommonError(message: "邀请码不存在"))
+                    }
+                }
+            }
+            return Disposables.create { }
+        }
+    }
+    
     private func saveInviteCodeToPublicDB() -> Observable<(String, Int)> {
         return Observable<(String, Int)>.create { (observable) -> Disposable in
             let code = self.generatorRandomString()
@@ -154,7 +182,7 @@ class InviteManager {
                 if let ckError = error as? CKError {
                     print("ckError:\(ckError)")
                     if ckError.code == CKError.Code.serverRecordChanged {
-                        observable.onError(CommonError(message: "优惠码已存在", code: 2))
+                        observable.onError(CommonError(message: "邀请码已存在", code: 2))
                     } else {
                         observable.onError(ckError)
                     }

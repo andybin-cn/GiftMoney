@@ -107,7 +107,7 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
                     self?.trades.remove(at: indexPath.row)
                     tableView.reloadData()
                 }) { [weak self] (error) in
-                    self?.showTipsView(text: error.localizedDescription)
+                    self?.catchError(error: error)
                 }.disposed(by: self.disposeBag)
             })
         ])

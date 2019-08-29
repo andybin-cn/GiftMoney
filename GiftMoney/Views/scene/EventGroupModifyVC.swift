@@ -147,7 +147,7 @@ class EventGroupModifyVC: BaseViewController {
             self.navigationController?.popViewController(animated: true)
             self.navigationController?.children.last?.showTipsView(text: "删除成功")
         } catch let error {
-            self.showTipsView(text: error.localizedDescription)
+            self.catchError(error: error)
         }
     }
     func modifyAllEventForTrades() {

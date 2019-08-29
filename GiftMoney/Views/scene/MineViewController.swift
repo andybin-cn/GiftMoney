@@ -27,7 +27,10 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
     
     let faceID: MineSwitchRow
+    let inviteCodeRow = MineTextRow(title: "填写邀请码", image: UIImage(named: "icons8-invite"))
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
+    let desc3 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石Vip】会员资格")
+    
     let feedBack = MineTextRow(title: "意见反馈", image: UIImage(named: "icons8-feedback"))
     let aboutUs = MineTextRow(title: "关于我们", image: UIImage(named: "icons8-about"))
     
@@ -83,6 +86,9 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                 make.bottom.equalToSuperview().offset(-40).priority(ConstraintPriority.low)
             }
         }
+        
+        inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
+        
         stackView.addArrangedSubview(excelImportAndExport)
         stackView.addArrangedSubview(imageImportAndExport)
         stackView.addArrangedSubview(desc1)
@@ -90,7 +96,9 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         stackView.addArrangedSubview(recoverData)
         stackView.addArrangedSubview(desc2)
         stackView.addArrangedSubview(faceID)
+        stackView.addArrangedSubview(inviteCodeRow)
         stackView.addArrangedSubview(share)
+        stackView.addArrangedSubview(desc3)
         stackView.addArrangedSubview(feedBack)
         stackView.addArrangedSubview(aboutUs)
         
@@ -154,6 +162,15 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             self?.backupTradesToCloud()
         }).disposed(by: disposeBag)
         
+        inviteCodeRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            if InviteManager.shared.hasUsedCode {
+                self?.showTipsView(text: "您已经填写过邀请码了，无法进行修改")
+               return
+            }
+            let controller = FillInviteCodeVC()
+            self?.navigationController?.pushViewController(controller, animated: true)
+        }).disposed(by: disposeBag)
+        
         share.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
             self.showLoadingIndicator(text: "正在获取邀请码")
             InviteManager.shared.fetchAndGeneratorInviteCode().subscribe(onNext: { [weak self] (_, _) in
@@ -162,7 +179,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                 self?.navigationController?.pushViewController(controller, animated: true)
             }, onError: { (error) in
                 SLog.error("fetchAndGeneratorInviteCode error:\(error)")
-                self.showTipsView(text: error.localizedDescription)
+                self.catchError(error: error)
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
         
@@ -216,7 +233,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             self.hiddenLoadingIndicator()
             self.present(TempExcelPreviewVC(url: url), animated: true, completion: nil)
         }, onError: { [unowned self] (error) in
-            self.showTipsView(text: error.localizedDescription)
+            self.catchError(error: error)
         }).disposed(by: disposeBag)
     }
     
@@ -233,7 +250,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             self.hiddenLoadingIndicator()
             self.present(TempExcelPreviewVC(url: url), animated: true, completion: nil)
         }, onError: { [unowned self] (error) in
-            self.showTipsView(text: error.localizedDescription)
+            self.catchError(error: error)
         }).disposed(by: disposeBag)
     }
     weak var pickerZipController: UIDocumentPickerViewController?
@@ -257,14 +274,14 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             ImagesManager.shared.importFromZip(url: url).subscribe(onNext: { (count) in
                 self.showAlertView(title: "一共导入了\(count)个图片和视频")
             }, onError: { (error) in
-                self.showTipsView(text: error.localizedDescription)
+                self.catchError(error: error)
             }).disposed(by: disposeBag)
         } else {
             self.showLoadingIndicator()
             XLSXManager.shared.importFromXLSX(url: url).subscribe(onNext: { (count) in
                 self.showAlertView(title: "一共导入了\(count)条数据")
             }, onError: { (error) in
-                self.showTipsView(text: error.localizedDescription)
+                self.catchError(error: error)
             }).disposed(by: disposeBag)
         }
     }

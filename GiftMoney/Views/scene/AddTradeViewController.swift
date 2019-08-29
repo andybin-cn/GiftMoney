@@ -226,7 +226,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 self?.navigationController?.popViewController(animated: true)
                 self?.showTipsView(text: "保存成功")
             }) { [weak self] (error) in
-                self?.showTipsView(text: error.localizedDescription)
+                self?.catchError(error: error)
             }.disposed(by: disposeBag)
         } catch let err as NSError {
             self.showTipsView(text: err.localizedDescription)

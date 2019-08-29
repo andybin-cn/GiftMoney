@@ -15,6 +15,7 @@ class InviteCodeVC: BaseViewController {
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     let inviteCode = InviteManager.shared.inviteCode ?? ""
+    let inviteCount = InviteManager.shared.invitedCount
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,11 @@ class InviteCodeVC: BaseViewController {
         label3.numberOfLines = 0
         label3.lineBreakMode = .byWordWrapping
         
+        
+        let label4 = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 18), textAlignment: .left, text: "您已成功邀请 \(inviteCount) 位好友!")
+        label4.numberOfLines = 0
+        label4.lineBreakMode = .byWordWrapping
+        
         let buttons = UIStackView().then { (stackView) in
             stackView.axis = .horizontal
             stackView.distribution = .fillEqually
@@ -92,6 +98,7 @@ class InviteCodeVC: BaseViewController {
         stackView.addArrangedSubview(label1)
         stackView.addArrangedSubview(label2)
         stackView.addArrangedSubview(label3)
+        stackView.addArrangedSubview(label4)
         stackView.addArrangedSubview(buttons)
         
     }
