@@ -161,7 +161,8 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                 let controller = InviteCodeVC()
                 self?.navigationController?.pushViewController(controller, animated: true)
             }, onError: { (error) in
-                self.showLoadingIndicator(text: error.localizedDescription)
+                SLog.error("fetchAndGeneratorInviteCode error:\(error)")
+                self.showTipsView(text: error.localizedDescription)
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
         

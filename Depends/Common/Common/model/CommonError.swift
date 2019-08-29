@@ -17,3 +17,9 @@ public struct CommonError: Error {
         self.code = code
     }
 }
+
+extension CommonError {
+    public static var iCloudError: CommonError {
+        return CommonError(message: "访问iCloud服务错误")
+    }
+}

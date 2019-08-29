@@ -82,45 +82,63 @@ class InviteManager {
     
     func fetchAndGeneratorInviteCode() -> Observable<(String, Int)> {
         let query = fetchInviteCode()
-        let generator = saveInviteCodeToPublicDB().flatMapFirst { (code, _) -> Observable<(String, Int)> in
+        
+        let generatInviteCode = saveInviteCodeToPublicDB().retryWhen { (observer) -> Observable<Int> in
+            observer.flatMap { (error) -> Observable<Int> in
+                if let error = error as? CommonError, error.code == 2 {
+                    return Observable<Int>.from(optional: 0)
+                } else {
+                    return Observable<Int>.error(error)
+                }
+            }
+        }
+        
+        let generator = generatInviteCode.flatMapFirst { (code, _) -> Observable<(String, Int)> in
             return self.saveInviteCodeToPrivateDB(code: code)
         }
+        
         return query.catchError { (error) -> Observable<(String, Int)> in
-            if let error = error as? CommonError, error.code == -1 {
+            if let error = error as? CommonError, error.code == 1 {
                 return generator
             } else {
                 return Observable<(String, Int)>.error(error)
             }
-            }.do(onNext: { (code, count) in
-                self.inviteCode = code
-                self.invitedCount = count
-            })
+        }.do(onNext: { (code, count) in
+            self.inviteCode = code
+            self.invitedCount = count
+        }).observeOn(MainScheduler.init())
     }
     
-    private func fetchInviteCode() -> Observable<(String, Int)> {
-        return Observable<(String, Int)>.create { (observable) -> Disposable in
-            let privateDB = CKContainer.default().privateCloudDatabase
+    private func fetchInviteCodeUseCount(inviteCode: String) -> Observable<Int> {
+        return Observable<Int>.create { (observable) -> Disposable in
             let publicDB = CKContainer.default().publicCloudDatabase
-            let id = CKRecord.ID.init(recordName: "UserInfo", zoneID: CKRecordZone.ID.init(zoneName: "UserInfo", ownerName: CKCurrentUserDefaultName))
-            privateDB.fetch(withRecordID: id) { (record, error) in
-                if let error = error {
-                    observable.onError(error)
-                } else if let userInfo = record, let code = userInfo.value(forKey: "InviteCode") as? String {
-                    let query = CKQuery(recordType: "UsersForInviteCode", predicate: NSPredicate(format: "InviteCode == %@", code))
-                    publicDB.perform(query, inZoneWith: nil) { (records, error) in
-                        if let error = error {
-                            observable.onError(error)
-                        } else if let records = records {
-                            observable.onNext((code, records.count))
-                        } else {
-                            observable.onError(CommonError(message: "未知错误"))
-                        }
+            let query = CKQuery(recordType: "UsersForInviteCode", predicate: NSPredicate(format: "InviteCode == %@", inviteCode))
+            publicDB.perform(query, inZoneWith: nil) { (records, error) in
+                if let error = error as? CKError {
+                    if error.code == CKError.Code.unknownItem {
+                        observable.onNext(0)
+                        observable.onCompleted()
+                    } else {
+                        observable.onError(CommonError.iCloudError)
                     }
+                } else if let records = records {
+                    observable.onNext(records.count)
+                    observable.onCompleted()
                 } else {
-                    observable.onError(CommonError(message: "还没有创建记录", code: 1))
+                    observable.onError(CommonError.iCloudError)
                 }
             }
             return Disposables.create { }
+        }
+    }
+    
+    private func fetchInviteCode() -> Observable<(String, Int)> {
+        return AccountManager.shared.fetchInviteCode().flatMap { (code) -> Observable<(String, Int)> in
+            if let code = code, !code.isEmpty {
+                return self.fetchInviteCodeUseCount(inviteCode: code).map { (code, $0) }
+            } else {
+                return Observable<(String, Int)>.error(CommonError.init(message: "还没有创建记录", code: 1))
+            }
         }
     }
     
@@ -128,22 +146,24 @@ class InviteManager {
         return Observable<(String, Int)>.create { (observable) -> Disposable in
             let code = self.generatorRandomString()
             let publicDB = CKContainer.default().publicCloudDatabase
-            let id = CKRecord.ID(recordName: code, zoneID: CKRecordZone.ID(zoneName: "InviteCode", ownerName: PublicUserName))
+            let id = CKRecord.ID(recordName: code)
             let record = CKRecord(recordType: "InviteCode", recordID: id)
+            record.setObject(code as __CKRecordObjCValue, forKey: "InviteCode")
             record.setObject(0 as __CKRecordObjCValue, forKey: "InviteCount")
             publicDB.save(record) { (recoder, error) in
-                if let error = error {
-                    observable.onError(error)
+                if let ckError = error as? CKError {
+                    print("ckError:\(ckError)")
+                    if ckError.code == CKError.Code.serverRecordChanged {
+                        observable.onError(CommonError(message: "优惠码已存在", code: 2))
+                    } else {
+                        observable.onError(ckError)
+                    }
                 } else {
                     observable.onNext((code, 0))
                     observable.onCompleted()
                 }
             }
-            return Disposables.create {
-                publicDB.delete(withRecordID: CKRecord.ID(recordName: code)) { (recoder, error) in
-                    
-                }
-            }
+            return Disposables.create { }
         }
     }
     

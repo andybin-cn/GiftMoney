@@ -43,6 +43,7 @@
 		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
 		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
+		3849261C23179DBB0012D775 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3849261B23179DBB0012D775 /* CloudKit.framework */; };
 		384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */; };
 		384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA21230D3643006F0E3E /* libz.tbd */; };
 		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
@@ -202,6 +203,8 @@
 		3818556A22FBC57700024542 /* TradeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMedia.swift; sourceTree = "<group>"; };
 		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		3849261823179DB50012D775 /* GiftMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GiftMoney.entitlements; sourceTree = "<group>"; };
+		3849261B23179DBB0012D775 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = XlsxReaderWriter.xcodeproj; sourceTree = "<group>"; };
 		384CCA21230D3643006F0E3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
@@ -256,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3849261C23179DBB0012D775 /* CloudKit.framework in Frameworks */,
 				384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */,
 				384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */,
 				CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */,
@@ -347,6 +351,7 @@
 		3649C75722F67FB9009AF83F /* GiftMoney */ = {
 			isa = PBXGroup;
 			children = (
+				3849261823179DB50012D775 /* GiftMoney.entitlements */,
 				3870C2CE230A8766000C1996 /* Extensions */,
 				38236C64230105D700B67B8D /* Services */,
 				38EF4A7722F7D2D6007BB28A /* Realm */,
@@ -555,6 +560,7 @@
 		E63782FD40E14AE5A4748D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3849261B23179DBB0012D775 /* CloudKit.framework */,
 				384CCA21230D3643006F0E3E /* libz.tbd */,
 				7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */,
 				0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */,
@@ -1111,6 +1117,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GiftMoney/GiftMoney.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
@@ -1149,6 +1156,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GiftMoney/GiftMoney.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EG49RAY3R6;

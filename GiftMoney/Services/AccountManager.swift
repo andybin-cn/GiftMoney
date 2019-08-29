@@ -20,27 +20,65 @@ class AccountManager {
         
     }
     
-    func fetchUserInfo() -> Observable<CKRecord> {
-        Observable<CKRecord>.create { (observer) -> Disposable in
-            if let record = self.userInfo {
-                observer.onNext(record)
-                observer.onCompleted()
-                return Disposables.create { }
-            }
+    func fetchAndCreateUserInfoZone() -> Observable<CKRecordZone> {
+        Observable<CKRecordZone>.create { (observer) -> Disposable in
             let privateDB = CKContainer.default().privateCloudDatabase
-            let id = CKRecord.ID.init(recordName: "UserInfo", zoneID: CKRecordZone.ID.init(zoneName: "UserInfo", ownerName: CKCurrentUserDefaultName))
-            privateDB.fetch(withRecordID: id) { (record, error) in
-                if let record = record {
-                    self.userInfo = record
-                    observer.onNext(record)
-                    observer.onCompleted()
-                } else if let error = error {
-                    observer.onError(error)
+            let zoneID = CKRecordZone.ID.init(zoneName: "UserInfo", ownerName: CKCurrentUserDefaultName)
+            privateDB.fetch(withRecordZoneID: zoneID) { (zone, error) in
+                if let zone = zone {
+                    observer.onNext(zone)
+                } else if let ckError = error as? CKError, ckError.code == .zoneNotFound {
+                    privateDB.save(CKRecordZone(zoneID: zoneID)) { (zone, error) in
+                        if let zone = zone {
+                            observer.onNext(zone)
+                        } else {
+                            observer.onError(CommonError.iCloudError)
+                        }
+                    }
                 } else {
-                    let record = self.initUserInfo(id: id)
+                    observer.onError(CommonError.iCloudError)
+                }
+            }
+            
+            return Disposables.create { }
+        }
+    }
+    func fetchInviteCode() -> Observable<String?> {
+        fetchUserInfo().map { (record) -> String? in
+            record.object(forKey: "InviteCode") as? String
+        }
+    }
+    
+    func fetchUserInfo() -> Observable<CKRecord> {
+        if let record = self.userInfo {
+            return Observable<CKRecord>.from(optional: record)
+        } else {
+            return fetchAndCreateUserInfoZone().flatMap {
+                self.fetchAndCreateUserInfoRecord(zone: $0)
+            }
+        }
+    }
+    
+    func fetchAndCreateUserInfoRecord(zone: CKRecordZone) -> Observable<CKRecord> {
+        Observable<CKRecord>.create { (observer) -> Disposable in
+            let privateDB = CKContainer.default().privateCloudDatabase
+            let id = CKRecord.ID.init(recordName: "UserInfo", zoneID: zone.zoneID)
+            privateDB.fetch(withRecordID: id) { (record, error) in
+                if let error = error as? CKError {
+                    if error.code == .unknownItem {
+                        let record = self.initUserInfo(id: id)
+                        self.userInfo = record
+                        observer.onNext(record)
+                        observer.onCompleted()
+                    } else {
+                        observer.onError(error)
+                    }
+                } else if let record = record {
                     self.userInfo = record
                     observer.onNext(record)
                     observer.onCompleted()
+                } else {
+                    observer.onError(CommonError.iCloudError)
                 }
             }
             return Disposables.create { }
@@ -71,7 +109,6 @@ class AccountManager {
             }
             return Disposables.create { }
         }
-        
     }
     
 }

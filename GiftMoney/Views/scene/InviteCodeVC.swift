@@ -49,9 +49,16 @@ class InviteCodeVC: BaseViewController {
         }
         
         let label1 = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 18), textAlignment: .left, text: "成功邀请 5 位好友，解锁【黄金Vip】所有功能")
+        label1.numberOfLines = 0
+        label1.lineBreakMode = .byWordWrapping
+        
         let label2 = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 18), textAlignment: .left, text: "成功邀请 30 位好友，解锁【钻石Vip】所有功能")
+        label2.numberOfLines = 0
+        label2.lineBreakMode = .byWordWrapping
         
         let label3 = UILabel(textColor: .appGrayText, font: .appFont(ofSize: 13), textAlignment: .left, text: "我的邀请码【\(inviteCode)】,告诉好友下载App后，填写你的邀请码就可以了。")
+        label3.numberOfLines = 0
+        label3.lineBreakMode = .byWordWrapping
         
         let buttons = UIStackView().then { (stackView) in
             stackView.axis = .horizontal
