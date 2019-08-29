@@ -16,6 +16,7 @@ class Event: Hashable {
     var lastUseTime: Date?
     var giftCount = 0
     var totalMoney: Float = 0
+    var tradeCount: Int = 0
     
     init(name: String, time: Date? = nil, lastUseTime: Date? = nil) {
         self.name = name

@@ -61,6 +61,7 @@ class TradeManger {
             let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
             groupKey.totalMoney += trade.totalMoney
             groupKey.giftCount += trade.giftCount
+            groupKey.tradeCount += 1
             if tradeGroups[groupKey] != nil {
                 tradeGroups[groupKey]?.append(trade)
             } else {

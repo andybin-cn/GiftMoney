@@ -42,9 +42,12 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -104,7 +107,6 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: EventGroupCell.commonIdentifier, for: indexPath) as! EventGroupCell
         let event = keys[indexPath.row]
         cell.event = event
-        cell.trades = eventsGroup[event]
         return cell
     }
     

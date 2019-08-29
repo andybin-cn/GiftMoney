@@ -21,19 +21,12 @@ class EventGroupCell: UITableViewCell {
         didSet {
             eventLabel.text = event?.name
             timeLabel.text = event?.time?.toString(withFormat: "yyyy-MM-dd")
-        }
-    }
-    var trades: [Trade]? {
-        didSet {
-            var giftCount = 0
-            var totalMoney: Float = 0
-            trades?.forEach { (trade) in
-                giftCount += trade.giftCount
-                totalMoney += trade.totalMoney
+            if let event = event {
+                gitfLabel.text = "礼物共\(event.giftCount)件"
+                tradeCountLabel.text = "共 \(event.tradeCount) 条记录"
+                moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", event.totalMoney)
             }
-            gitfLabel.text = "礼物共\(giftCount)件"
-            tradeCountLabel.text = "共 \(trades?.count ?? 0) 条记录"
-            moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", totalMoney)
+            
         }
     }
 //    let detailButton = UIButton()
