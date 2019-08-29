@@ -54,6 +54,12 @@ class AboutUsVC: BaseViewController {
         
         stackView.addArrangedSubview(UILabel(textColor: .appDarkText, font: .appBoldFont(ofSize: 20), textAlignment: .center, text: "礼尚往来"))
         
+        let infoDic = Bundle.main.infoDictionary
+        let appVersion = infoDic?["CFBundleShortVersionString"] ?? "0.0"
+        let appBuildVersion = infoDic?["CFBundleVersion"] ?? "0"
+        
+        stackView.addArrangedSubview(UILabel(textColor: .appGrayText, font: .appFont(ofSize: 13), textAlignment: .center, text: "版本: \(appVersion)(\(appBuildVersion))"))
+        
         let label1 = UILabel(textColor: .appGrayText, font: .appFont(ofSize: 14), textAlignment: .left, text: "\n我们的App所有的数据都是保存在本机和Apple Cloud上，保证数据的绝对安全，请放心使用！")
         label1.numberOfLines = 0
         label1.lineBreakMode = .byWordWrapping

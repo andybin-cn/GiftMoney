@@ -26,11 +26,13 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let recoverData = MineTextRow(title: "从iCloud恢复数据", image: UIImage(named: "icons8-data_recovery"))
     let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
     
+    let desc3 = MineDescriptionRow(text: "隐私安全")
     let faceID: MineSwitchRow
+    let desc4 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石Vip】会员资格")
     let inviteCodeRow = MineTextRow(title: "填写邀请码", image: UIImage(named: "icons8-invite"))
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
-    let desc3 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石Vip】会员资格")
     
+    let desc5 = MineDescriptionRow(text: "个人App，非常期待您的反馈。")
     let feedBack = MineTextRow(title: "意见反馈", image: UIImage(named: "icons8-feedback"))
     let aboutUs = MineTextRow(title: "关于我们", image: UIImage(named: "icons8-about"))
     
@@ -89,16 +91,22 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         
         inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
         
+        stackView.addArrangedSubview(desc1)
         stackView.addArrangedSubview(excelImportAndExport)
         stackView.addArrangedSubview(imageImportAndExport)
-        stackView.addArrangedSubview(desc1)
+        
+        stackView.addArrangedSubview(desc2)
         stackView.addArrangedSubview(backupData)
         stackView.addArrangedSubview(recoverData)
-        stackView.addArrangedSubview(desc2)
+        
+        stackView.addArrangedSubview(desc3)
         stackView.addArrangedSubview(faceID)
+        
+        stackView.addArrangedSubview(desc4)
         stackView.addArrangedSubview(inviteCodeRow)
         stackView.addArrangedSubview(share)
-        stackView.addArrangedSubview(desc3)
+        
+        stackView.addArrangedSubview(desc5)
         stackView.addArrangedSubview(feedBack)
         stackView.addArrangedSubview(aboutUs)
         
