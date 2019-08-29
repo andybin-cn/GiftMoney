@@ -22,8 +22,8 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let excelImportAndExport = MineTextRow(title: "Excel导入/导出", image: UIImage(named: "icons8-ms_excel"))
     let imageImportAndExport = MineTextRow(title: "图片、视频导入/导出", image: UIImage(named: "icons8-image"))
     let desc1 = MineDescriptionRow(text: "购买服务，永久解锁数据导入/导出功能。")
-    let backupData = MineTextRow(title: "备份数据到Apple Cloud", image: UIImage(named: "icons8-cloud_database"))
-    let recoverData = MineTextRow(title: "从Apple Cloud恢复数据", image: UIImage(named: "icons8-data_recovery"))
+    let backupData = MineTextRow(title: "备份数据到iCloud", image: UIImage(named: "icons8-cloud_database"))
+    let recoverData = MineTextRow(title: "从iCloud恢复数据", image: UIImage(named: "icons8-data_recovery"))
     let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
     
     let faceID: MineSwitchRow
@@ -162,6 +162,13 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             self?.backupTradesToCloud()
         }).disposed(by: disposeBag)
         
+        recoverData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
+                return
+            }
+            self?.recoverTradesFromCloud()
+        }).disposed(by: disposeBag)
+        
         inviteCodeRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
             if InviteManager.shared.hasUsedCode {
                 self?.showTipsView(text: "您已经填写过邀请码了，无法进行修改")
@@ -219,6 +226,24 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             SLog.error(error.localizedDescription)
         }, onCompleted: {
             self.showTipsView(text: "备份完成")
+        }).disposed(by: disposeBag)
+    }
+    
+    func recoverTradesFromCloud() {
+        self.showLoadingIndicator()
+        var tempProgress: CloudSyncProgress?
+        CloudManager.shared.recoverTrades().subscribe(onNext: { (progress) in
+            tempProgress = progress
+            SLog.info("recoverTradesFromCloud progress:\(progress.finishCount)/\(progress.totoalCount)")
+        }, onError: { (error) in
+            self.showTipsView(text: "恢复失败")
+            SLog.error(error.localizedDescription)
+        }, onCompleted: {
+            if let progress = tempProgress {
+                self.showAlertView(title: "一共恢复了\(progress.finishCount)条数据，跳过了\(progress.totoalCount - progress.finishCount)条数据")
+            } else {
+                self.showTipsView(text: "恢复完成")
+            }
         }).disposed(by: disposeBag)
     }
     

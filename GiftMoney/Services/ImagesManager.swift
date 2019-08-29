@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Common
+import CloudKit
 
 class ImagesManager {
     static let shared = ImagesManager()
@@ -137,5 +138,22 @@ class ImagesManager {
             }
         })
         return successCount
+    }
+    
+    func recoverImages(assets: [CKAsset], medias: [TradeMedia]) {
+        let mediaDirectory = URL(fileURLWithPath: "\(NSHomeDirectory())/Documents/Medias")
+        if !FileManager.default.fileExists(atPath: mediaDirectory.path) {
+            try? FileManager.default.createDirectory(at: mediaDirectory, withIntermediateDirectories: true, attributes: nil)
+        }
+        assets.enumerated().forEach { (index, asset) in
+            if index >= medias.count {
+                return
+            }
+            guard let srcUrl = asset.fileURL else {
+                return
+            }
+            let dstURL = medias[index].url
+            try? FileManager.default.copyItem(at: srcUrl, to: dstURL)
+        }
     }
 }

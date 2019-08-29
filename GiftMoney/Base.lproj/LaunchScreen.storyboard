@@ -22,10 +22,15 @@
                                     <constraint firstAttribute="width" secondItem="dAb-GL-nM7" secondAttribute="height" multiplier="1:1" id="3kt-pU-5LN"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="礼尚往来" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA3-RB-4MR">
-                                <rect key="frame" x="138.5" y="504" width="137.5" height="41"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA3-RB-4MR">
+                                <rect key="frame" x="161" y="504" width="92" height="27"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="礼尚往来">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="STHupo"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
