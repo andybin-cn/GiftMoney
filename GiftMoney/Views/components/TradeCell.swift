@@ -80,7 +80,7 @@ class TradeCell: UITableViewCell {
         }
         let stackView = UIStackView().then { (stackView) in
             stackView.axis = .vertical
-            stackView.spacing = 15
+            stackView.spacing = 6
             stackView.alignment = .trailing
             stackView.addTo(contentView) { (make) in
                 make.centerY.equalToSuperview()
@@ -88,11 +88,11 @@ class TradeCell: UITableViewCell {
             }
         }
         gitfLabel.apply { (label) in
-            label.font = UIFont.appFont(ofSize: 14)
+            label.font = UIFont.appFont(ofSize: 15)
             label.textColor = .appSecondaryYellow
         }
         moneyLabel.apply { (label) in
-            label.font = UIFont.appFont(ofSize: 16)
+            label.font = UIFont.appFont(ofSize: 15)
             label.textColor = .appSecondaryYellow
         }
         stackView.addArrangedSubview(moneyLabel)
@@ -108,16 +108,18 @@ class TradeCell: UITableViewCell {
             iconLabel.text = "收"
             iconLabel.backgroundColor = UIColor.appSecondaryYellow
             iconLabel.layer.borderColor = UIColor.appMainRed.cgColor
+            iconLabel.textColor = .appMainRed
         } else {
             iconLabel.backgroundColor = UIColor.appMainRed
             iconLabel.layer.borderColor = UIColor.appSecondaryYellow.cgColor
             iconLabel.text = "支"
+            iconLabel.textColor = .white
         }
         
         nameLabel.text = trade.name
         eventLabel.text = trade.eventName
         timeLabel.text = trade.eventTime.toString(withFormat: "yyyy-MM-dd")
-        gitfLabel.text = "礼物共\(trade.giftCount)件"
+        gitfLabel.text = "礼物共 \(trade.giftCount)份"
         moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", trade.totalMoney)
         
     }
