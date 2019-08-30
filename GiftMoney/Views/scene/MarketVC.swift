@@ -28,7 +28,7 @@ class MarketVC: BaseViewController {
     init() {
         let freeHeader = MarketServiceHeader(title: "免费试用", image: UIImage(named: "icons8-trial_version")?.ui_renderImage(tintColor: UIColor.white))
         let freeItems: [MarketServiceItem] = [
-            MarketServiceItem(title: "自定义关系 4个"),
+            MarketServiceItem(title: "自定义关系 1个"),
             MarketServiceItem(title: "自定义事件 1个"),
             MarketServiceItem(title: "每条记录最多添加 1张 图片或视频"),
         ]
@@ -36,10 +36,10 @@ class MarketVC: BaseViewController {
         
         let vip1Header = MarketServiceHeader(title: "购买【黄金VIP】  （¥3元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appSecondaryYellow))
         let vip1Items: [MarketServiceItem] = [
-            MarketServiceItem(title: "自定义关系 8个"),
-            MarketServiceItem(title: "自定义事件 2个"),
+            MarketServiceItem(title: "自定义关系 5个"),
+            MarketServiceItem(title: "自定义事件 5个"),
             MarketServiceItem(title: "解锁批量修改事件名称"),
-            MarketServiceItem(title: "每条记录最多添加 3 张图片或视频"),
+            MarketServiceItem(title: "每条记录最多添加 5 张图片或视频"),
         ]
         vip1Group = MarketServiceGroup(header: vip1Header, items: vip1Items, showPay: true)
         
@@ -153,20 +153,25 @@ class MarketVC: BaseViewController {
         vip1Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
             self?.payForProduct(code: "vip001")
         }).disposed(by: disposeBag)
+        vip2Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            self?.payForProduct(code: "vip002")
+        }).disposed(by: disposeBag)
     }
     
     func payForProduct(code: String) {
-        self.showLoadingIndicator()
+        self.showLoadingIndicator(text: "正在生成订单")
         MarketManager.shared.fetchProductForCode(code: code).flatMap { (product) -> Observable<(String, SKPaymentTransactionState)> in
-            self.hiddenLoadingIndicator()
+            self.showLoadingIndicator(text: "正在生成订单", afterDelay: 60)
             return MarketManager.shared.payFor(product: product)
         }.subscribe(onNext: { [weak self] (productID, state) in
-            if state == .deferred {
-                self?.showLoadingIndicator(text: "正在进行支付，请稍后")
+            if state == .purchasing {
+                self?.showLoadingIndicator(text: "正在生成订单", afterDelay: 2)
+            } else if state == .deferred {
+                self?.showLoadingIndicator(text: "正在进行支付，请稍后", afterDelay: 5)
             } else if state == .purchased  {
-                self?.showAlertView(title: "恭喜你，成功购买此产品！")
+                self?.showAlertView(title: "恭喜你，已经将您的账号升级为\(MarketManager.shared.currentLevel.label)")
             } else if state == .restored {
-                self?.showAlertView(title: "您已经购买过此产品，已经为您恢复购买，无需再次支付。")
+                self?.showAlertView(title: "您已经购买过此产品，已经将您的账号恢复为\(MarketManager.shared.currentLevel.label)，无需再次支付。")
             }
             self?.refreshUI()
             SLog.info("MarketManager.shared.payForCode inProgree:\(state)")
@@ -184,7 +189,18 @@ class MarketVC: BaseViewController {
     }
     
     @objc func onRecoverButtonTapped() {
-        
+        self.showLoadingIndicator(text: "正在与Apple服务进行通讯", afterDelay: 60)
+        MarketManager.shared.recoverProducts().subscribe(onError: { [weak self] (error) in
+            self?.refreshUI()
+            self?.catchError(error: error)
+        }, onCompleted: { [weak self] in
+            self?.refreshUI()
+            if MarketManager.shared.currentLevel == .free {
+                self?.showAlertView(title: "恢复完成,您还未购买任何服务")
+            } else {
+                self?.showAlertView(title: "恢复完成，已经将您的账号升级为\(MarketManager.shared.currentLevel.label)")
+            }
+        }).disposed(by: self.disposeBag)
     }
     
     

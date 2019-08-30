@@ -27,7 +27,6 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
         case paid2
     }
     
-    
     static let shared = MarketManager()
     var paidProducts = [String]() {
         didSet {
@@ -85,27 +84,27 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
                 return false
             }
         case .relation:
-            if currentLevel == .free && count >= 2 {
-                self.showPayMessage(msg: "免费账号最多只能添加 2个自定义关系，快去购买Vip解除限制吧", controller: controller)
+            if currentLevel == .free && count >= 1 {
+                self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1个自定义关系，快去购买Vip解除限制吧", controller: controller)
                 return false
-            } else if currentLevel == .paid1 && count >= 8 {
-                self.showPayMessage(msg: "【白银Vip】最多只能添加 8个自定义关系，快去升级【黄金VIP】解除限制吧", controller: controller)
+            } else if currentLevel == .paid1 && count >= 5 {
+                self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5个自定义关系，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
                 return false
             }
         case .event:
             if currentLevel == .free && count >= 1 {
-                self.showPayMessage(msg: "免费账号最多只能添加 1个自定义事件，快去购买Vip解除限制吧", controller: controller)
+                self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1个自定义事件，快去购买Vip解除限制吧", controller: controller)
                 return false
-            } else if currentLevel == .paid1 && count >= 4 {
-                self.showPayMessage(msg: "【白银Vip】最多只能添加 4个自定义事件，快去升级【黄金VIP】解除限制吧", controller: controller)
+            } else if currentLevel == .paid1 && count >= 5 {
+                self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5个自定义事件，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
                 return false
             }
         case .media:
             if currentLevel == .free && count >= 1 {
-                self.showPayMessage(msg: "免费账号最多只能添加 1张图片或视频，快去购买Vip解除限制吧", controller: controller)
+                self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1张图片或视频，快去购买Vip解除限制吧", controller: controller)
                 return false
-            } else if currentLevel == .paid1 && count >= 3 {
-                self.showPayMessage(msg: "【白银Vip】最多只能添加 3张图片或视频，快去升级【黄金VIP】解除限制吧", controller: controller)
+            } else if currentLevel == .paid1 && count >= 5 {
+                self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5张图片或视频，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
                 return false
             }
         case .modifyEvent:
@@ -125,35 +124,57 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
             ])
     }
     
+    func recoverProducts() -> Observable<(String, SKPaymentTransactionState)> {
+        self.payObserver?.onCompleted()
+        return Observable<(String, SKPaymentTransactionState)>.create { (observer) -> Disposable in
+            self.payObserver = observer
+            SKPaymentQueue.default().restoreCompletedTransactions()
+            return Disposables.create {
+                self.payObserver = nil
+            }
+        }
+    }
     
-    private var fetchProductObserver = PublishSubject<SKProduct>()
+    private var fetchProductObserver: AnyObserver<SKProduct>?
     func fetchProductForCode(code: String) -> Observable<SKProduct> {
-        let productsRequest = SKProductsRequest(productIdentifiers: Set<String>(arrayLiteral: code))
-        productsRequest.delegate = self
-        productsRequest.start()
-        return fetchProductObserver.asObserver()
+        self.fetchProductObserver?.onCompleted()
+        return Observable<SKProduct>.create { (observer) -> Disposable in
+            self.fetchProductObserver = observer
+            let productsRequest = SKProductsRequest(productIdentifiers: Set<String>(arrayLiteral: code))
+            productsRequest.delegate = self
+            productsRequest.start()
+            return Disposables.create {
+                self.fetchProductObserver = nil
+            }
+        }
     }
     
-    private var payObserver = PublishSubject<(String, SKPaymentTransactionState)>()
+    private var payObserver: AnyObserver<(String, SKPaymentTransactionState)>?
     func payFor(product: SKProduct) -> Observable<(String, SKPaymentTransactionState)> {
-        let payment = SKMutablePayment(product: product)
-//        payment.simulatesAskToBuyInSandbox = true
-        SKPaymentQueue.default().add(payment)
-        return payObserver.asObserver()
+        self.payObserver?.onCompleted()
+        return Observable<(String, SKPaymentTransactionState)>.create { (observer) -> Disposable in
+            self.payObserver = observer
+            let payment = SKMutablePayment(product: product)
+            //        payment.simulatesAskToBuyInSandbox = true
+            SKPaymentQueue.default().add(payment)
+            return Disposables.create {
+                self.payObserver = nil
+            }
+        }
     }
-    
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         if let product = response.products.first {
-            fetchProductObserver.onNext(product)
-            fetchProductObserver.onCompleted()
+            fetchProductObserver?.onNext(product)
+            fetchProductObserver?.onCompleted()
         } else {
-            fetchProductObserver.onError(CommonError(message: "获取产品信息失败"))
+            fetchProductObserver?.onError(CommonError(message: "获取产品信息失败"))
         }
     }
     
     //Observe transaction updates.
-    func paymentQueue(_ queue: SKPaymentQueue,updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        SLog.info("updatedTransactions: start")
         for transaction in transactions {
             let productID = transaction.payment.productIdentifier
             switch transaction.transactionState {
@@ -161,14 +182,22 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
                 //该交易处于队列中，但其最终状态正在等待“要求购买”等外部操作。
                 //更新您的用户界面以显示延迟状态，并等待另一个指示最终状态的回调。
                 SLog.info("updatedTransactions: deferred")
+                self.payObserver?.onNext((productID, transaction.transactionState))
                 break
             case .purchasing:
                 //该交易正在由App Store处理。
                 SLog.info("updatedTransactions: purchasing")
+                self.payObserver?.onNext((productID, transaction.transactionState))
                 break
             case .failed:
                 //交易失败
                 SLog.info("updatedTransactions: failed")
+                self.payObserver?.onNext((productID, transaction.transactionState))
+                if let error = transaction.error {
+                    self.payObserver?.onError(error)
+                } else {
+                    self.payObserver?.onError(CommonError(message: "支付失败"))
+                }
                 break
             case .restored, .purchased:
                 SLog.info("updatedTransactions: success")
@@ -177,11 +206,30 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
                 if !paidProducts.contains(productID) {
                     paidProducts.append(productID)
                 }
+                self.payObserver?.onNext((productID, transaction.transactionState))
+                self.payObserver?.onCompleted()
                 break
             @unknown default:
                 break
             }
-            self.payObserver.onNext((productID, transaction.transactionState))
         }
     }
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        self.payObserver?.onCompleted()
+    }
+}
+
+
+extension MarketManager.Level {
+    var label: String {
+        switch self {
+        case .free:
+            return "免费账号"
+        case .paid1:
+            return "【黄金VIP】"
+        case .paid2:
+            return "【钻石VIP】"
+        }
+    }
+    
 }

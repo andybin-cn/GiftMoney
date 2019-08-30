@@ -107,7 +107,7 @@ class MarketServiceGroup: UIView {
             button.addTo(self) { (make) in
                 make.centerY.equalTo(header)
                 make.right.equalTo(-20)
-                make.left.greaterThanOrEqualTo(stackView.snp.right).offset(30)
+//                make.left.greaterThanOrEqualTo(stackView.snp.right).offset(30)
                 make.height.equalTo(35)
                 make.width.equalTo(100)
             }

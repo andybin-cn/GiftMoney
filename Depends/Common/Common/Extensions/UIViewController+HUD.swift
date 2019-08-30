@@ -20,7 +20,7 @@ class ABMBProgressHUD: MBProgressHUD {
 
 extension UIViewController {
     
-    public func showLoadingIndicator(text: String? = nil) {
+    public func showLoadingIndicator(text: String? = nil, afterDelay: TimeInterval = -1) {
         MBProgressHUD.hide(for: view, animated: false)
         let hud = ABMBProgressHUD(frame: view.bounds)
         hud.areDefaultMotionEffectsEnabled = false
@@ -29,6 +29,9 @@ extension UIViewController {
         hud.mode = .indeterminate
         hud.label.text = text
         hud.show(animated: true)
+        if afterDelay > 0 {
+            hud.hide(animated: true, afterDelay: afterDelay)
+        }
     }
     
     public func hiddenLoadingIndicator() {

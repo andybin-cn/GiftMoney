@@ -61,8 +61,8 @@ extension UIViewController {
         } else if error is CKError {
             self.showTipsView(text: CommonError.iCloudError.message)
         } else {
-            SLog.error("catchError:\(String(describing: catchError))")
-            self.showTipsView(text: "未知错误")
+            SLog.error("catchError:\(String(describing: error))")
+            self.showTipsView(text: error.localizedDescription)
         }
     }
 }
