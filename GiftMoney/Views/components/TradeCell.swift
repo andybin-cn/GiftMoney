@@ -37,9 +37,10 @@ class TradeCell: UITableViewCell {
             label.textColor = .white
             label.layer.cornerRadius = 20
             label.clipsToBounds = true
-            label.layer.borderWidth = 0.5
+            label.layer.borderWidth = 1
             label.textAlignment = .center
             label.backgroundColor = .appSecondaryYellow
+            label.layer.borderColor = UIColor.appMainRed.cgColor
             
             label.addTo(contentView) { (make) in
                 make.centerY.equalToSuperview()
@@ -78,8 +79,9 @@ class TradeCell: UITableViewCell {
             }
         }
         let stackView = UIStackView().then { (stackView) in
-            stackView.axis = .horizontal
+            stackView.axis = .vertical
             stackView.spacing = 15
+            stackView.alignment = .trailing
             stackView.addTo(contentView) { (make) in
                 make.centerY.equalToSuperview()
                 make.right.equalTo(-40)
@@ -93,8 +95,8 @@ class TradeCell: UITableViewCell {
             label.font = UIFont.appFont(ofSize: 16)
             label.textColor = .appSecondaryYellow
         }
-        stackView.addArrangedSubview(gitfLabel)
         stackView.addArrangedSubview(moneyLabel)
+        stackView.addArrangedSubview(gitfLabel)
     }
     
     func configerUI(trade: Trade) {
@@ -102,12 +104,21 @@ class TradeCell: UITableViewCell {
         guard let type = trade.type else {
             return
         }
-        iconLabel.text = type == .inAccount ? "收" : "送"
+        if type == .inAccount {
+            iconLabel.text = "收"
+            iconLabel.backgroundColor = UIColor.appSecondaryYellow
+            iconLabel.layer.borderColor = UIColor.appMainRed.cgColor
+        } else {
+            iconLabel.backgroundColor = UIColor.appMainRed
+            iconLabel.layer.borderColor = UIColor.appSecondaryYellow.cgColor
+            iconLabel.text = "支"
+        }
+        
         nameLabel.text = trade.name
         eventLabel.text = trade.eventName
         timeLabel.text = trade.eventTime.toString(withFormat: "yyyy-MM-dd")
         gitfLabel.text = "礼物共\(trade.giftCount)件"
-        moneyLabel.text = String.init(format: "¥%0.0f元", trade.totalMoney)
+        moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", trade.totalMoney)
         
     }
 }

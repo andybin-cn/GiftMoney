@@ -109,6 +109,7 @@ class InviteCodeVC: BaseViewController {
     }
     
     @objc func copyButtonTapped() {
-        
+        UIPasteboard.general.string = inviteCode
+        self.showTipsView(text: "邀请码已经复制到剪切板")
     }
 }

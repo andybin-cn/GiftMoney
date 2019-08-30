@@ -53,7 +53,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         case .paid1:
             return "黄金VIP用户"
         case .paid2:
-            return "砖石Vip用户"
+            return "钻石Vip用户"
         }
     }
     
@@ -213,7 +213,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                     UIAlertAction(title: "取消", style: .cancel, handler: nil),
                     UIAlertAction(title: "复制邮箱地址", style: .destructive, handler: { (_) in
                         UIPasteboard.general.string = "reciprocityApp@163.com"
-                        self.showTipsView(text: "邮箱地址已经复制的剪切板")
+                        self.showTipsView(text: "邮箱地址已经复制到剪切板")
                     })
                 ])
             }
