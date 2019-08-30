@@ -49,8 +49,8 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
         navigationController?.pushViewController(AddTradeViewController(tradeType: .outAccount, event: nil), animated: true)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         header.dissmisPopup()
     }
     

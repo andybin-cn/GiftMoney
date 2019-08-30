@@ -55,8 +55,8 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         super.viewDidAppear(animated)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         header.dissmisPopup()
     }
     
