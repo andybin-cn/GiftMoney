@@ -28,7 +28,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     
     let desc3 = MineDescriptionRow(text: "隐私安全")
     let faceID: MineSwitchRow
-    let desc4 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石Vip】会员资格")
+    let desc4 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石VIP】会员资格")
     let inviteCodeRow = MineTextRow(title: "填写邀请码", image: UIImage(named: "icons8-invite"))
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
     
@@ -51,7 +51,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         case .free:
             return "普通用户（升级VIP体验更多功能）"
         case .paid1:
-            return "黄金Vip用户"
+            return "黄金VIP用户"
         case .paid2:
             return "砖石Vip用户"
         }

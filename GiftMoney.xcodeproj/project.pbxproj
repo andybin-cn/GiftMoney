@@ -83,6 +83,7 @@
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
 		38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */; };
 		38FAD6302317BE2300F28AA0 /* FillInviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */; };
+		38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FAD6362319057400F28AA0 /* StoreKit.framework */; };
 		9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */; };
 		BEF4A2403A9B9C0A38D74C5F /* Pods_GiftMoneyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6EF788216A996B40FFA38 /* Pods_GiftMoneyUITests.framework */; };
 		CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */; };
@@ -246,6 +247,7 @@
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
 		38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInput.swift; sourceTree = "<group>"; };
 		38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillInviteCodeVC.swift; sourceTree = "<group>"; };
+		38FAD6362319057400F28AA0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		77429951A2D4E665BC0D3F1C /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyTests.debug.xcconfig"; path = "Target Support Files/Pods-GiftMoneyTests/Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0213D6FF91967F5765DFA8 /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyUITests.release.xcconfig"; path = "Target Support Files/Pods-GiftMoneyUITests/Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +266,7 @@
 				3849261C23179DBB0012D775 /* CloudKit.framework in Frameworks */,
 				384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */,
 				384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */,
+				38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */,
 				CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */,
 				369DFF2522F7094F0005B67D /* Common.framework in Frameworks */,
 			);
@@ -563,6 +566,7 @@
 		E63782FD40E14AE5A4748D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38FAD6362319057400F28AA0 /* StoreKit.framework */,
 				3849261B23179DBB0012D775 /* CloudKit.framework */,
 				384CCA21230D3643006F0E3E /* libz.tbd */,
 				7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */,

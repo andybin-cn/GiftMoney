@@ -49,11 +49,11 @@ class InviteCodeVC: BaseViewController {
             }
         }
         
-        let label1 = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 18), textAlignment: .left, text: "成功邀请 5 位好友，解锁【黄金Vip】所有功能")
+        let label1 = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 18), textAlignment: .left, text: "成功邀请 5 位好友，解锁【黄金VIP】所有功能")
         label1.numberOfLines = 0
         label1.lineBreakMode = .byWordWrapping
         
-        let label2 = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 18), textAlignment: .left, text: "成功邀请 30 位好友，解锁【钻石Vip】所有功能")
+        let label2 = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 18), textAlignment: .left, text: "成功邀请 30 位好友，解锁【钻石VIP】所有功能")
         label2.numberOfLines = 0
         label2.lineBreakMode = .byWordWrapping
         
