@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import SnapKit
 import Common
+import RxSwift
+import StoreKit
 
 class MarketVC: BaseViewController {
     
@@ -54,14 +56,12 @@ class MarketVC: BaseViewController {
         let inviteHeader = MarketServiceHeader(title: "邀请好友获取会员资格", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
         let inviteItems: [MarketServiceItem] = [
             MarketServiceItem(title: "成功邀请5位好友，解锁【黄金VIP】所有功能"),
-            MarketServiceItem(title: "成功邀请20位好友，解锁【钻石VIP】所有功能"),
-            MarketServiceItem(title: "不限自定义关系个数"),
-            MarketServiceItem(title: "不限自定义事件个数"),
-            MarketServiceItem(title: "不限图片或视频个数"),
+            MarketServiceItem(title: "成功邀请20位好友，解锁【钻石VIP】所有功能")
         ]
         inviteGroup = MarketServiceGroup(header: inviteHeader, items: inviteItems, showPay: true)
         inviteGroup.buyButton.setTitle("立即邀请", for: .normal)
         inviteGroup.buyButton.setTitle("立即邀请", for: .disabled)
+        inviteGroup.buyButton.setImage(UIImage(named: "icons8-invite")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .normal)
         inviteGroup.buyButton.snp.updateConstraints { (make) in
             make.width.equalTo(120)
         }
@@ -157,7 +157,17 @@ class MarketVC: BaseViewController {
     
     func payForProduct(code: String) {
         self.showLoadingIndicator()
-        MarketManager.shared.payForCode(code: code).subscribe(onNext: { [weak self] (state) in
+        MarketManager.shared.fetchProductForCode(code: code).flatMap { (product) -> Observable<(String, SKPaymentTransactionState)> in
+            self.hiddenLoadingIndicator()
+            return MarketManager.shared.payFor(product: product)
+        }.subscribe(onNext: { [weak self] (productID, state) in
+            if state == .deferred {
+                self?.showLoadingIndicator(text: "正在进行支付，请稍后")
+            } else if state == .purchased  {
+                self?.showAlertView(title: "恭喜你，成功购买此产品！")
+            } else if state == .restored {
+                self?.showAlertView(title: "您已经购买过此产品，已经为您恢复购买，无需再次支付。")
+            }
             self?.refreshUI()
             SLog.info("MarketManager.shared.payForCode inProgree:\(state)")
         }, onError: { [weak self] (error) in

@@ -20,7 +20,7 @@ enum MarketServiceType {
     case backupAndRecover
 }
 
-class MarketManager {
+class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDelegate {
     enum Level: Int {
         case free
         case paid1
@@ -43,13 +43,20 @@ class MarketManager {
     }
     
     
-    private init() {
+    deinit {
+        SKPaymentQueue.default().remove(self)
+    }
+    
+    private override init() {
         paidProducts = UserDefaults.standard.object(forKey: "MarketManager_paidProducts") as? [String] ?? [String]()
+        super.init()
         
         self.resetCurrentLevel()
         _ = InviteManager.shared.invitedCountRelay.subscribe(onNext: { (count) in
             self.resetCurrentLevel()
         })
+        
+        SKPaymentQueue.default().add(self)
     }
     
     func resetCurrentLevel() {
@@ -119,109 +126,62 @@ class MarketManager {
     }
     
     
-    func payForCode(code: String) -> Observable<SKPaymentTransactionState> {
-        return StoreObserver(productCode: code).requestPay().do(onNext: { (state) in
-            if state == .purchased || state == .restored {
-                if !self.paidProducts.contains(code) {
-                    self.paidProducts.append(code)
-                }
-            }
-        }).observeOn(MainScheduler())
-    }
-}
-
-
-
-class StoreObserver: NSObject, SKPaymentTransactionObserver, SKProductsRequestDelegate {
-    
-    deinit {
-        print("StoreObserver released!")
-    }
-    
-    var productsRequest: SKProductsRequest?
-    var productCode: String
-    init(productCode: String) {
-        self.productCode = productCode
-    }
-    
-    func requestPay() -> Observable<SKPaymentTransactionState> {
-        return fetchProductForCode(code: productCode).flatMap { self.payFor(product: $0) }
-    }
-    
-    private var observer: AnyObserver<SKProduct>?
+    private var fetchProductObserver = PublishSubject<SKProduct>()
     func fetchProductForCode(code: String) -> Observable<SKProduct> {
-        return Observable<SKProduct>.create { [unowned self] (observer) -> Disposable in
-            self.observer = observer
-            let productsRequest = SKProductsRequest(productIdentifiers: Set<String>(arrayLiteral: code))
-            productsRequest.delegate = self
-            productsRequest.start()
-            self.productsRequest = productsRequest
-            return Disposables.create {
-                self.productsRequest = nil
-                productsRequest.delegate = nil
-            }
-        }
+        let productsRequest = SKProductsRequest(productIdentifiers: Set<String>(arrayLiteral: code))
+        productsRequest.delegate = self
+        productsRequest.start()
+        return fetchProductObserver.asObserver()
     }
     
-    private var payObserver: AnyObserver<SKPaymentTransactionState>?
-    func payFor(product: SKProduct) -> Observable<SKPaymentTransactionState> {
-        return Observable<SKPaymentTransactionState>.create { [unowned self] (observer) -> Disposable in
-            self.payObserver = observer
-            let payment = SKMutablePayment(product: product)
-            SKPaymentQueue.default().add(self)
-            SKPaymentQueue.default().add(payment)
-            return Disposables.create {
-                SKPaymentQueue.default().remove(self)
-            }
-        }
+    private var payObserver = PublishSubject<(String, SKPaymentTransactionState)>()
+    func payFor(product: SKProduct) -> Observable<(String, SKPaymentTransactionState)> {
+        let payment = SKMutablePayment(product: product)
+//        payment.simulatesAskToBuyInSandbox = true
+        SKPaymentQueue.default().add(payment)
+        return payObserver.asObserver()
     }
     
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         if let product = response.products.first {
-            observer?.onNext(product)
-            observer?.onCompleted()
+            fetchProductObserver.onNext(product)
+            fetchProductObserver.onCompleted()
         } else {
-            observer?.onError(CommonError(message: "获取产品信息失败"))
+            fetchProductObserver.onError(CommonError(message: "获取产品信息失败"))
         }
     }
-    
     
     //Observe transaction updates.
     func paymentQueue(_ queue: SKPaymentQueue,updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
-            self.payObserver?.onNext(transaction.transactionState)
+            let productID = transaction.payment.productIdentifier
             switch transaction.transactionState {
             case .deferred:
                 //该交易处于队列中，但其最终状态正在等待“要求购买”等外部操作。
                 //更新您的用户界面以显示延迟状态，并等待另一个指示最终状态的回调。
+                SLog.info("updatedTransactions: deferred")
                 break
             case .purchasing:
                 //该交易正在由App Store处理。
+                SLog.info("updatedTransactions: purchasing")
                 break
             case .failed:
                 //交易失败
-                if let error = transaction.error {
-                    SLog.error("transaction failed:\(error)")
-                    self.payObserver?.onError(error)
-                } else {
-                    self.payObserver?.onError(CommonError(message: "支付未完成"))
+                SLog.info("updatedTransactions: failed")
+                break
+            case .restored, .purchased:
+                SLog.info("updatedTransactions: success")
+                //购买成功
+                //恢复用户先前购买的内容。 可查看originalTransaction属性以获取有关原始购买的信息。
+                if !paidProducts.contains(productID) {
+                    paidProducts.append(productID)
                 }
                 break
-            case .purchased:
-                //App Store已成功处理付款。
-                self.payObserver?.onCompleted()
-                break
-            case .restored:
-                //恢复用户先前购买的内容。 可查看originalTransaction属性以获取有关原始购买的信息。
-                self.payObserver?.onCompleted()
-                break
             @unknown default:
-                SLog.error("Unexpected transaction state:\(transaction.transactionState)")
-                self.payObserver?.onCompleted()
                 break
             }
+            self.payObserver.onNext((productID, transaction.transactionState))
         }
     }
-    
 }

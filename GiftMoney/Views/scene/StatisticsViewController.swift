@@ -100,7 +100,7 @@ class StatisticsViewController: BaseViewController, UITableViewDelegate, UITable
                     tableView.reloadData()
                 }) { [weak self] (error) in
                     self?.catchError(error: error)
-                    }.disposed(by: self.disposeBag)
+                }.disposed(by: self.disposeBag)
             })
             ])
     }

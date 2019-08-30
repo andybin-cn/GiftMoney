@@ -96,11 +96,11 @@ class MarketServiceGroup: UIView {
         buyButton.apply { (button) in
             button.setTitle("购买", for: .normal)
             button.setTitleColor(UIColor.white, for: .normal)
-            button.setImage(UIImage(named: "icons8-buy"), for: .normal)
+            button.setImage(UIImage(named: "icons8-buy")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .normal)
             
             button.setTitle("已购买", for: .disabled)
             button.setTitleColor(UIColor.green, for: .disabled)
-            button.setImage(UIImage(named: "icons8-checked"), for: .disabled)
+            button.setImage(UIImage(named: "icons8-checked")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .disabled)
             
             button.imageView?.contentMode = .scaleAspectFit
             
