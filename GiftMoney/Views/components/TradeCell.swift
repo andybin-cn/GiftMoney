@@ -89,34 +89,17 @@ class TradeCell: UITableViewCell {
         }
         gitfLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 15)
-            label.textColor = .appSecondaryYellow
+            label.textColor = .appSecondaryRed
             label.textAlignment = .right
         }
         moneyLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 15)
-            label.textColor = .appSecondaryYellow
+            label.textColor = .appSecondaryRed
             label.textAlignment = .right
         }
-        let moneyStack = UIStackView().then { (stackView) in
-            stackView.axis = .horizontal
-            stackView.spacing = 5
-            stackView.alignment = .firstBaseline
-            stackView.distribution = .fill
-        }
-        moneyStack.addArrangedSubview(UILabel(textColor: .appSecondaryYellow, font: .appFont(ofSize: 15), textAlignment: .left, text: "红包共"))
-        moneyStack.addArrangedSubview(moneyLabel)
         
-        let giftStack = UIStackView().then { (stackView) in
-            stackView.axis = .horizontal
-            stackView.spacing = 5
-            stackView.alignment = .firstBaseline
-            stackView.distribution = .fill
-        }
-        giftStack.addArrangedSubview(UILabel(textColor: .appSecondaryYellow, font: .appFont(ofSize: 15), textAlignment: .left, text: "礼物共"))
-        giftStack.addArrangedSubview(gitfLabel)
-        
-        stackView.addArrangedSubview(moneyStack)
-        stackView.addArrangedSubview(giftStack)
+        stackView.addArrangedSubview(moneyLabel)
+        stackView.addArrangedSubview(gitfLabel)
     }
     
     func configerUI(trade: Trade) {
@@ -139,8 +122,8 @@ class TradeCell: UITableViewCell {
         nameLabel.text = trade.name
         eventLabel.text = trade.eventName
         timeLabel.text = trade.eventTime.toString(withFormat: "yyyy-MM-dd")
-        gitfLabel.text = "\(trade.giftCount)份"
-        moneyLabel.text = String.init(format: "¥%0.0f元", trade.totalMoney)
+        gitfLabel.text = "礼物共    \(trade.giftCount)份"
+        moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", trade.totalMoney)
         
     }
 }
