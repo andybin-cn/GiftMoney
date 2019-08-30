@@ -24,6 +24,13 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        header.addTo(self.view) { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(ScreenHelp.navBarHeight)
+        }
+        header.delegate = self
+        header.parentView = MainTabViewController.shared.view
+        
         tableView.apply { (tableView) in
             tableView.register(EventGroupCell.self, forCellReuseIdentifier: EventGroupCell.commonIdentifier)
             tableView.estimatedRowHeight = 80
@@ -32,12 +39,10 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
             tableView.setExtraCellLineHidden()
             tableView.emptyDataSetDelegate = self
             tableView.emptyDataSetSource = self
-            tableView.tableHeaderView = header
-            header.delegate = self
-            header.parentView = MainTabViewController.shared.view
             
             tableView.addTo(view) { (make) in
-                make.edges.equalToSuperview()
+                make.top.equalTo(header.snp.bottom)
+                make.left.right.bottom.equalToSuperview()
             }
         }
     }
