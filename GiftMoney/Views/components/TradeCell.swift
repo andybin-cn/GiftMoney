@@ -81,7 +81,7 @@ class TradeCell: UITableViewCell {
         let stackView = UIStackView().then { (stackView) in
             stackView.axis = .vertical
             stackView.spacing = 6
-            stackView.alignment = .trailing
+            stackView.alignment = .fill
             stackView.addTo(contentView) { (make) in
                 make.centerY.equalToSuperview()
                 make.right.equalTo(-40)
@@ -90,13 +90,33 @@ class TradeCell: UITableViewCell {
         gitfLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 15)
             label.textColor = .appSecondaryYellow
+            label.textAlignment = .right
         }
         moneyLabel.apply { (label) in
             label.font = UIFont.appFont(ofSize: 15)
             label.textColor = .appSecondaryYellow
+            label.textAlignment = .right
         }
-        stackView.addArrangedSubview(moneyLabel)
-        stackView.addArrangedSubview(gitfLabel)
+        let moneyStack = UIStackView().then { (stackView) in
+            stackView.axis = .horizontal
+            stackView.spacing = 5
+            stackView.alignment = .firstBaseline
+            stackView.distribution = .fill
+        }
+        moneyStack.addArrangedSubview(UILabel(textColor: .appSecondaryYellow, font: .appFont(ofSize: 15), textAlignment: .left, text: "红包共"))
+        moneyStack.addArrangedSubview(moneyLabel)
+        
+        let giftStack = UIStackView().then { (stackView) in
+            stackView.axis = .horizontal
+            stackView.spacing = 5
+            stackView.alignment = .firstBaseline
+            stackView.distribution = .fill
+        }
+        giftStack.addArrangedSubview(UILabel(textColor: .appSecondaryYellow, font: .appFont(ofSize: 15), textAlignment: .left, text: "礼物共"))
+        giftStack.addArrangedSubview(gitfLabel)
+        
+        stackView.addArrangedSubview(moneyStack)
+        stackView.addArrangedSubview(giftStack)
     }
     
     func configerUI(trade: Trade) {
@@ -119,8 +139,8 @@ class TradeCell: UITableViewCell {
         nameLabel.text = trade.name
         eventLabel.text = trade.eventName
         timeLabel.text = trade.eventTime.toString(withFormat: "yyyy-MM-dd")
-        gitfLabel.text = "礼物共 \(trade.giftCount)份"
-        moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", trade.totalMoney)
+        gitfLabel.text = "\(trade.giftCount)份"
+        moneyLabel.text = String.init(format: "¥%0.0f元", trade.totalMoney)
         
     }
 }
