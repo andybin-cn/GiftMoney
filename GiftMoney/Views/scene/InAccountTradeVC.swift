@@ -52,7 +52,7 @@ class InAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadData()
+//        loadData()
     }
     
     func loadData() {

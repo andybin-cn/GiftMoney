@@ -55,17 +55,21 @@ class TradeManger {
         return trades
     }
     
-    func eventsGroup(trades: [Trade]) -> Dictionary<Event, [Trade]> {
-        var tradeGroups = Dictionary<Event, [Trade]>()
+    func eventsGroup(trades: [Trade]) -> Dictionary<Event, (Event, [Trade])> {
+        var tradeGroups = Dictionary<Event, (Event, [Trade])>()
         trades.forEach { (trade) in
             let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
-            groupKey.totalMoney += trade.totalMoney
-            groupKey.giftCount += trade.giftCount
-            groupKey.tradeCount += 1
-            if tradeGroups[groupKey] != nil {
-                tradeGroups[groupKey]?.append(trade)
+            if let oldValue = tradeGroups[groupKey] {
+                oldValue.0.giftCount += trade.giftCount
+                oldValue.0.totalMoney += trade.totalMoney
+                oldValue.0.tradeCount += 1
+                tradeGroups[groupKey]?.0 = oldValue.0
+                tradeGroups[groupKey]?.1.append(trade)
             } else {
-                tradeGroups[groupKey] = [trade]
+                groupKey.tradeCount = 1
+                groupKey.giftCount = trade.giftCount
+                groupKey.totalMoney = trade.totalMoney
+                tradeGroups[groupKey] = (groupKey, [trade])
             }
         }
         return tradeGroups

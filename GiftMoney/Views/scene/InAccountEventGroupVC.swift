@@ -13,7 +13,7 @@ import DZNEmptyDataSet
 class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, TradeFunctionHeaderDelegate {
     
     let tableView = UITableView()
-    var eventsGroup = Dictionary<Event, [Trade]>()
+    var eventsGroup = Dictionary<Event, (Event, [Trade])>()
     var keys = [Event]()
     
     let header = TradeFunctionHeader(frame: CGRect(x: 0, y: 0, width: ScreenHelp.windowWidth, height: 70))
@@ -117,15 +117,19 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let event = keys[indexPath.row]
-        let trades = eventsGroup[event]
+        var event = keys[indexPath.row]
+        let value = eventsGroup[event]
+        event = value?.0 ?? event
+        let trades = value?.1
         let controller = InAccountTradeVC(event: event, trades: trades)
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let event = keys[indexPath.row]
-        let trades = eventsGroup[event] ?? [Trade]()
+        var event = keys[indexPath.row]
+        let value = eventsGroup[event]
+        event = value?.0 ?? event
+        let trades = value?.1 ?? [Trade]()
         let controller = EventGroupModifyVC(event: event, trades: trades)
         self.navigationController?.pushViewController(controller, animated: true)
     }
