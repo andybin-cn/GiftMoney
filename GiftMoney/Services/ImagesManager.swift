@@ -156,4 +156,25 @@ class ImagesManager {
             try? FileManager.default.copyItem(at: srcUrl, to: dstURL)
         }
     }
+    
+    func recoverImage(asset: CKAsset, media: TradeMedia) -> Observable<URL> {
+        return Observable<URL>.create({ (observer) -> Disposable in
+            let mediaDirectory = URL(fileURLWithPath: "\(NSHomeDirectory())/Documents/Medias")
+            do {
+                if !FileManager.default.fileExists(atPath: mediaDirectory.path) {
+                    try FileManager.default.createDirectory(at: mediaDirectory, withIntermediateDirectories: true, attributes: nil)
+                }
+                guard let srcUrl = asset.fileURL else {
+                    observer.onError(CommonError.iCloudError)
+                    return Disposables.create { }
+                }
+                try FileManager.default.copyItem(at: srcUrl, to: media.url)
+            } catch let error {
+                observer.onError(error)
+            }
+            observer.onNext(media.url)
+            observer.onCompleted()
+            return Disposables.create { }
+        })
+    }
 }

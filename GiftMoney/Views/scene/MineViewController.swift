@@ -226,8 +226,9 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     }
     
     func backupTradesToCloud() {
-        self.showLoadingIndicator()
+        self.showLoadingIndicator(text: "正在备份数据")
         CloudManager.shared.backupTrades().subscribe(onNext: { (progress) in
+            self.showLoadingIndicator(text: "已备份\(progress.finishCount)条数据，共\(progress.totoalCount)条")
             SLog.info("backupTrades progress:\(progress.finishCount)/\(progress.totoalCount)")
         }, onError: { (error) in
             self.showTipsView(text: "备份失败")
@@ -242,6 +243,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         var tempProgress: CloudSyncProgress?
         CloudManager.shared.recoverTrades().subscribe(onNext: { (progress) in
             tempProgress = progress
+            self.showLoadingIndicator(text: "已恢复\(progress.finishCount)条数据")
             SLog.info("recoverTradesFromCloud progress:\(progress.finishCount)/\(progress.totoalCount)")
         }, onError: { (error) in
             self.showTipsView(text: "恢复失败")
