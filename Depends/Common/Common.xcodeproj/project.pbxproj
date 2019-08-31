@@ -302,7 +302,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = EG49RAY3R6;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					364F49921E6710E600208E9D = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -569,7 +569,8 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -579,8 +580,9 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.binea.Common;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -595,7 +597,8 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -605,8 +608,9 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.binea.Common;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_VERSION = 5.0;
