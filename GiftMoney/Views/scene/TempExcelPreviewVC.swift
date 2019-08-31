@@ -48,7 +48,7 @@ class TempExcelPreviewVC: QLPreviewController, QLPreviewControllerDataSource, QL
     
     //MARK: - QLPreviewItem
     var previewItemURL: URL? {
-        url
+        return url
     }
     var previewItemTitle: String? {
         return "导出预览"

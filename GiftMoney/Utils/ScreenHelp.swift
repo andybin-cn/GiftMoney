@@ -21,9 +21,9 @@ class ScreenHelp {
         return 1/UIScreen.main.scale
     }
     
-    static var windowSize: CGSize { UIScreen.main.bounds.size }
-    static var windowWidth: CGFloat { windowSize.width }
-    static var windoHeight: CGFloat { windowSize.height }
+    static var windowSize: CGSize { return UIScreen.main.bounds.size }
+    static var windowWidth: CGFloat { return windowSize.width }
+    static var windoHeight: CGFloat { return windowSize.height }
     
     static var screenType: ScreenType = { () in
         let size = UIScreen.main.bounds.size

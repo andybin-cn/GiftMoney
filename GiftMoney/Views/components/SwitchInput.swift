@@ -14,14 +14,14 @@ class SwitchInput: UIView, FormInput {
     let label = UILabel()
     let switcher = UISegmentedControl(items: ["送礼", "收礼"])
     var selectedIndex: Int {
-        get { switcher.selectedSegmentIndex }
+        get { return switcher.selectedSegmentIndex }
         set { switcher.selectedSegmentIndex = newValue }
     }
     
     var fieldName: String
     var fieldValue: FormValue {
         get {
-            selectedIndex == 0 ? Trade.TradeType.outAccount.rawValue : Trade.TradeType.inAccount.rawValue
+            return selectedIndex == 0 ? Trade.TradeType.outAccount.rawValue : Trade.TradeType.inAccount.rawValue
         }
         set {
             if let stringValue = newValue as? String {

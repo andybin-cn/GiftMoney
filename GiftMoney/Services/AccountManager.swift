@@ -21,7 +21,7 @@ class AccountManager {
     }
     
     func fetchAndCreateUserInfoZone() -> Observable<CKRecordZone> {
-        Observable<CKRecordZone>.create { (observer) -> Disposable in
+        return Observable<CKRecordZone>.create { (observer) -> Disposable in
             let privateDB = CKContainer.default().privateCloudDatabase
             let zoneID = CKRecordZone.ID.init(zoneName: "UserInfo", ownerName: CKCurrentUserDefaultName)
             privateDB.fetch(withRecordZoneID: zoneID) { (zone, error) in
@@ -44,7 +44,7 @@ class AccountManager {
         }
     }
     func fetchInviteCode() -> Observable<String?> {
-        fetchUserInfo().map { (record) -> String? in
+        return fetchUserInfo().map { (record) -> String? in
             record.object(forKey: "InviteCode") as? String
         }
     }
@@ -60,7 +60,7 @@ class AccountManager {
     }
     
     func fetchAndCreateUserInfoRecord(zone: CKRecordZone) -> Observable<CKRecord> {
-        Observable<CKRecord>.create { (observer) -> Disposable in
+        return Observable<CKRecord>.create { (observer) -> Disposable in
             let privateDB = CKContainer.default().privateCloudDatabase
             let id = CKRecord.ID.init(recordName: "UserInfo", zoneID: zone.zoneID)
             privateDB.fetch(withRecordID: id) { (record, error) in

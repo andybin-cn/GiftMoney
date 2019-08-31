@@ -15,7 +15,7 @@ class DateInputField: InputField {
     var date: Date
     override var fieldValue: FormValue {
         get {
-            date
+            return date
         }
         set {
             guard let date = newValue as? Date else {

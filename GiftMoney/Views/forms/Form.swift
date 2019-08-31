@@ -102,10 +102,10 @@ extension UIViewController: Form {
     }
 
     func formValues() -> [String : Any] {
-        view?.formValues() ?? [String : Any]()
+        return view?.formValues() ?? [String : Any]()
     }
     
     func validateForm() throws -> [String : Any] {
-        try view?.validateForm() ?? [String : Any]()
+        return try view?.validateForm() ?? [String : Any]()
     }
 }

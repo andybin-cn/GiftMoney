@@ -15,7 +15,7 @@ class TextInput: UIView, FormInput, UITextViewDelegate {
     var fieldName: String
     var fieldValue: FormValue {
         get {
-            textfield.text ?? ""
+            return textfield.text ?? ""
         }
         set {
             textfield.text = newValue as? String

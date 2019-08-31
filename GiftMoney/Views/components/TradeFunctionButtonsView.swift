@@ -15,17 +15,17 @@ protocol TradeFunctionButtonItem {
 
 extension Event: TradeFunctionButtonItem {
     var title: String {
-        self.name
+        return self.name
     }
 }
 extension String: TradeFunctionButtonItem {
     var title: String {
-        self
+        return self
     }
 }
 extension Relationship: TradeFunctionButtonItem {
     var title: String {
-        self.name
+        return self.name
     }
 }
 
@@ -36,7 +36,7 @@ class TradeFunctionButtonsView: UIView {
     var selectedIndex: [Int]
     let items: [TradeFunctionButtonItem]
     var selectedItems: [TradeFunctionButtonItem] {
-        selectedIndex.map { (index) -> TradeFunctionButtonItem? in
+        return selectedIndex.map { (index) -> TradeFunctionButtonItem? in
             index < items.count ? items[index] : nil
         }.filter { $0 != nil }.map { $0! }
     }

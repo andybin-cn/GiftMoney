@@ -48,7 +48,7 @@ class InviteManager {
     }
     
     func useInviteCode(code: String) -> Observable<String> {
-        AccountManager.shared.fetchUserInfo().flatMap { (record) -> Observable<String> in
+        return AccountManager.shared.fetchUserInfo().flatMap { (record) -> Observable<String> in
             let hasUsedInvitedCode = record.object(forKey: "hasUsedInvitedCode") as? Bool ?? false
             let usedInvitedCode = record.object(forKey: "usedInvitedCode") as? String ?? ""
             if hasUsedInvitedCode, !usedInvitedCode.isEmpty {
@@ -69,7 +69,7 @@ class InviteManager {
     }
     
     private func inserInviteCodeToUsedTable(code: String) -> Observable<String> {
-        Observable<String>.create { (observable) -> Disposable in
+        return Observable<String>.create { (observable) -> Disposable in
             let publicDB = CKContainer.default().publicCloudDatabase
             let record = CKRecord(recordType: "UsersForInviteCode")
             record.setObject(code as __CKRecordObjCValue, forKey: "InviteCode")

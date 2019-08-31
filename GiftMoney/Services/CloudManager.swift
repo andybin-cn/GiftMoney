@@ -55,7 +55,7 @@ class CloudManager {
     }
     
     func backupTrade(tradeID: String, dataBase: CKDatabase) -> Observable<CKRecord> {
-        Observable<CKRecord>.create { (observable) -> Disposable in
+        return Observable<CKRecord>.create { (observable) -> Disposable in
             let dispose = self.generatorRecordForTrade(tradeID: tradeID, dataBase: dataBase).subscribe(onNext: { (record) in
                 DispatchQueue.global().async {
                     let (_, trade) = self.fillValues(target: record, from: tradeID)
@@ -80,7 +80,7 @@ class CloudManager {
     
     
     func generatorRecordForTrade(tradeID: String, dataBase: CKDatabase) -> Observable<CKRecord> {
-        Observable<CKRecord>.create { (observable) -> Disposable in
+        return Observable<CKRecord>.create { (observable) -> Disposable in
             dataBase.fetch(withRecordID: CKRecord.ID(recordName: tradeID)) { (record, error) in
                 if let error = error as? CKError {
                     if error.code == .unknownItem {
@@ -136,7 +136,7 @@ class CloudManager {
     }
     
     func recoverTrades() -> Observable<CloudSyncProgress> {
-        fetchTradeRecords().flatMap({ self.saveRecordToDatabase(record: $0) }).scan(CloudSyncProgress(finishCount: 0, totoalCount: 0)) { (progress, sucess) -> CloudSyncProgress in
+        return fetchTradeRecords().flatMap({ self.saveRecordToDatabase(record: $0) }).scan(CloudSyncProgress(finishCount: 0, totoalCount: 0)) { (progress, sucess) -> CloudSyncProgress in
             if sucess {
                 return CloudSyncProgress(finishCount: progress.finishCount + 1, totoalCount: progress.totoalCount + 1)
             }
