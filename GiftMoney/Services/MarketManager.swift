@@ -181,17 +181,17 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
             case .deferred:
                 //该交易处于队列中，但其最终状态正在等待“要求购买”等外部操作。
                 //更新您的用户界面以显示延迟状态，并等待另一个指示最终状态的回调。
-                SLog.info("updatedTransactions: deferred")
+                SLog.info("updatedTransactions - deferred： \(productID)")
                 self.payObserver?.onNext((productID, transaction.transactionState))
                 break
             case .purchasing:
                 //该交易正在由App Store处理。
-                SLog.info("updatedTransactions: purchasing")
+                SLog.info("updatedTransactions: purchasing： \(productID)")
                 self.payObserver?.onNext((productID, transaction.transactionState))
                 break
             case .failed:
                 //交易失败
-                SLog.info("updatedTransactions: failed")
+                SLog.info("updatedTransactions: failed： \(productID)")
                 self.payObserver?.onNext((productID, transaction.transactionState))
                 if let error = transaction.error {
                     self.payObserver?.onError(error)
@@ -200,7 +200,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
                 }
                 break
             case .restored, .purchased:
-                SLog.info("updatedTransactions: success")
+                SLog.info("updatedTransactions: success： \(productID)")
                 //购买成功
                 //恢复用户先前购买的内容。 可查看originalTransaction属性以获取有关原始购买的信息。
                 if !paidProducts.contains(productID) {
