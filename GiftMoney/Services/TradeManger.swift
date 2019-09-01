@@ -111,6 +111,12 @@ class TradeManger {
             return Disposables.create { }
         }
     }
+    
+    func deleteTrades(trades: [Trade]) -> Completable {
+        return Observable<Trade>.from(trades).flatMapLatest { (trade) -> Completable in
+            return self.deleteTrade(trade: trade)
+        }.ignoreElements()
+    }
     func deleteTrade(trade: Trade) -> Completable {
         let tradeID = trade.id
         return Observable<Any>.create { (observable) -> Disposable in

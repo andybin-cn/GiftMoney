@@ -140,15 +140,14 @@ class EventGroupModifyVC: BaseViewController {
     }
     
     func deleteAllEventForTrades() {
-        do {
-            RealmManager.share.realm.beginWrite()
-            RealmManager.share.realm.delete(trades)
-            try RealmManager.share.realm.commitWrite()
+        self.showLoadingIndicator()
+        TradeManger.shared.deleteTrades(trades: trades).subscribe(onCompleted: { [unowned self] in
+            self.hiddenLoadingIndicator()
             self.navigationController?.popViewController(animated: true)
             self.navigationController?.children.last?.showTipsView(text: "删除成功")
-        } catch let error {
+        }) { [unowned self] (error) in
             self.catchError(error: error)
-        }
+        }.disposed(by: disposeBag)
     }
     func modifyAllEventForTrades() {
         do {
