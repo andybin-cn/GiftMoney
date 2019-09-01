@@ -119,6 +119,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         super.viewDidAppear(animated)
         
         self.navigationItem.title = dynamicTitle
+        inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
         faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
     }
     

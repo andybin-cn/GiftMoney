@@ -100,11 +100,10 @@ class InviteCodeVC: BaseViewController {
         stackView.addArrangedSubview(label3)
         stackView.addArrangedSubview(label4)
         stackView.addArrangedSubview(buttons)
-        
     }
     
     @objc func inviteButtonTapped() {
-        let controller = UIActivityViewController(activityItems: ["给你推荐一款实用App，记得填写我的邀请码：\(inviteCode)", URL(string: "http://www.baidu.com")!], applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems: ["给你推荐一款实用App，记得填写我的邀请码：\(inviteCode)", URL(string: "https://apps.apple.com/cn/app/id1478354248")!], applicationActivities: nil)
         self.present(controller, animated: true, completion: nil)
     }
     
