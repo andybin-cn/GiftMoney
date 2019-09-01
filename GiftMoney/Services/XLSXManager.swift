@@ -43,7 +43,7 @@ class XLSXManager {
                     }
                     return
                 }
-                let headers = ["id", "name", "relationship", "eventName", "eventTime", "remark", "typeString", "createTime", "updateTime", "tradeItems", "tradeMedias"]
+                let headers = ["id", "姓名", "关系", "事件名称", "事件时间", "备注", "类别", "创建时间", "最近修改时间", "记录详情", "图片和视频", "总金额(元)"]
                 
                 headers.enumerated().forEach { (arg0) in
                     let (index, name) = arg0
@@ -86,7 +86,8 @@ class XLSXManager {
             trade.createTime.toString(withFormat: "yyyy-MM-dd"),
             trade.updateTime.toString(withFormat: "yyyy-MM-dd"),
             tradeItemsValue,
-            tradeMediasValue
+            tradeMediasValue,
+            String(format: "%0.0f", trade.totalMoney)
         ]
         
         values.enumerated().forEach { (col, item) in
