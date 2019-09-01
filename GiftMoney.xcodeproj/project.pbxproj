@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360E722B231ACE3B001842EE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360E722A231ACE3B001842EE /* CloudKit.framework */; };
 		36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2222F7289800D17330 /* ScreenHelp.swift */; };
 		36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2622F728AC00D17330 /* UIFont+appTheme.swift */; };
 		36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D4B22F871B200D17330 /* TradeItemRow.swift */; };
@@ -43,7 +44,6 @@
 		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
 		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
-		3849261C23179DBB0012D775 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3849261B23179DBB0012D775 /* CloudKit.framework */; };
 		384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */; };
 		384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA21230D3643006F0E3E /* libz.tbd */; };
 		386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */; };
@@ -164,6 +164,7 @@
 
 /* Begin PBXFileReference section */
 		0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoneyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		360E722A231ACE3B001842EE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		36135D2222F7289800D17330 /* ScreenHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelp.swift; sourceTree = "<group>"; };
 		36135D2622F728AC00D17330 /* UIFont+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appTheme.swift"; sourceTree = "<group>"; };
 		36135D4B22F871B200D17330 /* TradeItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItemRow.swift; sourceTree = "<group>"; };
@@ -206,7 +207,6 @@
 		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3849261823179DB50012D775 /* GiftMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GiftMoney.entitlements; sourceTree = "<group>"; };
-		3849261B23179DBB0012D775 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		384CCA11230D35DD006F0E3E /* XlsxReaderWriter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = XlsxReaderWriter.xcodeproj; sourceTree = "<group>"; };
 		384CCA21230D3643006F0E3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		3868657F2302A0FE000BBD85 /* OutAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutAccountTradeVC.swift; sourceTree = "<group>"; };
@@ -263,10 +263,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3849261C23179DBB0012D775 /* CloudKit.framework in Frameworks */,
 				384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */,
 				384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */,
 				38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */,
+				360E722B231ACE3B001842EE /* CloudKit.framework in Frameworks */,
 				CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */,
 				369DFF2522F7094F0005B67D /* Common.framework in Frameworks */,
 			);
@@ -566,8 +566,8 @@
 		E63782FD40E14AE5A4748D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				360E722A231ACE3B001842EE /* CloudKit.framework */,
 				38FAD6362319057400F28AA0 /* StoreKit.framework */,
-				3849261B23179DBB0012D775 /* CloudKit.framework */,
 				384CCA21230D3643006F0E3E /* libz.tbd */,
 				7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */,
 				0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */,
@@ -655,6 +655,12 @@
 						LastSwiftMigration = 1100;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -817,18 +823,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/libxlsxwriter/xlsxwriter.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/xlsxwriter.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1154,9 +1153,9 @@
 					"\"xlsxwriter\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
+				PRODUCT_BUNDLE_IDENTIFIER = andybin.giftmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = giftMoney_DEV;
+				PROVISIONING_PROFILE_SPECIFIER = GiftMoney_DEV;
 				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1194,9 +1193,9 @@
 					"\"xlsxwriter\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoney;
+				PRODUCT_BUNDLE_IDENTIFIER = andybin.giftmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = giftMonry_AppStore;
+				PROVISIONING_PROFILE_SPECIFIER = GiftMoney_AppStore;
 				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

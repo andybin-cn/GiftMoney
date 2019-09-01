@@ -1,7 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks.sh
-${BUILT_PRODUCTS_DIR}/MBProgressHUD-iOS12.0/MBProgressHUD.framework
-${BUILT_PRODUCTS_DIR}/Realm-iOS12.0/Realm.framework
-${BUILT_PRODUCTS_DIR}/RealmSwift-iOS12.0/RealmSwift.framework
-${BUILT_PRODUCTS_DIR}/SKPhotoBrowser-iOS12.0/SKPhotoBrowser.framework
-${BUILT_PRODUCTS_DIR}/SnapKit-iOS12.0/SnapKit.framework
-${BUILT_PRODUCTS_DIR}/SwiftyBeaver-iOS12.0/SwiftyBeaver.framework
+${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework
+${BUILT_PRODUCTS_DIR}/libxlsxwriter/xlsxwriter.framework
