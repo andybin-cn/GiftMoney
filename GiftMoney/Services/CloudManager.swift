@@ -170,7 +170,7 @@ class CloudManager {
             let record = CKRecord(recordType: "TradeMedias", recordID: CKRecord.ID(recordName: media.id))
             record.setObject(CKAsset(fileURL: media.url) as __CKRecordObjCValue, forKey: "asset")
             record.setObject(typeString as __CKRecordObjCValue, forKey: "typeString")
-            record.setObject(media.tradeID as __CKRecordObjCValue, forKey: "tradeID")
+            record.setObject(tradeID as __CKRecordObjCValue, forKey: "tradeID")
             record.setObject(media.id as __CKRecordObjCValue, forKey: "mediaID")
             return record
         }

@@ -153,6 +153,9 @@ class TradeManger {
         return Observable<Trade>.create { (observable) -> Disposable in
             RealmManager.share.realm.beginWrite()
             let newTrade = trade ?? Trade()
+            newMedias.forEach({ (media) in
+                media.tradeID = newTrade.id
+            })
             newTrade.tradeMedias.append(objectsIn: newMedias)
             RealmManager.share.realm.add(newTrade, update: .all)
             
