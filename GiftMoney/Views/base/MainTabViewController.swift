@@ -38,7 +38,7 @@ class MainTabViewController: UITabBarController {
 //        barItem2.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
 //        statisticsNav.tabBarItem = barItem2
 
-        let barItem3 = UITabBarItem(title: "辅助", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
+        let barItem3 = UITabBarItem(title: "辅助功能", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
         barItem3.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
         
         mineNav.tabBarItem = barItem3
