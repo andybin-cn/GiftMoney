@@ -94,9 +94,9 @@ extension DelegateProxyTest {
 
 #if os(iOS)
 extension DelegateProxyTest {
-    func test_UIWebViewDelegateExtension() {
-        performDelegateTest(UIWebViewSubclass(frame: CGRect.zero)) { ExtendWebViewDelegateProxy(webViewSubclass: $0) }
-    }
+//    func test_UIWebViewDelegateExtension() {
+//        performDelegateTest(UIWebViewSubclass(frame: CGRect.zero)) { ExtendWebViewDelegateProxy(webViewSubclass: $0) }
+//    }
 }
 #endif
 
