@@ -27,7 +27,7 @@ class MainTabViewController: UITabBarController {
 //        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
         let mineNav = BaseNavigationController(rootViewController: mineVC)
 
-        let barItem1 = UITabBarItem(title: "礼尚往来", image: UIImage(named: "icons8-wish_list")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-wish_list")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
+        let barItem1 = UITabBarItem(title: "礼金记录", image: UIImage(named: "icons8-wish_list")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-wish_list")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
         barItem1.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
         
         inoutRecordsNav.tabBarItem = barItem1

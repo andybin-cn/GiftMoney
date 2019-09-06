@@ -33,7 +33,7 @@ class ImagesManager {
     
     func exportImages() -> Observable<URL> {
         let workPath = "\(NSTemporaryDirectory())imageExport"
-        let fileName = "礼尚往来-图片-\(Date().toString(withFormat: "MM月dd日HH-mm")).zip"
+        let fileName = "礼金小助手-图片-\(Date().toString(withFormat: "MM月dd日HH-mm")).zip"
         let fileUrl = URL(fileURLWithPath: "\(workPath)/\(fileName)")
         let mediaDirectory = URL(fileURLWithPath: "\(NSHomeDirectory())/Documents/Medias")
         

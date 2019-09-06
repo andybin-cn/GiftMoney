@@ -19,7 +19,7 @@ class XLSXManager {
     
     func exportXLSX() -> Observable<URL> {
         let workPath = "\(NSTemporaryDirectory())excelExport"
-        let fileName = "礼尚往来-Excel-\(Date().toString(withFormat: "MM月dd日HH-mm")).xlsx"
+        let fileName = "礼金小助手-Excel-\(Date().toString(withFormat: "MM月dd日HH-mm")).xlsx"
         let fileUrl = URL(fileURLWithPath: "\(workPath)/\(fileName)")
         return Observable<URL>.create { (observable) -> Disposable in
             var inCancel = false
@@ -37,7 +37,7 @@ class XLSXManager {
                 let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''"))
                 let file = NSString(format: "%@", fileUrl.path)
                 let workbook = new_workbook(file.fileSystemRepresentation)
-                guard let worksheet1 = workbook_add_worksheet(workbook, "礼尚往来") else {
+                guard let worksheet1 = workbook_add_worksheet(workbook, "礼金小助手") else {
                     DispatchQueue.main.async {
                         observable.onError(CommonError(message: "创建文件失败"))
                     }

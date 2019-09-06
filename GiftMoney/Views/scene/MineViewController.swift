@@ -204,7 +204,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             mailComposerVC.mailComposeDelegate = self
             
             mailComposerVC.setToRecipients(["reciprocityApp@163.com"])
-            mailComposerVC.setSubject("【礼尚往来App】意见反馈")
+            mailComposerVC.setSubject("【礼金小助手App】意见反馈")
             mailComposerVC.setMessageBody("\n\n感谢您的宝贵意见，我们会尽快给您回复。谢谢！", isHTML: false)
             
             if MFMailComposeViewController.canSendMail() {

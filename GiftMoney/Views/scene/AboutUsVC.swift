@@ -52,7 +52,7 @@ class AboutUsVC: BaseViewController {
         }
         stackView.addArrangedSubview(logo)
         
-        stackView.addArrangedSubview(UILabel(textColor: .appDarkText, font: .appBoldFont(ofSize: 20), textAlignment: .center, text: "礼尚往来"))
+        stackView.addArrangedSubview(UILabel(textColor: .appDarkText, font: .appBoldFont(ofSize: 20), textAlignment: .center, text: "礼金小助手"))
         
         let infoDic = Bundle.main.infoDictionary
         let appVersion = infoDic?["CFBundleShortVersionString"] ?? "0.0"
