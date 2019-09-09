@@ -32,7 +32,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let inviteCodeRow = MineTextRow(title: "填写邀请码", image: UIImage(named: "icons8-invite"))
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
     
-    let desc5 = MineDescriptionRow(text: "个人App，非常期待您的反馈。")
+    let desc5 = MineDescriptionRow(text: "您的意见对我们很重要，非常期待您的反馈")
     let feedBack = MineTextRow(title: "意见反馈", image: UIImage(named: "icons8-feedback"))
     let aboutUs = MineTextRow(title: "关于我们", image: UIImage(named: "icons8-about"))
     
