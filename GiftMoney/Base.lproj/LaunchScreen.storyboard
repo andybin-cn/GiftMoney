@@ -25,11 +25,12 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA3-RB-4MR">
-                                <rect key="frame" x="161" y="504" width="92" height="27"/>
+                                <rect key="frame" x="149" y="504" width="116.5" height="23"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="礼尚往来">
+                                    <fragment content="礼金小助手">
                                         <attributes>
-                                            <font key="NSFont" metaFont="system" size="23"/>
+                                            <font key="NSFont" size="23" name=".PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
