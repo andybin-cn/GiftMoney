@@ -38,6 +38,7 @@
 		369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE3622F6CD930005B67D /* MainTabViewController.swift */; };
 		369DFF2522F7094F0005B67D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; };
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		380259C223272EF400C50090 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C123272EF400C50090 /* SpeechManager.swift */; };
 		3818556322FACB6300024542 /* TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556222FACB6300024542 /* TradeCell.swift */; };
 		3818556722FBC30700024542 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556622FBC30600024542 /* Event.swift */; };
 		3818556922FBC54C00024542 /* TradeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556822FBC54C00024542 /* TradeItem.swift */; };
@@ -200,6 +201,7 @@
 		369DFE3522F6CD930005B67D /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		369DFE3622F6CD930005B67D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
+		380259C123272EF400C50090 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		3818556222FACB6300024542 /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
 		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				38775E25230E753800B697F5 /* CloudManager.swift */,
 				38970F3A2316412A004E2660 /* AccountManager.swift */,
 				38970F3C23164137004E2660 /* InviteManager.swift */,
+				380259C123272EF400C50090 /* SpeechManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
 				38970F3B2316412A004E2660 /* AccountManager.swift in Sources */,
+				380259C223272EF400C50090 /* SpeechManager.swift in Sources */,
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
 				3870C2CA230A86EA000C1996 /* MineSwitchRow.swift in Sources */,
 				3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */,
