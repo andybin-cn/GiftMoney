@@ -135,6 +135,7 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     @objc func saveButtonTapped() {
+        MobClick.event("CustomEventBtTapped")
         guard let name = inputField.text else {
             self.showTipsView(text: "请输入内容或者选择一个选项")
             return

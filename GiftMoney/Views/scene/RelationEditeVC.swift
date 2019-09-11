@@ -135,6 +135,7 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     
     @objc func saveButtonTapped() {
+        MobClick.event("CustomRelationBtTapped")
         guard let name = inputField.text else {
             self.showTipsView(text: "请输入内容或者选择一个选项")
             return

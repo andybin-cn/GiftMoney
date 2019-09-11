@@ -128,6 +128,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     
     func addEvents() {
         excelImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            MobClick.event("excelImportAndExportTapped")
             guard MarketManager.shared.checkAuth(type: .exportAndImport, controller: MainTabViewController.shared) else {
                 return
             }
@@ -142,6 +143,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         imageImportAndExport.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            MobClick.event("imageImportAndExport")
             guard MarketManager.shared.checkAuth(type: .exportAndImport, controller: MainTabViewController.shared) else {
                 return
             }
@@ -168,6 +170,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         backupData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("backupDataToiCloud")
             guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
                 return
             }
@@ -175,6 +178,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         recoverData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("recoverDataFromiCloud")
             guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
                 return
             }
@@ -182,6 +186,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         inviteCodeRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("inviteCodeButtonTapped")
             if InviteManager.shared.hasUsedCode {
                 self?.showTipsView(text: "您已经填写过邀请码了，无法进行修改")
                return
@@ -191,6 +196,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         share.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            MobClick.event("shareButtonTapped")
             self.showLoadingIndicator(text: "正在获取邀请码")
             InviteManager.shared.fetchAndGeneratorInviteCode().subscribe(onNext: { [weak self] (_, _) in
                 self?.hiddenLoadingIndicator()
@@ -203,6 +209,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         praiseRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            MobClick.event("praiseButtonTapped")
             if let url = URL(string: "itms-apps://itunes.apple.com/app/id1478354248?action=write-review") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
@@ -211,6 +218,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         }).disposed(by: disposeBag)
         
         feedBack.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            MobClick.event("feedBackButtonTapped")
             let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
             
@@ -233,6 +241,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         
         
         aboutUs.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("aboutUsButtonTapped")
             self?.navigationController?.pushViewController(AboutUsVC(), animated: true)
         }).disposed(by: disposeBag)
     }

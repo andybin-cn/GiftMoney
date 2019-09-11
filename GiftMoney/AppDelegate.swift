@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         
+        UMConfigure.initWithAppkey("5d78ba633fc1957618000841", channel: "App Store")
+        MobClick.setScenarioType(eScenarioType.E_UM_NORMAL)
+        
         SLog.info("NSHomeDirectory: \(NSHomeDirectory())")
         
         if LocalAuthManager.shared.localAuthEnabled {

@@ -5,3 +5,5 @@
 #import "xlsxwriter.h"
 #import "XlsxReaderWriter-swift-bridge.h"
 #import "SSZipArchive.h"
+#import <UMCommon/UMCommon.h>
+#import <UMAnalytics/MobClick.h>

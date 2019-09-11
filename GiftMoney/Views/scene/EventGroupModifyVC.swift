@@ -114,6 +114,7 @@ class EventGroupModifyVC: BaseViewController {
     }
     
     @objc func onDeleteButtonTapped() {
+        MobClick.event("EventDeleteBtTapped")
         self.showAlertView(title: "确定删除事件【\(event.name)】？", message: "一共包含\(trades.count)条记录", actions: [
             UIAlertAction.init(title: "取消", style: .cancel, handler: nil),
             UIAlertAction.init(title: "删除", style: .destructive, handler: { [weak self] (_) in
@@ -133,6 +134,7 @@ class EventGroupModifyVC: BaseViewController {
     }
     
     @objc func saveButtonTapped() {
+        MobClick.event("EventModifyBtTapped")
         guard MarketManager.shared.checkAuth(type: .modifyEvent, controller: self) else {
             return
         }
