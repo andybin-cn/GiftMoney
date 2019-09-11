@@ -154,13 +154,16 @@ class MarketVC: BaseViewController {
     
     func addEvents() {
         vip1Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("buyVIP1BtnTapped")
             self?.payForProduct(code: "vip001")
         }).disposed(by: disposeBag)
         vip2Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("buyVIP2BtnTapped")
             self?.payForProduct(code: "vip002")
         }).disposed(by: disposeBag)
         
         inviteGroup.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("buyInviteBtnTapped")
             self?.onInviteButtonTapped()
         }).disposed(by: disposeBag)
     }
