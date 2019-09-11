@@ -12,6 +12,7 @@ import RxCocoa
 import MessageUI
 import Social
 import Common
+import StoreKit
 
 class MineViewController: BaseViewController, MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate {
     let documentTypes = ["public.item", "public.content", "public.composite-content", "public.message", "public.contact", "public.archive", "public.disk-image", "public.data", "public.directory", "com.apple.resolvable", "public.symlink", "public.executable", "com.apple.mount-point", "com.apple.alias-file", "com.apple.alias-record", "com.apple.bookmark", "public.url", "public.file-url", "public.text", "public.plain-text", "public.utf8-plain-text", "public.utf16-external-plain-text", "public.utf16-plain-text", "public.delimited-values-text", "public.comma-separated-values-text", "public.tab-separated-values-text", "public.utf8-tab-separated-values-text", "public.rtf", "public.html", "public.xml", "public.source-code", "public.assembly-source", "public.c-source", "public.objective-c-source", "public.swift-source", "public.c-plus-plus-source", "public.objective-c-plus-plus-source", "public.c-header", "public.c-plus-plus-header", "com.sun.java-source", "public.script", "com.apple.applescript.text", "com.apple.applescript.script", "com.apple.applescript.script-bundle", "com.netscape.javascript-source", "public.shell-script", "public.perl-script", "public.python-script", "public.ruby-script", "public.php-script", "public.json", "com.apple.property-list", "com.apple.xml-property-list", "com.apple.binary-property-list", "com.adobe.pdf", "com.apple.rtfd", "com.apple.flat-rtfd", "com.apple.txn.text-multimedia-data", "com.apple.webarchive", "public.image", "public.jpeg", "public.jpeg-2000", "public.tiff", "com.apple.pict", "com.compuserve.gif", "public.png", "com.apple.quicktime-image", "com.apple.icns", "com.microsoft.bmp", "com.microsoft.ico", "public.camera-raw-image", "public.svg-image", "com.apple.live-photo", "public.audiovisual-content", "public.movie", "public.video", "public.audio", "com.apple.quicktime-movie", "public.mpeg", "public.mpeg-2-video", "public.mpeg-2-transport-stream", "public.mp3", "public.mpeg-4", "public.mpeg-4-audio", "com.apple.protected-mpeg-4-audio", "com.apple.protected-mpeg-4-video", "public.avi", "public.aiff-audio", "com.microsoft.waveform-audio", "public.midi-audio", "public.playlist", "public.m3u-playlist", "public.folder", "public.volume", "com.apple.package", "com.apple.bundle", "com.apple.plugin", "com.apple.metadata-importer", "com.apple.quicklook-generator", "com.apple.xpc-service", "com.apple.framework", "com.apple.application", "com.apple.application-bundle", "com.apple.application-file", "public.unix-executable", "com.microsoft.windows-executable", "com.sun.java-class", "com.sun.java-archive", "com.apple.systempreference.prefpane", "org.gnu.gnu-zip-archive", "public.bzip2-archive", "public.zip-archive", "public.spreadsheet", "public.presentation", "public.database", "public.vcard", "public.to-do-item", "public.calendar-event", "public.email-message", "com.apple.internet-location", "com.apple.ink.inktext", "public.font", "public.bookmark", "public.3d-content", "com.rsa.pkcs-12", "public.x509-certificate", "org.idpf.epub-container", "public.log", "com.apple.keynote.key", "com.microsoft.word.doc", "com.microsoft.excel.xls", "com.microsoft.excel.xlsx", "com.microsoft.powerpoint.ppt"]
@@ -33,6 +34,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
     
     let desc5 = MineDescriptionRow(text: "您的意见对我们很重要，非常期待您的反馈")
+    let praiseRow = MineTextRow(title: "给个好评吧", image: UIImage(named: "icons8-trust"))
     let feedBack = MineTextRow(title: "意见反馈", image: UIImage(named: "icons8-feedback"))
     let aboutUs = MineTextRow(title: "关于我们", image: UIImage(named: "icons8-about"))
     
@@ -107,6 +109,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         stackView.addArrangedSubview(share)
         
         stackView.addArrangedSubview(desc5)
+        stackView.addArrangedSubview(praiseRow)
         stackView.addArrangedSubview(feedBack)
         stackView.addArrangedSubview(aboutUs)
         
@@ -197,6 +200,14 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                 SLog.error("fetchAndGeneratorInviteCode error:\(error)")
                 self.catchError(error: error)
             }).disposed(by: self.disposeBag)
+        }).disposed(by: disposeBag)
+        
+        praiseRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
+            if let url = URL(string: "itms-apps://itunes.apple.com/app/id1478354248?action=write-review") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                self.showTipsView(text: "无法打开链接")
+            }
         }).disposed(by: disposeBag)
         
         feedBack.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
