@@ -40,6 +40,9 @@
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		380259C223272EF400C50090 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C123272EF400C50090 /* SpeechManager.swift */; };
 		380259C42327461C00C50090 /* SpeechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C32327461C00C50090 /* SpeechViewController.swift */; };
+		380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259DE2328F24700C50090 /* CoreTelephony.framework */; };
+		380259E32328F25900C50090 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259E22328F25900C50090 /* libsqlite3.tbd */; };
+		380259E52328F26200C50090 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259E42328F26200C50090 /* SystemConfiguration.framework */; };
 		3818556322FACB6300024542 /* TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556222FACB6300024542 /* TradeCell.swift */; };
 		3818556722FBC30700024542 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556622FBC30600024542 /* Event.swift */; };
 		3818556922FBC54C00024542 /* TradeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556822FBC54C00024542 /* TradeItem.swift */; };
@@ -205,6 +208,9 @@
 		380259C123272EF400C50090 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		380259C32327461C00C50090 /* SpeechViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewController.swift; sourceTree = "<group>"; };
 		380259C82328BC5400C50090 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		380259DE2328F24700C50090 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		380259E22328F25900C50090 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		380259E42328F26200C50090 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3818556222FACB6300024542 /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
 		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
@@ -268,6 +274,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				380259E52328F26200C50090 /* SystemConfiguration.framework in Frameworks */,
+				380259E32328F25900C50090 /* libsqlite3.tbd in Frameworks */,
+				380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */,
 				384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */,
 				384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */,
 				38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */,
@@ -573,6 +582,9 @@
 		E63782FD40E14AE5A4748D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				380259E42328F26200C50090 /* SystemConfiguration.framework */,
+				380259E22328F25900C50090 /* libsqlite3.tbd */,
+				380259DE2328F24700C50090 /* CoreTelephony.framework */,
 				360E722A231ACE3B001842EE /* CloudKit.framework */,
 				38FAD6362319057400F28AA0 /* StoreKit.framework */,
 				384CCA21230D3643006F0E3E /* libz.tbd */,
@@ -687,6 +699,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				Base,
 				"zh-Hans",
 			);
@@ -832,9 +845,18 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/libxlsxwriter/xlsxwriter.framework",
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/xlsxwriter.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

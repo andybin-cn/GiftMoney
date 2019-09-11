@@ -1,20 +1,29 @@
 PODS:
   - DZNEmptyDataSet (1.8.1)
   - libxlsxwriter (0.8.7)
+  - UMCAnalytics (6.0.5):
+    - UMCCommon
+  - UMCCommon (2.1.1)
 
 DEPENDENCIES:
   - DZNEmptyDataSet (~> 1.8.1)
   - libxlsxwriter (~> 0.8.7)
+  - UMCAnalytics
+  - UMCCommon
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DZNEmptyDataSet
     - libxlsxwriter
+    - UMCAnalytics
+    - UMCCommon
 
 SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   libxlsxwriter: a33a49a75979a24438554119f94e5f4096a818f4
+  UMCAnalytics: 045be2cd1ec05aa95ad62405a850757f932e2d59
+  UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
 
-PODFILE CHECKSUM: 9926a97813238a26704ce2f6d92bdd89ca87a72f
+PODFILE CHECKSUM: 18a304922557d710f3648f6d7ce298cf38420f62
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.6.1

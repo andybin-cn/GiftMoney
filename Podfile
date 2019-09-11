@@ -12,6 +12,9 @@ target 'GiftMoney' do
 #  pod 'SwiftyBeaver','~> 1.7.0'
   pod 'libxlsxwriter', '~> 0.8.7'
   pod 'DZNEmptyDataSet', '~> 1.8.1'
+  
+  pod 'UMCCommon'
+  pod 'UMCAnalytics'
 
 
 
