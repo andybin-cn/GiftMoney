@@ -86,10 +86,24 @@ class AccountManager {
     }
     
     func initUserInfo(id: CKRecord.ID) -> CKRecord {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        
         let record = CKRecord(recordType: "UserInfo", recordID: id)
         record.setObject(false as __CKRecordObjCValue, forKey: "hasUsedInvitedCode")
         record.setObject("" as __CKRecordObjCValue, forKey: "usedInvitedCode")
         record.setObject("" as __CKRecordObjCValue, forKey: "InviteCode")
+        record.setObject(UIDevice.current.name as __CKRecordObjCValue, forKey: "UserName")
+        record.setObject(UIDevice.current.model as __CKRecordObjCValue, forKey: "DeviceName")
+        record.setObject(identifier as __CKRecordObjCValue, forKey: "DeviceVersion")
+        record.setObject(deviceID as __CKRecordObjCValue, forKey: "DeviceID")
+        
         CKContainer.default().privateCloudDatabase.save(record) { (_, _) in  }
         return record
     }

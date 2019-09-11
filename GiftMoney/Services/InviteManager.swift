@@ -70,12 +70,23 @@ class InviteManager {
     
     private func inserInviteCodeToUsedTable(code: String) -> Observable<String> {
         return Observable<String>.create { (observable) -> Disposable in
+            var systemInfo = utsname()
+            uname(&systemInfo)
+            let machineMirror = Mirror(reflecting: systemInfo.machine)
+            let identifier = machineMirror.children.reduce("") { identifier, element in
+                guard let value = element.value as? Int8, value != 0 else { return identifier }
+                return identifier + String(UnicodeScalar(UInt8(value)))
+            }
+            let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
+            
             let publicDB = CKContainer.default().publicCloudDatabase
             let record = CKRecord(recordType: "UsersForInviteCode")
             record.setObject(code as __CKRecordObjCValue, forKey: "InviteCode")
-            record.setObject("" as __CKRecordObjCValue, forKey: "UserName")
+            record.setObject(UIDevice.current.name as __CKRecordObjCValue, forKey: "UserName")
             record.setObject(NSDate() as __CKRecordObjCValue, forKey: "UseTime")
-            record.setObject("" as __CKRecordObjCValue, forKey: "DeviceName")
+            record.setObject(UIDevice.current.model as __CKRecordObjCValue, forKey: "DeviceName")
+            record.setObject(identifier as __CKRecordObjCValue, forKey: "DeviceVersion")
+            record.setObject(deviceID as __CKRecordObjCValue, forKey: "DeviceID")
             publicDB.save(record) { (record, error) in
                 if let error = error {
                     observable.onError(error)
