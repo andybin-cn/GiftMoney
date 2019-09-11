@@ -120,7 +120,7 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: EventCell.commonIdentifier, for: indexPath) as! EventCell
         cell.textLabel?.text = event.name
-        cell.detailTextLabel?.text = event.time?.toString(withFormat: "yyyy-MM-dd")
+//        cell.detailTextLabel?.text = event.time?.toString(withFormat: "yyyy-MM-dd")
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
