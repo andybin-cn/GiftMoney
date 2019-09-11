@@ -17,20 +17,28 @@ class Event: Hashable {
     var giftCount = 0
     var totalMoney: Float = 0
     var tradeCount: Int = 0
+    var compareWithTime: Bool
     
-    init(name: String, time: Date? = nil, lastUseTime: Date? = nil) {
+    init(name: String, time: Date? = nil, lastUseTime: Date? = nil, compareWithTime: Bool = true) {
+        self.compareWithTime = compareWithTime
         self.name = name
         self.time = time
         self.lastUseTime = lastUseTime
     }
     
     static func == (lhs: Event, rhs: Event) -> Bool {
-        return lhs.name == rhs.name && lhs.time?.toString(withFormat: "yyyy-MM-dd") == rhs.time?.toString(withFormat: "yyyy-MM-dd")
+        if lhs.compareWithTime || rhs.compareWithTime {
+            return lhs.name == rhs.name && lhs.time?.toString(withFormat: "yyyy-MM-dd") == rhs.time?.toString(withFormat: "yyyy-MM-dd")
+        } else {
+            return lhs.name == rhs.name
+        }
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
-        hasher.combine(time?.toString(withFormat: "yyyy-MM-dd"))
+        if compareWithTime {
+            hasher.combine(time?.toString(withFormat: "yyyy-MM-dd"))
+        }
     }
 }
 
@@ -43,7 +51,7 @@ extension Event {
         var tradeGroups = Dictionary<Event, [Trade]>()
         let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''")).sorted(byKeyPath: "updateTime", ascending: false)
         trades.forEach { (trade) in
-            let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
+            let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime, compareWithTime: false)
             if var tradeGroup = tradeGroups[groupKey] {
                 tradeGroup.append(trade)
             } else {
@@ -63,16 +71,6 @@ extension Event {
     }
     
     static var allEventNames: [Event] {
-        var tradeGroups = Dictionary<String, [Trade]>()
-        let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString != '' AND eventName != ''")).sorted(byKeyPath: "updateTime", ascending: false)
-        trades.forEach { (trade) in
-            let groupKey = Event(name: trade.eventName, time: trade.eventTime, lastUseTime: trade.updateTime)
-            if var tradeGroup = tradeGroups[trade.eventName] {
-                tradeGroup.append(trade)
-            } else {
-                tradeGroups[trade.eventName] = [trade]
-            }
-        }
-        return tradeGroups.keys.map { Event(name: $0) }
+        return Event.latestusedEvents
     }
 }

@@ -25,7 +25,10 @@ class MarketVC: BaseViewController {
     let vip2Group: MarketServiceGroup
     let inviteGroup: MarketServiceGroup
     
-    init() {
+    weak var superVC: UIViewController?
+    
+    init(superVC: UIViewController?) {
+        self.superVC = superVC
         let freeHeader = MarketServiceHeader(title: "免费试用", image: UIImage(named: "icons8-trial_version")?.ui_renderImage(tintColor: UIColor.white))
         let freeItems: [MarketServiceItem] = [
             MarketServiceItem(title: "自定义关系 1个"),
@@ -156,6 +159,22 @@ class MarketVC: BaseViewController {
         vip2Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
             self?.payForProduct(code: "vip002")
         }).disposed(by: disposeBag)
+        
+        inviteGroup.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            self?.onInviteButtonTapped()
+        }).disposed(by: disposeBag)
+    }
+    
+    func onInviteButtonTapped() {
+        self.showLoadingIndicator(text: "正在获取邀请码")
+        InviteManager.shared.fetchAndGeneratorInviteCode().subscribe(onNext: { [weak self] (_, _) in
+            self?.hiddenLoadingIndicator()
+            let controller = InviteCodeVC()
+            self?.present(BaseNavigationController(rootViewController: controller), animated: true, completion: nil)
+        }, onError: { (error) in
+            SLog.error("fetchAndGeneratorInviteCode error:\(error)")
+            self.catchError(error: error)
+        }).disposed(by: self.disposeBag)
     }
     
     func payForProduct(code: String) {

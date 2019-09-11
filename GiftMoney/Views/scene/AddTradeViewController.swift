@@ -59,7 +59,12 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "新增记录"
+        if trade != nil {
+            self.title = "修改记录"
+        } else {
+            self.title = "新增记录"
+        }
+        
         let saveButton = UIBarButtonItem(title: "保存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveButtonTapped))
         self.navigationItem.rightBarButtonItems = [saveButton]
         

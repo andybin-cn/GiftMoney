@@ -60,18 +60,18 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     
     func resetCurrentLevel() {
         self.currentLevel = .free
-        if hasVip1Paid {
-            self.currentLevel = .paid1
-        }
-        if hasVip2Paid {
-            self.currentLevel = .paid2
-        }
-        let count = InviteManager.shared.invitedCount
-        if count >= 30 {
-            self.currentLevel = .paid2
-        } else if self.currentLevel == .free && count >= 5 {
-            self.currentLevel = .paid1
-        }
+//        if hasVip1Paid {
+//            self.currentLevel = .paid1
+//        }
+//        if hasVip2Paid {
+//            self.currentLevel = .paid2
+//        }
+//        let count = InviteManager.shared.invitedCount
+//        if count >= 30 {
+//            self.currentLevel = .paid2
+//        } else if self.currentLevel == .free && count >= 5 {
+//            self.currentLevel = .paid1
+//        }
     }
     
     var currentLevel = Level.free
@@ -80,7 +80,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
         switch type {
         case .exportAndImport, .backupAndRecover:
             if currentLevel != .paid2 {
-                controller.present(MarketVC(), animated: true, completion: nil)
+                controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
                 return false
             }
         case .relation:
@@ -119,7 +119,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     func showPayMessage(msg: String, controller: UIViewController) {
         controller.showAlertView(title: msg, message: nil, actions: [
                 UIAlertAction(title: "好的", style: .cancel, handler: { (_) in
-                    controller.present(MarketVC(), animated: true, completion: nil)
+                    controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
                 })
             ])
     }

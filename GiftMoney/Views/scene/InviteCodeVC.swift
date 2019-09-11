@@ -123,6 +123,14 @@ class InviteCodeVC: BaseViewController {
         stackView.addArrangedSubview(label3)
         stackView.addArrangedSubview(label4)
         stackView.addArrangedSubview(buttons)
+        
+        if self.navigationController?.children.count == 1 {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(backButtonTapped))
+        }
+    }
+    
+    @objc func backButtonTapped() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     @objc func inviteButtonTapped() {
