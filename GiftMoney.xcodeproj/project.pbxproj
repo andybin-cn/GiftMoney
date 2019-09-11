@@ -204,6 +204,7 @@
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
 		380259C123272EF400C50090 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		380259C32327461C00C50090 /* SpeechViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewController.swift; sourceTree = "<group>"; };
+		380259C82328BC5400C50090 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3818556222FACB6300024542 /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
 		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
@@ -686,8 +687,8 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 3649C74C22F67FB9009AF83F;
 			productRefGroup = 3649C75622F67FB9009AF83F /* Products */;
@@ -1008,6 +1009,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3649C76722F67FBD009AF83F /* Base */,
+				380259C82328BC5400C50090 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1019,6 +1021,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1080,6 +1083,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
