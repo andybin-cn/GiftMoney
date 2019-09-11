@@ -60,18 +60,18 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     
     func resetCurrentLevel() {
         self.currentLevel = .free
-//        if hasVip1Paid {
-//            self.currentLevel = .paid1
-//        }
-//        if hasVip2Paid {
-//            self.currentLevel = .paid2
-//        }
-//        let count = InviteManager.shared.invitedCount
-//        if count >= 30 {
-//            self.currentLevel = .paid2
-//        } else if self.currentLevel == .free && count >= 5 {
-//            self.currentLevel = .paid1
-//        }
+        if hasVip1Paid {
+            self.currentLevel = .paid1
+        }
+        if hasVip2Paid {
+            self.currentLevel = .paid2
+        }
+        let count = InviteManager.shared.invitedCount
+        if count >= 30 {
+            self.currentLevel = .paid2
+        } else if self.currentLevel == .free && count >= 5 {
+            self.currentLevel = .paid1
+        }
     }
     
     var currentLevel = Level.free
