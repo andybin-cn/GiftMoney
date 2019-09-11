@@ -241,9 +241,9 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     @objc func onEventNameFieldtapped() {
         let editorVC = EventEditeViewController(defaultValue: eventNameField.textfield.text) { [weak self] (event) in
             self?.eventNameField.fieldValue = event.name
-            if let time = event.time {
-                self?.eventTimeField.fieldValue = time
-            }
+//            if let time = event.time {
+//                self?.eventTimeField.fieldValue = time
+//            }
         }
         self.navigationController?.pushViewController(editorVC, animated: true)
     }
