@@ -114,6 +114,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         stackView.addArrangedSubview(aboutUs)
         
         faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
+        autoSyncToiCloudRow.switcher.isOn = AccountManager.shared.autoSyncToiCloudEnable
         
         addEvents()
     }
@@ -158,19 +159,21 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             ])
         }).disposed(by: disposeBag)
         
-        faceID.switcher.rx.isOn.asObservable().subscribe(onNext: { [unowned self] (isOn) in
+        faceID.switcher.rx.controlEvent(.valueChanged).subscribe(onNext: { [unowned self] (_) in
+            let isOn = self.faceID.switcher.isOn
             if isOn {
                 if !LocalAuthManager.shared.localAuthAvailability {
                     self.faceID.switcher.isOn = false
                 } else if !LocalAuthManager.shared.localAuthEnabled {
                     MainTabViewController.shared.showLocalAuthView(viewMode: .open)
                 }
-            } else if LocalAuthManager.shared.localAuthEnabled {
+            } else if LocalAuthManager.shared.localAuthAvailability && LocalAuthManager.shared.localAuthEnabled {
                 MainTabViewController.shared.showLocalAuthView(viewMode: .close)
             }
         }).disposed(by: disposeBag)
         
-        autoSyncToiCloudRow.switcher.rx.isOn.asObservable().subscribe(onNext: { (isOn) in
+        autoSyncToiCloudRow.switcher.rx.controlEvent(.valueChanged).subscribe(onNext: { [unowned self] (_) in
+            let isOn = self.autoSyncToiCloudRow.switcher.isOn
             MobClick.event("AutomaticSyncToiCloud")
             guard MarketManager.shared.checkAuth(type: .autoSyncToiCloud, controller: MainTabViewController.shared) else {
                 self.autoSyncToiCloudRow.switcher.isOn = false
