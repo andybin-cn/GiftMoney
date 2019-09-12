@@ -39,19 +39,9 @@ class CloudManager {
     
     func backupTradesInGlobalQueue(observable: AnyObserver<CloudSyncProgress>) -> Disposable {
         let trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "hasBackupToCloud == NO")).map { $0.id }
-        let privateDB = CKContainer.default().privateCloudDatabase
         
         return Observable<String>.from(trades).flatMap { (tradeID) -> Observable<CKRecord> in
-            return self.backupTrade(tradeID: tradeID, dataBase: privateDB).flatMap({ (trade, medias) -> Observable<CKRecord> in
-                return self.backupTradeMedias(medias: medias, dataBase: privateDB).flatMap({ (_) -> Observable<CKRecord> in
-                    if let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) {
-                        try? RealmManager.share.realm.write {
-                            trade.hasBackupToCloud = true
-                        }
-                    }
-                    return Observable<CKRecord>.from(optional: trade)
-                })
-            })
+            return self.backupTradeAndMedias(tradeID: tradeID)
         }.scan(CloudSyncProgress(finishCount: 0, totoalCount: trades.count)) { (progress, record) -> CloudSyncProgress in
             return CloudSyncProgress(finishCount: progress.finishCount + 1, totoalCount: progress.totoalCount)
         }.subscribe(onNext: { (progress) in
@@ -60,6 +50,20 @@ class CloudManager {
             observable.onError(error)
         }, onCompleted: {
             observable.onCompleted()
+        })
+    }
+    
+    func backupTradeAndMedias(tradeID: String) -> Observable<CKRecord> {
+        let privateDB = CKContainer.default().privateCloudDatabase
+        return self.backupTrade(tradeID: tradeID, dataBase: privateDB).flatMap({ (trade, medias) -> Observable<CKRecord> in
+            return self.backupTradeMedias(medias: medias, dataBase: privateDB).flatMap({ (_) -> Observable<CKRecord> in
+                if let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) {
+                    try? RealmManager.share.realm.write {
+                        trade.hasBackupToCloud = true
+                    }
+                }
+                return Observable<CKRecord>.from(optional: trade)
+            })
         })
     }
     
