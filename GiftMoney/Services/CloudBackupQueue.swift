@@ -50,11 +50,17 @@ class CloudBackupQueue {
     private init() { }
     
     private var items = [String: UploadItem]()
+    
+    func uploadItem(forTradeID tradeID: String) -> Observable<CKRecord>? {
+        return items[tradeID]?.progressObservable.observeOn(MainScheduler.instance)
+    }
+    
     func backupTradeInQueue(tradeID: String) -> Observable<CKRecord> {
         if let item = items[tradeID] {
-            return item.progressObservable
+            return item.progressObservable.observeOn(MainScheduler.instance)
         }
         let item = UploadItem(tradeID: tradeID)
+        items[tradeID] = item
         _ = item.progressObservable.asObserver().subscribe(onError: { (error) in
             self.onItemComplete(item: item)
         }, onCompleted: {
@@ -63,7 +69,7 @@ class CloudBackupQueue {
         if uploadingCount < 3 {
             return item.start()
         }
-        return item.progressObservable
+        return item.progressObservable.observeOn(MainScheduler.instance)
     }
     
     var uploadingCount: Int {

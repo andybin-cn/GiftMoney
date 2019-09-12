@@ -65,7 +65,7 @@ class InviteManager {
                     }
                 }
             }
-        }.observeOn(MainScheduler())
+        }.observeOn(MainScheduler.instance)
     }
     
     private func inserInviteCodeToUsedTable(code: String) -> Observable<String> {
@@ -125,7 +125,7 @@ class InviteManager {
         }.do(onNext: { (code, count) in
             self.inviteCode = code
             self.invitedCount = count
-        }).observeOn(MainScheduler.init())
+        }).observeOn(MainScheduler.instance)
     }
     
     private func fetchInviteCodeUseCount(inviteCode: String) -> Observable<Int> {

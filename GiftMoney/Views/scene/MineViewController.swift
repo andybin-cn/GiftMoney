@@ -23,7 +23,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let excelImportAndExport = MineTextRow(title: "Excel导入/导出", image: UIImage(named: "icons8-ms_excel"))
     let imageImportAndExport = MineTextRow(title: "图片、视频导入/导出", image: UIImage(named: "icons8-image"))
     let desc1 = MineDescriptionRow(text: "购买服务，永久解锁数据导入/导出功能。")
-    let autoSyncToiCloudRow = MineSwitchRow(title: "自动同步数据至iCloud", image: UIImage(named: "icons8-cloud_database"))
+    let autoSyncToiCloudRow = MineSwitchRow(title: "自动同步数据至iCloud", image: UIImage(named: "icons8-cloud_refresh"))
     let recoverAndBackupData = MineTextRow(title: "手动从iCloud备份/恢复数据", image: UIImage(named: "icons8-data_recovery"))
     let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
     

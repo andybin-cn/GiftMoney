@@ -34,7 +34,7 @@ class CloudManager {
             return Disposables.create {
                 disposable?.dispose()
             }
-        }.observeOn(MainScheduler())
+        }.observeOn(MainScheduler.instance)
     }
     
     func backupTradesInGlobalQueue(observable: AnyObserver<CloudSyncProgress>) -> Disposable {
@@ -201,7 +201,7 @@ class CloudManager {
                 return CloudSyncProgress(finishCount: progress.finishCount + 1, totoalCount: progress.totoalCount + 1)
             }
             return CloudSyncProgress(finishCount: progress.finishCount, totoalCount: progress.totoalCount + 1)
-        }.observeOn(MainScheduler())
+        }.observeOn(MainScheduler.instance)
     }
     
     private func fetchTradeRecords() -> Observable<CKRecord> {

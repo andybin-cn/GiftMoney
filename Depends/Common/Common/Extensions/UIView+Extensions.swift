@@ -28,4 +28,15 @@ extension UIView {
             layout(make)
         }
     }
+    
+    public var firstViewController: UIViewController? {
+        var target: UIResponder = self
+        while let next = target.next {
+            target = next
+            if let controller = next as? UIViewController {
+                return controller
+            }
+        }
+        return nil
+    }
 }

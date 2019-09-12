@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import Common
 
 class TradeCell: UITableViewCell {
     let iconLabel = UILabel()
@@ -16,8 +18,11 @@ class TradeCell: UITableViewCell {
     let timeLabel = UILabel()
     let gitfLabel = UILabel()
     let moneyLabel = UILabel()
+    let uploadButton = UIButton()
     
     var trade: Trade?
+    
+    var disposeBag: DisposeBag = DisposeBag()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,6 +32,11 @@ class TradeCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupSubviews()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     func setupSubviews() {
@@ -100,6 +110,14 @@ class TradeCell: UITableViewCell {
         
         stackView.addArrangedSubview(moneyLabel)
         stackView.addArrangedSubview(gitfLabel)
+        
+        uploadButton.titleLabel?.font = UIFont.appFont(ofSize: 10)
+        uploadButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+//        uploadButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        uploadButton.addTo(self) { (make) in
+            make.top.right.equalToSuperview()
+        }
+        uploadButton.addTarget(self, action: #selector(onUploadButtonTapped), for: .touchUpInside)
     }
     
     func configerUI(trade: Trade) {
@@ -125,5 +143,51 @@ class TradeCell: UITableViewCell {
         gitfLabel.text = "礼物共    \(trade.giftCount)份"
         moneyLabel.text = String.init(format: "红包共 ¥%0.0f元", trade.totalMoney)
         
+        self.refreshUploadStatus()
+    }
+    
+    func refreshUploadStatus() {
+        guard let trade = trade else {
+            return
+        }
+        let uploadItem = CloudBackupQueue.shared.uploadItem(forTradeID: trade.id)
+        uploadButton.isUserInteractionEnabled = false
+        if !trade.hasBackupToCloud {
+            if let uploadItem = uploadItem {
+                uploadButton.setTitle("正在同步", for: .normal)
+                uploadButton.setImage(UIImage(named: "icons8-cloud_refresh")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
+                uploadButton.setTitleColor(UIColor.appSecondaryGray, for: .normal)
+                uploadItem.subscribe(onError: { [unowned self] (_) in
+                    self.uploadButton.isUserInteractionEnabled = true
+                    self.uploadButton.setTitle("点击重试", for: .normal)
+                    self.uploadButton.setImage(UIImage(named: "icons8-error_cloud")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
+                    self.uploadButton.setTitleColor(UIColor.appSecondaryRed, for: .normal)
+                }, onCompleted: { [unowned self] in
+                    self.uploadButton.isUserInteractionEnabled = false
+                    self.uploadButton.setTitle("已同步", for: .normal)
+                    self.uploadButton.setImage(UIImage(named: "icons8-cloud_checked")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
+                    self.uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
+                }).disposed(by: disposeBag)
+            } else {
+                uploadButton.isUserInteractionEnabled = true
+                uploadButton.setTitle("同步至iCloud", for: .normal)
+                uploadButton.setImage(UIImage(named: "icons8-upload_to_cloud")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
+                uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
+            }
+        } else {
+            uploadButton.setTitle("已同步", for: .normal)
+            uploadButton.setImage(UIImage(named: "icons8-cloud_checked")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
+            uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
+        }
+    }
+    
+    @objc func onUploadButtonTapped() {
+        print("onUploadButtonTapped")
+        let controller = self.firstViewController ?? MainTabViewController.shared
+        guard let trade = trade, MarketManager.shared.checkAuth(type: .autoSyncToiCloud, controller: controller) else {
+            return
+        }
+        _ = CloudBackupQueue.shared.backupTradeInQueue(tradeID: trade.id)
+        self.refreshUploadStatus()
     }
 }

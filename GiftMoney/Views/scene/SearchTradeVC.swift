@@ -51,7 +51,7 @@ class SearchTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        inputField.rx.text.asObservable().debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler()).subscribe(onNext: { [weak self] (text) in
+        inputField.rx.text.asObservable().debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] (text) in
             if let keyword = text, !keyword.isEmpty {
                 self?.searchTrade(keyword: keyword)
             }
