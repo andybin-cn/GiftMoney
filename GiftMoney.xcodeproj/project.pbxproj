@@ -43,6 +43,7 @@
 		380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259DE2328F24700C50090 /* CoreTelephony.framework */; };
 		380259E32328F25900C50090 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259E22328F25900C50090 /* libsqlite3.tbd */; };
 		380259E52328F26200C50090 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259E42328F26200C50090 /* SystemConfiguration.framework */; };
+		380CCACE232A1FD8002AC4B8 /* CloudBackupQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380CCACD232A1FD8002AC4B8 /* CloudBackupQueue.swift */; };
 		3818556322FACB6300024542 /* TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556222FACB6300024542 /* TradeCell.swift */; };
 		3818556722FBC30700024542 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556622FBC30600024542 /* Event.swift */; };
 		3818556922FBC54C00024542 /* TradeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556822FBC54C00024542 /* TradeItem.swift */; };
@@ -211,6 +212,7 @@
 		380259DE2328F24700C50090 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		380259E22328F25900C50090 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		380259E42328F26200C50090 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		380CCACD232A1FD8002AC4B8 /* CloudBackupQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudBackupQueue.swift; sourceTree = "<group>"; };
 		3818556222FACB6300024542 /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
 		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				38970F3A2316412A004E2660 /* AccountManager.swift */,
 				38970F3C23164137004E2660 /* InviteManager.swift */,
 				380259C123272EF400C50090 /* SpeechManager.swift */,
+				380CCACD232A1FD8002AC4B8 /* CloudBackupQueue.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -965,6 +968,7 @@
 				38970F3B2316412A004E2660 /* AccountManager.swift in Sources */,
 				380259C223272EF400C50090 /* SpeechManager.swift in Sources */,
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
+				380CCACE232A1FD8002AC4B8 /* CloudBackupQueue.swift in Sources */,
 				3870C2CA230A86EA000C1996 /* MineSwitchRow.swift in Sources */,
 				3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */,
 				38FAD6302317BE2300F28AA0 /* FillInviteCodeVC.swift in Sources */,

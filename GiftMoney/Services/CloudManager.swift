@@ -348,13 +348,14 @@ class CloudManager {
         newTrade.eventTime = eventTime
         newTrade.createTime = createTime
         newTrade.updateTime = updateTime
+        newTrade.hasBackupToCloud = true
         
         let tradeItems = [TradeItem].init(JSONString: tradeItemsString) ?? [TradeItem]()
         let tradeMedias = [TradeMedia].init(JSONString: tradeMediasString) ?? [TradeMedia]()
         
         newTrade.tradeItems.append(objectsIn: tradeItems)
         newTrade.tradeMedias.append(objectsIn: tradeMedias)
-        let result = TradeManger.shared.saveTrade(trade: newTrade, oldTrade: oldTrade)
+        let result = TradeManger.shared.saveTrade(trade: newTrade, oldTrade: oldTrade, hasBackuped: true)
         
         return Observable<Trade?>.create { (observer) -> Disposable in
             _ = result.subscribe(onCompleted: {

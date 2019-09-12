@@ -23,8 +23,8 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     let excelImportAndExport = MineTextRow(title: "Excel导入/导出", image: UIImage(named: "icons8-ms_excel"))
     let imageImportAndExport = MineTextRow(title: "图片、视频导入/导出", image: UIImage(named: "icons8-image"))
     let desc1 = MineDescriptionRow(text: "购买服务，永久解锁数据导入/导出功能。")
-    let backupData = MineTextRow(title: "备份数据到iCloud", image: UIImage(named: "icons8-cloud_database"))
-    let recoverData = MineTextRow(title: "从iCloud恢复数据", image: UIImage(named: "icons8-data_recovery"))
+    let autoSyncToiCloudRow = MineSwitchRow(title: "自动同步数据至iCloud", image: UIImage(named: "icons8-cloud_database"))
+    let recoverAndBackupData = MineTextRow(title: "手动从iCloud备份/恢复数据", image: UIImage(named: "icons8-data_recovery"))
     let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
     
     let desc3 = MineDescriptionRow(text: "隐私安全")
@@ -98,8 +98,8 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         stackView.addArrangedSubview(imageImportAndExport)
         
         stackView.addArrangedSubview(desc2)
-        stackView.addArrangedSubview(backupData)
-        stackView.addArrangedSubview(recoverData)
+        stackView.addArrangedSubview(autoSyncToiCloudRow)
+        stackView.addArrangedSubview(recoverAndBackupData)
         
         stackView.addArrangedSubview(desc3)
         stackView.addArrangedSubview(faceID)
@@ -124,6 +124,7 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         self.navigationItem.title = dynamicTitle
         inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
         faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
+        autoSyncToiCloudRow.switcher.isOn = AccountManager.shared.autoSyncToiCloudEnable
     }
     
     func addEvents() {
@@ -169,20 +170,28 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
             }
         }).disposed(by: disposeBag)
         
-        backupData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
-            MobClick.event("backupDataToiCloud")
-            guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
+        autoSyncToiCloudRow.switcher.rx.isOn.asObservable().subscribe(onNext: { (isOn) in
+            MobClick.event("AutomaticSyncToiCloud")
+            guard MarketManager.shared.checkAuth(type: .autoSyncToiCloud, controller: MainTabViewController.shared) else {
+                self.autoSyncToiCloudRow.switcher.isOn = false
                 return
             }
-            self?.backupTradesToCloud()
+            AccountManager.shared.autoSyncToiCloudEnable = isOn
         }).disposed(by: disposeBag)
         
-        recoverData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+        recoverAndBackupData.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
             MobClick.event("recoverDataFromiCloud")
             guard MarketManager.shared.checkAuth(type: .backupAndRecover, controller: MainTabViewController.shared) else {
                 return
             }
-            self?.recoverTradesFromCloud()
+            self?.showActionSheetView(title: "iCloud备份和恢复", actions: [
+                UIAlertAction(title: "备份数据", style: .default, handler: { (_) in
+                    self?.backupTradesToCloud()
+                }),
+                UIAlertAction(title: "恢复数据", style: .default, handler: { (_) in
+                    self?.recoverTradesFromCloud()
+                })
+            ])
         }).disposed(by: disposeBag)
         
         inviteCodeRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in

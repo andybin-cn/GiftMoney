@@ -15,9 +15,14 @@ class AccountManager {
     static let shared = AccountManager()
     
     var userInfo: CKRecord?
+    var autoSyncToiCloudEnable: Bool {
+        didSet {
+           UserDefaults.standard.set(autoSyncToiCloudEnable, forKey: "autoSyncToiCloudEnable")
+        }
+    }
     
     private init() {
-        
+        autoSyncToiCloudEnable = UserDefaults.standard.bool(forKey: "autoSyncToiCloudEnable")
     }
     
     func fetchAndCreateUserInfoZone() -> Observable<CKRecordZone> {

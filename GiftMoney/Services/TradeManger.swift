@@ -75,20 +75,27 @@ class TradeManger {
         return tradeGroups
     }
     
-    func saveTrade(trade: Trade, oldTrade: Trade?) -> Completable {
+    func saveTrade(trade: Trade, oldTrade: Trade?, hasBackuped: Bool = false) -> Completable {
         RealmManager.share.realm.beginWrite()
         if let oldTrade = oldTrade {
             trade.id = oldTrade.id
             RealmManager.share.realm.delete(oldTrade.tradeItems)
         }
-        trade.updateTime = Date()
+        trade.hasBackupToCloud = hasBackuped
+        if !hasBackuped {
+            trade.updateTime = Date()
+        }
         RealmManager.share.realm.add(trade, update: .all)
         do {
             try RealmManager.share.realm.commitWrite()
         } catch let error {
             return Completable.error(error)
         }
+        if !hasBackuped, AccountManager.shared.autoSyncToiCloudEnable {
+            _ = CloudBackupQueue.shared.backupTradeInQueue(tradeID: trade.id)
+        }
         return Completable.empty()
+        
     }
     
     func deleteTradeMedia(trade: Trade, tradeMedia: TradeMedia) -> Observable<Trade> {

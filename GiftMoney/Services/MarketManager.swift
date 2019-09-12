@@ -18,6 +18,7 @@ enum MarketServiceType {
     case modifyEvent
     case exportAndImport
     case backupAndRecover
+    case autoSyncToiCloud
 }
 
 class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDelegate {
@@ -78,7 +79,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     
     func checkAuth(type: MarketServiceType, controller: UIViewController, count: Int = 0) -> Bool {
         switch type {
-        case .exportAndImport, .backupAndRecover:
+        case .exportAndImport, .backupAndRecover, .autoSyncToiCloud:
             if currentLevel != .paid2 {
                 controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
                 return false
