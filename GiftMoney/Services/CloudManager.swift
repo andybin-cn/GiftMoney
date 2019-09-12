@@ -44,6 +44,11 @@ class CloudManager {
         return Observable<String>.from(trades).flatMap { (tradeID) -> Observable<CKRecord> in
             return self.backupTrade(tradeID: tradeID, dataBase: privateDB).flatMap({ (trade, medias) -> Observable<CKRecord> in
                 return self.backupTradeMedias(medias: medias, dataBase: privateDB).flatMap({ (_) -> Observable<CKRecord> in
+                    if let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) {
+                        try? RealmManager.share.realm.write {
+                            trade.hasBackupToCloud = true
+                        }
+                    }
                     return Observable<CKRecord>.from(optional: trade)
                 })
             })
