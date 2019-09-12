@@ -154,7 +154,7 @@ class TradeCell: UITableViewCell {
         uploadButton.isUserInteractionEnabled = false
         if !trade.hasBackupToCloud {
             if let uploadItem = uploadItem {
-                uploadButton.setTitle("正在同步", for: .normal)
+                uploadButton.setTitle("正在上传", for: .normal)
                 uploadButton.setImage(UIImage(named: "icons8-cloud_refresh")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
                 uploadButton.setTitleColor(UIColor.appSecondaryGray, for: .normal)
                 uploadItem.subscribe(onError: { [unowned self] (_) in
@@ -164,18 +164,18 @@ class TradeCell: UITableViewCell {
                     self.uploadButton.setTitleColor(UIColor.appSecondaryRed, for: .normal)
                 }, onCompleted: { [unowned self] in
                     self.uploadButton.isUserInteractionEnabled = false
-                    self.uploadButton.setTitle("已同步", for: .normal)
+                    self.uploadButton.setTitle("已上传", for: .normal)
                     self.uploadButton.setImage(UIImage(named: "icons8-cloud_checked")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
                     self.uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
                 }).disposed(by: disposeBag)
             } else {
                 uploadButton.isUserInteractionEnabled = true
-                uploadButton.setTitle("同步至iCloud", for: .normal)
+                uploadButton.setTitle("上传至iCloud", for: .normal)
                 uploadButton.setImage(UIImage(named: "icons8-upload_to_cloud")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
                 uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
             }
         } else {
-            uploadButton.setTitle("已同步", for: .normal)
+            uploadButton.setTitle("已上传", for: .normal)
             uploadButton.setImage(UIImage(named: "icons8-cloud_checked")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
             uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
         }
