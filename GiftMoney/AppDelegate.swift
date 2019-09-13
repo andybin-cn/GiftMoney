@@ -24,7 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         
-        UMConfigure.initWithAppkey("5d78ba633fc1957618000841", channel: "App Store")
+        #if DEBUG
+            UMConfigure.initWithAppkey("5d7b4b4b0cafb2c6ef0005c4", channel: "Debug")
+        #else
+            UMConfigure.initWithAppkey("5d78ba633fc1957618000841", channel: "App Store")
+        #endif
         MobClick.setScenarioType(eScenarioType.E_UM_NORMAL)
         
         SLog.info("NSHomeDirectory: \(NSHomeDirectory())")

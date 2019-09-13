@@ -13,6 +13,8 @@ import Common
 import RxRelay
 
 class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
+    static let shared = SpeechManager()
+    
     private let audioEngine = AVAudioEngine()
     
     var speechAvailable = BehaviorRelay<Bool>(value: true)

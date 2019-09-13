@@ -117,6 +117,15 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
         autoSyncToiCloudRow.switcher.isOn = AccountManager.shared.autoSyncToiCloudEnable
         
         addEvents()
+        
+        #if DEBUG
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "测试", style: .done, target: self, action: #selector(onTestButtonTapped))
+        #endif
+    }
+    
+    @objc func onTestButtonTapped() {
+        let controller = SpeechViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
