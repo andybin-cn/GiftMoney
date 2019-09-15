@@ -11,13 +11,23 @@ import Speech
 import RxSwift
 import Common
 import RxRelay
+import Accelerate
 
 class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     static let shared = SpeechManager()
     
     private let audioEngine = AVAudioEngine()
-    
+    private let fftSize: UInt32
+    let audioAnalyzer: RealtimeAnalyzer
     var speechAvailable = BehaviorRelay<Bool>(value: true)
+    var peakPower = BehaviorRelay<Float>(value: 0.0)
+    
+    
+    private override init() {
+        fftSize = 2048
+        audioAnalyzer = RealtimeAnalyzer(fftSize: Int(fftSize))
+        super.init()
+    }
     
     func requestAuthorization() -> Observable<SFSpeechRecognizerAuthorizationStatus> {
         return Observable<SFSpeechRecognizerAuthorizationStatus>.create { (observer) -> Disposable in
@@ -31,6 +41,7 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     var speechRecognizer = SFSpeechRecognizer(locale: .current)
+    private lazy var fftSetup = vDSP_create_fftsetup(vDSP_Length(Int(round(log2(Double(fftSize))))), FFTRadix(kFFTRadix2))
     
     func startSpeech() -> Observable<SFSpeechRecognitionResult> {
         return Observable<SFSpeechRecognitionResult>.create { (observer) -> Disposable in
@@ -51,9 +62,12 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
                 try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
                 let inputNode = self.audioEngine.inputNode
                 
+                
                 let recordingFormat = inputNode.outputFormat(forBus: 0)
-                inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+                
+                inputNode.installTap(onBus: 0, bufferSize: self.fftSize, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
                     recognitionRequest.append(buffer)
+                    self.peakPower.accept(self.audioAnalyzer.peakPower(buffer: buffer))
                 }
                 
                 self.audioEngine.prepare()

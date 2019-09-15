@@ -16,14 +16,22 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
     
     let text = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 14))
     let speechButton = UIButton()
+    let buttonContainer = UIView()
+    let animateView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        buttonContainer.addTo(self.view) { (make) in
+            make.bottom.equalTo(0)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(260)
+        }
+        
         text.numberOfLines = 0
         text.lineBreakMode = .byWordWrapping
         text.addTo(self.view) { (make) in
-            make.top.equalTo(200)
+            make.bottom.equalTo(buttonContainer.snp.top)
             make.left.equalTo(20)
             make.right.equalTo(20)
         }
@@ -32,17 +40,23 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
         speechButton.titleLabel?.font = UIFont.appFont(ofSize: 12)
         speechButton.layer.cornerRadius = 40
         speechButton.layer.masksToBounds = true
-        speechButton.backgroundColor = UIColor.appSecondaryGray
-        speechButton.setTitleColor(.appMainRed, for: .normal)
-        speechButton.addTo(self.view) { (make) in
-            make.bottom.equalTo(0)
+        speechButton.backgroundColor = UIColor.appSecondaryRed
+        speechButton.setTitleColor(.appWhiteText, for: .normal)
+        speechButton.addTo(buttonContainer) { (make) in
+            make.bottom.equalTo(-20)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(80)
         }
-        
-//        let gesture = UIGestureRecognizer(target: self, action: #selector(onGestureRecognizer(sender:)))
-//        gesture.delegate = self
-//        speechButton.addGestureRecognizer(gesture)
+        animateView.apply { (animateView) in
+            animateView.layer.cornerRadius = 40
+            animateView.layer.masksToBounds = true
+            animateView.backgroundColor = UIColor.appSecondaryGray
+            animateView.addTo(buttonContainer) { (make) in
+                make.center.equalTo(speechButton)
+                make.width.height.equalTo(speechButton)
+            }
+        }
+        buttonContainer.sendSubviewToBack(animateView)
         
         speechButton.rx.controlEvent(.touchDown).asObservable().subscribe(onNext: { [unowned self] (_) in
             self.startRecognizer()
@@ -52,6 +66,15 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
         }).disposed(by: disposeBag)
         speechButton.rx.controlEvent(.touchUpOutside).asObservable().subscribe(onNext: { [unowned self] (_) in
             self.stopRecognizer()
+        }).disposed(by: disposeBag)
+        
+        SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
+            SLog.info("peakPower:\(power)")
+            let scale = min(CGFloat(1 + power * 100), 3)
+//            self.animateView.layer.transform = CATransform3DMakeScale(scale, scale, 1)
+            UIView.animate(withDuration: 0.1, animations: {
+                self.animateView.transform = CGAffineTransform.init(scaleX: scale, y: scale)
+            })
         }).disposed(by: disposeBag)
     }
     
@@ -72,6 +95,7 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
     func stopRecognizer() {
         SLog.info("stopRecognizer")
         speechDispose?.dispose()
+        self.animateView.transform = CGAffineTransform.identity
         speechDispose = nil
     }
     

@@ -36,6 +36,9 @@ extension UIColor {
     public static var appGrayText: UIColor {
         return UIColor.from(hexString: "#5a5a5a")
     }
+    public static var appWhiteText: UIColor {
+        return UIColor.white
+    }
     public static var appDarkText: UIColor {
         return UIColor.darkText
     }
