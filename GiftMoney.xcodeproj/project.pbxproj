@@ -51,6 +51,7 @@
 		38220DC5232F2C22007955D0 /* JieBaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38220DC4232F2C22007955D0 /* JieBaBridge.mm */; };
 		38220DF8232F5769007955D0 /* Segmentor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38220DD0232F5769007955D0 /* Segmentor.cpp */; };
 		38220DF9232F5769007955D0 /* iosjieba.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38220DD1232F5769007955D0 /* iosjieba.bundle */; };
+		38220DFB232F612C007955D0 /* WordAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38220DFA232F612C007955D0 /* WordAnalyze.swift */; };
 		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
 		384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */; };
@@ -253,6 +254,7 @@
 		38220DF5232F5769007955D0 /* SegmentBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SegmentBase.hpp; sourceTree = "<group>"; };
 		38220DF6232F5769007955D0 /* HMMSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HMMSegment.hpp; sourceTree = "<group>"; };
 		38220DF7232F5769007955D0 /* Segmentor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segmentor.h; sourceTree = "<group>"; };
+		38220DFA232F612C007955D0 /* WordAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAnalyze.swift; sourceTree = "<group>"; };
 		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3849261823179DB50012D775 /* GiftMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GiftMoney.entitlements; sourceTree = "<group>"; };
@@ -536,9 +538,9 @@
 			isa = PBXGroup;
 			children = (
 				38220DD0232F5769007955D0 /* Segmentor.cpp */,
+				38220DF7232F5769007955D0 /* Segmentor.h */,
 				38220DD1232F5769007955D0 /* iosjieba.bundle */,
 				38220DD2232F5769007955D0 /* CppJieba */,
-				38220DF7232F5769007955D0 /* Segmentor.h */,
 			);
 			path = jieba;
 			sourceTree = "<group>";
@@ -608,6 +610,7 @@
 				380CCACD232A1FD8002AC4B8 /* CloudBackupQueue.swift */,
 				38220DC3232F2C22007955D0 /* JieBaBridge.h */,
 				38220DC4232F2C22007955D0 /* JieBaBridge.mm */,
+				38220DFA232F612C007955D0 /* WordAnalyze.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -954,6 +957,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38775E26230E753800B697F5 /* CloudManager.swift in Sources */,
+				38220DFB232F612C007955D0 /* WordAnalyze.swift in Sources */,
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
 				38970F372314CDC9004E2660 /* TradeFuntionSortView.swift in Sources */,

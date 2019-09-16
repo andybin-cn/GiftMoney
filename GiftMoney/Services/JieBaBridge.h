@@ -10,10 +10,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface JieBaTag : NSObject
+
+@property(nonatomic, copy) NSString* word;
+@property(nonatomic, copy) NSString* tag;
+
+- (instancetype)initWith:(NSString*)word tag:(NSString*)tag;
+
+@end
+
 @interface JieBaBridge : NSObject
 
 +(void)initJieBa;
 +(NSString*)jiebaCut:(NSString*)sentence;
++(NSMutableArray<JieBaTag*>*)jiebaTag:(NSString*)sentence;
 
 @end
 

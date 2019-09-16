@@ -9,6 +9,21 @@
 #import "JieBaBridge.h"
 #import "Segmentor.h"
 
+@implementation JieBaTag
+
+- (instancetype)initWith:(NSString*)word tag:(NSString*)tag
+{
+    self = [super init];
+    if (self) {
+        self.word = word;
+        self.tag = tag;
+    }
+    return self;
+}
+
+@end
+
+
 @implementation JieBaBridge
 
 +(void)initJieBa {
@@ -30,6 +45,20 @@
     std::string result;
     result << words;
     return [NSString stringWithUTF8String:result.c_str()];
+}
+
++(NSMutableArray<JieBaTag*>*)jiebaTag:(NSString*)sentence {
+    std::vector<std::pair<std::string, std::string> > tags;
+    JiebaTag([sentence UTF8String], tags);
+    int count = (int)tags.size();
+    NSMutableArray<JieBaTag*>* result = [NSMutableArray<JieBaTag*> arrayWithCapacity:count];
+    for (int i = 0; i<count; i++) {
+        NSString* word = [NSString stringWithUTF8String:tags[i].first.c_str()];
+        NSString* tagName = [NSString stringWithUTF8String:tags[i].second.c_str()];
+        JieBaTag* tag = [[JieBaTag alloc] initWith:word tag:tagName];
+        [result addObject:tag];
+    }
+    return result;
 }
 
 @end

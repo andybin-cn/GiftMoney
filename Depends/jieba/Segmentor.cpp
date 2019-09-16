@@ -28,3 +28,11 @@ void JiebaCut(const string& sentence, vector<string>& words)
     cout << __FILE__ << __LINE__ << endl;
     cout << words << endl;
 }
+
+void JiebaTag(const string& sentence, vector<pair<string, string>>& tags)
+{
+    assert(globalSegmentor);
+    globalSegmentor->Tag(sentence, tags);
+    cout << __FILE__ << __LINE__ << endl;
+    cout << tags << endl;
+}
