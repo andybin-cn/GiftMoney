@@ -7,3 +7,4 @@
 #import "SSZipArchive.h"
 #import <UMCommon/UMCommon.h>
 #import <UMAnalytics/MobClick.h>
+#import "JieBaBridge.h"

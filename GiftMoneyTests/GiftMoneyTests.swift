@@ -13,15 +13,18 @@ class GiftMoneyTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        JieBaBridge.initJieBa()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
+    func testJieBaCut() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let string = JieBaBridge.jiebaCut("李丽洁¥500红包.")
+        print("JieBaBridge.jiebaCut:\(string)")
     }
 
     func testPerformanceExample() {

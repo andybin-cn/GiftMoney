@@ -21,7 +21,6 @@
 		3649C76522F67FBD009AF83F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3649C76422F67FBD009AF83F /* Assets.xcassets */; };
 		3649C76822F67FBD009AF83F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3649C76622F67FBD009AF83F /* LaunchScreen.storyboard */; };
 		3649C77322F67FBD009AF83F /* GiftMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77222F67FBD009AF83F /* GiftMoneyTests.swift */; };
-		3649C77E22F67FBD009AF83F /* GiftMoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */; };
 		3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InAccountTradeVC.swift */; };
 		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
@@ -51,6 +50,7 @@
 		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
 		38220DBF232F26C0007955D0 /* Segmentor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38220D9A232F26C0007955D0 /* Segmentor.cpp */; };
 		38220DC0232F26C0007955D0 /* iosjieba.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38220D9B232F26C0007955D0 /* iosjieba.bundle */; };
+		38220DC5232F2C22007955D0 /* JieBaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38220DC4232F2C22007955D0 /* JieBaBridge.mm */; };
 		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
 		384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */; };
@@ -94,19 +94,11 @@
 		38FAD6302317BE2300F28AA0 /* FillInviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */; };
 		38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FAD6362319057400F28AA0 /* StoreKit.framework */; };
 		9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */; };
-		BEF4A2403A9B9C0A38D74C5F /* Pods_GiftMoneyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6EF788216A996B40FFA38 /* Pods_GiftMoneyUITests.framework */; };
 		CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		3649C76F22F67FBD009AF83F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3649C74D22F67FB9009AF83F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3649C75422F67FB9009AF83F;
-			remoteInfo = GiftMoney;
-		};
-		3649C77A22F67FBD009AF83F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3649C74D22F67FB9009AF83F /* Project object */;
 			proxyType = 1;
@@ -191,7 +183,6 @@
 		3649C76E22F67FBD009AF83F /* GiftMoneyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftMoneyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3649C77222F67FBD009AF83F /* GiftMoneyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftMoneyTests.swift; sourceTree = "<group>"; };
 		3649C77422F67FBD009AF83F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3649C77922F67FBD009AF83F /* GiftMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3649C77D22F67FBD009AF83F /* GiftMoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftMoneyUITests.swift; sourceTree = "<group>"; };
 		3649C77F22F67FBD009AF83F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3649C78F22F68644009AF83F /* InAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountTradeVC.swift; sourceTree = "<group>"; };
@@ -254,6 +245,9 @@
 		38220DBA232F26C0007955D0 /* SegmentBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SegmentBase.hpp; sourceTree = "<group>"; };
 		38220DBB232F26C0007955D0 /* HMMSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HMMSegment.hpp; sourceTree = "<group>"; };
 		38220DBC232F26C0007955D0 /* Segmentor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segmentor.h; sourceTree = "<group>"; };
+		38220DC3232F2C22007955D0 /* JieBaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JieBaBridge.h; sourceTree = "<group>"; };
+		38220DC4232F2C22007955D0 /* JieBaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = JieBaBridge.mm; sourceTree = "<group>"; };
+		38220DC6232F4E2F007955D0 /* xlsxwriter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = xlsxwriter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3849261823179DB50012D775 /* GiftMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GiftMoney.entitlements; sourceTree = "<group>"; };
@@ -333,14 +327,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3649C77622F67FBD009AF83F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BEF4A2403A9B9C0A38D74C5F /* Pods_GiftMoneyUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -404,7 +390,6 @@
 			children = (
 				3649C75522F67FB9009AF83F /* GiftMoney.app */,
 				3649C76E22F67FBD009AF83F /* GiftMoneyTests.xctest */,
-				3649C77922F67FBD009AF83F /* GiftMoneyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -611,6 +596,8 @@
 				38970F3C23164137004E2660 /* InviteManager.swift */,
 				380259C123272EF400C50090 /* SpeechManager.swift */,
 				380CCACD232A1FD8002AC4B8 /* CloudBackupQueue.swift */,
+				38220DC3232F2C22007955D0 /* JieBaBridge.h */,
+				38220DC4232F2C22007955D0 /* JieBaBridge.mm */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -680,6 +667,7 @@
 		E63782FD40E14AE5A4748D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38220DC6232F4E2F007955D0 /* xlsxwriter.framework */,
 				380259E42328F26200C50090 /* SystemConfiguration.framework */,
 				380259E22328F25900C50090 /* libsqlite3.tbd */,
 				380259DE2328F24700C50090 /* CoreTelephony.framework */,
@@ -738,25 +726,6 @@
 			productReference = 3649C76E22F67FBD009AF83F /* GiftMoneyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3649C77822F67FBD009AF83F /* GiftMoneyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3649C78822F67FBD009AF83F /* Build configuration list for PBXNativeTarget "GiftMoneyUITests" */;
-			buildPhases = (
-				DA4CD69CDB915EF5AC479120 /* [CP] Check Pods Manifest.lock */,
-				3649C77522F67FBD009AF83F /* Sources */,
-				3649C77622F67FBD009AF83F /* Frameworks */,
-				3649C77722F67FBD009AF83F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3649C77B22F67FBD009AF83F /* PBXTargetDependency */,
-			);
-			name = GiftMoneyUITests;
-			productName = GiftMoneyUITests;
-			productReference = 3649C77922F67FBD009AF83F /* GiftMoneyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -783,10 +752,6 @@
 						};
 					};
 					3649C76D22F67FBD009AF83F = {
-						CreatedOnToolsVersion = 11.0;
-						TestTargetID = 3649C75422F67FB9009AF83F;
-					};
-					3649C77822F67FBD009AF83F = {
 						CreatedOnToolsVersion = 11.0;
 						TestTargetID = 3649C75422F67FB9009AF83F;
 					};
@@ -818,7 +783,6 @@
 			targets = (
 				3649C75422F67FB9009AF83F /* GiftMoney */,
 				3649C76D22F67FBD009AF83F /* GiftMoneyTests */,
-				3649C77822F67FBD009AF83F /* GiftMoneyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -867,13 +831,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3649C76C22F67FBD009AF83F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3649C77722F67FBD009AF83F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -979,28 +936,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA4CD69CDB915EF5AC479120 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GiftMoneyUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1036,6 +971,7 @@
 				38970F3D23164137004E2660 /* InviteManager.swift in Sources */,
 				3870C2D6230A8766000C1996 /* String+Extensions.swift in Sources */,
 				369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */,
+				38220DC5232F2C22007955D0 /* JieBaBridge.mm in Sources */,
 				3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */,
 				369923B623142F540000A71A /* TradeFunctionFilterView.swift in Sources */,
 				38220DBF232F26C0007955D0 /* Segmentor.cpp in Sources */,
@@ -1090,14 +1026,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3649C77522F67FBD009AF83F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3649C77E22F67FBD009AF83F /* GiftMoneyUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1105,11 +1033,6 @@
 			isa = PBXTargetDependency;
 			target = 3649C75422F67FB9009AF83F /* GiftMoney */;
 			targetProxy = 3649C76F22F67FBD009AF83F /* PBXContainerItemProxy */;
-		};
-		3649C77B22F67FBD009AF83F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3649C75422F67FB9009AF83F /* GiftMoney */;
-			targetProxy = 3649C77A22F67FBD009AF83F /* PBXContainerItemProxy */;
 		};
 		369DFF2422F7093E0005B67D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1259,11 +1182,13 @@
 			baseConfigurationReference = B12DA1992B17A1CABDA11D8E /* Pods-GiftMoney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = GiftMoney/GiftMoney.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/libxlsxwriter/xlsxwriter.framework/Headers\"",
@@ -1299,11 +1224,13 @@
 			baseConfigurationReference = FE4753A816F5D3C0997C58EC /* Pods-GiftMoney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = GiftMoney/GiftMoney.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/libxlsxwriter/xlsxwriter.framework/Headers\"",
@@ -1339,8 +1266,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/libxlsxwriter/xlsxwriter.framework/Headers\"",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/XlsxReaderWriter",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/ThirdParties/**",
+				);
 				INFOPLIST_FILE = GiftMoneyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1349,6 +1284,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoneyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GiftMoney.app/GiftMoney";
@@ -1361,8 +1297,16 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = EG49RAY3R6;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/libxlsxwriter/xlsxwriter.framework/Headers\"",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/XlsxReaderWriter",
+					"$(SRCROOT)/Depends/XlsxReaderWriter/ThirdParties/**",
+				);
 				INFOPLIST_FILE = GiftMoneyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1371,51 +1315,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoneyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GiftMoney.app/GiftMoney";
-			};
-			name = Release;
-		};
-		3649C78922F67FBD009AF83F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D936886169576D32657005B /* Pods-GiftMoneyUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EG49RAY3R6;
-				INFOPLIST_FILE = GiftMoneyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoneyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GiftMoney;
-			};
-			name = Debug;
-		};
-		3649C78A22F67FBD009AF83F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B0213D6FF91967F5765DFA8 /* Pods-GiftMoneyUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EG49RAY3R6;
-				INFOPLIST_FILE = GiftMoneyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.andybin.GiftMoneyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GiftMoney;
 			};
 			name = Release;
 		};
@@ -1445,15 +1348,6 @@
 			buildConfigurations = (
 				3649C78622F67FBD009AF83F /* Debug */,
 				3649C78722F67FBD009AF83F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3649C78822F67FBD009AF83F /* Build configuration list for PBXNativeTarget "GiftMoneyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3649C78922F67FBD009AF83F /* Debug */,
-				3649C78A22F67FBD009AF83F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
