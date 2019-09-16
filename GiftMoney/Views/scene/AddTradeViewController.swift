@@ -216,6 +216,17 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         imageSetView.setImageViews(showMedias: medias, imageSize: imageSetView.imageSize, imageCountInLine: 4, isShowAddButton: true)
     }
     
+    func addEvents() {
+        speechView.speechResult.asObservable().subscribe(onNext: { [unowned self] (result) in
+            if let error = result.error {
+                self.catchError(error: error)
+            } else {
+                self.nameField.textfield.text = result.name
+                self.nameField.textfield.text = result.name
+            }
+        }).disposed(by: disposeBag)
+    }
+    
     //MARK: - controller actions
     
     @objc func onAddItemButtonTapped() {
