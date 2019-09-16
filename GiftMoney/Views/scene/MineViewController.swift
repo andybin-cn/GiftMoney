@@ -124,7 +124,10 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     }
     
     @objc func onTestButtonTapped() {
-        let controller = SpeechViewController()
+        let controller = UIViewController()
+        controller.view.addSubview(SpeechButtonView()) { (make) in
+            make.left.right.bottom.equalToSuperview()
+        }
         navigationController?.pushViewController(controller, animated: true)
     }
     

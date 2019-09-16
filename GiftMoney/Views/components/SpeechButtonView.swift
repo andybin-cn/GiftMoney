@@ -1,5 +1,5 @@
 //
-//  SpeechViewController.swift
+//  SpeechButtonView.swift
 //  GiftMoney
 //
 //  Created by andy.bin on 2019/9/10.
@@ -10,19 +10,25 @@ import Foundation
 import Common
 import SnapKit
 import RxSwift
+import RxRelay
 import Speech
 
-class SpeechViewController: BaseViewController, UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate {
+class SpeechButtonView: UIView {
+    let disposeBag = DisposeBag()
     
     let text = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 14))
     let speechButton = UIButton()
     let buttonContainer = UIView()
     let animateView = UIView()
+    let speechResult = BehaviorRelay<AnalyzeResult>(value: AnalyzeResult())
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    init() {
+        super.init(frame: .zero)
+        self.snp.makeConstraints { (make) in
+            make.height.equalTo(100)
+        }
         
-        buttonContainer.addTo(self.view) { (make) in
+        buttonContainer.addTo(self) { (make) in
             make.bottom.equalTo(0)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(260)
@@ -30,7 +36,7 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
         
         text.numberOfLines = 0
         text.lineBreakMode = .byWordWrapping
-        text.addTo(self.view) { (make) in
+        text.addTo(self) { (make) in
             make.bottom.equalTo(buttonContainer.snp.top)
             make.left.equalTo(20)
             make.right.equalTo(20)
@@ -61,14 +67,18 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
         speechButton.rx.controlEvent(.touchDown).asObservable().subscribe(onNext: { [unowned self] (_) in
             self.startRecognizer()
         }).disposed(by: disposeBag)
-        speechButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            self.stopRecognizer()
+        speechButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self?.stopRecognizer()
+            })
         }).disposed(by: disposeBag)
-        speechButton.rx.controlEvent(.touchUpOutside).asObservable().subscribe(onNext: { [unowned self] (_) in
-            self.stopRecognizer()
+        speechButton.rx.controlEvent(.touchUpOutside).asObservable().subscribe(onNext: { [weak self] (_) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self?.stopRecognizer()
+            })
         }).disposed(by: disposeBag)
         
-        SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
+    SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
             SLog.info("peakPower:\(power)")
             let scale = min(CGFloat(1 + power * 100), 3)
 //            self.animateView.layer.transform = CATransform3DMakeScale(scale, scale, 1)
@@ -78,10 +88,15 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
         }).disposed(by: disposeBag)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var speechDispose: Disposable?
     func startRecognizer() {
         SLog.info("startRecognizer")
         stopRecognizer()
+        self.text.text = ""
         speechDispose = SpeechManager.shared.startSpeech().subscribe(onNext: { [unowned self] (result) in
             SLog.info("speech result:\(result.bestTranscription.formattedString)")
             self.text.text = result.bestTranscription.formattedString
@@ -91,21 +106,34 @@ class SpeechViewController: BaseViewController, UIViewControllerTransitioningDel
             self.stopRecognizer()
         })
         speechDispose?.disposed(by: disposeBag)
+        UIView.animate(withDuration: 0.2) {
+            self.snp.updateConstraints({ (make) in
+                make.height.equalTo(320)
+            })
+            self.layoutIfNeeded()
+        }
     }
     func stopRecognizer() {
         SLog.info("stopRecognizer")
         speechDispose?.dispose()
         self.animateView.transform = CGAffineTransform.identity
         speechDispose = nil
+        UIView.animate(withDuration: 0.2) {
+            self.snp.updateConstraints({ (make) in
+                make.height.equalTo(100)
+            })
+            self.layoutIfNeeded()
+        }
+        if let text = self.text.text, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
+            let analyzeResult = WordAnalyze.shared.analyzeSentence(tags: result)
+            if analyzeResult.name.isEmpty || analyzeResult.value.isEmpty {
+                analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音")
+            }
+            speechResult.accept(analyzeResult)
+        } else {
+            let analyzeResult = AnalyzeResult()
+            analyzeResult.error = CommonError(message: "请按照例句中的格式录入语音")
+            speechResult.accept(analyzeResult)
+        }
     }
-    
-    //MARK: - UIGestureRecognizerDelegate
-    @objc func onGestureRecognizer(sender: Any) {
-        SLog.info("onGestureRecognizer")
-        SLog.info("onGestureRecognizer:\(type(of: sender))")
-    }
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-
 }

@@ -39,7 +39,7 @@
 		369DFF2522F7094F0005B67D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; };
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		380259C223272EF400C50090 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C123272EF400C50090 /* SpeechManager.swift */; };
-		380259C42327461C00C50090 /* SpeechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C32327461C00C50090 /* SpeechViewController.swift */; };
+		380259C42327461C00C50090 /* SpeechButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C32327461C00C50090 /* SpeechButtonView.swift */; };
 		380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259DE2328F24700C50090 /* CoreTelephony.framework */; };
 		380259E32328F25900C50090 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259E22328F25900C50090 /* libsqlite3.tbd */; };
 		380259E52328F26200C50090 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259E42328F26200C50090 /* SystemConfiguration.framework */; };
@@ -203,7 +203,7 @@
 		369DFE3622F6CD930005B67D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
 		380259C123272EF400C50090 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
-		380259C32327461C00C50090 /* SpeechViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewController.swift; sourceTree = "<group>"; };
+		380259C32327461C00C50090 /* SpeechButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechButtonView.swift; sourceTree = "<group>"; };
 		380259C82328BC5400C50090 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		380259DE2328F24700C50090 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		380259E22328F25900C50090 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -374,7 +374,6 @@
 				38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */,
 				38970F3E231647AD004E2660 /* InviteCodeVC.swift */,
 				38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */,
-				380259C32327461C00C50090 /* SpeechViewController.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -473,6 +472,7 @@
 		369DFE2022F6BD9D0005B67D /* components */ = {
 			isa = PBXGroup;
 			children = (
+				380259C32327461C00C50090 /* SpeechButtonView.swift */,
 				369DFE2122F6BDD30005B67D /* InputField.swift */,
 				36135D5622FB214600D17330 /* DateInputField.swift */,
 				38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */,
@@ -990,7 +990,7 @@
 				369923B623142F540000A71A /* TradeFunctionFilterView.swift in Sources */,
 				38970F3923151E9C004E2660 /* TradeFunctionTimeView.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
-				380259C42327461C00C50090 /* SpeechViewController.swift in Sources */,
+				380259C42327461C00C50090 /* SpeechButtonView.swift in Sources */,
 				38236C67230105F000B67B8D /* TradeManger.swift in Sources */,
 				36135D4C22F871B200D17330 /* TradeItemRow.swift in Sources */,
 				369923BA231431DD0000A71A /* TradeFunctionButtonsView.swift in Sources */,

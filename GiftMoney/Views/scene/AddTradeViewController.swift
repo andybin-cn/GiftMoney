@@ -21,6 +21,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
 
     let scrollView = UIScrollView()
     
+    let speechView = SpeechButtonView()
+    
     let typeSwitch = SwitchInput(name:"type", labelString: "类型：")
     let nameField = InputField(name: "name", labelString: "姓名")
     let relationshipField = InputField(name: "relationship", labelString: "关系")
@@ -59,6 +61,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if trade != nil {
             self.title = "修改记录"
         } else {
@@ -82,6 +85,10 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                     make.width.equalTo(self.view)
                 }
             }
+        }
+        
+        speechView.addTo(self.view) { (make) in
+            make.bottom.left.right.equalToSuperview()
         }
         
         typeSwitch.addTo(scrollView) { (make) in

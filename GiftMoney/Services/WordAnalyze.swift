@@ -14,6 +14,7 @@ class AnalyzeResult {
     var unit: String = ""
     var unitType: TradeItem.ItemType = .money
     var type: Trade.TradeType = .inAccount
+    var error: Error? = nil
 }
 
 class WordAnalyze {
