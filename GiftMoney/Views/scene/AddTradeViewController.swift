@@ -77,6 +77,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             scrollView.addTo(self.view) { (make) in
                 make.edges.equalToSuperview()
             }
+            scrollView.contentInset += UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
             
             UIView().apply { (widthView) in
                 widthView.addTo(scrollView) { (make) in
@@ -176,6 +177,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
         }
         
         fillInFormValues()
+        addEvents()
     }
     func fillInFormValues() {
         if let tradeType = defaultType {
@@ -221,8 +223,24 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             if let error = result.error {
                 self.catchError(error: error)
             } else {
-                self.nameField.textfield.text = result.name
-                self.nameField.textfield.text = result.name
+                self.nameField.fieldValue = result.name
+                
+                let row = TradeItemRow(name: "tradeItems",tradeItem: nil, canDelete: false)
+                row.delegate = self
+                row.tradeItemType = result.unitType
+                if result.unitType == .money {
+                    row.moneyField.fieldValue = result.value
+                } else {
+                    row.giftNameField.fieldValue = "礼物"
+                    row.giftValueField.fieldValue = result.value
+                }
+                for subview in self.itemsStackView.subviews {
+                    if subview is TradeItemRow {
+                        subview.removeFromSuperview()
+                        self.itemsStackView.removeArrangedSubview(subview)
+                    }
+                }
+                self.itemsStackView.insertArrangedSubview(row, at: 0)
             }
         }).disposed(by: disposeBag)
     }
@@ -237,6 +255,18 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     @objc func saveButtonTapped() {
         do {
+            if nameField.textfield.text?.isEmpty ?? true {
+                self.showTipsView(text: "请输入姓名")
+                return
+            }
+            if eventNameField.textfield.text?.isEmpty ?? true {
+                self.showTipsView(text: "请输入事件名称")
+                return
+            }
+            if relationshipField.textfield.text?.isEmpty ?? true {
+                self.showTipsView(text: "请选择关系")
+                return
+            }
             let values = try self.validateForm()
             
             guard let newTrade = Trade.init(JSON: values) else {

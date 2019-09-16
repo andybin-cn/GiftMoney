@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = MainTabViewController.shared
         window?.makeKeyAndVisible()
         
+        JieBaBridge.initJieBa()
         IQKeyboardManager.shared.enable = true
         
         #if DEBUG

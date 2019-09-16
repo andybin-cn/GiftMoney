@@ -18,7 +18,12 @@ class TradeItemRow: UIView, FormInput {
     var valueSrtuct: FormInputValueSrtuct { return  .array }
     
     var tradeItemType: TradeItem.ItemType {
-        return switcher.selectedSegmentIndex == 0 ? TradeItem.ItemType.money : TradeItem.ItemType.gift
+        get {
+            return switcher.selectedSegmentIndex == 0 ? TradeItem.ItemType.money : TradeItem.ItemType.gift
+        }
+        set {
+            switcher.selectedSegmentIndex = tradeItemType == .money ? 0 : 1
+        }
     }
     var tradeItemName: String {
         return switcher.selectedSegmentIndex == 0 ? "人民币" : giftNameField.textfield.text ?? ""

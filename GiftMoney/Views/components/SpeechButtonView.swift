@@ -24,6 +24,8 @@ class SpeechButtonView: UIView {
     
     init() {
         super.init(frame: .zero)
+        self.backgroundColor = UIColor.white
+        self.clipsToBounds = true
         self.snp.makeConstraints { (make) in
             make.height.equalTo(100)
         }
@@ -106,22 +108,24 @@ class SpeechButtonView: UIView {
             self.stopRecognizer()
         })
         speechDispose?.disposed(by: disposeBag)
+        self.snp.updateConstraints({ (make) in
+            make.height.equalTo(320)
+        })
         UIView.animate(withDuration: 0.2) {
-            self.snp.updateConstraints({ (make) in
-                make.height.equalTo(320)
-            })
+            self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
             self.layoutIfNeeded()
         }
     }
     func stopRecognizer() {
         SLog.info("stopRecognizer")
         speechDispose?.dispose()
-        self.animateView.transform = CGAffineTransform.identity
         speechDispose = nil
+        self.snp.updateConstraints({ (make) in
+            make.height.equalTo(100)
+        })
         UIView.animate(withDuration: 0.2) {
-            self.snp.updateConstraints({ (make) in
-                make.height.equalTo(100)
-            })
+            self.animateView.transform = CGAffineTransform.identity
+            self.backgroundColor = UIColor.white
             self.layoutIfNeeded()
         }
         if let text = self.text.text, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
