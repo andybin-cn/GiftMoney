@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-extern CppJieba::MixSegment * globalSegmentor;
+extern cppjieba::MixSegment * globalSegmentor;
 
 void JiebaInit(const std::string& dictPath, const std::string& hmmPath, const std::string& userDictPath);
 

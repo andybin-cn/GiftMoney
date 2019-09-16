@@ -4,120 +4,86 @@
 #include <algorithm>
 #include <set>
 #include <cassert>
-#include "Limonp/Logger.hpp"
+#include "limonp/Logging.hpp"
 #include "DictTrie.hpp"
-#include "ISegment.hpp"
 #include "SegmentBase.hpp"
 #include "FullSegment.hpp"
 #include "MixSegment.hpp"
-#include "TransCode.hpp"
-#include "DictTrie.hpp"
+#include "Unicode.hpp"
 
-namespace CppJieba
-{
-    class QuerySegment: public SegmentBase
-    {
-    private:
-        MixSegment _mixSeg;
-        FullSegment _fullSeg;
-        size_t _maxWordLen;
+namespace cppjieba {
+class QuerySegment: public SegmentBase {
+ public:
+  QuerySegment(const string& dict, const string& model, const string& userDict = "")
+    : mixSeg_(dict, model, userDict),
+      trie_(mixSeg_.GetDictTrie()) {
+  }
+  QuerySegment(const DictTrie* dictTrie, const HMMModel* model)
+    : mixSeg_(dictTrie, model), trie_(dictTrie) {
+  }
+  ~QuerySegment() {
+  }
 
-    public:
-        QuerySegment(){};
-        QuerySegment(const string& dict, const string& model, size_t maxWordLen)
-        {
-            init(dict, model, maxWordLen);
-        };
-        virtual ~QuerySegment(){};
-    public:
-        bool init(const string& dict, const string& model, size_t maxWordLen)
-        {
-            LIMONP_CHECK(_mixSeg.init(dict, model));
-            LIMONP_CHECK(_fullSeg.init(_mixSeg.getDictTrie()));
-            assert(maxWordLen);
-            _maxWordLen = maxWordLen;
-            return true;
+  void Cut(const string& sentence, vector<string>& words) const {
+    Cut(sentence, words, true);
+  }
+  void Cut(const string& sentence, vector<string>& words, bool hmm) const {
+    vector<Word> tmp;
+    Cut(sentence, tmp, hmm);
+    GetStringsFromWords(tmp, words);
+  }
+  void Cut(const string& sentence, vector<Word>& words, bool hmm = true) const {
+    PreFilter pre_filter(symbols_, sentence);
+    PreFilter::Range range;
+    vector<WordRange> wrs;
+    wrs.reserve(sentence.size()/2);
+    while (pre_filter.HasNext()) {
+      range = pre_filter.Next();
+      Cut(range.begin, range.end, wrs, hmm);
+    }
+    words.clear();
+    words.reserve(wrs.size());
+    GetWordsFromWordRanges(sentence, wrs, words);
+  }
+  void Cut(RuneStrArray::const_iterator begin, RuneStrArray::const_iterator end, vector<WordRange>& res, bool hmm) const {
+    //use mix Cut first
+    vector<WordRange> mixRes;
+    mixSeg_.Cut(begin, end, mixRes, hmm);
+
+    vector<WordRange> fullRes;
+    for (vector<WordRange>::const_iterator mixResItr = mixRes.begin(); mixResItr != mixRes.end(); mixResItr++) {
+      if (mixResItr->Length() > 2) {
+        for (size_t i = 0; i + 1 < mixResItr->Length(); i++) {
+          WordRange wr(mixResItr->left + i, mixResItr->left + i + 1);
+          if (trie_->Find(wr.left, wr.right + 1) != NULL) {
+            res.push_back(wr);
+          }
         }
-
-    public:
-        using SegmentBase::cut;
-
-    public:
-        bool cut(Unicode::const_iterator begin, Unicode::const_iterator end, vector<Unicode>& res) const
-        {
-            if (begin >= end)
-            {
-                LogError("begin >= end");
-                return false;
-            }
-
-            //use mix cut first
-            vector<Unicode> mixRes;
-            if (!_mixSeg.cut(begin, end, mixRes))
-            {
-                LogError("_mixSeg cut failed.");
-                return false;
-            }
-
-            vector<Unicode> fullRes;
-            for (vector<Unicode>::const_iterator mixResItr = mixRes.begin(); mixResItr != mixRes.end(); mixResItr++)
-            {
-                
-                // if it's too long, cut with _fullSeg, put fullRes in res
-                if (mixResItr->size() > _maxWordLen)
-                {
-                    if (_fullSeg.cut(mixResItr->begin(), mixResItr->end(), fullRes))
-                    {
-                       for (vector<Unicode>::const_iterator fullResItr = fullRes.begin(); fullResItr != fullRes.end(); fullResItr++)
-                       {
-                           res.push_back(*fullResItr);
-                       }
-
-                       //clear tmp res
-                       fullRes.clear();
-                    }
-                }
-                else // just use the mix result
-                {
-                    res.push_back(*mixResItr);
-                }
-            }
-
-            return true;
+      }
+      if (mixResItr->Length() > 3) {
+        for (size_t i = 0; i + 2 < mixResItr->Length(); i++) {
+          WordRange wr(mixResItr->left + i, mixResItr->left + i + 2);
+          if (trie_->Find(wr.left, wr.right + 1) != NULL) {
+            res.push_back(wr);
+          }
         }
+      }
+      res.push_back(*mixResItr);
+    }
+  }
+ private:
+  bool IsAllAscii(const Unicode& s) const {
+   for(size_t i = 0; i < s.size(); i++) {
+     if (s[i] >= 0x80) {
+       return false;
+     }
+   }
+   return true;
+  }
+  MixSegment mixSeg_;
+  const DictTrie* trie_;
+}; // QuerySegment
 
-
-        bool cut(Unicode::const_iterator begin, Unicode::const_iterator end, vector<string>& res) const
-        {
-            if (begin >= end)
-            {
-                LogError("begin >= end");
-                return false;
-            }
-
-            vector<Unicode> uRes;
-            if (!cut(begin, end, uRes))
-            {
-                LogError("get unicode cut result error.");
-                return false;
-            }
-
-            string tmp;
-            for (vector<Unicode>::const_iterator uItr = uRes.begin(); uItr != uRes.end(); uItr++)
-            {
-                if (TransCode::encode(*uItr, tmp))
-                {
-                    res.push_back(tmp);
-                }
-                else
-                {
-                    LogError("encode failed.");
-                }
-            }
-
-            return true;
-        }
-    };
-}
+} // namespace cppjieba
 
 #endif

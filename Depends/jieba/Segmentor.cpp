@@ -9,9 +9,9 @@
 #include "Segmentor.h"
 #include <iostream>
 
-using namespace CppJieba;
+using namespace cppjieba;
 
-CppJieba::MixSegment * globalSegmentor;
+cppjieba::MixSegment * globalSegmentor;
 
 void JiebaInit(const string& dictPath, const string& hmmPath, const string& userDictPath)
 {
@@ -24,7 +24,7 @@ void JiebaInit(const string& dictPath, const string& hmmPath, const string& user
 void JiebaCut(const string& sentence, vector<string>& words)
 {
     assert(globalSegmentor);
-    globalSegmentor->cut(sentence, words);
+    globalSegmentor->Cut(sentence, words);
     cout << __FILE__ << __LINE__ << endl;
     cout << words << endl;
 }

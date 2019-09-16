@@ -48,9 +48,9 @@
 		3818556722FBC30700024542 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556622FBC30600024542 /* Event.swift */; };
 		3818556922FBC54C00024542 /* TradeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556822FBC54C00024542 /* TradeItem.swift */; };
 		3818556B22FBC57700024542 /* TradeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818556A22FBC57700024542 /* TradeMedia.swift */; };
-		38220DBF232F26C0007955D0 /* Segmentor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38220D9A232F26C0007955D0 /* Segmentor.cpp */; };
-		38220DC0232F26C0007955D0 /* iosjieba.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38220D9B232F26C0007955D0 /* iosjieba.bundle */; };
 		38220DC5232F2C22007955D0 /* JieBaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 38220DC4232F2C22007955D0 /* JieBaBridge.mm */; };
+		38220DF8232F5769007955D0 /* Segmentor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38220DD0232F5769007955D0 /* Segmentor.cpp */; };
+		38220DF9232F5769007955D0 /* iosjieba.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38220DD1232F5769007955D0 /* iosjieba.bundle */; };
 		38236C67230105F000B67B8D /* TradeManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C66230105F000B67B8D /* TradeManger.swift */; };
 		38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38236C6B23028A8A00B67B8D /* EventCell.swift */; };
 		384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 384CCA19230D35DD006F0E3E /* libXlsxReaderWriter.a */; };
@@ -212,42 +212,47 @@
 		3818556622FBC30600024542 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3818556822FBC54C00024542 /* TradeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItem.swift; sourceTree = "<group>"; };
 		3818556A22FBC57700024542 /* TradeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMedia.swift; sourceTree = "<group>"; };
-		38220D9A232F26C0007955D0 /* Segmentor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Segmentor.cpp; sourceTree = "<group>"; };
-		38220D9B232F26C0007955D0 /* iosjieba.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iosjieba.bundle; sourceTree = "<group>"; };
-		38220D9D232F26C0007955D0 /* DictTrie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DictTrie.hpp; sourceTree = "<group>"; };
-		38220D9E232F26C0007955D0 /* ISegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ISegment.hpp; sourceTree = "<group>"; };
-		38220D9F232F26C0007955D0 /* FullSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FullSegment.hpp; sourceTree = "<group>"; };
-		38220DA0232F26C0007955D0 /* MixSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MixSegment.hpp; sourceTree = "<group>"; };
-		38220DA1232F26C0007955D0 /* MPSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MPSegment.hpp; sourceTree = "<group>"; };
-		38220DA2232F26C0007955D0 /* KeywordExtractor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeywordExtractor.hpp; sourceTree = "<group>"; };
-		38220DA3232F26C0007955D0 /* PosTagger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PosTagger.hpp; sourceTree = "<group>"; };
-		38220DA4232F26C0007955D0 /* TransCode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransCode.hpp; sourceTree = "<group>"; };
-		38220DA5232F26C0007955D0 /* Trie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Trie.hpp; sourceTree = "<group>"; };
-		38220DA7232F26C0007955D0 /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
-		38220DA8232F26C0007955D0 /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
-		38220DA9232F26C0007955D0 /* StdExtension.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StdExtension.hpp; sourceTree = "<group>"; };
-		38220DAA232F26C0007955D0 /* HandyMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HandyMacro.hpp; sourceTree = "<group>"; };
-		38220DAB232F26C0007955D0 /* StringUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StringUtil.hpp; sourceTree = "<group>"; };
-		38220DAC232F26C0007955D0 /* LocalVector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LocalVector.hpp; sourceTree = "<group>"; };
-		38220DAD232F26C0007955D0 /* BlockingQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlockingQueue.hpp; sourceTree = "<group>"; };
-		38220DAE232F26C0007955D0 /* InitOnOff.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InitOnOff.hpp; sourceTree = "<group>"; };
-		38220DAF232F26C0007955D0 /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
-		38220DB0232F26C0007955D0 /* MysqlClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MysqlClient.hpp; sourceTree = "<group>"; };
-		38220DB1232F26C0007955D0 /* CastFloat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CastFloat.hpp; sourceTree = "<group>"; };
-		38220DB2232F26C0007955D0 /* BoundedQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BoundedQueue.hpp; sourceTree = "<group>"; };
-		38220DB3232F26C0007955D0 /* ArgvContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ArgvContext.hpp; sourceTree = "<group>"; };
-		38220DB4232F26C0007955D0 /* Condition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Condition.hpp; sourceTree = "<group>"; };
-		38220DB5232F26C0007955D0 /* Md5.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Md5.hpp; sourceTree = "<group>"; };
-		38220DB6232F26C0007955D0 /* Thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thread.hpp; sourceTree = "<group>"; };
-		38220DB7232F26C0007955D0 /* MutexLock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MutexLock.hpp; sourceTree = "<group>"; };
-		38220DB8232F26C0007955D0 /* NonCopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NonCopyable.hpp; sourceTree = "<group>"; };
-		38220DB9232F26C0007955D0 /* QuerySegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = QuerySegment.hpp; sourceTree = "<group>"; };
-		38220DBA232F26C0007955D0 /* SegmentBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SegmentBase.hpp; sourceTree = "<group>"; };
-		38220DBB232F26C0007955D0 /* HMMSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HMMSegment.hpp; sourceTree = "<group>"; };
-		38220DBC232F26C0007955D0 /* Segmentor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segmentor.h; sourceTree = "<group>"; };
 		38220DC3232F2C22007955D0 /* JieBaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JieBaBridge.h; sourceTree = "<group>"; };
 		38220DC4232F2C22007955D0 /* JieBaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = JieBaBridge.mm; sourceTree = "<group>"; };
 		38220DC6232F4E2F007955D0 /* xlsxwriter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = xlsxwriter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38220DD0232F5769007955D0 /* Segmentor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Segmentor.cpp; sourceTree = "<group>"; };
+		38220DD1232F5769007955D0 /* iosjieba.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iosjieba.bundle; sourceTree = "<group>"; };
+		38220DD3232F5769007955D0 /* DictTrie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DictTrie.hpp; sourceTree = "<group>"; };
+		38220DD4232F5769007955D0 /* Unicode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Unicode.hpp; sourceTree = "<group>"; };
+		38220DD5232F5769007955D0 /* PreFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PreFilter.hpp; sourceTree = "<group>"; };
+		38220DD6232F5769007955D0 /* FullSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FullSegment.hpp; sourceTree = "<group>"; };
+		38220DD7232F5769007955D0 /* MixSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MixSegment.hpp; sourceTree = "<group>"; };
+		38220DD8232F5769007955D0 /* MPSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MPSegment.hpp; sourceTree = "<group>"; };
+		38220DD9232F5769007955D0 /* KeywordExtractor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeywordExtractor.hpp; sourceTree = "<group>"; };
+		38220DDA232F5769007955D0 /* Jieba.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Jieba.hpp; sourceTree = "<group>"; };
+		38220DDB232F5769007955D0 /* TextRankExtractor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextRankExtractor.hpp; sourceTree = "<group>"; };
+		38220DDC232F5769007955D0 /* PosTagger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PosTagger.hpp; sourceTree = "<group>"; };
+		38220DDD232F5769007955D0 /* Trie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Trie.hpp; sourceTree = "<group>"; };
+		38220DDF232F5769007955D0 /* ThreadPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadPool.hpp; sourceTree = "<group>"; };
+		38220DE0232F5769007955D0 /* Colors.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Colors.hpp; sourceTree = "<group>"; };
+		38220DE1232F5769007955D0 /* StdExtension.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StdExtension.hpp; sourceTree = "<group>"; };
+		38220DE2232F5769007955D0 /* StringUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StringUtil.hpp; sourceTree = "<group>"; };
+		38220DE3232F5769007955D0 /* LocalVector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LocalVector.hpp; sourceTree = "<group>"; };
+		38220DE4232F5769007955D0 /* BlockingQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlockingQueue.hpp; sourceTree = "<group>"; };
+		38220DE5232F5769007955D0 /* Closure.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Closure.hpp; sourceTree = "<group>"; };
+		38220DE6232F5769007955D0 /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
+		38220DE7232F5769007955D0 /* ForcePublic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ForcePublic.hpp; sourceTree = "<group>"; };
+		38220DE8232F5769007955D0 /* BoundedQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BoundedQueue.hpp; sourceTree = "<group>"; };
+		38220DE9232F5769007955D0 /* ArgvContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ArgvContext.hpp; sourceTree = "<group>"; };
+		38220DEA232F5769007955D0 /* Condition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Condition.hpp; sourceTree = "<group>"; };
+		38220DEB232F5769007955D0 /* Md5.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Md5.hpp; sourceTree = "<group>"; };
+		38220DEC232F5769007955D0 /* Thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thread.hpp; sourceTree = "<group>"; };
+		38220DED232F5769007955D0 /* MutexLock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MutexLock.hpp; sourceTree = "<group>"; };
+		38220DEE232F5769007955D0 /* FileLock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileLock.hpp; sourceTree = "<group>"; };
+		38220DEF232F5769007955D0 /* Logging.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
+		38220DF0232F5769007955D0 /* NonCopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NonCopyable.hpp; sourceTree = "<group>"; };
+		38220DF1232F5769007955D0 /* BoundedBlockingQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BoundedBlockingQueue.hpp; sourceTree = "<group>"; };
+		38220DF2232F5769007955D0 /* QuerySegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = QuerySegment.hpp; sourceTree = "<group>"; };
+		38220DF3232F5769007955D0 /* SegmentTagged.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SegmentTagged.hpp; sourceTree = "<group>"; };
+		38220DF4232F5769007955D0 /* HMMModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HMMModel.hpp; sourceTree = "<group>"; };
+		38220DF5232F5769007955D0 /* SegmentBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SegmentBase.hpp; sourceTree = "<group>"; };
+		38220DF6232F5769007955D0 /* HMMSegment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HMMSegment.hpp; sourceTree = "<group>"; };
+		38220DF7232F5769007955D0 /* Segmentor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segmentor.h; sourceTree = "<group>"; };
 		38236C66230105F000B67B8D /* TradeManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManger.swift; sourceTree = "<group>"; };
 		38236C6B23028A8A00B67B8D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3849261823179DB50012D775 /* GiftMoney.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GiftMoney.entitlements; sourceTree = "<group>"; };
@@ -503,7 +508,7 @@
 		369DFE3D22F708600005B67D /* Depends */ = {
 			isa = PBXGroup;
 			children = (
-				38220D99232F26C0007955D0 /* jieba */,
+				38220DCF232F5769007955D0 /* jieba */,
 				384CCA0F230D35B4006F0E3E /* XlsxReaderWriter */,
 				369DFE3E22F708600005B67D /* Common */,
 			);
@@ -527,58 +532,63 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		38220D99232F26C0007955D0 /* jieba */ = {
+		38220DCF232F5769007955D0 /* jieba */ = {
 			isa = PBXGroup;
 			children = (
-				38220D9A232F26C0007955D0 /* Segmentor.cpp */,
-				38220D9B232F26C0007955D0 /* iosjieba.bundle */,
-				38220D9C232F26C0007955D0 /* CppJieba */,
-				38220DBC232F26C0007955D0 /* Segmentor.h */,
+				38220DD0232F5769007955D0 /* Segmentor.cpp */,
+				38220DD1232F5769007955D0 /* iosjieba.bundle */,
+				38220DD2232F5769007955D0 /* CppJieba */,
+				38220DF7232F5769007955D0 /* Segmentor.h */,
 			);
 			path = jieba;
 			sourceTree = "<group>";
 		};
-		38220D9C232F26C0007955D0 /* CppJieba */ = {
+		38220DD2232F5769007955D0 /* CppJieba */ = {
 			isa = PBXGroup;
 			children = (
-				38220D9D232F26C0007955D0 /* DictTrie.hpp */,
-				38220D9E232F26C0007955D0 /* ISegment.hpp */,
-				38220D9F232F26C0007955D0 /* FullSegment.hpp */,
-				38220DA0232F26C0007955D0 /* MixSegment.hpp */,
-				38220DA1232F26C0007955D0 /* MPSegment.hpp */,
-				38220DA2232F26C0007955D0 /* KeywordExtractor.hpp */,
-				38220DA3232F26C0007955D0 /* PosTagger.hpp */,
-				38220DA4232F26C0007955D0 /* TransCode.hpp */,
-				38220DA5232F26C0007955D0 /* Trie.hpp */,
-				38220DA6232F26C0007955D0 /* Limonp */,
-				38220DB9232F26C0007955D0 /* QuerySegment.hpp */,
-				38220DBA232F26C0007955D0 /* SegmentBase.hpp */,
-				38220DBB232F26C0007955D0 /* HMMSegment.hpp */,
+				38220DD3232F5769007955D0 /* DictTrie.hpp */,
+				38220DD4232F5769007955D0 /* Unicode.hpp */,
+				38220DD5232F5769007955D0 /* PreFilter.hpp */,
+				38220DD6232F5769007955D0 /* FullSegment.hpp */,
+				38220DD7232F5769007955D0 /* MixSegment.hpp */,
+				38220DD8232F5769007955D0 /* MPSegment.hpp */,
+				38220DD9232F5769007955D0 /* KeywordExtractor.hpp */,
+				38220DDA232F5769007955D0 /* Jieba.hpp */,
+				38220DDB232F5769007955D0 /* TextRankExtractor.hpp */,
+				38220DDC232F5769007955D0 /* PosTagger.hpp */,
+				38220DDD232F5769007955D0 /* Trie.hpp */,
+				38220DDE232F5769007955D0 /* Limonp */,
+				38220DF2232F5769007955D0 /* QuerySegment.hpp */,
+				38220DF3232F5769007955D0 /* SegmentTagged.hpp */,
+				38220DF4232F5769007955D0 /* HMMModel.hpp */,
+				38220DF5232F5769007955D0 /* SegmentBase.hpp */,
+				38220DF6232F5769007955D0 /* HMMSegment.hpp */,
 			);
 			path = CppJieba;
 			sourceTree = "<group>";
 		};
-		38220DA6232F26C0007955D0 /* Limonp */ = {
+		38220DDE232F5769007955D0 /* Limonp */ = {
 			isa = PBXGroup;
 			children = (
-				38220DA7232F26C0007955D0 /* ThreadPool.hpp */,
-				38220DA8232F26C0007955D0 /* Logger.hpp */,
-				38220DA9232F26C0007955D0 /* StdExtension.hpp */,
-				38220DAA232F26C0007955D0 /* HandyMacro.hpp */,
-				38220DAB232F26C0007955D0 /* StringUtil.hpp */,
-				38220DAC232F26C0007955D0 /* LocalVector.hpp */,
-				38220DAD232F26C0007955D0 /* BlockingQueue.hpp */,
-				38220DAE232F26C0007955D0 /* InitOnOff.hpp */,
-				38220DAF232F26C0007955D0 /* Config.hpp */,
-				38220DB0232F26C0007955D0 /* MysqlClient.hpp */,
-				38220DB1232F26C0007955D0 /* CastFloat.hpp */,
-				38220DB2232F26C0007955D0 /* BoundedQueue.hpp */,
-				38220DB3232F26C0007955D0 /* ArgvContext.hpp */,
-				38220DB4232F26C0007955D0 /* Condition.hpp */,
-				38220DB5232F26C0007955D0 /* Md5.hpp */,
-				38220DB6232F26C0007955D0 /* Thread.hpp */,
-				38220DB7232F26C0007955D0 /* MutexLock.hpp */,
-				38220DB8232F26C0007955D0 /* NonCopyable.hpp */,
+				38220DDF232F5769007955D0 /* ThreadPool.hpp */,
+				38220DE0232F5769007955D0 /* Colors.hpp */,
+				38220DE1232F5769007955D0 /* StdExtension.hpp */,
+				38220DE2232F5769007955D0 /* StringUtil.hpp */,
+				38220DE3232F5769007955D0 /* LocalVector.hpp */,
+				38220DE4232F5769007955D0 /* BlockingQueue.hpp */,
+				38220DE5232F5769007955D0 /* Closure.hpp */,
+				38220DE6232F5769007955D0 /* Config.hpp */,
+				38220DE7232F5769007955D0 /* ForcePublic.hpp */,
+				38220DE8232F5769007955D0 /* BoundedQueue.hpp */,
+				38220DE9232F5769007955D0 /* ArgvContext.hpp */,
+				38220DEA232F5769007955D0 /* Condition.hpp */,
+				38220DEB232F5769007955D0 /* Md5.hpp */,
+				38220DEC232F5769007955D0 /* Thread.hpp */,
+				38220DED232F5769007955D0 /* MutexLock.hpp */,
+				38220DEE232F5769007955D0 /* FileLock.hpp */,
+				38220DEF232F5769007955D0 /* Logging.hpp */,
+				38220DF0232F5769007955D0 /* NonCopyable.hpp */,
+				38220DF1232F5769007955D0 /* BoundedBlockingQueue.hpp */,
 			);
 			path = Limonp;
 			sourceTree = "<group>";
@@ -824,7 +834,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3870C2DC230A88E2000C1996 /* Main.storyboard in Resources */,
-				38220DC0232F26C0007955D0 /* iosjieba.bundle in Resources */,
+				38220DF9232F5769007955D0 /* iosjieba.bundle in Resources */,
 				3649C76822F67FBD009AF83F /* LaunchScreen.storyboard in Resources */,
 				3649C76522F67FBD009AF83F /* Assets.xcassets in Resources */,
 			);
@@ -974,7 +984,6 @@
 				38220DC5232F2C22007955D0 /* JieBaBridge.mm in Sources */,
 				3870C2E4230B8C22000C1996 /* MarketVC.swift in Sources */,
 				369923B623142F540000A71A /* TradeFunctionFilterView.swift in Sources */,
-				38220DBF232F26C0007955D0 /* Segmentor.cpp in Sources */,
 				38970F3923151E9C004E2660 /* TradeFunctionTimeView.swift in Sources */,
 				369DFE3722F6CD930005B67D /* BaseViewController.swift in Sources */,
 				380259C42327461C00C50090 /* SpeechViewController.swift in Sources */,
@@ -1002,6 +1011,7 @@
 				38970F3B2316412A004E2660 /* AccountManager.swift in Sources */,
 				380259C223272EF400C50090 /* SpeechManager.swift in Sources */,
 				36135D5422F9B02100D17330 /* Form.swift in Sources */,
+				38220DF8232F5769007955D0 /* Segmentor.cpp in Sources */,
 				380CCACE232A1FD8002AC4B8 /* CloudBackupQueue.swift in Sources */,
 				3870C2CA230A86EA000C1996 /* MineSwitchRow.swift in Sources */,
 				3870C2ED230BD4C5000C1996 /* LocalAuthVC.swift in Sources */,

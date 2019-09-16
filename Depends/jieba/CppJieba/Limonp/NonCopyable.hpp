@@ -3,20 +3,19 @@
 #ifndef LIMONP_NONCOPYABLE_H
 #define LIMONP_NONCOPYABLE_H
 
-#include <iostream>
-#include <string>
+namespace limonp {
 
-namespace Limonp
-{
-    class NonCopyable
-    {
-        protected:
-            NonCopyable(){};
-            ~NonCopyable(){};
-        private:
-            NonCopyable(const NonCopyable& );
-            const NonCopyable& operator=(const NonCopyable& );
-    };
-}
+class NonCopyable {
+ protected:
+  NonCopyable() {
+  }
+  ~NonCopyable() {
+  }
+ private:
+  NonCopyable(const NonCopyable& );
+  const NonCopyable& operator=(const NonCopyable& );
+}; // class NonCopyable
 
-#endif
+} // namespace limonp
+
+#endif // LIMONP_NONCOPYABLE_H
