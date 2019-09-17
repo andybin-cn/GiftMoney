@@ -21,6 +21,7 @@ class EventGroupModifyVC: BaseViewController {
     let eventNameField = InputField(name: "eventName", labelString: "事件名称")
     let eventTimeField = DateInputField(name: "eventTime", labelString: "时间")
     let saveButton = UIButton()
+    let addTradeButton = UIButton()
     
     init(event: Event, trades: [Trade]) {
         self.event = event
@@ -105,6 +106,19 @@ class EventGroupModifyVC: BaseViewController {
                 make.left.equalTo(15)
                 make.right.equalTo(-15)
                 make.top.equalTo(eventTimeField.snp.bottom).offset(20)
+            }
+        }
+        
+        addTradeButton.apply { (button) in
+            button.addTarget(self, action: #selector(addTradeButtonTapped), for: .touchUpInside)
+            button.layer.cornerRadius = 6
+            button.layer.masksToBounds = true
+            button.backgroundColor = UIColor.appSecondaryYellow
+            button.setTitle("添加记录(可直接带入事件信息)", for: .normal)
+            button.addTo(scrollView) { (make) in
+                make.left.equalTo(15)
+                make.right.equalTo(-15)
+                make.top.equalTo(saveButton.snp.bottom).offset(20)
                 make.bottom.equalTo(-40).priority(ConstraintPriority.low)
             }
         }
@@ -121,6 +135,10 @@ class EventGroupModifyVC: BaseViewController {
                 self?.deleteAllEventForTrades()
             })
         ])
+    }
+    
+    @objc func addTradeButtonTapped() {
+        navigationController?.pushViewController(AddTradeViewController(tradeType: Trade.TradeType.inAccount, event: event), animated: true)
     }
     
     @objc func onEventNameFieldtapped() {

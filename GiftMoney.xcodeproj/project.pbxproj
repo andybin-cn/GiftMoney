@@ -14,6 +14,7 @@
 		36135D5422F9B02100D17330 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D5322F9B02100D17330 /* Form.swift */; };
 		36135D5722FB214700D17330 /* DateInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D5622FB214600D17330 /* DateInputField.swift */; };
 		361DC9F1233114910025F3E1 /* UploadStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DC9F0233114910025F3E1 /* UploadStateButton.swift */; };
+		361DC9F323312FAB0025F3E1 /* SpeechHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DC9F223312FAB0025F3E1 /* SpeechHelpVC.swift */; };
 		3620B8AF232B8CC000393329 /* RealtimeAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3620B8AE232B8CC000393329 /* RealtimeAnalyzer.swift */; };
 		36294C802300429000819539 /* EventEditeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36294C7F2300429000819539 /* EventEditeViewController.swift */; };
 		3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C75822F67FB9009AF83F /* AppDelegate.swift */; };
@@ -176,6 +177,7 @@
 		36135D5322F9B02100D17330 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		36135D5622FB214600D17330 /* DateInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputField.swift; sourceTree = "<group>"; };
 		361DC9F0233114910025F3E1 /* UploadStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadStateButton.swift; sourceTree = "<group>"; };
+		361DC9F223312FAB0025F3E1 /* SpeechHelpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechHelpVC.swift; sourceTree = "<group>"; };
 		3620B8AE232B8CC000393329 /* RealtimeAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeAnalyzer.swift; sourceTree = "<group>"; };
 		36294C7F2300429000819539 /* EventEditeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditeViewController.swift; sourceTree = "<group>"; };
 		3649C75522F67FB9009AF83F /* GiftMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiftMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -380,6 +382,7 @@
 				38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */,
 				38970F3E231647AD004E2660 /* InviteCodeVC.swift */,
 				38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */,
+				361DC9F223312FAB0025F3E1 /* SpeechHelpVC.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				369DFE2222F6BDD30005B67D /* InputField.swift in Sources */,
 				3870C2E7230B8CD5000C1996 /* MarketManager.swift in Sources */,
 				386865802302A0FE000BBD85 /* OutAccountTradeVC.swift in Sources */,
+				361DC9F323312FAB0025F3E1 /* SpeechHelpVC.swift in Sources */,
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,

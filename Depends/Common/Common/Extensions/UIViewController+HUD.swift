@@ -28,6 +28,7 @@ extension UIViewController {
         view.addSubview(hud)
         hud.mode = .indeterminate
         hud.label.text = text
+        hud.label.numberOfLines = 0
         hud.show(animated: true)
         if afterDelay > 0 {
             hud.hide(animated: true, afterDelay: afterDelay)
@@ -46,6 +47,7 @@ extension UIViewController {
         view.addSubview(hud)
         hud.mode = .text
         hud.label.text = text
+        hud.label.numberOfLines = 0
         hud.show(animated: true)
         hud.hide(animated: true, afterDelay: 2)
     }

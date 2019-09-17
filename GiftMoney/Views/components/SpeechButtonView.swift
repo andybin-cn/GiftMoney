@@ -168,10 +168,6 @@ class SpeechButtonView: UIView {
                 analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音")
             }
             speechResult.accept(analyzeResult)
-        } else {
-            let analyzeResult = AnalyzeResult()
-            analyzeResult.error = CommonError(message: "请按照例句中的格式录入语音")
-            speechResult.accept(analyzeResult)
         }
         self.textLabel.text = nil
         self.exampleLabel.isHidden = true

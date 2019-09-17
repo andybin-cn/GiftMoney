@@ -65,13 +65,19 @@ class BaseViewController: UIViewController {
 
 extension UIViewController {
     func catchError(error: Error) {
-        if let error = error as? CommonError {
-            self.showTipsView(text: error.message)
-        } else if error is CKError {
-            self.showTipsView(text: CommonError.iCloudError.message)
+        SLog.error("catchError:\(String(describing: self))")
+        self.showTipsView(text: error.errorMessage)
+    }
+}
+
+extension Error {
+    var errorMessage: String {
+        if let error = self as? CommonError {
+            return error.message
+        } else if self is CKError {
+            return CommonError.iCloudError.message
         } else {
-            SLog.error("catchError:\(String(describing: error))")
-            self.showTipsView(text: error.localizedDescription)
+            return localizedDescription
         }
     }
 }
