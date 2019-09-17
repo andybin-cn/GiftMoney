@@ -21,7 +21,7 @@ class WordAnalyzeHelp {
         return OptionalService.shared.allRelationships.map{ $0.name } + ["友", "亲", "朋"]
     }
     var eventWords: [String] {
-        return OptionalService.shared.allEvents.map{ $0.name } + ["结婚", "生小孩", "满月", "生日", "搬新家", "乔迁", "大学", "升值"]
+        return OptionalService.shared.allEvents.map{ $0.name } + ["结婚", "生小孩", "满月", "生日", "搬新家", "乔迁", "上大学", "升值"]
     }
     
     func isName(word: String) -> Bool {

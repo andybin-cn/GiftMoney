@@ -128,7 +128,7 @@ class SpeechButtonView: UIView {
             self.backgroundColor = UIColor.white
             self.layoutIfNeeded()
         }
-        if let text = self.text.text, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
+        if let text = self.text.text, !text.isEmpty, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
             let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
             if analyzeResult.name.isEmpty || analyzeResult.value.isEmpty {
                 analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音")
@@ -139,5 +139,6 @@ class SpeechButtonView: UIView {
             analyzeResult.error = CommonError(message: "请按照例句中的格式录入语音")
             speechResult.accept(analyzeResult)
         }
+        self.text.text = nil
     }
 }

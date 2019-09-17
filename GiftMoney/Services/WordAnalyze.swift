@@ -158,6 +158,9 @@ class WordAnalyze {
                         }
                     }
                 }
+                if tag.jieBaTag == "relation" || tag.jieBaTag == "event" {
+                    confidence = -1
+                }
                 if tag.jieBaTag == "nr" {
                     confidence += 3
                 }
