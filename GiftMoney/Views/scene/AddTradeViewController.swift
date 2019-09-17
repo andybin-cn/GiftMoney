@@ -225,7 +225,8 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             } else {
                 self.nameField.fieldValue = result.name
                 if self.eventNameField.textfield.text?.isEmpty ?? true {
-                    self.eventNameField.fieldValue = result.event
+                    let event = result.event.isEmpty ? "朋友" : result.event
+                    self.eventNameField.fieldValue = event
                 }
                 if self.relationshipField.textfield.text?.isEmpty ?? true {
                     self.relationshipField.fieldValue = result.relation
