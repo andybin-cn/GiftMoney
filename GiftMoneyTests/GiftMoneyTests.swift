@@ -30,10 +30,13 @@ class GiftMoneyTests: XCTestCase {
     func testJieBaTag() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        guard let result = JieBaBridge.jiebaTag("19年3月10号送给朋友李大强¥500红包.") as? Array<JieBaTag> else {
+//        let str = "李大强结婚送给他1套房子."
+//        let str = "李大强结婚送给他1套房子."
+        let str = "李大强同学3000块."
+        guard let result = JieBaBridge.jiebaTag(str) as? Array<JieBaTag> else {
             return
         }
-        let analyzeResult = WordAnalyze.shared.analyzeSentence(tags: result)
+        let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
         print("JieBaBridge.jiebaTag:\(String(describing: result))")
         print("analyzeResult:\(analyzeResult)")
     }

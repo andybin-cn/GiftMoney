@@ -83,12 +83,12 @@ extension AppDelegate {
         JieBaBridge.initJieBa()
         _ = OptionalService.shared.newEventsEmit.subscribe(onNext: { (events) in
             events.forEach({ (event) in
-                JieBaBridge.insertUserWord(event.name, tag: "n")
+                JieBaBridge.insertUserWord(event.name, tag: "event")
             })
         })
         _ = OptionalService.shared.newRelationEmit.subscribe(onNext: { (relations) in
             relations.forEach({ (relation) in
-                JieBaBridge.insertUserWord(relation.name, tag: "n")
+                JieBaBridge.insertUserWord(relation.name, tag: "relation")
             })
         })
         //需要先添加监听后再初始化

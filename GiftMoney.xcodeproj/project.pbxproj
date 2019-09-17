@@ -95,6 +95,7 @@
 		38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */; };
 		38FAD6302317BE2300F28AA0 /* FillInviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */; };
 		38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FAD6362319057400F28AA0 /* StoreKit.framework */; };
+		38FECDA32330C4F900232A9A /* WordAnalyzeHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FECDA22330C4F900232A9A /* WordAnalyzeHelp.swift */; };
 		9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */; };
 		CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */; };
 /* End PBXBuildFile section */
@@ -301,6 +302,7 @@
 		38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInput.swift; sourceTree = "<group>"; };
 		38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillInviteCodeVC.swift; sourceTree = "<group>"; };
 		38FAD6362319057400F28AA0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		38FECDA22330C4F900232A9A /* WordAnalyzeHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAnalyzeHelp.swift; sourceTree = "<group>"; };
 		77429951A2D4E665BC0D3F1C /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyTests.debug.xcconfig"; path = "Target Support Files/Pods-GiftMoneyTests/Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0213D6FF91967F5765DFA8 /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyUITests.release.xcconfig"; path = "Target Support Files/Pods-GiftMoneyUITests/Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -612,6 +614,7 @@
 				380CCACD232A1FD8002AC4B8 /* CloudBackupQueue.swift */,
 				38220DC3232F2C22007955D0 /* JieBaBridge.h */,
 				38220DC4232F2C22007955D0 /* JieBaBridge.mm */,
+				38FECDA22330C4F900232A9A /* WordAnalyzeHelp.swift */,
 				38220DFA232F612C007955D0 /* WordAnalyze.swift */,
 				38220DFF23307724007955D0 /* OptionalService.swift */,
 			);
@@ -959,6 +962,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FECDA32330C4F900232A9A /* WordAnalyzeHelp.swift in Sources */,
 				38775E26230E753800B697F5 /* CloudManager.swift in Sources */,
 				38220DFB232F612C007955D0 /* WordAnalyze.swift in Sources */,
 				369DFE1122F68F270005B67D /* UIColor+appTheme.swift in Sources */,
