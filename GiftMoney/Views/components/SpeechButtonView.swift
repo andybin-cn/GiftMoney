@@ -16,7 +16,8 @@ import Speech
 class SpeechButtonView: UIView {
     let disposeBag = DisposeBag()
     
-    let text = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 14))
+    let exampleLabel = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 14))
+    let textLabel = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 14))
     let speechButton = UIButton()
     let buttonContainer = UIView()
     let animateView = UIView()
@@ -36,12 +37,38 @@ class SpeechButtonView: UIView {
             make.width.height.equalTo(260)
         }
         
-        text.numberOfLines = 0
-        text.lineBreakMode = .byWordWrapping
-        text.addTo(self) { (make) in
-            make.bottom.equalTo(buttonContainer.snp.top)
-            make.left.equalTo(20)
-            make.right.equalTo(20)
+        exampleLabel.apply { (label) in
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.isHidden = true
+            label.addTo(self) { (make) in
+                make.top.equalTo(8)
+                make.left.equalTo(15)
+                make.right.equalTo(15)
+            }
+            let attrStr = NSMutableAttributedString()
+            attrStr.append(NSAttributedString(string: "例句：   ", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
+            attrStr.append(NSAttributedString(string: "收到大学同学小明200元红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
+//            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
+//            attrStr.append(NSAttributedString(string: "大学同学", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
+////            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
+//            attrStr.append(NSAttributedString(string: "小明", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
+//            attrStr.append(NSAttributedString(string: "200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
+//            attrStr.append(NSAttributedString(string: "红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
+            
+            attrStr.append(NSAttributedString(string: "\n或者：   ", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
+            attrStr.append(NSAttributedString(string: "李萌萌同学200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
+            label.attributedText = attrStr
+        }
+        textLabel.apply { (label) in
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.isHidden = true
+            label.addTo(self) { (make) in
+                make.top.equalTo(exampleLabel.snp.bottom).offset(8)
+                make.left.equalTo(20)
+                make.right.equalTo(20)
+            }
         }
         
         speechButton.setTitle("按住说话", for: .normal)
@@ -98,10 +125,10 @@ class SpeechButtonView: UIView {
     func startRecognizer() {
         SLog.info("startRecognizer")
         stopRecognizer()
-        self.text.text = ""
+        self.textLabel.text = ""
         speechDispose = SpeechManager.shared.startSpeech().subscribe(onNext: { [unowned self] (result) in
             SLog.info("speech result:\(result.bestTranscription.formattedString)")
-            self.text.text = result.bestTranscription.formattedString
+            self.textLabel.text = result.bestTranscription.formattedString
         }, onError: { [unowned self] (error) in
             self.stopRecognizer()
         }, onCompleted: { [unowned self] in
@@ -109,11 +136,18 @@ class SpeechButtonView: UIView {
         })
         speechDispose?.disposed(by: disposeBag)
         self.snp.updateConstraints({ (make) in
-            make.height.equalTo(320)
+            make.height.equalTo(360)
         })
         UIView.animate(withDuration: 0.2) {
             self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
             self.layoutIfNeeded()
+        }
+        UIView.animate(withDuration: 0.2, animations: {
+            self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+            self.layoutIfNeeded()
+        }) { (_) in
+            self.exampleLabel.isHidden = false
+            self.textLabel.isHidden = false
         }
     }
     func stopRecognizer() {
@@ -128,7 +162,7 @@ class SpeechButtonView: UIView {
             self.backgroundColor = UIColor.white
             self.layoutIfNeeded()
         }
-        if let text = self.text.text, !text.isEmpty, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
+        if let text = self.textLabel.text, !text.isEmpty, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
             let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
             if analyzeResult.name.isEmpty || analyzeResult.value.isEmpty {
                 analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音")
@@ -139,6 +173,8 @@ class SpeechButtonView: UIView {
             analyzeResult.error = CommonError(message: "请按照例句中的格式录入语音")
             speechResult.accept(analyzeResult)
         }
-        self.text.text = nil
+        self.textLabel.text = nil
+        self.exampleLabel.isHidden = true
+        self.textLabel.isHidden = true
     }
 }
