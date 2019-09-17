@@ -18,7 +18,7 @@ class TradeCell: UITableViewCell {
     let timeLabel = UILabel()
     let gitfLabel = UILabel()
     let moneyLabel = UILabel()
-    let uploadButton = UIButton()
+    let uploadButton = UploadStateButton()
     
     var trade: Trade?
     
@@ -111,11 +111,19 @@ class TradeCell: UITableViewCell {
         stackView.addArrangedSubview(moneyLabel)
         stackView.addArrangedSubview(gitfLabel)
         
-        uploadButton.titleLabel?.font = UIFont.appFont(ofSize: 10)
-        uploadButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+//        uploadButton.titleLabel?.font = UIFont.appFont(ofSize: 10)
+//        uploadButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+//        uploadButton.layer.cornerRadius = 30
+//        uploadButton.clipsToBounds = true
+//        uploadButton.layer.borderWidth = 1
+//        uploadButton.layer.borderColor = UIColor.appSecondaryBlue.cgColor
+//        uploadButton.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal)
+//        uploadButton.imageEdgeInsets = UIEdgeInsets(top: -10, left: 0, bottom: 10, right: -20)
+//        uploadButton.titleEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
 //        uploadButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
         uploadButton.addTo(self) { (make) in
-            make.top.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.right.equalTo(-15)
         }
         uploadButton.addTarget(self, action: #selector(onUploadButtonTapped), for: .touchUpInside)
     }
@@ -154,30 +162,17 @@ class TradeCell: UITableViewCell {
         uploadButton.isUserInteractionEnabled = false
         if !trade.hasBackupToCloud {
             if let uploadItem = uploadItem {
-                uploadButton.setTitle("正在上传", for: .normal)
-                uploadButton.setImage(UIImage(named: "icons8-cloud_refresh")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
-                uploadButton.setTitleColor(UIColor.appSecondaryGray, for: .normal)
+                uploadButton.uploadState = .uploading
                 uploadItem.subscribe(onError: { [unowned self] (_) in
-                    self.uploadButton.isUserInteractionEnabled = true
-                    self.uploadButton.setTitle("点击重试", for: .normal)
-                    self.uploadButton.setImage(UIImage(named: "icons8-error_cloud")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
-                    self.uploadButton.setTitleColor(UIColor.appSecondaryRed, for: .normal)
+                    self.uploadButton.uploadState = .warning
                 }, onCompleted: { [unowned self] in
-                    self.uploadButton.isUserInteractionEnabled = false
-                    self.uploadButton.setTitle("已上传", for: .normal)
-                    self.uploadButton.setImage(UIImage(named: "icons8-cloud_checked")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
-                    self.uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
+                    self.uploadButton.uploadState = .uploadted
                 }).disposed(by: disposeBag)
             } else {
-                uploadButton.isUserInteractionEnabled = true
-                uploadButton.setTitle("上传至iCloud", for: .normal)
-                uploadButton.setImage(UIImage(named: "icons8-upload_to_cloud")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
-                uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
+                self.uploadButton.uploadState = .notUpload
             }
         } else {
-            uploadButton.setTitle("已上传", for: .normal)
-            uploadButton.setImage(UIImage(named: "icons8-cloud_checked")?.ui_resizeImage(to: CGSize(width: 16, height: 16)), for: .normal)
-            uploadButton.setTitleColor(UIColor.appSecondaryBlue, for: .normal)
+            self.uploadButton.uploadState = .uploadted
         }
     }
     
