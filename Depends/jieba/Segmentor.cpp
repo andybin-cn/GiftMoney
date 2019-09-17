@@ -6,17 +6,24 @@
 //  Copyright (c) 2014年 yanyiwu. All rights reserved.
 //
 
-#include "Segmentor.h"
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include "CppJieba/Jieba.hpp"
 #include <iostream>
 
 using namespace cppjieba;
 
-cppjieba::MixSegment * globalSegmentor;
+cppjieba::Jieba* globalSegmentor;
 
-void JiebaInit(const string& dictPath, const string& hmmPath, const string& userDictPath)
+void JiebaInit(const string& dictPath, const string& hmmPath, const string& userDictPath, const string& idfPath, const string& stopWordPath)
 {
     if(globalSegmentor == NULL) {
-        globalSegmentor = new MixSegment(dictPath, hmmPath, userDictPath);
+        globalSegmentor = new Jieba(dictPath,
+                                    hmmPath,
+                                    userDictPath,
+                                    idfPath,
+                                    stopWordPath);
     }
     cout << __FILE__ << __LINE__ << endl;
 }
@@ -35,4 +42,10 @@ void JiebaTag(const string& sentence, vector<pair<string, string>>& tags)
     globalSegmentor->Tag(sentence, tags);
     cout << __FILE__ << __LINE__ << endl;
     cout << tags << endl;
+}
+
+void JiebaInsertUserWord(const string& word, const string& tag)
+{
+    assert(globalSegmentor);
+    globalSegmentor->InsertUserWord(word, tag);
 }

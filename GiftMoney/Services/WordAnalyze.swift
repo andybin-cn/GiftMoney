@@ -10,11 +10,14 @@ import UIKit
 
 class AnalyzeResult {
     var name: String = ""
+    var giftName: String = ""
     var value: String = ""
     var unit: String = ""
     var unitType: TradeItem.ItemType = .money
     var type: Trade.TradeType = .inAccount
     var error: Error? = nil
+    var event: String = ""
+    var relation: String = ""
 }
 
 class WordAnalyze {
@@ -25,6 +28,12 @@ class WordAnalyze {
     var giftUnits: [String] = ["箱","个","份","桶","包","瓶","件","条","套","把","部","辆","束","双","座","头","只","张","支","幅","斤","千克","克","两","吨","担","石","分","亩"]
     var moneyUnits: [String] = ["元", "¥"]
     var bedeckWords: [String] = ["分子", "红包", "礼金"]
+    var relationWords: [String] {
+        return OptionalService.shared.allRelationships.map{ $0.name } + ["友", "亲", "朋"]
+    }
+    var eventWords: [String] {
+        return OptionalService.shared.allEvents.map{ $0.name }
+    }
     
     func analyzeSentence(tags: Array<JieBaTag>) -> AnalyzeResult {
         let result = AnalyzeResult()
@@ -33,7 +42,7 @@ class WordAnalyze {
                 result.unitType = .money
                 continue
             }
-            if tag.tag == "nr" {
+            if tag.tag == "nr", !result.name.isEmpty {
                 result.name = tag.word
                 continue
             }
@@ -45,9 +54,20 @@ class WordAnalyze {
                 result.name = tag.word
                 continue
             }
+            if isEventWords(word: tag.word) {
+                result.event = tag.word
+                continue
+            }
+            if isRelationWords(word: tag.word) {
+                result.relation = tag.word
+                continue
+            }
             if isGiftUnit(word: tag.word) > 0 {
                 result.unit = tag.word
                 result.unitType = .gift
+                result.giftName = tags.findFirst { (tag) -> Bool in
+                    return tag.tag == "n" && tag.word.count > 1
+                }?.word ?? ""
                 continue
             }
             if isMoneyUnit(word: tag.word) > 0 {
@@ -87,6 +107,16 @@ class WordAnalyze {
     
     func isBedeckWords(word: String) -> Bool {
         return bedeckWords.findFirst(predicate: { (name) -> Bool in
+            return word.contains(name)
+        }) != nil
+    }
+    func isEventWords(word: String) -> Bool {
+        return eventWords.findFirst(predicate: { (name) -> Bool in
+            return word.contains(name)
+        }) != nil
+    }
+    func isRelationWords(word: String) -> Bool {
+        return relationWords.findFirst(predicate: { (name) -> Bool in
             return word.contains(name)
         }) != nil
     }

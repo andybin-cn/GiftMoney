@@ -94,6 +94,7 @@ class TradeManger {
         if !hasBackuped, AccountManager.shared.autoSyncToiCloudEnable {
             _ = CloudBackupQueue.shared.backupTradeInQueue(tradeID: trade.id)
         }
+        OptionalService.shared.onTradeAdd(trade: trade)
         return Completable.empty()
         
     }

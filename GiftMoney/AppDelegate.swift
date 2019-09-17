@@ -18,11 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        BaseNavigationController.root.isNavigationBarHidden = true
+        
+        self.setupService()
+        
         window = UIWindow()
         window?.rootViewController = MainTabViewController.shared
         window?.makeKeyAndVisible()
         
-        JieBaBridge.initJieBa()
         IQKeyboardManager.shared.enable = true
         
         #if DEBUG
@@ -76,3 +78,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+    func setupService() {
+        JieBaBridge.initJieBa()
+        _ = OptionalService.shared.newEventsEmit.subscribe(onNext: { (events) in
+            events.forEach({ (event) in
+                JieBaBridge.insertUserWord(event.name, tag: "n")
+            })
+        })
+        _ = OptionalService.shared.newRelationEmit.subscribe(onNext: { (relations) in
+            relations.forEach({ (relation) in
+                JieBaBridge.insertUserWord(relation.name, tag: "n")
+            })
+        })
+        //需要先添加监听后再初始化
+        OptionalService.shared.initOptionals()
+    }
+}

@@ -17,18 +17,12 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     let inputContainerView = UIView()
     let inputField = UITextField()
     let latestusedRelationships = Relationship.latestusedRelationships
-    let customRelationships: [Relationship]
     
     var onResult: ((_ relation: Relationship) -> Void)?
     
     init(defaultValue: String? = "", onResult: ((_ relation: Relationship) -> Void)? = nil) {
         self.onResult = onResult
         inputField.text = defaultValue
-        customRelationships = latestusedRelationships.filter({ (relation) -> Bool in
-            return !Relationship.systemRelationship.contains { (systemRelation) -> Bool in
-                relation.name == systemRelation.name
-            }
-        })
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -140,7 +134,7 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             self.showTipsView(text: "请输入内容或者选择一个选项")
             return
         }
-        guard MarketManager.shared.checkAuth(type: .relation, controller: self, count: customRelationships.count) else {
+        guard MarketManager.shared.checkAuth(type: .relation, controller: self, count: 0, formValue: name) else {
             return
         }
         let relation = Relationship(name: name)

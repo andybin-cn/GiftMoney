@@ -30,13 +30,19 @@
     NSString *dictPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"iosjieba.bundle/dict/jieba.dict.small.utf8"];
     NSString *hmmPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"iosjieba.bundle/dict/hmm_model.utf8"];
     NSString *userDictPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"iosjieba.bundle/dict/user.dict.utf8"];
+    NSString *idfPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"iosjieba.bundle/dict/idf.utf8"];
+    NSString *stopWordPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"iosjieba.bundle/dict/stop_words.utf8"];
     
     const char *cDictPath = [dictPath UTF8String];
     const char *cHmmPath = [hmmPath UTF8String];
     const char *cUserDictPath = [userDictPath UTF8String];
+    const char *cIDFPath = [idfPath UTF8String];
+    const char *cStopWordPath = [stopWordPath UTF8String];
     
-    
-    JiebaInit(cDictPath, cHmmPath, cUserDictPath);
+    JiebaInit(cDictPath, cHmmPath, cUserDictPath, cIDFPath, cStopWordPath);
+}
++(void)insertUserWord:(NSString*)word tag:(NSString*)tag {
+    JiebaInsertUserWord([word UTF8String], [tag UTF8String]);
 }
 
 +(NSString*)jiebaCut:(NSString*)sentence {

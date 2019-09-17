@@ -77,7 +77,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     
     var currentLevel = Level.free
     
-    func checkAuth(type: MarketServiceType, controller: UIViewController, count: Int = 0) -> Bool {
+    func checkAuth(type: MarketServiceType, controller: UIViewController, count: Int = 0, formValue: String = "") -> Bool {
         switch type {
         case .exportAndImport, .backupAndRecover, .autoSyncToiCloud:
             if currentLevel != .paid2 {
@@ -85,18 +85,39 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
                 return false
             }
         case .relation:
-            if currentLevel == .free && count >= 1 {
+            if Relationship.systemRelationship.contains(Relationship(name: formValue)) {
+                return true
+            }
+            let latestusedRelationships = Relationship.latestusedRelationships
+            if latestusedRelationships.contains(Relationship(name: formValue)) {
+                return true
+            }
+            let customCount = latestusedRelationships.filter { (relation) -> Bool in
+                return !Relationship.systemRelationship.contains(relation)
+            }.count
+            if currentLevel == .free && customCount >= 1 {
                 self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1个自定义关系，快去购买Vip解除限制吧", controller: controller)
                 return false
-            } else if currentLevel == .paid1 && count >= 5 {
+            } else if currentLevel == .paid1 && customCount >= 5 {
                 self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5个自定义关系，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
                 return false
             }
         case .event:
-            if currentLevel == .free && count >= 1 {
+            if Event.systemEvents.contains(Event(name: formValue, time: nil, lastUseTime: nil, compareWithTime: false)) {
+                return true
+            }
+            let latestusedEvents = Event.latestusedEvents
+            if latestusedEvents.contains(Event(name: formValue, time: nil, lastUseTime: nil, compareWithTime: false)) {
+                return true
+            }
+            let customCount = latestusedEvents.filter { (event) -> Bool in
+                return !Event.systemEvents.contains(event)
+            }.count
+            
+            if currentLevel == .free && customCount >= 1 {
                 self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1个自定义事件，快去购买Vip解除限制吧", controller: controller)
                 return false
-            } else if currentLevel == .paid1 && count >= 5 {
+            } else if currentLevel == .paid1 && customCount >= 5 {
                 self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5个自定义事件，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
                 return false
             }

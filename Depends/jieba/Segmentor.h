@@ -17,9 +17,10 @@
 
 extern cppjieba::MixSegment * globalSegmentor;
 
-void JiebaInit(const std::string& dictPath, const std::string& hmmPath, const std::string& userDictPath);
+void JiebaInit(const std::string& dictPath, const std::string& hmmPath, const std::string& userDictPath, const std::string& idfPath, const std::string& stopWordPath);
 
 void JiebaCut(const std::string& sentence, std::vector<std::string>& words);
 void JiebaTag(const std::string& sentence, std::vector<std::pair<std::string, std::string>>& tags);
+void JiebaInsertUserWord(const std::string& word, const std::string& tag);
 
 #endif /* defined(__iosjieba__Segmentor__) */

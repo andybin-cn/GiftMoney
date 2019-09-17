@@ -224,6 +224,12 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 self.catchError(error: error)
             } else {
                 self.nameField.fieldValue = result.name
+                if self.eventNameField.textfield.text?.isEmpty ?? true {
+                    self.eventNameField.fieldValue = result.event
+                }
+                if self.relationshipField.textfield.text?.isEmpty ?? true {
+                    self.relationshipField.fieldValue = result.relation
+                }
                 
                 let row = TradeItemRow(name: "tradeItems",tradeItem: nil, canDelete: false)
                 row.delegate = self
@@ -231,7 +237,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 if result.unitType == .money {
                     row.moneyField.fieldValue = result.value
                 } else {
-                    row.giftNameField.fieldValue = "礼物"
+                    row.giftNameField.fieldValue = result.giftName
                     row.giftValueField.fieldValue = result.value
                 }
                 for subview in self.itemsStackView.subviews {
@@ -259,14 +265,21 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 self.showTipsView(text: "请输入姓名")
                 return
             }
-            if eventNameField.textfield.text?.isEmpty ?? true {
+            guard let eventName = eventNameField.textfield.text, !eventName.isEmpty else {
                 self.showTipsView(text: "请输入事件名称")
                 return
             }
-            if relationshipField.textfield.text?.isEmpty ?? true {
+            guard let relation = relationshipField.textfield.text, !relation.isEmpty else {
                 self.showTipsView(text: "请选择关系")
                 return
             }
+            guard MarketManager.shared.checkAuth(type: .event, controller: self, count: 0, formValue: eventName) else {
+                return
+            }
+            guard MarketManager.shared.checkAuth(type: .relation, controller: self, count: 0, formValue: relation) else {
+                return
+            }
+            
             let values = try self.validateForm()
             
             guard let newTrade = Trade.init(JSON: values) else {

@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)initJieBa;
 +(NSString*)jiebaCut:(NSString*)sentence;
 +(NSMutableArray<JieBaTag*>*)jiebaTag:(NSString*)sentence;
++(void)insertUserWord:(NSString*)word tag:(NSString*)tag;
 
 @end
 

@@ -23,14 +23,14 @@ class GiftMoneyTests: XCTestCase {
     func testJieBaCut() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let string = JieBaBridge.jiebaCut("李丽洁¥500红包.")
+        let string = JieBaBridge.jiebaCut("19年3月10号收到朋友李大强¥500红包.")
         print("JieBaBridge.jiebaCut:\(string)")
     }
     
     func testJieBaTag() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        guard let result = JieBaBridge.jiebaTag("李大强¥500红包.") as? Array<JieBaTag> else {
+        guard let result = JieBaBridge.jiebaTag("19年3月10号送给朋友李大强¥500红包.") as? Array<JieBaTag> else {
             return
         }
         let analyzeResult = WordAnalyze.shared.analyzeSentence(tags: result)

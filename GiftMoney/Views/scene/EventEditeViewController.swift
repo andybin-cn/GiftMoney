@@ -17,18 +17,12 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
     let inputContainerView = UIView()
     let inputField = UITextField()
     let latestusedEvents = Event.latestusedEvents
-    let customEvents: [Event]
     
     var onResult: ((_ event: Event) -> Void)?
     
     init(defaultValue: String? = "", onResult: ((_ event: Event) -> Void)? = nil) {
         self.onResult = onResult
         inputField.text = defaultValue
-        customEvents = latestusedEvents.filter({ (event) -> Bool in
-            return !Event.systemEvents.contains { (systemEvent) -> Bool in
-                return event.name == systemEvent.name
-            }
-        })
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -140,7 +134,7 @@ class EventEditeViewController: BaseViewController, UITableViewDelegate, UITable
             self.showTipsView(text: "请输入内容或者选择一个选项")
             return
         }
-        guard MarketManager.shared.checkAuth(type: .event, controller: self, count: customEvents.count) else {
+        guard MarketManager.shared.checkAuth(type: .event, controller: self, count: 0, formValue: name) else {
             return
         }
         let event = Event(name: name)
