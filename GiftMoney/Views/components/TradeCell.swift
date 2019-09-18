@@ -40,7 +40,7 @@ class TradeCell: UITableViewCell {
     }
     
     func setupSubviews() {
-        accessoryType = .disclosureIndicator
+        accessoryType = .none
         
         iconLabel.apply { (label) in
             label.font = UIFont.appBoldFont(ofSize: 25)
@@ -88,13 +88,20 @@ class TradeCell: UITableViewCell {
                 make.bottom.lessThanOrEqualToSuperview().inset(8)
             }
         }
+        
+        uploadButton.addTo(self) { (make) in
+            make.centerY.equalToSuperview()
+            make.right.equalTo(-15)
+        }
+        uploadButton.addTarget(self, action: #selector(onUploadButtonTapped), for: .touchUpInside)
+        
         let stackView = UIStackView().then { (stackView) in
             stackView.axis = .vertical
             stackView.spacing = 6
             stackView.alignment = .fill
             stackView.addTo(contentView) { (make) in
                 make.centerY.equalToSuperview()
-                make.right.equalTo(-40)
+                make.right.equalTo(uploadButton.snp.left).offset(-8)
             }
         }
         gitfLabel.apply { (label) in
@@ -110,22 +117,6 @@ class TradeCell: UITableViewCell {
         
         stackView.addArrangedSubview(moneyLabel)
         stackView.addArrangedSubview(gitfLabel)
-        
-//        uploadButton.titleLabel?.font = UIFont.appFont(ofSize: 10)
-//        uploadButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-//        uploadButton.layer.cornerRadius = 30
-//        uploadButton.clipsToBounds = true
-//        uploadButton.layer.borderWidth = 1
-//        uploadButton.layer.borderColor = UIColor.appSecondaryBlue.cgColor
-//        uploadButton.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal)
-//        uploadButton.imageEdgeInsets = UIEdgeInsets(top: -10, left: 0, bottom: 10, right: -20)
-//        uploadButton.titleEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
-//        uploadButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
-        uploadButton.addTo(self) { (make) in
-            make.centerY.equalToSuperview()
-            make.right.equalTo(-15)
-        }
-        uploadButton.addTarget(self, action: #selector(onUploadButtonTapped), for: .touchUpInside)
     }
     
     func configerUI(trade: Trade) {
