@@ -9,6 +9,7 @@
 import UIKit
 import Common
 import IQKeyboardManagerSwift
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    var recoverTradesDispose: Disposable?
     func applicationWillResignActive(_ application: UIApplication) {
         UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "ResignActiveTime")
     }
@@ -51,6 +53,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if LocalAuthManager.shared.localAuthEnabled {
                 MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
             }
+        }
+        if recoverTradesDispose != nil, AccountManager.shared.autoSyncToiCloudEnable {
+            recoverTradesDispose = CloudManager.shared.recoverTrades(forceAll: false).subscribe(onError: { (error) in
+                SLog.error("recoverTrades error:\(error.errorMessage)")
+                self.recoverTradesDispose = nil
+            }, onCompleted: {
+                self.recoverTradesDispose = nil
+            })
         }
     }
 

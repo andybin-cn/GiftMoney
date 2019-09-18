@@ -21,11 +21,24 @@ typealias RecordsErrorHandler = ([CKRecord], Swift.Error?) -> Void
 class CloudManager {
     static let shared = CloudManager()
     
+    var lastBackupTime: Date? {
+        didSet {
+            UserDefaults.standard.set(lastBackupTime, forKey: "CloudManager_lastBackupTime")
+        }
+    }
+    var lastRecoverTime: Date? {
+        didSet {
+            UserDefaults.standard.set(lastRecoverTime, forKey: "CloudManager_lastRecoverTime")
+        }
+    }
+    
     private init() {
-        
+        lastBackupTime = UserDefaults.standard.object(forKey: "CloudManager_lastBackupTime") as? Date
+        lastRecoverTime = UserDefaults.standard.object(forKey: "CloudManager_lastRecoverTime") as? Date
     }
     
     func backupTrades() -> Observable<CloudSyncProgress> {
+        lastBackupTime = Date()
         return Observable<CloudSyncProgress>.create { (observable) -> Disposable in
             var disposable: Disposable?
             DispatchQueue.global().async {
@@ -190,11 +203,11 @@ class CloudManager {
         return (record, trade, mediaRecords)
     }
     
-    func recoverTrades() -> Observable<CloudSyncProgress> {
-        return fetchTradeRecords().flatMap({
-            return self.saveTradeRecordToDatabase(record: $0).flatMap({ (trade) -> Observable<Bool> in
+    func recoverTrades(forceAll: Bool = true) -> Observable<CloudSyncProgress> {
+        return fetchTradeRecords(forceAll: forceAll).flatMap({ (record) in
+            return self.saveTradeRecordToDatabase(record: record).flatMap({ (trade) -> Observable<Bool> in
                 if let trade = trade {
-                    return self.recoverTradeMedias(trade: trade)
+                    return self.recoverTradeMedias(trade: trade, record: record)
                 } else {
                     return Observable<Bool>.from(optional: false)
                 }
@@ -207,13 +220,18 @@ class CloudManager {
         }.observeOn(MainScheduler.instance)
     }
     
-    private func fetchTradeRecords() -> Observable<CKRecord> {
+    private func fetchTradeRecords(forceAll: Bool) -> Observable<CKRecord> {
         func createQueryOperation(observer: AnyObserver<CKRecord>, cursor: CKQueryOperation.Cursor?) -> CKQueryOperation {
             let queryOperation: CKQueryOperation
             if let cursor = cursor {
                 queryOperation = CKQueryOperation(cursor: cursor)
             } else {
-                let query = CKQuery(recordType: "Trades", predicate: NSPredicate(value: true))
+                var predicate = NSPredicate(value: true)
+                if !forceAll, let lastRecoverTime = self.lastRecoverTime as NSDate? {
+                    predicate = NSPredicate(format: "modifiedAt > %@", lastRecoverTime)
+                }
+                let query = CKQuery(recordType: "Trades", predicate: predicate)
+                query.sortDescriptors = [NSSortDescriptor(key: "modifiedAt", ascending: true)]
                 queryOperation = CKQueryOperation(query: query)
             }
             queryOperation.recordFetchedBlock = { record in
@@ -241,13 +259,17 @@ class CloudManager {
         }
     }
     
-    func recoverTradeMedias(trade: Trade) -> Observable<Bool> {
+    func recoverTradeMedias(trade: Trade, record: CKRecord) -> Observable<Bool> {
         let medias: [TradeMedia] = trade.tradeMedias.map { $0 }
         return Observable<TradeMedia>.from(medias).flatMap { (meida) -> Observable<Bool> in
             self.recoverTradeMedia(meida: meida)
         }.reduce(true) { (result, sucess) -> Bool in
             return true
-        }
+        }.do(onNext: { (_) in
+            if let modificationDate = record.modificationDate {
+                self.lastRecoverTime = modificationDate
+            }
+        })
     }
     
     func recoverTradeMedia(meida: TradeMedia) -> Observable<Bool> {
@@ -258,9 +280,7 @@ class CloudManager {
             return self.saveMediaRecordToDatabase(record: record)
         }).map({ _ in
             return true
-        }).catchError({ _ in
-            return Observable<Bool>.from(optional: true)
-        })
+        }).retry(3)
     }
     
     func fetchMedias(medidID: String) -> Observable<CKRecord> {
