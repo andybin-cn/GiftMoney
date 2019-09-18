@@ -43,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AccountManager.shared.autoSyncToiCloudEnable {
             _ = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
                 SLog.error("recoverTrades error:\(error.errorMessage)")
+            }, onCompleted: {
+                MainTabViewController.shared.inoutRecordsVC.currentVC?.viewWillAppear(false)
             })
         }
         return true

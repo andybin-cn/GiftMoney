@@ -18,6 +18,15 @@ class AccountManager {
     var autoSyncToiCloudEnable: Bool {
         didSet {
            UserDefaults.standard.set(autoSyncToiCloudEnable, forKey: "autoSyncToiCloudEnable")
+            if autoSyncToiCloudEnable {
+                if AccountManager.shared.autoSyncToiCloudEnable {
+                    _ = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
+                        SLog.error("recoverTrades error:\(error.errorMessage)")
+                    }, onCompleted: {
+                        MainTabViewController.shared.inoutRecordsVC.currentVC?.viewWillAppear(false)
+                    })
+                }
+            }
         }
     }
     

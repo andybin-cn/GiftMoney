@@ -457,16 +457,8 @@
 				36135D5122F9B00D00D17330 /* forms */,
 				369DFE3322F6CD930005B67D /* base */,
 				369DFE2022F6BD9D0005B67D /* components */,
-				3649C78E22F685D6009AF83F /* records */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		3649C78E22F685D6009AF83F /* records */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = records;
 			sourceTree = "<group>";
 		};
 		369DFE0F22F68EE90005B67D /* Theme */ = {
