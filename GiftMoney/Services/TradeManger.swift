@@ -121,19 +121,17 @@ class TradeManger {
     }
     
     func deleteTrades(trades: [Trade]) -> Completable {
-        return Observable<Trade>.from(trades).flatMapLatest { (trade) -> Completable in
-            return self.deleteTrade(trade: trade)
+        return Observable<Trade>.from(trades).flatMapLatest { (trade) -> Observable<String> in
+            return self.deleteTrade(tradeID: trade.id)
         }.ignoreElements()
     }
-    func deleteTrade(trade: Trade) -> Completable {
-        let tradeID = trade.id
-        return Observable<Any>.create { (observable) -> Disposable in
+    func deleteTrade(tradeID: String) -> Observable<String> {
+        return Observable<String>.create { (observable) -> Disposable in
             DispatchQueue.global().async {
                 do {
                     guard let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) else {
-                        DispatchQueue.main.async {
-                            observable.onCompleted()
-                        }
+                        observable.onNext(tradeID)
+                        observable.onCompleted()
                         return
                     }
                     for tradeMedia in trade.tradeMedias {
@@ -144,17 +142,16 @@ class TradeManger {
                     RealmManager.share.realm.delete(trade.tradeItems)
                     RealmManager.share.realm.delete(trade)
                     try RealmManager.share.realm.commitWrite()
-                    DispatchQueue.main.async {
-                        observable.onCompleted()
-                    }
+                    observable.onNext(tradeID)
+                    observable.onCompleted()
                 } catch let error {
-                    DispatchQueue.main.async {
-                        observable.onError(error)
-                    }
+                    observable.onError(error)
                 }
             }
             return Disposables.create { }
-        }.ignoreElements()
+        }.do(onNext: { (tradeID) in
+            _ = CloudManager.shared.deleteTradeAndMedias(tradeID: tradeID).subscribe()
+        }).observeOn(MainScheduler.instance)
     }
     
     func saveTradeMedias(trade: Trade?, newMedias: [TradeMedia]) -> Observable<Trade> {
