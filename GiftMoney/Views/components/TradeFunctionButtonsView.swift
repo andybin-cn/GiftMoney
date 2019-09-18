@@ -70,6 +70,7 @@ class TradeFunctionButtonsView: UIView {
             stackView.removeArrangedSubview(subview)
             subview.removeFromSuperview()
         }
+        buttons.removeAll()
         var rowStackView = UIStackView()
         let itemWidth = (ScreenHelp.windowWidth - 15 * 4) / 3
         items.enumerated().forEach { (index, item) in
@@ -115,10 +116,13 @@ class TradeFunctionButtonsView: UIView {
         }
         if isMultiple {
             sender.isSelected = !sender.isSelected
-            self.selectedItems = buttons.filter{ $0.isSelected }.map({ (button) -> TradeFunctionButtonItem in
-                let index = button.tag
+            self.selectedItems = buttons.filter{ $0.isSelected }.map({ (button) -> TradeFunctionButtonItem? in
+                let index = button.tag - 100
+                if index < 0 || index >= self.items.count {
+                    return nil
+                }
                 return self.items[index]
-            })
+            }).filter{ $0 != nil }.map{ $0! }
         } else {
             let currentItem = self.items[index]
             buttons.forEach { (button) in
@@ -135,7 +139,7 @@ class TradeFunctionButtonsView: UIView {
     
     func resetWith(items: [TradeFunctionButtonItem], selectedItems: [TradeFunctionButtonItem] = []) {
         self.items = items
-        self.selectedItems = []
+        self.selectedItems = selectedItems
         refreshItems()
     }
     
