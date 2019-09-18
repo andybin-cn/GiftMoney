@@ -60,7 +60,7 @@ class AboutUsVC: BaseViewController {
         
         stackView.addArrangedSubview(UILabel(textColor: .appGrayText, font: .appFont(ofSize: 13), textAlignment: .center, text: "版本: \(appVersion)(\(appBuildVersion))"))
         
-        let label1 = UILabel(textColor: .appGrayText, font: .appFont(ofSize: 14), textAlignment: .left, text: "1.为了节约成本，我们没有开发服务端，所以不会收集用户的任何数据，也无法查看您的数据记录。请放心使用！\n\n2.数据完全保存在本地（备份数据会保存在您Apple账号的iCloud中），对数据进行了严格的加密保护，保证数据的安全可靠！")
+        let label1 = UILabel(textColor: .appGrayText, font: .appFont(ofSize: 14), textAlignment: .left, text: "1.我们没有后台服务端，所以不会收集用户的任何数据，也无法查看您的数据记录。请放心使用！\n\n2.数据完全保存在本地（备份数据会保存在您Apple账号的iCloud中），对数据进行了严格的加密保护，保证数据的安全可靠！")
         label1.numberOfLines = 0
         label1.lineBreakMode = .byWordWrapping
         stackView.addArrangedSubview(label1)
