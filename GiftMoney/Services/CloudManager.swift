@@ -21,24 +21,11 @@ typealias RecordsErrorHandler = ([CKRecord], Swift.Error?) -> Void
 class CloudManager {
     static let shared = CloudManager()
     
-    var lastBackupTime: Date? {
-        didSet {
-            UserDefaults.standard.set(lastBackupTime, forKey: "CloudManager_lastBackupTime")
-        }
-    }
-    var lastRecoverTime: Date? {
-        didSet {
-            UserDefaults.standard.set(lastRecoverTime, forKey: "CloudManager_lastRecoverTime")
-        }
-    }
-    
     private init() {
-        lastBackupTime = UserDefaults.standard.object(forKey: "CloudManager_lastBackupTime") as? Date
-        lastRecoverTime = UserDefaults.standard.object(forKey: "CloudManager_lastRecoverTime") as? Date
+        
     }
     
     func backupTrades() -> Observable<CloudSyncProgress> {
-        lastBackupTime = Date()
         return Observable<CloudSyncProgress>.create { (observable) -> Disposable in
             var disposable: Disposable?
             DispatchQueue.global().async {
@@ -203,8 +190,8 @@ class CloudManager {
         return (record, trade, mediaRecords)
     }
     
-    func recoverTrades(forceAll: Bool = true) -> Observable<CloudSyncProgress> {
-        return fetchTradeRecords(forceAll: forceAll).flatMap({ (record) in
+    func recoverTrades() -> Observable<CloudSyncProgress> {
+        return fetchTradeRecords().flatMap({ (record) in
             return self.saveTradeRecordToDatabase(record: record).flatMap({ (trade) -> Observable<Bool> in
                 if let trade = trade {
                     return self.recoverTradeMedias(trade: trade, record: record)
@@ -220,17 +207,13 @@ class CloudManager {
         }.observeOn(MainScheduler.instance)
     }
     
-    private func fetchTradeRecords(forceAll: Bool) -> Observable<CKRecord> {
+    private func fetchTradeRecords() -> Observable<CKRecord> {
         func createQueryOperation(observer: AnyObserver<CKRecord>, cursor: CKQueryOperation.Cursor?) -> CKQueryOperation {
             let queryOperation: CKQueryOperation
             if let cursor = cursor {
                 queryOperation = CKQueryOperation(cursor: cursor)
             } else {
-                var predicate = NSPredicate(value: true)
-                if !forceAll, let lastRecoverTime = self.lastRecoverTime as NSDate? {
-                    predicate = NSPredicate(format: "modifiedAt > %@", lastRecoverTime)
-                }
-                let query = CKQuery(recordType: "Trades", predicate: predicate)
+                let query = CKQuery(recordType: "Trades", predicate: NSPredicate(value: true))
                 query.sortDescriptors = [NSSortDescriptor(key: "modifiedAt", ascending: true)]
                 queryOperation = CKQueryOperation(query: query)
             }
@@ -265,11 +248,7 @@ class CloudManager {
             self.recoverTradeMedia(meida: meida)
         }.reduce(true) { (result, sucess) -> Bool in
             return true
-        }.do(onNext: { (_) in
-            if let modificationDate = record.modificationDate {
-                self.lastRecoverTime = modificationDate
-            }
-        })
+        }
     }
     
     func recoverTradeMedia(meida: TradeMedia) -> Observable<Bool> {
@@ -388,6 +367,49 @@ class CloudManager {
                 observer.onNext(nil)
                 observer.onCompleted()
             }
+            return Disposables.create { }
+        }
+    }
+    
+    func deleteTradeAndMedias(tradeID: String) -> Observable<String> {
+        return deleteTradeMedias(tradeID: tradeID).flatMap({ (tradeID) -> Observable<String> in
+            return self.deleteRecord(recordID: CKRecord.ID(recordName: tradeID)).map{ _ in tradeID }
+        })
+    }
+    
+    func deleteTradeMedias(tradeID: String) -> Observable<String> {
+        guard let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) else {
+            return Observable<String>.empty()
+        }
+        guard trade.tradeItems.count > 0 else {
+            return Observable<String>.from(optional: tradeID)
+        }
+        return Observable<TradeItem>.from(trade.tradeItems.map { $0 }).flatMap { (item) -> Observable<String> in
+            return self.deleteRecord(recordID: CKRecord.ID(recordName: item.id)).map{ _ in item.id }
+        }.reduce(tradeID) { (_, _) -> String in
+            return tradeID
+        }
+    }
+    
+    func deleteRecord(recordID: CKRecord.ID) -> Observable<CKRecord.ID> {
+        return Observable<CKRecord.ID>.create { (observer) -> Disposable in
+            let database = CKContainer.default().privateCloudDatabase
+            database.delete(withRecordID: recordID, completionHandler: { (_, error) in
+                if let ckError = error as? CKError {
+                    SLog.error("deleteRecord error:\(ckError.code)")
+                    if ckError.code == CKError.Code.unknownItem {
+                        observer.onNext(recordID)
+                        observer.onCompleted()
+                    } else {
+                        observer.onError(ckError)
+                    }
+                } else if error != nil {
+                    observer.onError(CommonError.iCloudError)
+                } else {
+                    observer.onNext(recordID)
+                    observer.onCompleted()
+                }
+            })
             return Disposables.create { }
         }
     }

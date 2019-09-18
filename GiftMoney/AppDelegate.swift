@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         if recoverTradesDispose != nil, AccountManager.shared.autoSyncToiCloudEnable {
-            recoverTradesDispose = CloudManager.shared.recoverTrades(forceAll: false).subscribe(onError: { (error) in
+            recoverTradesDispose = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
                 SLog.error("recoverTrades error:\(error.errorMessage)")
                 self.recoverTradesDispose = nil
             }, onCompleted: {
