@@ -30,7 +30,6 @@ class SpeechHelpVC: BaseViewController {
         
         let blurEffect = UIBlurEffect.init(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.alpha = 0.9
         blurEffectView.addTo(view) { (make) in
             make.edges.equalToSuperview()
         }

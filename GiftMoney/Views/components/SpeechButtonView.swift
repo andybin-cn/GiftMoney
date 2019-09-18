@@ -21,11 +21,27 @@ class SpeechButtonView: UIView {
     let speechButton = UIButton()
     let buttonContainer = UIView()
     let animateView = UIView()
-    let speechResult = BehaviorRelay<AnalyzeResult>(value: AnalyzeResult())
+    let speechResult = PublishRelay<AnalyzeResult>()
+    let blurEffectView: UIVisualEffectView
+    let logoImage = UIImageView(image: UIImage(named: "logo"))
     
     init() {
+        let blurEffect = UIBlurEffect.init(style: UIBlurEffect.Style.dark)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        
         super.init(frame: .zero)
-        self.backgroundColor = UIColor.white
+        logoImage.apply { (logo) in
+            logo.alpha = 0
+            logo.addTo(self, layout: { (make) in
+                make.edges.equalToSuperview()
+            })
+        }
+        
+        blurEffectView.addTo(logoImage) { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        self.backgroundColor = UIColor.clear
         self.clipsToBounds = true
         self.snp.makeConstraints { (make) in
             make.height.equalTo(100)
@@ -138,13 +154,9 @@ class SpeechButtonView: UIView {
         self.snp.updateConstraints({ (make) in
             make.height.equalTo(360)
         })
-        UIView.animate(withDuration: 0.2) {
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-            self.layoutIfNeeded()
-        }
+        self.layoutIfNeeded()
         UIView.animate(withDuration: 0.2, animations: {
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-            self.layoutIfNeeded()
+            self.logoImage.alpha = 1
         }) { (_) in
             self.exampleLabel.isHidden = false
             self.textLabel.isHidden = false
@@ -157,10 +169,11 @@ class SpeechButtonView: UIView {
         self.snp.updateConstraints({ (make) in
             make.height.equalTo(100)
         })
+        self.layoutIfNeeded()
+        
         UIView.animate(withDuration: 0.2) {
             self.animateView.transform = CGAffineTransform.identity
-            self.backgroundColor = UIColor.white
-            self.layoutIfNeeded()
+            self.logoImage.alpha = 0
         }
         if let text = self.textLabel.text, !text.isEmpty, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
             let analyzeResult = WordAnalyze(tags: result).analyzeSentence()

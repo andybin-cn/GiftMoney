@@ -113,7 +113,7 @@ class EventGroupModifyVC: BaseViewController {
             button.addTarget(self, action: #selector(addTradeButtonTapped), for: .touchUpInside)
             button.layer.cornerRadius = 6
             button.layer.masksToBounds = true
-            button.backgroundColor = UIColor.appSecondaryYellow
+            button.backgroundColor = UIColor.appSecondaryBlue
             button.setTitle("添加记录(可直接带入事件信息)", for: .normal)
             button.addTo(scrollView) { (make) in
                 make.left.equalTo(15)

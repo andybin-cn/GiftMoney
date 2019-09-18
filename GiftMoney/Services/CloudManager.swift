@@ -58,9 +58,9 @@ class CloudManager {
         return self.backupTrade(tradeID: tradeID, dataBase: privateDB).flatMap({ (trade, medias) -> Observable<CKRecord> in
             return self.backupTradeMedias(medias: medias, dataBase: privateDB).flatMap({ (_) -> Observable<CKRecord> in
                 if let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) {
-                    try? RealmManager.share.realm.write {
-                        trade.hasBackupToCloud = true
-                    }
+                    RealmManager.share.realm.beginWrite()
+                    trade.hasBackupToCloud = true
+                    try? RealmManager.share.realm.commitWrite()
                 }
                 return Observable<CKRecord>.from(optional: trade)
             })
@@ -96,6 +96,9 @@ class CloudManager {
         }
     }
     func backupTradeMedias(medias: [CKRecord], dataBase: CKDatabase) -> Observable<Int> {
+        if medias.count == 0 {
+            return Observable<Int>.from([0])
+        }
         return Observable<CKRecord>.from(medias).flatMap({ (record) -> Observable<Bool> in
             return self.backupTradeMedia(media: record, dataBase: dataBase).map({ _ in true }).catchError({ _ in Observable<Bool>.from(optional: false) })
         }).scan(0, accumulator: { (result, sucess) -> Int in
