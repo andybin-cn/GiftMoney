@@ -276,6 +276,39 @@ class CloudManager {
             return Disposables.create { }
         })
     }
+    func fetchMedias(tradeID: String) -> Observable<CKRecord> {
+        func createQueryOperation(observer: AnyObserver<CKRecord>, cursor: CKQueryOperation.Cursor?) -> CKQueryOperation {
+            let queryOperation: CKQueryOperation
+            if let cursor = cursor {
+                queryOperation = CKQueryOperation(cursor: cursor)
+            } else {
+                let query = CKQuery(recordType: "TradeMedias", predicate: NSPredicate(format: "tradeID == %@", tradeID))
+                queryOperation = CKQueryOperation(query: query)
+            }
+            queryOperation.recordFetchedBlock = { record in
+                observer.onNext(record)
+            }
+            
+            queryOperation.queryCompletionBlock = { cursor, error in
+                if let cursor = cursor {
+                    let nextQueryOperation = createQueryOperation(observer: observer, cursor: cursor)
+                    CKContainer.default().privateCloudDatabase.add(nextQueryOperation)
+                } else if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onCompleted()
+                }
+            }
+            
+            return queryOperation
+        }
+        
+        return Observable<CKRecord>.create { (observer) -> Disposable in
+            let queryOperation = createQueryOperation(observer: observer, cursor: nil)
+            CKContainer.default().privateCloudDatabase.add(queryOperation)
+            return Disposables.create { }
+        }
+    }
     
     func saveMediaRecordToDatabase(record: CKRecord) -> Observable<CKRecord> {
         guard let asset = record.object(forKey: "asset") as? CKAsset else {
@@ -371,23 +404,21 @@ class CloudManager {
         }
     }
     
-    func deleteTradeAndMedias(tradeID: String) -> Observable<String> {
-        return deleteTradeMedias(tradeID: tradeID).flatMap({ (tradeID) -> Observable<String> in
+    func deleteTradeAndMedias(tradeID: String, mediaIDs: [String]? = nil) -> Observable<String> {
+        return deleteTradeMedias(tradeID: tradeID, mediaIDs: mediaIDs).flatMap({ (tradeID) -> Observable<String> in
             return self.deleteRecord(recordID: CKRecord.ID(recordName: tradeID)).map{ _ in tradeID }
         })
     }
     
-    func deleteTradeMedias(tradeID: String) -> Observable<String> {
-        guard let trade = RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: tradeID) else {
-            return Observable<String>.empty()
+    func deleteTradeMedias(tradeID: String, mediaIDs: [String]? = nil) -> Observable<String> {
+        let mediaRecordID: Observable<CKRecord.ID>
+        if let mediaIDs = mediaIDs {
+            mediaRecordID = Observable<String>.from(mediaIDs).map{ CKRecord.ID(recordName: $0) }
+        } else {
+            mediaRecordID = fetchMedias(tradeID: tradeID).map{ $0.recordID }
         }
-        guard trade.tradeItems.count > 0 else {
-            return Observable<String>.from(optional: tradeID)
-        }
-        let database = CKContainer.default().privateCloudDatabase
-        
-        return Observable<TradeItem>.from(trade.tradeItems.map { $0 }).flatMap { (item) -> Observable<String> in
-            return self.deleteRecord(recordID: CKRecord.ID(recordName: item.id)).map{ _ in item.id }
+        return mediaRecordID.concatMap { (recordID) -> Observable<String> in
+            return self.deleteRecord(recordID: recordID).map{ _ in recordID.recordName }
         }.reduce(tradeID) { (_, _) -> String in
             return tradeID
         }

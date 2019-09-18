@@ -126,6 +126,7 @@ class TradeManger {
         }.ignoreElements()
     }
     func deleteTrade(tradeID: String) -> Observable<String> {
+        var mediaIDs = [String]()
         return Observable<String>.create { (observable) -> Disposable in
             DispatchQueue.global().async {
                 do {
@@ -135,6 +136,7 @@ class TradeManger {
                         return
                     }
                     for tradeMedia in trade.tradeMedias {
+                        mediaIDs.append(tradeMedia.id)
                         try? FileManager.default.removeItem(at: tradeMedia.url)
                     }
                     RealmManager.share.realm.beginWrite()
@@ -151,7 +153,7 @@ class TradeManger {
             return Disposables.create { }
         }.do(onNext: { (tradeID) in
             if AccountManager.shared.autoSyncToiCloudEnable {
-                _ = CloudManager.shared.deleteTradeAndMedias(tradeID: tradeID).subscribe()
+                _ = CloudManager.shared.deleteTradeAndMedias(tradeID: tradeID, mediaIDs: mediaIDs).subscribe()
             }
         }).observeOn(MainScheduler.instance)
     }
