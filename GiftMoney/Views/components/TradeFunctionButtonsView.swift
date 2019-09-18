@@ -108,7 +108,7 @@ class TradeFunctionButtonsView: UIView {
     
     
     @objc func onButtonItemTapped(sender: UIButton) {
-        let index = sender.tag
+        let index = sender.tag - 100
         if index < 0 || index >= self.items.count {
             sender.isSelected = !sender.isSelected
             return
