@@ -33,18 +33,18 @@ class TradeFunctionButtonsView: UIView {
     let stackView = UIStackView()
     var buttons = [UIButton]()
     let isMultiple: Bool
-    var selectedIndex: [Int]
-    let items: [TradeFunctionButtonItem]
-    var selectedItems: [TradeFunctionButtonItem] {
-        return selectedIndex.map { (index) -> TradeFunctionButtonItem? in
-            index < items.count ? items[index] : nil
-        }.filter { $0 != nil }.map { $0! }
+//    var selectedIndex: [Int]
+    var items: [TradeFunctionButtonItem] {
+        didSet {
+            refreshItems()
+        }
     }
+    var selectedItems: [TradeFunctionButtonItem]
     
-    init(items: [TradeFunctionButtonItem], selectedIndex: [Int], isMultiple: Bool = true) {
+    init(items: [TradeFunctionButtonItem], selectedItems: [TradeFunctionButtonItem], isMultiple: Bool = true) {
         self.items = items
         self.isMultiple = isMultiple
-        self.selectedIndex = selectedIndex
+        self.selectedItems = selectedItems
         super.init(frame: .zero)
         
         stackView.apply { (stackView) in
@@ -58,7 +58,18 @@ class TradeFunctionButtonsView: UIView {
                 make.top.bottom.equalToSuperview()
             }
         }
-        
+        refreshItems()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func refreshItems() {
+        stackView.subviews.forEach { (subview) in
+            stackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
         var rowStackView = UIStackView()
         let itemWidth = (ScreenHelp.windowWidth - 15 * 4) / 3
         items.enumerated().forEach { (index, item) in
@@ -89,34 +100,43 @@ class TradeFunctionButtonsView: UIView {
             button.layer.cornerRadius = 17
             button.layer.masksToBounds = true
             button.tag = 100 + index
-            button.isSelected = selectedIndex.contains(index)
+            button.isSelected = self.selectedItems.contains(where: { $0.title == item.title })
             buttons.append(button)
             rowStackView.addArrangedSubview(button)
         }
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     
     @objc func onButtonItemTapped(sender: UIButton) {
+        let index = sender.tag
+        if index < 0 || index >= self.items.count {
+            sender.isSelected = !sender.isSelected
+            return
+        }
         if isMultiple {
             sender.isSelected = !sender.isSelected
-            self.selectedIndex = buttons.filter{ $0.isSelected }.map { $0.tag - 100 }
+            self.selectedItems = buttons.filter{ $0.isSelected }.map({ (button) -> TradeFunctionButtonItem in
+                let index = button.tag
+                return self.items[index]
+            })
         } else {
-            let oldSelected = self.selectedIndex.contains(sender.tag - 100)
+            let currentItem = self.items[index]
             buttons.forEach { (button) in
                 button.isSelected = false
             }
-            if oldSelected {
-                self.selectedIndex = []
+            if let oldItem = self.selectedItems.first, oldItem.title == currentItem.title {
+                self.selectedItems = []
             } else {
-                self.selectedIndex = [sender.tag - 100]
+                self.selectedItems = [currentItem]
                 sender.isSelected = true
             }
         }
+    }
+    
+    func resetWith(items: [TradeFunctionButtonItem], selectedItems: [TradeFunctionButtonItem] = []) {
+        self.items = items
+        self.selectedItems = []
+        refreshItems()
     }
     
 }

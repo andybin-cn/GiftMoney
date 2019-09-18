@@ -201,6 +201,7 @@ class TradeFunctionHeader: UIView {
     }
     
     func showFilter() {
+        filterView.refreshItems()
         showContainerView()
         sortView.removeFromSuperview()
         filterView.addTo(containerView) { (make) in
@@ -209,6 +210,7 @@ class TradeFunctionHeader: UIView {
     }
     
     func showSortView() {
+        sortView.refreshItems()
         showContainerView()
         filterView.removeFromSuperview()
         sortView.addTo(containerView) { (make) in

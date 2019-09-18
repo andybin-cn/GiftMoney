@@ -69,8 +69,4 @@ extension Event {
             return t1 > t2
         }
     }
-    
-    static var allEventNames: [Event] {
-        return Event.latestusedEvents
-    }
 }

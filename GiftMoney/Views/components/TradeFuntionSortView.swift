@@ -45,7 +45,7 @@ class TradeFuntionSortView: UIView {
         return items.first!
     }
     init() {
-        sortGroup = TradeFunctionContainerView(title: "排序方式", body: TradeFunctionButtonsView(items: items, selectedIndex: [0], isMultiple: false))
+        sortGroup = TradeFunctionContainerView(title: "排序方式", body: TradeFunctionButtonsView(items: items, selectedItems: [TradeFuntionSort.timeDescending], isMultiple: false))
         super.init(frame: .zero)
         
         scrollView.apply { (scrollView) in
@@ -81,10 +81,10 @@ class TradeFuntionSortView: UIView {
     }
     
     func reset() {
-        stackView.removeArrangedSubview(sortGroup)
-        sortGroup.removeFromSuperview()
-        
-        sortGroup = TradeFunctionContainerView(title: "排序方式", body: TradeFunctionButtonsView(items: items, selectedIndex: [0], isMultiple: false))
-        stackView.addArrangedSubview(sortGroup)
+        (sortGroup.body as? TradeFunctionButtonsView)?.resetWith(items: items, selectedItems: [TradeFuntionSort.timeDescending])
+    }
+    
+    func refreshItems() {
+        //nothing need to do
     }
 }

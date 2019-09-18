@@ -61,6 +61,12 @@ class TradeFunctionTimeView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    func reset() {
+        startTimeField.date = nil
+        endTimeField.date = nil
+    }
 }
 
 

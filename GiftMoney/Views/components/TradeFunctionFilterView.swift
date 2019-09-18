@@ -41,8 +41,8 @@ class TradeFunctionFilterView: UIView {
     }
     
     init() {
-        eventGroup = TradeFunctionContainerView(title: "事件类型", body: TradeFunctionButtonsView(items: Event.allEventNames, selectedIndex: []))
-        relationGroup = TradeFunctionContainerView(title: "关系", body: TradeFunctionButtonsView(items: Relationship.latestusedRelationships, selectedIndex: []))
+        eventGroup = TradeFunctionContainerView(title: "事件类型", body: TradeFunctionButtonsView(items: OptionalService.shared.latestusedEvents, selectedItems: []))
+        relationGroup = TradeFunctionContainerView(title: "关系", body: TradeFunctionButtonsView(items: OptionalService.shared.latestusedRelationships, selectedItems: []))
         dateGroup = TradeFunctionContainerView(title: "时间区间", body: TradeFunctionTimeView())
         super.init(frame: .zero)
         
@@ -81,20 +81,13 @@ class TradeFunctionFilterView: UIView {
     }
     
     func reset() {
-        stackView.removeArrangedSubview(eventGroup)
-        eventGroup.removeFromSuperview()
-        stackView.removeArrangedSubview(relationGroup)
-        relationGroup.removeFromSuperview()
-        stackView.removeArrangedSubview(dateGroup)
-        dateGroup.removeFromSuperview()
-        
-        
-        eventGroup = TradeFunctionContainerView(title: "事件类型", body: TradeFunctionButtonsView(items: Event.allEventNames, selectedIndex: []))
-        relationGroup = TradeFunctionContainerView(title: "关系", body: TradeFunctionButtonsView(items: Relationship.latestusedRelationships, selectedIndex: []))
-        dateGroup = TradeFunctionContainerView(title: "时间区间", body: TradeFunctionTimeView())
-        
-        stackView.addArrangedSubview(eventGroup)
-        stackView.addArrangedSubview(relationGroup)
-        stackView.addArrangedSubview(dateGroup)
+        (eventGroup.body as? TradeFunctionButtonsView)?.resetWith(items: OptionalService.shared.latestusedEvents)
+        (relationGroup.body as? TradeFunctionButtonsView)?.resetWith(items: OptionalService.shared.latestusedRelationships)
+        (dateGroup.body as? TradeFunctionTimeView)?.reset()
+    }
+    
+    func refreshItems() {
+        (eventGroup.body as? TradeFunctionButtonsView)?.items = OptionalService.shared.latestusedEvents
+        (relationGroup.body as? TradeFunctionButtonsView)?.items = OptionalService.shared.latestusedRelationships
     }
 }
