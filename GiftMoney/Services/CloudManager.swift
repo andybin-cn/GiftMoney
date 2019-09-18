@@ -214,7 +214,7 @@ class CloudManager {
                 queryOperation = CKQueryOperation(cursor: cursor)
             } else {
                 let query = CKQuery(recordType: "Trades", predicate: NSPredicate(value: true))
-                query.sortDescriptors = [NSSortDescriptor(key: "modifiedAt", ascending: true)]
+                query.sortDescriptors = [NSSortDescriptor(key: "modificationDate", ascending: false)]
                 queryOperation = CKQueryOperation(query: query)
             }
             queryOperation.recordFetchedBlock = { record in
@@ -255,14 +255,14 @@ class CloudManager {
         if FileManager.default.fileExists(atPath: meida.url.path) {
             return Observable<Bool>.from(optional: true)
         }
-        return fetchMedias(medidID: meida.id).flatMap({ (record) -> Observable<CKRecord> in
+        return fetchMedia(medidID: meida.id).flatMap({ (record) -> Observable<CKRecord> in
             return self.saveMediaRecordToDatabase(record: record)
         }).map({ _ in
             return true
         }).retry(3)
     }
     
-    func fetchMedias(medidID: String) -> Observable<CKRecord> {
+    func fetchMedia(medidID: String) -> Observable<CKRecord> {
         return Observable<CKRecord>.create({ (observer) -> Disposable in
             let id = CKRecord.ID(recordName: medidID)
             CKContainer.default().privateCloudDatabase.fetch(withRecordID: id, completionHandler: { (record, error) in
@@ -384,6 +384,8 @@ class CloudManager {
         guard trade.tradeItems.count > 0 else {
             return Observable<String>.from(optional: tradeID)
         }
+        let database = CKContainer.default().privateCloudDatabase
+        
         return Observable<TradeItem>.from(trade.tradeItems.map { $0 }).flatMap { (item) -> Observable<String> in
             return self.deleteRecord(recordID: CKRecord.ID(recordName: item.id)).map{ _ in item.id }
         }.reduce(tradeID) { (_, _) -> String in

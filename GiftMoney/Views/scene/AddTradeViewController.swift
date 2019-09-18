@@ -55,7 +55,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     deinit {
         if let trade = self.trade, trade.type == nil {
-            _ = TradeManger.shared.deleteTrade(trade: trade).subscribe()
+            _ = TradeManger.shared.deleteTrade(tradeID: trade.id).subscribe()
         }
     }
     

@@ -150,7 +150,9 @@ class TradeManger {
             }
             return Disposables.create { }
         }.do(onNext: { (tradeID) in
-            _ = CloudManager.shared.deleteTradeAndMedias(tradeID: tradeID).subscribe()
+            if AccountManager.shared.autoSyncToiCloudEnable {
+                _ = CloudManager.shared.deleteTradeAndMedias(tradeID: tradeID).subscribe()
+            }
         }).observeOn(MainScheduler.instance)
     }
     

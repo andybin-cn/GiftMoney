@@ -107,13 +107,13 @@ class OutAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewDat
             UIAlertAction(title: "取消", style: .cancel, handler: nil),
             UIAlertAction(title: "删除", style: .destructive, handler: { (_) in
                 self.showLoadingIndicator()
-                TradeManger.shared.deleteTrade(trade: trade).subscribe(onCompleted: { [weak self] in
+                TradeManger.shared.deleteTrade(tradeID: trade.id).subscribe(onError: { [weak self] (error) in
+                    self?.catchError(error: error)
+                }, onCompleted: { [weak self] in
                     self?.hiddenLoadingIndicator()
                     self?.trades.remove(at: indexPath.row)
                     tableView.reloadData()
-                }) { [weak self] (error) in
-                    self?.catchError(error: error)
-                }.disposed(by: self.disposeBag)
+                }).disposed(by: self.disposeBag)
             })
         ])
     }

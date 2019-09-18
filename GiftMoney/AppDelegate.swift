@@ -40,10 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if LocalAuthManager.shared.localAuthEnabled {
             MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
         }
+        if AccountManager.shared.autoSyncToiCloudEnable {
+            _ = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
+                SLog.error("recoverTrades error:\(error.errorMessage)")
+            })
+        }
         return true
     }
     
-    var recoverTradesDispose: Disposable?
     func applicationWillResignActive(_ application: UIApplication) {
         UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "ResignActiveTime")
     }
@@ -53,14 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if LocalAuthManager.shared.localAuthEnabled {
                 MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
             }
-        }
-        if recoverTradesDispose != nil, AccountManager.shared.autoSyncToiCloudEnable {
-            recoverTradesDispose = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
-                SLog.error("recoverTrades error:\(error.errorMessage)")
-                self.recoverTradesDispose = nil
-            }, onCompleted: {
-                self.recoverTradesDispose = nil
-            })
         }
     }
 
