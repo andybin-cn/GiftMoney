@@ -29,7 +29,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>若不允许，则无法把位置信息保存到照片中</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>若不允许，则无法录制视频添加礼金记录中</string>
+	<string>若不允许，则无法使用语音识别和录制视频到记录中的功能</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>若不允许，则无法添加照片或者视频到礼金记录中</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

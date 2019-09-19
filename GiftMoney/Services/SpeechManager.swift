@@ -105,16 +105,26 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     
     func requestAuthorization() -> Observable<Bool> {
         return Observable<Bool>.create { (observer) -> Disposable in
-            SFSpeechRecognizer.requestAuthorization { authStatus in
-                switch authStatus {
-                case .authorized:
+            let audioStatus = AVCaptureDevice.authorizationStatus(for: .audio)
+            SFSpeechRecognizer.requestAuthorization { speechStatus in
+                switch (speechStatus, audioStatus) {
+                case (.authorized, .authorized):
                     observer.onNext(true)
                     observer.onCompleted()
-                case .notDetermined:
+                case (.denied, _):
+                    observer.onError(AuthorizationError(type: .speechRecognizer))
+                case (.restricted, _):
+                    observer.onError(AuthorizationError(type: .speechRecognizer))
+                case (_, .restricted):
+                    observer.onError(AuthorizationError(type: .microphone))
+                case (_, .denied):
+                    observer.onError(AuthorizationError(type: .microphone))
+                case (.notDetermined, _):
                     observer.onNext(false)
                     observer.onCompleted()
-                case .denied, .restricted:
-                    observer.onError(AuthorizationError(type: .speechRecognizer))
+                case (_, .notDetermined):
+                    observer.onNext(false)
+                    observer.onCompleted()
                 default:
                     observer.onNext(false)
                     observer.onCompleted()
