@@ -63,8 +63,8 @@ class SpeechButtonView: UIView {
                 make.right.equalTo(15)
             }
             let attrStr = NSMutableAttributedString()
-            attrStr.append(NSAttributedString(string: "例句：   ", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
-            attrStr.append(NSAttributedString(string: "收到大学同学小明200元红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
+            attrStr.append(NSAttributedString(string: "请大声准确的对我说话，例句：\n", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
+            attrStr.append(NSAttributedString(string: "1.结婚典礼收到大学同学小明200元红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
 //            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
 //            attrStr.append(NSAttributedString(string: "大学同学", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
 ////            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
@@ -72,8 +72,8 @@ class SpeechButtonView: UIView {
 //            attrStr.append(NSAttributedString(string: "200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
 //            attrStr.append(NSAttributedString(string: "红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
             
-            attrStr.append(NSAttributedString(string: "\n或者：   ", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
-            attrStr.append(NSAttributedString(string: "李萌萌同学200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
+            attrStr.append(NSAttributedString(string: "\n2.朋友李萌萌200元", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
+//            attrStr.append(NSAttributedString(string: "李萌萌同学200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
             label.attributedText = attrStr
         }
         textLabel.apply { (label) in
@@ -113,8 +113,10 @@ class SpeechButtonView: UIView {
             self.startRecognizer()
         }).disposed(by: disposeBag)
         speechButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            self?.speechButton.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 self?.stopRecognizer()
+                self?.speechButton.isUserInteractionEnabled = true
             })
         }).disposed(by: disposeBag)
         speechButton.rx.controlEvent(.touchUpOutside).asObservable().subscribe(onNext: { [weak self] (_) in
@@ -124,8 +126,10 @@ class SpeechButtonView: UIView {
         }).disposed(by: disposeBag)
         
     SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
-            SLog.info("peakPower:\(power)")
-            let scale = min(CGFloat(1 + power * 100), 3)
+        var scale: CGFloat = 1
+            if self.isInSpeech {
+                scale = min(CGFloat(1.1 + power * 80), 3)
+            }
 //            self.animateView.layer.transform = CATransform3DMakeScale(scale, scale, 1)
             UIView.animate(withDuration: 0.1, animations: {
                 self.animateView.transform = CGAffineTransform.init(scaleX: scale, y: scale)
@@ -136,19 +140,28 @@ class SpeechButtonView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    var isInSpeech: Bool {
+        return speechDispose != nil
+    }
     var speechDispose: Disposable?
     func startRecognizer() {
         SLog.info("startRecognizer")
-        stopRecognizer()
+        if isInSpeech {
+            return
+        }
         self.textLabel.text = ""
-        speechDispose = SpeechManager.shared.startSpeech().subscribe(onNext: { [unowned self] (result) in
+        speechDispose = SpeechManager.shared.requestAuthorizeAndStart().subscribe(onNext: { [weak self] (result) in
             SLog.info("speech result:\(result.bestTranscription.formattedString)")
-            self.textLabel.text = result.bestTranscription.formattedString
-        }, onError: { [unowned self] (error) in
-            self.stopRecognizer()
-        }, onCompleted: { [unowned self] in
-            self.stopRecognizer()
+            self?.textLabel.text = result.bestTranscription.formattedString
+        }, onError: { [weak self] (error) in
+            let analyzeResult = AnalyzeResult()
+            analyzeResult.error = error
+            self?.speechResult.accept(analyzeResult)
+            self?.speechDispose = nil
+            self?.stopRecognizer()
+        }, onCompleted: { [weak self] in
+            self?.speechDispose = nil
+            self?.stopRecognizer()
         })
         speechDispose?.disposed(by: disposeBag)
         self.snp.updateConstraints({ (make) in
@@ -178,7 +191,7 @@ class SpeechButtonView: UIView {
         if let text = self.textLabel.text, !text.isEmpty, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
             let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
             if analyzeResult.name.isEmpty || analyzeResult.value.isEmpty {
-                analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音")
+                analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音", code: 100)
             }
             speechResult.accept(analyzeResult)
         }

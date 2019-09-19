@@ -14,7 +14,7 @@ import Social
 import Common
 import StoreKit
 
-class MineViewController: BaseViewController, MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate {
+class MineViewController: BaseViewController, UIDocumentPickerDelegate {
     let documentTypes = ["public.item", "public.content", "public.composite-content", "public.message", "public.contact", "public.archive", "public.disk-image", "public.data", "public.directory", "com.apple.resolvable", "public.symlink", "public.executable", "com.apple.mount-point", "com.apple.alias-file", "com.apple.alias-record", "com.apple.bookmark", "public.url", "public.file-url", "public.text", "public.plain-text", "public.utf8-plain-text", "public.utf16-external-plain-text", "public.utf16-plain-text", "public.delimited-values-text", "public.comma-separated-values-text", "public.tab-separated-values-text", "public.utf8-tab-separated-values-text", "public.rtf", "public.html", "public.xml", "public.source-code", "public.assembly-source", "public.c-source", "public.objective-c-source", "public.swift-source", "public.c-plus-plus-source", "public.objective-c-plus-plus-source", "public.c-header", "public.c-plus-plus-header", "com.sun.java-source", "public.script", "com.apple.applescript.text", "com.apple.applescript.script", "com.apple.applescript.script-bundle", "com.netscape.javascript-source", "public.shell-script", "public.perl-script", "public.python-script", "public.ruby-script", "public.php-script", "public.json", "com.apple.property-list", "com.apple.xml-property-list", "com.apple.binary-property-list", "com.adobe.pdf", "com.apple.rtfd", "com.apple.flat-rtfd", "com.apple.txn.text-multimedia-data", "com.apple.webarchive", "public.image", "public.jpeg", "public.jpeg-2000", "public.tiff", "com.apple.pict", "com.compuserve.gif", "public.png", "com.apple.quicktime-image", "com.apple.icns", "com.microsoft.bmp", "com.microsoft.ico", "public.camera-raw-image", "public.svg-image", "com.apple.live-photo", "public.audiovisual-content", "public.movie", "public.video", "public.audio", "com.apple.quicktime-movie", "public.mpeg", "public.mpeg-2-video", "public.mpeg-2-transport-stream", "public.mp3", "public.mpeg-4", "public.mpeg-4-audio", "com.apple.protected-mpeg-4-audio", "com.apple.protected-mpeg-4-video", "public.avi", "public.aiff-audio", "com.microsoft.waveform-audio", "public.midi-audio", "public.playlist", "public.m3u-playlist", "public.folder", "public.volume", "com.apple.package", "com.apple.bundle", "com.apple.plugin", "com.apple.metadata-importer", "com.apple.quicklook-generator", "com.apple.xpc-service", "com.apple.framework", "com.apple.application", "com.apple.application-bundle", "com.apple.application-file", "public.unix-executable", "com.microsoft.windows-executable", "com.sun.java-class", "com.sun.java-archive", "com.apple.systempreference.prefpane", "org.gnu.gnu-zip-archive", "public.bzip2-archive", "public.zip-archive", "public.spreadsheet", "public.presentation", "public.database", "public.vcard", "public.to-do-item", "public.calendar-event", "public.email-message", "com.apple.internet-location", "com.apple.ink.inktext", "public.font", "public.bookmark", "public.3d-content", "com.rsa.pkcs-12", "public.x509-certificate", "org.idpf.epub-container", "public.log", "com.apple.keynote.key", "com.microsoft.word.doc", "com.microsoft.excel.xls", "com.microsoft.excel.xlsx", "com.microsoft.powerpoint.ppt"]
     
     let scrollView = UIScrollView()
@@ -124,11 +124,12 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
     }
     
     @objc func onTestButtonTapped() {
-        let controller = UIViewController()
-        controller.view.addSubview(SpeechButtonView()) { (make) in
-            make.left.right.bottom.equalToSuperview()
-        }
-        navigationController?.pushViewController(controller, animated: true)
+//        let controller = UIViewController()
+//        controller.view.addSubview(SpeechButtonView()) { (make) in
+//            make.left.right.bottom.equalToSuperview()
+//        }
+//        navigationController?.pushViewController(controller, animated: true)
+        self.feedBackError()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -300,11 +301,6 @@ class MineViewController: BaseViewController, MFMailComposeViewControllerDelegat
                 self.showTipsView(text: "恢复完成")
             }
         }).disposed(by: disposeBag)
-    }
-    
-    //MARK: - MFMailComposeViewControllerDelegate
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
     }
     
     func exportXLSX() {

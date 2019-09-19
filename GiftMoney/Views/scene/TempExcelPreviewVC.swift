@@ -12,8 +12,10 @@ import QuickLook
 class TempExcelPreviewVC: QLPreviewController, QLPreviewControllerDataSource, QLPreviewItem {
     
     let url: URL
-    init(url: URL) {
+    let titleStr: String
+    init(url: URL, titleStr: String = "导出预览") {
         self.url = url
+        self.titleStr = titleStr
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,6 +32,7 @@ class TempExcelPreviewVC: QLPreviewController, QLPreviewControllerDataSource, QL
         
         dataSource = self
         currentPreviewItemIndex = 0
+        self.title = titleStr
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,6 +54,6 @@ class TempExcelPreviewVC: QLPreviewController, QLPreviewControllerDataSource, QL
         return url
     }
     var previewItemTitle: String? {
-        return "导出预览"
+        return self.titleStr
     }
 }

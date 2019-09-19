@@ -12,9 +12,9 @@ import SwiftyBeaver
 
 
 public class SLogClass {
+    public let file = FileDestination()
     init() {
         let console = ConsoleDestination()  // log to Xcode Console
-        let file = FileDestination()  // log to default swiftybeaver.log file
         #if DEBUG
         console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         console.asynchronously = false

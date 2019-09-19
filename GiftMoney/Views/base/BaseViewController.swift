@@ -10,6 +10,7 @@ import UIKit
 import Common
 import RxSwift
 import CloudKit
+import MessageUI
 
 class BaseViewController: UIViewController {
     var navigationBar: UIView
@@ -63,21 +64,73 @@ class BaseViewController: UIViewController {
 }
 
 
-extension UIViewController {
+extension UIViewController: MFMailComposeViewControllerDelegate {
     func catchError(error: Error) {
-        SLog.error("catchError:\(String(describing: self))")
-        self.showTipsView(text: error.errorMessage)
-    }
-}
-
-extension Error {
-    var errorMessage: String {
-        if let error = self as? CommonError {
-            return error.message
-        } else if self is CKError {
-            return CommonError.iCloudError.message
+        if let error = error as? CommonError {
+            self.showTipsView(text: error.message)
+        } else if let error = error as? AuthorizationError {
+            self.showAlertView(title: error.localizedDescription, message: nil, actions: [
+                UIAlertAction(title: "取消", style: .cancel, handler: nil),
+                UIAlertAction(title: "前往设置", style: .destructive, handler: { (_) in
+                    DeviceSupport.default.openSystemSetting()
+                })
+            ])
         } else {
-            return localizedDescription
+            SLog.error(error)
+            self.showAlertView(title: "App遇到了无法解决的错误", message: "您可以进行多次尝试，如无法解决问题。请将问题反馈给我们，我们会尽快为您解决！", actions: [
+                UIAlertAction(title: "取消", style: .cancel, handler: nil),
+                UIAlertAction(title: "反馈问题", style: .destructive, handler: { (_) in
+                    self.feedBackError()
+                })
+            ])
         }
+    }
+    
+    private func addAttachmentErrorLogData(mailComposerVC: MFMailComposeViewController) {
+        DispatchQueue.global().async {
+            do {
+                if let url = SLog.file.logFileURL {
+                    let data = try Data(contentsOf: url)
+                    DispatchQueue.main.async {
+                        mailComposerVC.addAttachmentData(data, mimeType: "text/plain", fileName: "错误日志")
+                    }
+                }
+            } catch let e {
+                SLog.error(e)
+            }
+        }
+    }
+    
+    func feedBackError() {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        
+        mailComposerVC.setToRecipients(["reciprocityApp@163.com"])
+        mailComposerVC.setSubject("【礼金小助手App】错误反馈")
+        mailComposerVC.setMessageBody("\n\n请提供尽量详细的错误信息，如截图，视频等\n\n感谢您的反馈，我们会尽快为您解决。谢谢！", isHTML: false)
+        addAttachmentErrorLogData(mailComposerVC: mailComposerVC)
+        
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposerVC, animated: true, completion: nil)
+        } else {
+            self.showAlertView(title: "无法打开邮件，您可以手动发送邮件至 reciprocityApp@163.com !", message: "分享错误信息给我们可以加快问题的解决速度！", actions: [
+                UIAlertAction(title: "取消", style: .cancel, handler: nil),
+                UIAlertAction(title: "分享错误信息", style: .destructive, handler: { (_) in
+                    UIPasteboard.general.string = "reciprocityApp@163.com"
+                    if let url = SLog.file.logFileURL {
+                        let controler = TempExcelPreviewVC(url: url, titleStr: "分享错误日志")
+                        self.present(controler, animated: true, completion: nil)
+                        controler.showTipsView(text: "邮箱地址已经复制到剪切板")
+                    } else {
+                        self.showTipsView(text: "邮箱地址已经复制到剪切板")
+                    }
+                })
+            ])
+        }
+    }
+    
+    //MARK: - MFMailComposeViewControllerDelegate
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

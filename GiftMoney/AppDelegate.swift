@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
             UMConfigure.initWithAppkey("5d78ba633fc1957618000841", channel: "App Store")
         #endif
+        MobClick.setCrashReportEnabled(true)
         MobClick.setScenarioType(eScenarioType.E_UM_NORMAL)
         
         SLog.info("NSHomeDirectory: \(NSHomeDirectory())")
@@ -42,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if AccountManager.shared.autoSyncToiCloudEnable {
             _ = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
-                SLog.error("recoverTrades error:\(error.errorMessage)")
+                SLog.error("recoverTrades error:\(error.localizedDescription)")
             }, onCompleted: {
                 MainTabViewController.shared.inoutRecordsVC.currentVC?.viewWillAppear(false)
             })

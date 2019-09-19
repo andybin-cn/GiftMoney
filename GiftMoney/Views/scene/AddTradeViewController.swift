@@ -221,12 +221,18 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     func addEvents() {
         speechView.speechResult.asObservable().subscribe(onNext: { [unowned self] (result) in
             if let error = result.error {
-                self.showAlertView(title: error.errorMessage, message: nil, actions: [
-                    UIAlertAction(title: "取消", style: .cancel, handler: nil),
-                    UIAlertAction(title: "查看帮助", style: .destructive, handler: { (_) in
-                        self.present(SpeechHelpVC(), animated: true, completion: nil)
-                    })
-                ])
+                if let commonError = error as? CommonError, commonError.code == 100 {
+                    //分词识别失败
+                    self.showAlertView(title: commonError.message, message: nil, actions: [
+                        UIAlertAction(title: "取消", style: .cancel, handler: nil),
+                        UIAlertAction(title: "查看帮助", style: .destructive, handler: { (_) in
+                            self.present(SpeechHelpVC(), animated: true, completion: nil)
+                        })
+                    ])
+                } else {
+                    //语音识别失败
+                    self.catchError(error: error)
+                }
             } else {
                 self.nameField.fieldValue = result.name
                 if self.eventNameField.textfield.text?.isEmpty ?? true {

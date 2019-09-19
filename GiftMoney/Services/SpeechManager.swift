@@ -20,7 +20,7 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     private let fftSize: UInt32
     let audioAnalyzer: RealtimeAnalyzer
     var speechAvailable = BehaviorRelay<Bool>(value: true)
-    var peakPower = BehaviorRelay<Float>(value: 0.0)
+    var peakPower = PublishRelay<Float>()
     
     
     private override init() {
@@ -29,21 +29,17 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
         super.init()
     }
     
-    func requestAuthorization() -> Observable<SFSpeechRecognizerAuthorizationStatus> {
-        return Observable<SFSpeechRecognizerAuthorizationStatus>.create { (observer) -> Disposable in
-            SFSpeechRecognizer.requestAuthorization { authStatus in
-                observer.onNext(authStatus)
-                observer.onCompleted()
-            }
-            return Disposables.create { }
-        }
-    }
-    
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    var speechRecognizer = SFSpeechRecognizer(locale: .current)
+    var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "zh_CN"))
     private lazy var fftSetup = vDSP_create_fftsetup(vDSP_Length(Int(round(log2(Double(fftSize))))), FFTRadix(kFFTRadix2))
     
-    func startSpeech() -> Observable<SFSpeechRecognitionResult> {
+    func requestAuthorizeAndStart() -> Observable<SFSpeechRecognitionResult> {
+        return requestAuthorization().flatMap { (authorized) -> Observable<SFSpeechRecognitionResult> in
+            return self.startSpeech(authorized: authorized)
+        }.observeOn(MainScheduler.instance)
+    }
+    
+    func startSpeech(authorized: Bool) -> Observable<SFSpeechRecognitionResult> {
         return Observable<SFSpeechRecognitionResult>.create { (observer) -> Disposable in
             self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
             guard let recognitionRequest = self.recognitionRequest else {
@@ -82,11 +78,16 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
                     if isFinal {
                         observer.onCompleted()
                     } else if let error = error {
-                        observer.onError(error)
+                        SLog.error("speechRecognizer error:\(error)")
+                        if !authorized {
+                            observer.onError(AuthorizationError(type: .speechRecognizer))
+                        } else {
+                            observer.onError(CommonError(message: "语音识别失败，如有重试后无法解决，请把问题反馈给我们。"))
+                        }
                     }
                 }
-            } catch let error {
-                observer.onError(error)
+            } catch _ {
+                observer.onError(CommonError(message: "语音识别失败，如有重试后无法解决，请把问题反馈给我们。"))
             }
             
             return Disposables.create {
@@ -100,5 +101,26 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     //MARK - SFSpeechRecognizerDelegate
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         speechAvailable.accept(available)
+    }
+    
+    func requestAuthorization() -> Observable<Bool> {
+        return Observable<Bool>.create { (observer) -> Disposable in
+            SFSpeechRecognizer.requestAuthorization { authStatus in
+                switch authStatus {
+                case .authorized:
+                    observer.onNext(true)
+                    observer.onCompleted()
+                case .notDetermined:
+                    observer.onNext(false)
+                    observer.onCompleted()
+                case .denied, .restricted:
+                    observer.onError(AuthorizationError(type: .speechRecognizer))
+                default:
+                    observer.onNext(false)
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create { }
+        }
     }
 }

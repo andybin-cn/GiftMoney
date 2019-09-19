@@ -21,7 +21,7 @@ class AccountManager {
             if autoSyncToiCloudEnable {
                 if AccountManager.shared.autoSyncToiCloudEnable {
                     _ = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
-                        SLog.error("recoverTrades error:\(error.errorMessage)")
+                        SLog.error("recoverTrades error:\(error.localizedDescription)")
                     }, onCompleted: {
                         MainTabViewController.shared.inoutRecordsVC.currentVC?.viewWillAppear(false)
                     })
