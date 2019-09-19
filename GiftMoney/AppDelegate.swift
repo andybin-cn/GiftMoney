@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobClick.setCrashReportEnabled(true)
         MobClick.setScenarioType(eScenarioType.E_UM_NORMAL)
         
-        SLog.info("NSHomeDirectory: \(NSHomeDirectory())")
+        SLog.debug("NSHomeDirectory: \(NSHomeDirectory())")
         
         if LocalAuthManager.shared.localAuthEnabled {
             MainTabViewController.shared.showLocalAuthView(viewMode: .verify)

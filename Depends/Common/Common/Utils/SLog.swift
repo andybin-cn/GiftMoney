@@ -19,6 +19,9 @@ public class SLogClass {
         console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         console.asynchronously = false
         SwiftyBeaver.addDestination(console)
+        file.minLevel = .verbose
+        #else
+        file.minLevel = .info
         #endif
         file.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         file.asynchronously = true
