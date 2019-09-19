@@ -114,9 +114,10 @@ class SpeechButtonView: UIView {
         
         speechButton.rx.controlEvent(.touchDown).asObservable().subscribe(onNext: { [unowned self] (_) in
             MobClick.event("speechButtonTapped")
-            if UserGuideManager.shared.hasShowSpeechGuid {
+            if !UserGuideManager.shared.hasShowSpeechGuid {
                 UserGuideManager.shared.hasShowSpeechGuid = true
-                self?.controller?.present(SpeechHelpVC(), animated: true, completion: nil)
+                self.controller?.present(SpeechHelpVC(), animated: true, completion: nil)
+                return
             }
             if !MarketManager.shared.checkAuth(type: .speechRecognize, controller: self.controller ?? MainTabViewController.shared) {
                 return

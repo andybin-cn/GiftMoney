@@ -13,12 +13,12 @@ class UserGuideManager {
     
     var hasShowSpeechGuid = false {
         didSet {
-            UserDefaults.standard.set(isFirstTimeForSpeech, forKey: "UserGuideManager_hasShowSpeechGuid")
+            UserDefaults.standard.set(hasShowSpeechGuid, forKey: "UserGuideManager_hasShowSpeechGuid")
         }
     }
     
     init() {
-        isFirstTimeForSpeech = UserDefaults.standard.bool(forKey: "UserGuideManager_hasShowSpeechGuid")
+        hasShowSpeechGuid = UserDefaults.standard.bool(forKey: "UserGuideManager_hasShowSpeechGuid")
     }
     
 }

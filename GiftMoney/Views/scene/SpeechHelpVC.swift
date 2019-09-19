@@ -140,8 +140,8 @@ class SpeechHelpVC: BaseViewController {
             
             let experienceButton = UIButton()
             experienceButton.setTitle("先体验一番", for: .normal)
-            experienceButton.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal)
-            experienceButton.setTitleColor(.appMainRed, for: .normal)
+            experienceButton.setBackgroundImage(UIColor.appSecondaryBlue.toImage(), for: .normal)
+            experienceButton.setTitleColor(.appSecondaryYellow, for: .normal)
             experienceButton.layer.cornerRadius = 4
             experienceButton.layer.masksToBounds = true
             experienceButton.addTarget(self, action: #selector(onExperienceButton), for: .touchUpInside)

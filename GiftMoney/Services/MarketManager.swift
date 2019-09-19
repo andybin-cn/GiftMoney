@@ -47,7 +47,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
             UserDefaults.standard.set(speechRecognizedCount, forKey: "MarketManager_speechRecognizedCount")
         }
     }
-    let speechRecognizedLimit = 10
+    let speechRecognizedLimit = 30
     
     deinit {
         SKPaymentQueue.default().remove(self)
@@ -75,7 +75,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
             self.currentLevel = .paid2
         }
         let count = InviteManager.shared.invitedCount
-        if count >= 30 {
+        if count >= 20 {
             self.currentLevel = .paid2
         } else if self.currentLevel == .free && count >= 5 {
             self.currentLevel = .paid1
