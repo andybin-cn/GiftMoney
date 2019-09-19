@@ -33,6 +33,7 @@ public struct AuthorizationError: Error {
         case photo
         case speechRecognizer
         case microphone
+        case contact
     }
     
     let type: `Type`
@@ -50,6 +51,8 @@ public struct AuthorizationError: Error {
             return "您未授权使用摄像头权限"
         case .photo:
             return "您未授权相册权限"
+        case .contact:
+            return "您未授权通讯录权限"
         }
     }
 }

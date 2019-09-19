@@ -25,6 +25,18 @@ class WordAnalyzeHelp {
     }
     
     func isName(word: String) -> Bool {
+        if ContactManager.shared.allFullNameDict[word] != nil {
+            return true
+        }
+        if ContactManager.shared.allFirstNameDict[word] != nil {
+            return true
+        }
+        let index = ContactManager.shared.allLastNameDict.keys.first { (name) -> Bool in
+            return word.contains(name)
+        }
+        if index != nil {
+            return true
+        }
         return nameWords.findFirst(predicate: { (name) -> Bool in
             return word.contains(name)
         }) != nil

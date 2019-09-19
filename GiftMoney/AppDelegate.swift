@@ -89,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func setupService() {
+        //加载自定义词典
         JieBaBridge.initJieBa()
         _ = OptionalService.shared.newEventsEmit.subscribe(onNext: { (events) in
             events.forEach({ (event) in
@@ -100,7 +101,23 @@ extension AppDelegate {
                 JieBaBridge.insertUserWord(relation.name, tag: "relation")
             })
         })
+        _ = OptionalService.shared.newNameEmit.subscribe(onNext: { (names) in
+            names.forEach({ (name) in
+                JieBaBridge.insertUserWord(name, tag: "nr")
+            })
+        })
+        _ = ContactManager.shared.allFirstNameDictEmit.subscribe(onNext: { (names) in
+            names.forEach({ (name) in
+                JieBaBridge.insertUserWord(name, tag: "nr")
+            })
+        })
+        _ = ContactManager.shared.allFirstNameDictEmit.subscribe(onNext: { (names) in
+            names.forEach({ (name) in
+                JieBaBridge.insertUserWord(name, tag: "nr")
+            })
+        })
         //需要先添加监听后再初始化
+        ContactManager.shared.loadLocalData()
         OptionalService.shared.initOptionals()
     }
 }

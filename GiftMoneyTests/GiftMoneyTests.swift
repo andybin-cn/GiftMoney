@@ -33,7 +33,11 @@ class GiftMoneyTests: XCTestCase {
 //        let str = "李大强结婚送给他1套房子."
 //        let str = "李大强结婚送给他1套房子."
 //        let str = "李大强同学3000块."
-        let str = "朋友李萌萌200元。"
+        JieBaBridge.insertUserWord("李0萌", tag: "nr")
+        JieBaBridge.insertUserWord("李0萌", tag: "nr")
+        JieBaBridge.insertUserWord("李0萌", tag: "nr")
+        JieBaBridge.insertUserWord("李0萌", tag: "nr")
+        let str = "朋友李0萌200元。"
         guard let result = JieBaBridge.jiebaTag(str) as? Array<JieBaTag> else {
             return
         }

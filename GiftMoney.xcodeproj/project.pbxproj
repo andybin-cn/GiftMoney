@@ -40,6 +40,7 @@
 		369DFE3922F6CD930005B67D /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369DFE3622F6CD930005B67D /* MainTabViewController.swift */; };
 		369DFF2522F7094F0005B67D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; };
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		36B90A152333B3CF00F77DDA /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90A142333B3CF00F77DDA /* ContactManager.swift */; };
 		380259C223272EF400C50090 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C123272EF400C50090 /* SpeechManager.swift */; };
 		380259C42327461C00C50090 /* SpeechButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C32327461C00C50090 /* SpeechButtonView.swift */; };
 		380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259DE2328F24700C50090 /* CoreTelephony.framework */; };
@@ -208,6 +209,7 @@
 		369DFE3522F6CD930005B67D /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		369DFE3622F6CD930005B67D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
+		36B90A142333B3CF00F77DDA /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		380259C123272EF400C50090 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		380259C32327461C00C50090 /* SpeechButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechButtonView.swift; sourceTree = "<group>"; };
 		380259C82328BC5400C50090 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				38FECDA22330C4F900232A9A /* WordAnalyzeHelp.swift */,
 				38220DFA232F612C007955D0 /* WordAnalyze.swift */,
 				38220DFF23307724007955D0 /* OptionalService.swift */,
+				36B90A142333B3CF00F77DDA /* ContactManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1012,6 +1015,7 @@
 				3695D2E023098E5F00AC2044 /* EventGroupModifyVC.swift in Sources */,
 				3870C2BE2306A0EB000C1996 /* RelationEditeVC.swift in Sources */,
 				38775E4C230FEDDB00B697F5 /* AboutUsVC.swift in Sources */,
+				36B90A152333B3CF00F77DDA /* ContactManager.swift in Sources */,
 				38236C6C23028A8A00B67B8D /* EventCell.swift in Sources */,
 				3868658C2303AE40000BBD85 /* ImageSetView.swift in Sources */,
 				3620B8AF232B8CC000393329 /* RealtimeAnalyzer.swift in Sources */,

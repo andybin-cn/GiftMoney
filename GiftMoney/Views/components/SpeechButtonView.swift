@@ -117,6 +117,7 @@ class SpeechButtonView: UIView {
             if !MarketManager.shared.checkAuth(type: .speechRecognize, controller: self.controller ?? MainTabViewController.shared) {
                 return
             }
+            _ = ContactManager.shared.initContactsAndReqAuthorizationIfNeed().subscribe()
             self.startRecognizer()
         }).disposed(by: disposeBag)
         speechButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
