@@ -15,7 +15,7 @@ class AnalyzeResult {
     var value: String = ""
     var unit: String = ""
     var unitType: TradeItem.ItemType = .money
-    var type: Trade.TradeType = .inAccount
+    var type: Trade.TradeType? = nil
     var error: Error? = nil
     var event: String = ""
     var relation: String = ""
@@ -107,9 +107,6 @@ class WordAnalyze {
         analyzeMainTag()
         analyzeSecondaryTag()
         analyzeValueTag()
-        if type == nil {
-            type = .inAccount
-        }
         
         let result = AnalyzeResult()
         if let nameTag = nameTag {
@@ -121,9 +118,7 @@ class WordAnalyze {
         if let relationTag = relationTag {
             result.relation = relationTag.word
         }
-        if let type = type {
-            result.type = type
-        }
+        result.type = type
         if unitType == .gift {
             result.unitType = .gift
             if let giftName = giftNameTag, let giftValue = valueTag {
@@ -279,7 +274,11 @@ class WordAnalyze {
                     tag.type = .eventName
                 }
             }
-            if type == nil, WordAnalyzeHelp.shared.isOutAccountWords(word: tag.word) {
+            if type == nil, WordAnalyzeHelp.shared.isInAccountWords(word: tag.word) {
+                if tag.type == nil && tag.confidence < 6 {
+                    type = .inAccount
+                }
+            } else if type == nil, WordAnalyzeHelp.shared.isOutAccountWords(word: tag.word) {
                 if tag.type == nil && tag.confidence < 6 {
                     type = .outAccount
                 }
