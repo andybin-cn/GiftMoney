@@ -58,7 +58,7 @@ class SpeechHelpVC: BaseViewController {
             stackView.addTo(scrollView) { (make) in
                 make.top.equalTo(100)
                 make.left.right.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-40).priority(ConstraintPriority.low)
+                make.bottom.lessThanOrEqualTo(-40).priority(ConstraintPriority.low)
             }
         }
         
@@ -89,7 +89,80 @@ class SpeechHelpVC: BaseViewController {
         
         stackView.addArrangedSubview(examplesGroup)
         stackView.addArrangedSubview(tipsGroup)
+        
+        
+        let experienceView = UIView().then { (experienceView) in
+            let image = MarketManager.shared.currentLevel == .free ? UIImage(named: "icons8-info")?.ui_renderImage(tintColor: .appSecondaryYellow) : UIImage(named: "icons8-approval")
+            let icon = UIImageView(image: image)
+            icon.addTo(experienceView, layout: { (make) in
+                make.left.equalToSuperview()
+                make.centerY.equalToSuperview()
+                make.width.height.equalTo(26)
+            })
+            
+            UILabel().apply({ (label) in
+                label.numberOfLines = 0
+                label.lineBreakMode = .byWordWrapping
+                label.attributedText = authorityDesc
+                label.textAlignment = .left
+                label.addTo(experienceView, layout: { (make) in
+                    make.left.equalTo(icon.snp.right).offset(5)
+                    make.centerY.equalToSuperview()
+                    make.right.equalTo(0)
+                    make.bottom.lessThanOrEqualToSuperview()
+                })
+            })
+            
+            experienceView.addTo(scrollView, layout: { (make) in
+                make.left.equalTo(20)
+                make.top.equalTo(stackView.snp.bottom).offset(40)
+                make.right.equalTo(-20)
+                make.bottom.lessThanOrEqualTo(-40).priority(.low)
+            })
+        }
+        
+        
+        if MarketManager.shared.currentLevel == .free {
+            let buyButton = UIButton()
+            buyButton.setTitle("立即获得无限使用次数", for: .normal)
+            buyButton.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal)
+            buyButton.setTitleColor(.appMainRed, for: .normal)
+            buyButton.layer.cornerRadius = 4
+            buyButton.layer.masksToBounds = true
+            buyButton.addTarget(self, action: #selector(onBuyButtonTapped), for: .touchUpInside)
+            
+            buyButton.addTo(scrollView) { (make) in
+                make.left.equalTo(20)
+                make.top.equalTo(experienceView.snp.bottom).offset(50)
+                make.right.equalTo(-20)
+                make.bottom.lessThanOrEqualTo(-60).priority(.low)
+                make.height.equalTo(35)
+            }
+        }
+        
     }
+    
+    @objc func onBuyButtonTapped() {
+        self.present(MarketVC(superVC: self), animated: true, completion: nil)
+    }
+    
+    var authorityDesc: NSAttributedString {
+        let attrString = NSMutableAttributedString()
+//        let paragraphStyle = NSMutableParagraphStyle()
+        if MarketManager.shared.currentLevel == .free {
+            attrString.append(NSAttributedString(string: "您的【语音识别录入】功能剩余", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
+            attrString.append(NSAttributedString(string: "\(MarketManager.shared.speechRecognizedLimit - MarketManager.shared.speechRecognizedCount)", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 20), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
+            attrString.append(NSAttributedString(string: " 次免费体验次数(识别成功算一次)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
+        } else {
+            attrString.append(NSAttributedString(string: "恭喜你！您已可以无限制的使用【语音识别录入】功能啦！", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
+            
+        }
+//        paragraphStyle.lineSpacing = 40
+//        attrString.addAttribute(.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+        
+        return attrString
+    }
+    
     
     @objc func onCloseButtonTapped() {
         self.dismiss(animated: true, completion: nil)

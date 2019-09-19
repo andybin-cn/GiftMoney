@@ -31,6 +31,7 @@ class MarketVC: BaseViewController {
         self.superVC = superVC
         let freeHeader = MarketServiceHeader(title: "免费试用", image: UIImage(named: "icons8-trial_version")?.ui_renderImage(tintColor: UIColor.white))
         let freeItems: [MarketServiceItem] = [
+            MarketServiceItem(title: "免费体验语音录入功能 \(MarketManager.shared.speechRecognizedLimit)次"),
             MarketServiceItem(title: "自定义关系 1个"),
             MarketServiceItem(title: "自定义事件 1个"),
             MarketServiceItem(title: "每条记录最多添加 1张 图片或视频"),
@@ -39,6 +40,7 @@ class MarketVC: BaseViewController {
         
         let vip1Header = MarketServiceHeader(title: "购买【黄金VIP】  （¥3元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appSecondaryYellow))
         let vip1Items: [MarketServiceItem] = [
+            MarketServiceItem(title: "语音录入功能无限制！"),
             MarketServiceItem(title: "自定义关系 5个"),
             MarketServiceItem(title: "自定义事件 5个"),
             MarketServiceItem(title: "解锁批量修改事件名称"),

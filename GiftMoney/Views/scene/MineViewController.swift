@@ -129,7 +129,8 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
 //            make.left.right.bottom.equalToSuperview()
 //        }
 //        navigationController?.pushViewController(controller, animated: true)
-        self.feedBackError()
+//        self.feedBackError()
+        MainTabViewController.shared.present(SpeechHelpVC(), animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

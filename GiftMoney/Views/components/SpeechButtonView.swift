@@ -25,6 +25,8 @@ class SpeechButtonView: UIView {
     let blurEffectView: UIVisualEffectView
     let logoImage = UIImageView(image: UIImage(named: "logo"))
     
+    weak var controller: UIViewController?
+    
     init() {
         let blurEffect = UIBlurEffect.init(style: UIBlurEffect.Style.dark)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -111,6 +113,9 @@ class SpeechButtonView: UIView {
         buttonContainer.sendSubviewToBack(animateView)
         
         speechButton.rx.controlEvent(.touchDown).asObservable().subscribe(onNext: { [unowned self] (_) in
+            if !MarketManager.shared.checkAuth(type: .speechRecognize, controller: self.controller ?? MainTabViewController.shared) {
+                return
+            }
             self.startRecognizer()
         }).disposed(by: disposeBag)
         speechButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
@@ -193,6 +198,8 @@ class SpeechButtonView: UIView {
             let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
             if analyzeResult.name.isEmpty || analyzeResult.value.isEmpty {
                 analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音", code: 100)
+            } else {
+                MarketManager.shared.speechRecognizedCount += 1
             }
             speechResult.accept(analyzeResult)
         }

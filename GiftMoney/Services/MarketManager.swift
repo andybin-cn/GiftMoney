@@ -19,6 +19,7 @@ enum MarketServiceType {
     case exportAndImport
     case backupAndRecover
     case autoSyncToiCloud
+    case speechRecognize
 }
 
 class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDelegate {
@@ -41,7 +42,12 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     var hasVip2Paid: Bool {
         return paidProducts.contains("vip002")
     }
-    
+    var speechRecognizedCount: Int {
+        didSet {
+            UserDefaults.standard.set(speechRecognizedCount, forKey: "MarketManager_speechRecognizedCount")
+        }
+    }
+    let speechRecognizedLimit = 30
     
     deinit {
         SKPaymentQueue.default().remove(self)
@@ -49,6 +55,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     
     private override init() {
         paidProducts = UserDefaults.standard.object(forKey: "MarketManager_paidProducts") as? [String] ?? [String]()
+        speechRecognizedCount = UserDefaults.standard.integer(forKey: "MarketManager_speechRecognizedCount")
         super.init()
         
         self.resetCurrentLevel()
@@ -134,6 +141,12 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
                 self.showPayMessage(msg: "免费账号不支持批量修改事件信息，快去购买Vip解除限制吧", controller: controller)
                 return false
             }
+        case .speechRecognize:
+            if currentLevel == .free && speechRecognizedCount >= speechRecognizedLimit {
+                self.showPayMessage(msg: "您的【语音识别功能】免费体验次数已用完，快去购买Vip解除限制吧", controller: controller)
+                return false
+            }
+            return true
         }
         return true
     }

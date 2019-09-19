@@ -88,6 +88,7 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             }
         }
         
+        speechView.controller = self
         speechView.addTo(self.view) { (make) in
             make.bottom.left.right.equalToSuperview()
         }
