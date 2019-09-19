@@ -113,6 +113,7 @@ class SpeechButtonView: UIView {
         buttonContainer.sendSubviewToBack(animateView)
         
         speechButton.rx.controlEvent(.touchDown).asObservable().subscribe(onNext: { [unowned self] (_) in
+            MobClick.event("speechButtonTapped")
             if !MarketManager.shared.checkAuth(type: .speechRecognize, controller: self.controller ?? MainTabViewController.shared) {
                 return
             }
@@ -157,7 +158,7 @@ class SpeechButtonView: UIView {
         }
         self.textLabel.text = ""
         speechDispose = SpeechManager.shared.requestAuthorizeAndStart().subscribe(onNext: { [weak self] (result) in
-            SLog.info("speech result:\(result.bestTranscription.formattedString)")
+            SLog.debug("speech result:\(result.bestTranscription.formattedString)")
             self?.textLabel.text = result.bestTranscription.formattedString
         }, onError: { [weak self] (error) in
             let analyzeResult = AnalyzeResult()

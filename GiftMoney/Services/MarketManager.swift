@@ -47,7 +47,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
             UserDefaults.standard.set(speechRecognizedCount, forKey: "MarketManager_speechRecognizedCount")
         }
     }
-    let speechRecognizedLimit = 30
+    let speechRecognizedLimit = 10
     
     deinit {
         SKPaymentQueue.default().remove(self)
@@ -143,7 +143,14 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
             }
         case .speechRecognize:
             if currentLevel == .free && speechRecognizedCount >= speechRecognizedLimit {
-                self.showPayMessage(msg: "您的【语音识别功能】免费体验次数已用完，快去购买Vip解除限制吧", controller: controller)
+                controller.showAlertView(title: "您的【语音识别功能】免费体验次数已用完，快去购买Vip解除限制吧", message: nil, actions: [
+                    UIAlertAction(title: "立即解锁", style: .destructive, handler: { (_) in
+                        controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
+                    }),
+                    UIAlertAction(title: "查看帮助", style: .cancel, handler: { (_) in
+                        controller.present(SpeechHelpVC(), animated: true, completion: nil)
+                    })
+                ])
                 return false
             }
             return true
@@ -153,10 +160,10 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     
     func showPayMessage(msg: String, controller: UIViewController) {
         controller.showAlertView(title: msg, message: nil, actions: [
-                UIAlertAction(title: "好的", style: .cancel, handler: { (_) in
-                    controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
-                })
-            ])
+            UIAlertAction(title: "好的", style: .cancel, handler: { (_) in
+                controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
+            })
+        ])
     }
     
     func recoverProducts() -> Observable<(String, SKPaymentTransactionState)> {

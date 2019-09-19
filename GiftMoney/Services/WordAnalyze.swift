@@ -338,9 +338,11 @@ class WordAnalyze {
     }
     
     func printAnalyzeTags() {
+        #if DEBUG
         let str = analyzeTags.reduce("") { (str, tag) -> String in
             return "\(str)\(tag.string)  "
         }
         print(str)
+        #endif
     }
 }
