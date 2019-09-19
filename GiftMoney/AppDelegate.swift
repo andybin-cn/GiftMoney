@@ -100,6 +100,11 @@ extension AppDelegate {
                 JieBaBridge.insertUserWord(relation.name, tag: "relation")
             })
         })
+        _ = OptionalService.shared.newNameEmit.subscribe(onNext: { (names) in
+            names.forEach({ (name) in
+                JieBaBridge.insertUserWord(name, tag: "nr")
+            })
+        })
         //需要先添加监听后再初始化
         OptionalService.shared.initOptionals()
     }

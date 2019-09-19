@@ -135,6 +135,21 @@ class SpeechHelpVC: BaseViewController {
                 make.left.equalTo(20)
                 make.top.equalTo(experienceView.snp.bottom).offset(50)
                 make.right.equalTo(-20)
+                make.height.equalTo(35)
+            }
+            
+            let experienceButton = UIButton()
+            experienceButton.setTitle("先体验一番", for: .normal)
+            experienceButton.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal)
+            experienceButton.setTitleColor(.appMainRed, for: .normal)
+            experienceButton.layer.cornerRadius = 4
+            experienceButton.layer.masksToBounds = true
+            experienceButton.addTarget(self, action: #selector(onExperienceButton), for: .touchUpInside)
+            
+            experienceButton.addTo(scrollView) { (make) in
+                make.left.equalTo(20)
+                make.top.equalTo(buyButton.snp.bottom).offset(20)
+                make.right.equalTo(-20)
                 make.bottom.lessThanOrEqualTo(-60).priority(.low)
                 make.height.equalTo(35)
             }
@@ -145,6 +160,11 @@ class SpeechHelpVC: BaseViewController {
     @objc func onBuyButtonTapped() {
         self.present(MarketVC(superVC: self), animated: true, completion: nil)
     }
+    
+    @objc func onExperienceButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     var authorityDesc: NSAttributedString {
         let attrString = NSMutableAttributedString()
