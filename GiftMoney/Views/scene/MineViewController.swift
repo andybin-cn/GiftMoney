@@ -228,7 +228,7 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
                 let controller = InviteCodeVC()
                 self?.navigationController?.pushViewController(controller, animated: true)
             }, onError: { (error) in
-                SLog.error("fetchAndGeneratorInviteCode error:\(error)")
+                Log.error("fetchAndGeneratorInviteCode error:\(error)")
                 self.catchError(error: error)
             }).disposed(by: self.disposeBag)
         }).disposed(by: disposeBag)
@@ -275,10 +275,10 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
         self.showLoadingIndicator(text: "正在备份数据")
         CloudManager.shared.backupTrades().subscribe(onNext: { (progress) in
             self.showLoadingIndicator(text: "已备份\(progress.finishCount)条数据，共\(progress.totoalCount)条")
-            SLog.info("backupTrades progress:\(progress.finishCount)/\(progress.totoalCount)")
+            Log.info("backupTrades progress:\(progress.finishCount)/\(progress.totoalCount)")
         }, onError: { (error) in
             self.showTipsView(text: "备份失败")
-            SLog.error(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }, onCompleted: {
             self.showTipsView(text: "备份完成")
         }).disposed(by: disposeBag)
@@ -290,10 +290,10 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
         CloudManager.shared.recoverTrades().subscribe(onNext: { (progress) in
             tempProgress = progress
             self.showLoadingIndicator(text: "已恢复\(progress.finishCount)条数据")
-            SLog.info("recoverTradesFromCloud progress:\(progress.finishCount)/\(progress.totoalCount)")
+            Log.info("recoverTradesFromCloud progress:\(progress.finishCount)/\(progress.totoalCount)")
         }, onError: { (error) in
             self.showTipsView(text: "恢复失败")
-            SLog.error(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }, onCompleted: {
             if let progress = tempProgress {
                 self.showAlertView(title: "一共恢复了\(progress.finishCount)条数据，跳过了\(progress.totoalCount - progress.finishCount)条数据")

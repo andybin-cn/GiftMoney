@@ -36,14 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobClick.setCrashReportEnabled(true)
         MobClick.setScenarioType(eScenarioType.E_UM_NORMAL)
         
-        SLog.info("NSHomeDirectory: \(NSHomeDirectory())")
+        Log.info("NSHomeDirectory: \(NSHomeDirectory())")
         
         if LocalAuthManager.shared.localAuthEnabled {
             MainTabViewController.shared.showLocalAuthView(viewMode: .verify)
         }
         if AccountManager.shared.autoSyncToiCloudEnable {
             _ = CloudManager.shared.recoverTrades().subscribe(onError: { (error) in
-                SLog.error("recoverTrades error:\(error.localizedDescription)")
+                Log.error("recoverTrades error:\(error.localizedDescription)")
             }, onCompleted: {
                 MainTabViewController.shared.inoutRecordsVC.currentVC?.viewWillAppear(false)
             })

@@ -126,8 +126,8 @@ class SpeechButtonView: UIView {
             })
         }).disposed(by: disposeBag)
         
-    SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
-        var scale: CGFloat = 1
+        SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
+            var scale: CGFloat = 1
             if self.isInSpeech {
                 scale = min(CGFloat(1.1 + power * 80), 3)
             }
@@ -146,13 +146,13 @@ class SpeechButtonView: UIView {
     }
     var speechDispose: Disposable?
     func startRecognizer() {
-        SLog.info("startRecognizer")
+        Log.info("startRecognizer")
         if isInSpeech {
             return
         }
         self.textLabel.text = ""
         speechDispose = SpeechManager.shared.requestAuthorizeAndStart().subscribe(onNext: { [weak self] (result) in
-            SLog.info("speech result:\(result.bestTranscription.formattedString)")
+            Log.info("speech result:\(result.bestTranscription.formattedString)")
             self?.textLabel.text = result.bestTranscription.formattedString
         }, onError: { [weak self] (error) in
             let analyzeResult = AnalyzeResult()
@@ -177,7 +177,7 @@ class SpeechButtonView: UIView {
         }
     }
     func stopRecognizer() {
-        SLog.info("stopRecognizer")
+        Log.info("stopRecognizer")
         speechDispose?.dispose()
         speechDispose = nil
         self.snp.updateConstraints({ (make) in

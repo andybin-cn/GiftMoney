@@ -41,7 +41,11 @@ class BaseViewController: UIViewController {
     }
     
     deinit {
-        SLog.info("\(type(of: self)) released!")
+        Log.info("\(type(of: self)) released!")
+        for i in 0...100 {
+            Log.info("\(i)")
+            Log.info("SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unownedSpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned")
+        }
     }
     
     override func viewDidLoad() {
@@ -76,7 +80,7 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
                 })
             ])
         } else {
-            SLog.error(error)
+            Log.error("\(error)")
             self.showAlertView(title: "App遇到了无法解决的错误", message: "您可以进行多次尝试，如无法解决问题。请将问题反馈给我们，我们会尽快为您解决！", actions: [
                 UIAlertAction(title: "取消", style: .cancel, handler: nil),
                 UIAlertAction(title: "反馈问题", style: .destructive, handler: { (_) in
@@ -88,16 +92,14 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
     
     private func addAttachmentErrorLogData(mailComposerVC: MFMailComposeViewController) {
         DispatchQueue.global().async {
-            do {
-                if let url = SLog.file.logFileURL {
-                    let data = try Data(contentsOf: url)
+            Log.logFileURLs.enumerated().forEach({ (index, url) in
+                if let data = try? Data(contentsOf: url) {
                     DispatchQueue.main.async {
-                        mailComposerVC.addAttachmentData(data, mimeType: "text/plain", fileName: "错误日志")
+                        mailComposerVC.addAttachmentData(data, mimeType: "text/plain", fileName: "错误日志-\(url.lastPathComponent)")
                     }
                 }
-            } catch let e {
-                SLog.error(e)
-            }
+                
+            })
         }
     }
     
@@ -117,7 +119,7 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
                 UIAlertAction(title: "取消", style: .cancel, handler: nil),
                 UIAlertAction(title: "分享错误信息", style: .destructive, handler: { (_) in
                     UIPasteboard.general.string = "reciprocityApp@163.com"
-                    if let url = SLog.file.logFileURL {
+                    if let url = Log.logFileURLs.first {
                         let controler = TempExcelPreviewVC(url: url, titleStr: "分享错误日志")
                         self.present(controler, animated: true, completion: nil)
                         controler.showTipsView(text: "邮箱地址已经复制到剪切板")

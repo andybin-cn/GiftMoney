@@ -429,7 +429,7 @@ class CloudManager {
             let database = CKContainer.default().privateCloudDatabase
             database.delete(withRecordID: recordID, completionHandler: { (_, error) in
                 if let ckError = error as? CKError {
-                    SLog.error("deleteRecord error:\(ckError.code)")
+                    Log.error("deleteRecord error:\(ckError.code)")
                     if ckError.code == CKError.Code.unknownItem {
                         observer.onNext(recordID)
                         observer.onCompleted()

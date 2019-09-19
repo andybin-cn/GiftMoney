@@ -78,7 +78,7 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
                     if isFinal {
                         observer.onCompleted()
                     } else if let error = error {
-                        SLog.error("speechRecognizer error:\(error)")
+                        Log.error("speechRecognizer error:\(error)")
                         if !authorized {
                             observer.onError(AuthorizationError(type: .speechRecognizer))
                         } else {

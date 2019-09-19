@@ -13,7 +13,6 @@
 		36041D6B1E782E5E001E4305 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36041D6A1E782E5E001E4305 /* UITableView+Extensions.swift */; };
 		360914E11E79888B00121052 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360914E01E79888B00121052 /* UIImage+Extensions.swift */; };
 		360914E31E79895E00121052 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360914E21E79895E00121052 /* CGSize+Extensions.swift */; };
-		363C3EAC1E717D2000AC4370 /* SLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C3EAB1E717D2000AC4370 /* SLog.swift */; };
 		364F49941E6710E600208E9D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364F498A1E6710E500208E9D /* Common.framework */; };
 		364F49991E6710E600208E9D /* CommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364F49981E6710E600208E9D /* CommonTests.swift */; };
 		364F499B1E6710E600208E9D /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 364F498D1E6710E500208E9D /* Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,6 +26,7 @@
 		36E6F0121E7AB30A0046327F /* UIViewController+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6F00F1E7AB30A0046327F /* UIViewController+HUD.swift */; };
 		36E76FB61E800E080025F73C /* Prototyping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E76FB51E800E080025F73C /* Prototyping.swift */; };
 		3870C300230CECB3000C1996 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2FF230CECB3000C1996 /* CommonError.swift */; };
+		38FECDB12333491200232A9A /* LogHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FECDB02333491200232A9A /* LogHelp.swift */; };
 		3A3D5476DDF12B78F12F4786 /* Pods_Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07945F3384AC87493E1AC6B /* Pods_Common.framework */; };
 		B32F84601E6ACE4800CDF465 /* String+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32F84591E6ACE4800CDF465 /* String+Extentions.swift */; };
 		B32F84611E6ACE4800CDF465 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32F845A1E6ACE4800CDF465 /* UIColor+Extensions.swift */; };
@@ -77,7 +77,6 @@
 		36041D6A1E782E5E001E4305 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		360914E01E79888B00121052 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		360914E21E79895E00121052 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
-		363C3EAB1E717D2000AC4370 /* SLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLog.swift; sourceTree = "<group>"; };
 		364F498A1E6710E500208E9D /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		364F498D1E6710E500208E9D /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		364F498E1E6710E500208E9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		36E6F00F1E7AB30A0046327F /* UIViewController+HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+HUD.swift"; sourceTree = "<group>"; };
 		36E76FB51E800E080025F73C /* Prototyping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prototyping.swift; sourceTree = "<group>"; };
 		3870C2FF230CECB3000C1996 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		38FECDB02333491200232A9A /* LogHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelp.swift; sourceTree = "<group>"; };
 		8B9F1A09284CFC95C3798ABF /* Pods-Common.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Common.release.xcconfig"; path = "Target Support Files/Pods-Common/Pods-Common.release.xcconfig"; sourceTree = "<group>"; };
 		A07945F3384AC87493E1AC6B /* Pods_Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32F84591E6ACE4800CDF465 /* String+Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extentions.swift"; sourceTree = "<group>"; };
@@ -228,8 +228,8 @@
 				B32F845D1E6ACE4800CDF465 /* Procedural.swift */,
 				B32F845E1E6ACE4800CDF465 /* PropertySetterSupport.swift */,
 				B32F845F1E6ACE4800CDF465 /* Then.swift */,
-				363C3EAB1E717D2000AC4370 /* SLog.swift */,
 				36E76FB51E800E080025F73C /* Prototyping.swift */,
+				38FECDB02333491200232A9A /* LogHelp.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -277,6 +277,7 @@
 				364F49901E6710E600208E9D /* Frameworks */,
 				364F49911E6710E600208E9D /* Resources */,
 				B3BD51761E6A6EB4006FBE9F /* CopyFiles */,
+				38FECDB2233357BD00232A9A /* [CP] Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -348,6 +349,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		38FECDB2233357BD00232A9A /* [CP] Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../../Carthage/Build/iOS/CocoaLumberjackSwift.framework",
+				"$(SRCROOT)/../../Carthage/Build/iOS/CocoaLumberjack.framework",
+				"$(SRCROOT)/../../Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/../../Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/../../Carthage/Build/iOS/SnapKit.framework",
+			);
+			name = "[CP] Copy Carthage Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		664FBCAA923F19EA4A131AAB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,7 +426,6 @@
 				36E6F00C1E7AB2C90046327F /* UIView+AttachedView.swift in Sources */,
 				B32F84611E6ACE4800CDF465 /* UIColor+Extensions.swift in Sources */,
 				36E4390C21BD60F000D5C699 /* Array+Extensions.swift in Sources */,
-				363C3EAC1E717D2000AC4370 /* SLog.swift in Sources */,
 				360914E11E79888B00121052 /* UIImage+Extensions.swift in Sources */,
 				36041D6B1E782E5E001E4305 /* UITableView+Extensions.swift in Sources */,
 				36E6F0101E7AB30A0046327F /* ReuseIdentifierEnable.swift in Sources */,
@@ -412,6 +435,7 @@
 				36E6F0111E7AB30A0046327F /* UIViewController+Alert.swift in Sources */,
 				B32F84621E6ACE4800CDF465 /* UIView+Extensions.swift in Sources */,
 				36041D691E78284E001E4305 /* UIButton+EnlargeEdge.swift in Sources */,
+				38FECDB12333491200232A9A /* LogHelp.swift in Sources */,
 				B32F84601E6ACE4800CDF465 /* String+Extentions.swift in Sources */,
 				36E6F0121E7AB30A0046327F /* UIViewController+HUD.swift in Sources */,
 				36E4391121BE856800D5C699 /* Dictionary+Extensions.swift in Sources */,
@@ -501,6 +525,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -556,6 +581,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -586,7 +612,6 @@
 				SKIP_INSTALL = YES;
 				SUPPORTS_UIKITFORMAC = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -613,7 +638,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_UIKITFORMAC = NO;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -628,7 +652,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.binea.CommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -642,7 +665,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.binea.CommonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

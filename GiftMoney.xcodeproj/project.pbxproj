@@ -901,6 +901,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TZImagePickerController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SKPhotoBrowser.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
 			);
 			name = "[CP] Copy Carthage Frameworks";
 			outputFileListPaths = (

@@ -165,7 +165,7 @@ class XLSXManager {
                         try RealmManager.share.realm.commitWrite()
                         trades.append(trade)
                     } catch _ {
-                        SLog.info("RealmManager error:")
+                        Log.info("RealmManager error:")
                     }
                 }
                 let count = trades.count

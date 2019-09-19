@@ -175,7 +175,7 @@ class MarketVC: BaseViewController {
             let controller = InviteCodeVC()
             self?.present(BaseNavigationController(rootViewController: controller), animated: true, completion: nil)
         }, onError: { (error) in
-            SLog.error("fetchAndGeneratorInviteCode error:\(error)")
+            Log.error("fetchAndGeneratorInviteCode error:\(error)")
             self.catchError(error: error)
         }).disposed(by: self.disposeBag)
     }
@@ -196,7 +196,8 @@ class MarketVC: BaseViewController {
                 self?.showAlertView(title: "您已经购买过此产品，已经将您的账号恢复为\(MarketManager.shared.currentLevel.label)，无需再次支付。")
             }
             self?.refreshUI()
-            SLog.info("MarketManager.shared.payForCode inProgree:\(state)")
+            Log.info("dsadsa")
+            Log.info("MarketManager.shared.payForCode inProgree:\(state)")
         }, onError: { [weak self] (error) in
             self?.refreshUI()
             self?.catchError(error: error)
