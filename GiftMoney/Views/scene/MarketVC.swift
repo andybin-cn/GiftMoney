@@ -49,6 +49,7 @@ class MarketVC: BaseViewController {
         let vip2Header = MarketServiceHeader(title: "购买【钻石VIP】  （¥12元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
         let vip2Items: [MarketServiceItem] = [
             MarketServiceItem(title: "黄金VIP的所有功能"),
+            MarketServiceItem(title: "iCloud自动同步（备份）功能"),
             MarketServiceItem(title: "数据导入导出功能"),
             MarketServiceItem(title: "不限自定义关系个数"),
             MarketServiceItem(title: "不限自定义事件个数"),
