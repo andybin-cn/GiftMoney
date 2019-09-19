@@ -17,7 +17,7 @@ class SpeechButtonView: UIView {
     let disposeBag = DisposeBag()
     
     let exampleLabel = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 14))
-    let textLabel = UILabel(textColor: .appDarkText, font: .appFont(ofSize: 14))
+    let textLabel = UILabel(textColor: .appSecondaryBlue, font: .appBoldFont(ofSize: 15))
     let speechButton = UIButton()
     let buttonContainer = UIView()
     let animateView = UIView()
@@ -58,13 +58,13 @@ class SpeechButtonView: UIView {
             label.lineBreakMode = .byWordWrapping
             label.isHidden = true
             label.addTo(self) { (make) in
-                make.top.equalTo(8)
+                make.top.equalTo(8).priority(ConstraintPriority.low)
                 make.left.equalTo(15)
                 make.right.equalTo(15)
             }
             let attrStr = NSMutableAttributedString()
-            attrStr.append(NSAttributedString(string: "请大声准确的对我说话，例句：\n", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
-            attrStr.append(NSAttributedString(string: "1.结婚典礼收到大学同学小明200元红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
+            attrStr.append(NSAttributedString(string: "请大声准确的对我说话，例句：\n", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
+            attrStr.append(NSAttributedString(string: "1.结婚典礼收到大学同学小明200元红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
 //            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
 //            attrStr.append(NSAttributedString(string: "大学同学", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
 ////            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
@@ -72,7 +72,7 @@ class SpeechButtonView: UIView {
 //            attrStr.append(NSAttributedString(string: "200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
 //            attrStr.append(NSAttributedString(string: "红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
             
-            attrStr.append(NSAttributedString(string: "\n2.朋友李萌萌200元", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
+            attrStr.append(NSAttributedString(string: "\n2.朋友李萌萌200元", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
 //            attrStr.append(NSAttributedString(string: "李萌萌同学200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
             label.attributedText = attrStr
         }
@@ -82,6 +82,7 @@ class SpeechButtonView: UIView {
             label.isHidden = true
             label.addTo(self) { (make) in
                 make.top.equalTo(exampleLabel.snp.bottom).offset(8)
+                make.bottom.lessThanOrEqualTo(buttonContainer.snp.top).priority(.high)
                 make.left.equalTo(20)
                 make.right.equalTo(20)
             }
