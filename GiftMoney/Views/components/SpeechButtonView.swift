@@ -117,7 +117,6 @@ class SpeechButtonView: UIView {
             if !MarketManager.shared.checkAuth(type: .speechRecognize, controller: self.controller ?? MainTabViewController.shared) {
                 return
             }
-            _ = ContactManager.shared.initContactsAndReqAuthorizationIfNeed().subscribe()
             self.startRecognizer()
         }).disposed(by: disposeBag)
         speechButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
@@ -133,8 +132,8 @@ class SpeechButtonView: UIView {
             })
         }).disposed(by: disposeBag)
         
-    SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
-        var scale: CGFloat = 1
+        SpeechManager.shared.peakPower.asObservable().observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (power) in
+            var scale: CGFloat = 1
             if self.isInSpeech {
                 scale = min(CGFloat(1.1 + power * 80), 3)
             }
@@ -161,6 +160,17 @@ class SpeechButtonView: UIView {
         speechDispose = SpeechManager.shared.requestAuthorizeAndStart().subscribe(onNext: { [weak self] (result) in
             SLog.debug("speech result:\(result.bestTranscription.formattedString)")
             self?.textLabel.text = result.bestTranscription.formattedString
+            
+            if result.bestTranscription.formattedString.count > 40 {
+                self?.textLabel.text = ""
+                self?.stopRecognizer()
+                self?.controller?.showAlertView(title: "请简单明了的说出关键信息", message: nil, actions: [
+                    UIAlertAction(title: "取消", style: .cancel, handler: nil),
+                    UIAlertAction(title: "查看帮助", style: .destructive, handler: { (_) in
+                        self?.controller?.present(SpeechHelpVC(), animated: true, completion: nil)
+                    })
+                ])
+            }
         }, onError: { [weak self] (error) in
             let analyzeResult = AnalyzeResult()
             analyzeResult.error = error
@@ -200,6 +210,7 @@ class SpeechButtonView: UIView {
         let sentence = self.textLabel.text ?? ""
         if !sentence.isEmpty, let result = JieBaBridge.jiebaTag(sentence) as? Array<JieBaTag> {
             let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
+            analyzeResult.originSentence = sentence
             if analyzeResult.name.isEmpty || analyzeResult.value.isEmpty {
                 analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音", code: 100)
             } else {

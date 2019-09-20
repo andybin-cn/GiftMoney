@@ -25,7 +25,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>若不允许，则无法拍摄照片添加礼金记录中</string>
 	<key>NSContactsUsageDescription</key>
-	<string>访问通讯录来提高语音识别的准确率，不会收集您的数据，仅在本地分析，以提高姓名识别率</string>
+	<string>(可选)访问通讯录来提高语音识别的准确率，不会收集您的数据。</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>若不允许，则无法使用面部解锁应用的功能</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

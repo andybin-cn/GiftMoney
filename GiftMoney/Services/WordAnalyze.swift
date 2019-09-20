@@ -19,6 +19,7 @@ class AnalyzeResult {
     var error: Error? = nil
     var event: String = ""
     var relation: String = ""
+    var originSentence: String = ""
 }
 
 enum AnalyzeTagType: String {

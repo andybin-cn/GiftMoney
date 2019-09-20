@@ -253,13 +253,18 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                     relation = OptionalService.shared.allNames[result.name] ?? ""
                 }
                 if relation.isEmpty {
-                    relation = self.relationshipField.textfield.text ?? "朋友"
+                    relation = self.relationshipField.textfield.text ?? ""
+                }
+                if relation.isEmpty {
+                    relation = "朋友"
                 }
                 self.relationshipField.fieldValue = relation
                 
                 if let type = result.type {
                     self.typeSwitch.fieldValue = type.rawValue
                 }
+                let remark = self.remarkField.textfield.text ?? ""
+                self.remarkField.fieldValue = "\(result.originSentence)\n\(remark)"
                 
                 let row = TradeItemRow(name: "tradeItems",tradeItem: nil, canDelete: false)
                 row.delegate = self

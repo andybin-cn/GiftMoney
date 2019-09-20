@@ -33,7 +33,7 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     private lazy var fftSetup = vDSP_create_fftsetup(vDSP_Length(Int(round(log2(Double(fftSize))))), FFTRadix(kFFTRadix2))
     
     func requestAuthorizeAndStart() -> Observable<SFSpeechRecognitionResult> {
-        return requestAuthorization().flatMap { (authorized) -> Observable<SFSpeechRecognitionResult> in
+        return requestAuthorizationNoDispose().flatMap { (authorized) -> Observable<SFSpeechRecognitionResult> in
             return self.startSpeech(authorized: authorized)
         }.observeOn(MainScheduler.instance)
     }
@@ -102,34 +102,58 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
         speechAvailable.accept(available)
     }
     
-    func requestAuthorization() -> Observable<Bool> {
-        return Observable<Bool>.create { (observer) -> Disposable in
-            let audioStatus = AVCaptureDevice.authorizationStatus(for: .audio)
+    func requestMicrophoneAuthorization() -> Observable<AVAuthorizationStatus> {
+        return Observable<AVAuthorizationStatus>.create { (observer) -> Disposable in
+            AVCaptureDevice.requestAccess(for: .audio, completionHandler: { (_) in
+                let audioStatus = AVCaptureDevice.authorizationStatus(for: .audio)
+                observer.onNext(audioStatus)
+                observer.onCompleted()
+            })
+            return Disposables.create { }
+        }
+    }
+    
+    func requestSpeechAuthorization() -> Observable<SFSpeechRecognizerAuthorizationStatus> {
+        return Observable<SFSpeechRecognizerAuthorizationStatus>.create { (observer) -> Disposable in
             SFSpeechRecognizer.requestAuthorization { speechStatus in
-                switch (speechStatus, audioStatus) {
-                case (.authorized, .authorized):
-                    observer.onNext(true)
-                    observer.onCompleted()
-                case (.denied, _):
-                    observer.onError(AuthorizationError(type: .speechRecognizer))
-                case (.restricted, _):
-                    observer.onError(AuthorizationError(type: .speechRecognizer))
-                case (_, .restricted):
-                    observer.onError(AuthorizationError(type: .microphone))
-                case (_, .denied):
-                    observer.onError(AuthorizationError(type: .microphone))
-                case (.notDetermined, _):
-                    observer.onNext(false)
-                    observer.onCompleted()
-                case (_, .notDetermined):
-                    observer.onNext(false)
-                    observer.onCompleted()
-                default:
-                    observer.onNext(false)
-                    observer.onCompleted()
-                }
+                observer.onNext(speechStatus)
+                observer.onCompleted()
             }
             return Disposables.create { }
         }
+    }
+    
+    func requestAuthorizationNoDispose() -> Observable<Bool> {
+        return Observable<Bool>.create({ (observer) -> Disposable in
+            _ = self.requestAuthorization().subscribe(onNext: { (result) in
+                observer.onNext(result)
+            }, onError: { (error) in
+                observer.onError(error)
+            }, onCompleted: {
+                observer.onCompleted()
+            })
+            return Disposables.create { }
+        })
+    }
+    
+    func requestAuthorization() -> Observable<Bool> {
+        return requestSpeechAuthorization().flatMap { (speechStatus) -> Observable<(AVAuthorizationStatus, SFSpeechRecognizerAuthorizationStatus)> in
+            return self.requestMicrophoneAuthorization().map { ($0, speechStatus) }
+        }.flatMap { (audioStatus, speechStatus) -> Observable<Bool> in
+            switch (speechStatus, audioStatus) {
+            case (.authorized, .authorized):
+                return Observable<Bool>.from(optional: true)
+            case (.denied, _):
+                return Observable<Bool>.error(AuthorizationError(type: .speechRecognizer))
+            case (.restricted, _):
+                return Observable<Bool>.error(AuthorizationError(type: .speechRecognizer))
+            case (.notDetermined, _):
+                return Observable<Bool>.error(AuthorizationError(type: .speechRecognizer))
+            default:
+                return Observable<Bool>.error(AuthorizationError(type: .microphone))
+            }
+        }.do(onCompleted: {
+            _ = ContactManager.shared.initContactsAndReqAuthorizationIfNeed().subscribe()
+        })
     }
 }
