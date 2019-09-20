@@ -66,7 +66,7 @@ class SpeechButtonView: UIView {
             }
             let attrStr = NSMutableAttributedString()
             attrStr.append(NSAttributedString(string: "请大声准确的对我说话，例句：\n", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
-            attrStr.append(NSAttributedString(string: "1.结婚典礼收到大学同学小明200元红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
+            attrStr.append(NSAttributedString(string: "1.结婚典礼收到大学同学小明200元红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
 //            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
 //            attrStr.append(NSAttributedString(string: "大学同学", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
 ////            attrStr.append(NSAttributedString(string: "(可选)", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
@@ -74,7 +74,7 @@ class SpeechButtonView: UIView {
 //            attrStr.append(NSAttributedString(string: "200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appMainRed]))
 //            attrStr.append(NSAttributedString(string: "红包。", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryBlue]))
             
-            attrStr.append(NSAttributedString(string: "\n2.朋友李萌萌200元", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryGray]))
+            attrStr.append(NSAttributedString(string: "\n2.朋友李萌萌200元", attributes: [NSAttributedString.Key.font : UIFont.appFont(ofSize: 13), NSAttributedString.Key.foregroundColor : UIColor.appDarkText]))
 //            attrStr.append(NSAttributedString(string: "李萌萌同学200元", attributes: [NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 15), NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow]))
             label.attributedText = attrStr
         }

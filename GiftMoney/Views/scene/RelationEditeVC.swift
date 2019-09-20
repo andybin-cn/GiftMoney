@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Common
 
-class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     let tableView = UITableView()
     
@@ -24,6 +24,7 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         self.onResult = onResult
         inputField.text = defaultValue
         super.init(nibName: nil, bundle: nil)
+        inputField.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -140,6 +141,13 @@ class RelationEditeVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let relation = Relationship(name: name)
         self.onResult?(relation)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK: - UITextFieldDelegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let oldString: NSString = (textField.text as NSString?) ?? "" as NSString
+        let newString = oldString.replacingCharacters(in: range, with: string)
+        return newString.count <= 8
     }
     
 }

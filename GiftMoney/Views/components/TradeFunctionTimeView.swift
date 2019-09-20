@@ -71,7 +71,7 @@ class TradeFunctionTimeView: UIView {
 
 
 
-class TradeFunctionDateInputField: InputField, UITextFieldDelegate {
+class TradeFunctionDateInputField: InputField {
     
     let datePicker = UIDatePicker()
     var date: Date? {
@@ -86,8 +86,8 @@ class TradeFunctionDateInputField: InputField, UITextFieldDelegate {
         }
     }
     
-    override init(name: String, labelString: String) {
-        super.init(name: name, labelString: labelString)
+    init(name: String, labelString: String) {
+        super.init(name: name, labelString: labelString, maxLength: 15)
         
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(onDatePickerChanged(sender:)), for: UIControl.Event.valueChanged)

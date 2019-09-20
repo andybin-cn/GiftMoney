@@ -24,9 +24,9 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     let speechView = SpeechButtonView()
     
     let typeSwitch = SwitchInput(name:"type", labelString: "类型：")
-    let nameField = InputField(name: "name", labelString: "姓名")
-    let relationshipField = InputField(name: "relationship", labelString: "关系")
-    let eventNameField = InputField(name: "eventName", labelString: "事件名称")
+    let nameField = InputField(name: "name", labelString: "姓名", maxLength: 12)
+    let relationshipField = InputField(name: "relationship", labelString: "关系", maxLength: 8)
+    let eventNameField = InputField(name: "eventName", labelString: "事件名称", maxLength: 8)
     let eventTimeField = DateInputField(name: "eventTime", labelString: "时间")
     let itemsStackView = UIStackView()
     let addItemButton = UIButton()

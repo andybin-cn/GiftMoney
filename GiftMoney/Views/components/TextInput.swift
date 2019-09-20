@@ -30,8 +30,9 @@ class TextInput: UIView, FormInput, UITextViewDelegate {
     
     let label = UILabel()
     let textfield = UITextView()
-    
-    init(name: String, labelString: String) {
+    let maxLength: Int
+    init(name: String, labelString: String, maxLength: Int = 300) {
+        self.maxLength = maxLength
         self.fieldName = name
         super.init(frame: .zero)
         
@@ -125,6 +126,11 @@ class TextInput: UIView, FormInput, UITextViewDelegate {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         textViewDidChange(textView)
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let oldString: NSString = (textView.text as NSString?) ?? "" as NSString
+        let newString = oldString.replacingCharacters(in: range, with: text)
+        return newString.count <= maxLength
     }
     
     required init?(coder: NSCoder) {

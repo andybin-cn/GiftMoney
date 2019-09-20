@@ -9,7 +9,7 @@
 import UIKit
 import Common
 
-class InputField: UIView, FormInput {
+class InputField: UIView, FormInput, UITextFieldDelegate {
     
     var fieldName: String
     var fieldValue: FormValue {
@@ -30,7 +30,9 @@ class InputField: UIView, FormInput {
     let label = UILabel()
     let textfield = UITextField()
     
-    init(name: String, labelString: String) {
+    let maxLength: Int
+    init(name: String, labelString: String, maxLength: Int = 10) {
+        self.maxLength = maxLength
         self.fieldName = name
         super.init(frame: .zero)
         
@@ -41,6 +43,7 @@ class InputField: UIView, FormInput {
         }
         
         textfield.apply { (textfield) in
+            textfield.delegate = self
             textfield.font = UIFont.appFont(ofSize: 13)
         }
         
@@ -121,6 +124,13 @@ class InputField: UIView, FormInput {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - UITextFieldDelegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let oldString: NSString = (textField.text as NSString?) ?? "" as NSString
+        let newString = oldString.replacingCharacters(in: range, with: string)
+        return newString.count <= maxLength
     }
     
 }

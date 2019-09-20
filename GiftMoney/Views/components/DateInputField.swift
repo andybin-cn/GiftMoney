@@ -27,9 +27,9 @@ class DateInputField: InputField {
         }
     }
     
-    override init(name: String, labelString: String) {
+    init(name: String, labelString: String) {
         date = Date()
-        super.init(name: name, labelString: labelString)
+        super.init(name: name, labelString: labelString, maxLength: 15)
         
         let datePicker = UIDatePicker()
         datePicker.date = date
