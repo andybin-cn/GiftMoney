@@ -104,9 +104,26 @@ class WordAnalyze {
     
     
     func analyzeSentence() -> AnalyzeResult {
-        analyzeMainTag()
-        analyzeSecondaryTag()
+        analyzeTradeUnitTag()
+        printAnalyzeTags()
+        
         analyzeValueTag()
+        printAnalyzeTags()
+        
+        analyzePepoleNameTag()
+        printAnalyzeTags()
+        
+        analyzeRelationTag()
+        printAnalyzeTags()
+        
+        analyzeEventTag()
+        printAnalyzeTags()
+        
+        analyzeGiftNameTag()
+        printAnalyzeTags()
+        
+        analyzeInOutTag()
+        printAnalyzeTags()
         
         let result = AnalyzeResult()
         if let nameTag = nameTag {
@@ -139,43 +156,19 @@ class WordAnalyze {
         }
         return result
     }
-    
-    func analyzeMainTag() {
+    func analyzeTradeUnitTag() {
         for (index, tag) in analyzeTags.enumerated() {
             tag.index = index
-            if WordAnalyzeHelp.shared.isName(word: tag.word) {
-                var confidence: Float = Float(tag.word.count) * 2.0
-                for name in WordAnalyzeHelp.shared.nameWords {
-                    if let firstIndex = tag.word.range(of: name)?.lowerBound {
-                        if firstIndex.utf16Offset(in: tag.word) == 0 {
-                            confidence += 4
-                            break
-                        }
-                    }
-                }
-                if tag.jieBaTag == "relation" || tag.jieBaTag == "event" {
-                    confidence = -1
-                }
-                if tag.jieBaTag == "nr" {
-                    confidence += 3
-                }
-                if tag.jieBaTag == "n" {
-                    confidence += 1
-                }
-                if let oldTag = nameTag {
-                    if oldTag.confidence < confidence, tag.confidence < confidence {
-                        tag.confidence = confidence
-                        tag.type = .name
-                    }
-                } else {
-                    tag.confidence = confidence
-                    tag.type = .name
-                }
-            }
             if WordAnalyzeHelp.shared.isMoneyUnit(word: tag.word) {
                 var confidence: Float = 5.0
-                if ["¥", "元"].contains(tag.word) {
+                if "¥" == tag.word {
+                    confidence += 20
+                } else if "元" == tag.word {
                     confidence += 10
+                } else if "红包" == tag.word {
+                    confidence += 9
+                } else if "块" == tag.word {
+                    confidence += min(Float(index), 5)
                 }
                 if let oldTag = moneyUnitTag {
                     if oldTag.confidence < confidence, tag.confidence < confidence {
@@ -209,37 +202,53 @@ class WordAnalyze {
                     tag.type = .giftUnit
                 }
             }
-            printAnalyzeTags()
         }
     }
-    func analyzeSecondaryTag() {
+    
+    func analyzePepoleNameTag() {
+        guard let unitTag = unitType == .money ? moneyUnitTag : giftUnitTag else {
+            return
+        }
         for (index, tag) in analyzeTags.enumerated() {
-            if WordAnalyzeHelp.shared.isGiftNameWords(word: tag.word) {
-                var confidence: Float = 2.0
-                if tag.jieBaTag == "n" {
-                    confidence += 2
-                }
-                confidence += Float(tag.word.count)
-                if let giftUnitTag = giftUnitTag {
-                    if giftUnitTag.index == index {
-                        confidence = -1
-                    } else {
-                        confidence += Float(4 - abs(giftUnitTag.index - index))
+            if unitTag.index == index {
+                continue
+            }
+            if WordAnalyzeHelp.shared.isName(word: tag.word) {
+                var confidence: Float = Float(tag.word.count) * 2.0
+                for name in WordAnalyzeHelp.shared.nameWords {
+                    if let firstIndex = tag.word.range(of: name)?.lowerBound {
+                        if firstIndex.utf16Offset(in: tag.word) == 0 {
+                            confidence += 4
+                            break
+                        }
                     }
-                } else {
-                    confidence += Float(index)/10
                 }
-                
-                if let oldTag = giftNameTag {
+                if tag.jieBaTag == "relation" || tag.jieBaTag == "event" {
+                    confidence = -1
+                }
+                if tag.jieBaTag == "nr" {
+                    confidence += 3
+                }
+                if tag.jieBaTag == "n" {
+                    confidence += 1
+                }
+                if index > unitTag.index {
+                    confidence -= 1
+                }
+                if let oldTag = nameTag {
                     if oldTag.confidence < confidence, tag.confidence < confidence {
                         tag.confidence = confidence
-                        tag.type = .giftName
+                        tag.type = .name
                     }
-                } else if confidence > 0 {
+                } else {
                     tag.confidence = confidence
-                    tag.type = .giftName
+                    tag.type = .name
                 }
             }
+        }
+    }
+    func analyzeRelationTag() {
+        for (_, tag) in analyzeTags.enumerated() {
             if WordAnalyzeHelp.shared.isRelationWords(word: tag.word) {
                 var confidence: Float = 5.0
                 if tag.jieBaTag == "n" {
@@ -257,6 +266,10 @@ class WordAnalyze {
                     tag.type = .relationName
                 }
             }
+        }
+    }
+    func analyzeEventTag() {
+        for (_, tag) in analyzeTags.enumerated() {
             if WordAnalyzeHelp.shared.isEventWords(word: tag.word) {
                 var confidence: Float = 4.0
                 if tag.jieBaTag == "n" {
@@ -274,23 +287,65 @@ class WordAnalyze {
                     tag.type = .eventName
                 }
             }
+        }
+    }
+    func analyzeInOutTag() {
+        for tag in analyzeTags {
             if type == nil, WordAnalyzeHelp.shared.isInAccountWords(word: tag.word) {
-                if tag.type == nil && tag.confidence < 6 {
-                    type = .inAccount
-                }
-            } else if type == nil, WordAnalyzeHelp.shared.isOutAccountWords(word: tag.word) {
-                if tag.type == nil && tag.confidence < 6 {
-                    type = .outAccount
+                type = .inAccount
+                break
+            }
+            if type == nil, WordAnalyzeHelp.shared.isOutAccountWords(word: tag.word) {
+                type = .outAccount
+                break
+            }
+        }
+    }
+    func analyzeGiftNameTag() {
+        guard unitType == .gift, let value = valueTag else {
+            return
+        }
+        let nameTag = self.nameTag
+        let eventTag = self.eventTag
+        let relationTag = self.relationTag
+        let unitTag = giftUnitTag
+        for step in 1...2 {
+            var index = value.index - step
+            if nameTag?.index == index || eventTag?.index == index || relationTag?.index == index || value.index == index || unitTag?.index == index {
+                continue
+            }
+            if index > 0 {
+                let giftNameTag = analyzeTags[index]
+                if WordAnalyzeHelp.shared.isGiftNameWords(word: giftNameTag.word) {
+                    var confidence: Float = Float(6 - step)
+                    if giftNameTag.jieBaTag == "n" {
+                        confidence += 2
+                    }
+                    giftNameTag.confidence = confidence
+                    giftNameTag.type = .giftName
                 }
             }
-            printAnalyzeTags()
+            index = value.index + step
+            if nameTag?.index == index || eventTag?.index == index || relationTag?.index == index || value.index == index || unitTag?.index == index {
+                continue
+            }
+            if index < analyzeTags.count {
+                let giftNameTag = analyzeTags[index]
+                if WordAnalyzeHelp.shared.isGiftNameWords(word: giftNameTag.word) {
+                    var confidence = Float(5 + step)
+                    if giftNameTag.jieBaTag == "n" {
+                        confidence += 2
+                    }
+                    giftNameTag.confidence = confidence
+                    giftNameTag.type = .giftName
+                }
+            }
         }
     }
     
     func analyzeValueTag() {
         if unitType == .gift, let unitTag = giftUnitTag {
-            let step = 1
-            while step <= 2 {
+            for step in 1...2 {
                 var index = unitTag.index - step
                 if index > 0 {
                     let giftValueTag = analyzeTags[index]
@@ -311,8 +366,7 @@ class WordAnalyze {
                 }
             }
         } else if let unitTag = moneyUnitTag {
-            let step = 1
-            while step <= 2 {
+            for step in 1...2 {
                 var index = unitTag.index - step
                 if index > 0 {
                     let moneyValueTag = analyzeTags[index]
@@ -333,7 +387,6 @@ class WordAnalyze {
                 }
             }
         }
-        printAnalyzeTags()
     }
     
     func printAnalyzeTags() {
