@@ -73,6 +73,7 @@ class WordAnalyze {
     var nameTag: AnalyzeTag? {
         return findMaxConfidenceFor(type: .name)
     }
+    var lastNameTag: AnalyzeTag?
     var valueTag: AnalyzeTag? {
         return findMaxConfidenceFor(type: .value)
     }
@@ -125,9 +126,15 @@ class WordAnalyze {
         analyzeInOutTag()
         printAnalyzeTags()
         
+        analyzePepoleLastNameTag()
+        printAnalyzeTags()
+        
         let result = AnalyzeResult()
         if let nameTag = nameTag {
             result.name = nameTag.word
+            if let lastName = self.lastNameTag {
+                result.name += lastName.word
+            }
         }
         if let eventTag = eventTag {
             result.event = eventTag.word
@@ -247,6 +254,21 @@ class WordAnalyze {
             }
         }
     }
+    func analyzePepoleLastNameTag() {
+        guard let nameTag = self.nameTag, nameTag.word.count == 1 else {
+            return
+        }
+        let lastNameTagIndex = nameTag.index + 1
+        if lastNameTagIndex >= analyzeTags.count {
+            return
+        }
+        let lastNameTag = analyzeTags[lastNameTagIndex]
+        if lastNameTag.type != nil || lastNameTag.confidence >= 0 {
+            return
+        }
+        self.lastNameTag = lastNameTag
+    }
+    
     func analyzeRelationTag() {
         for (_, tag) in analyzeTags.enumerated() {
             if WordAnalyzeHelp.shared.isRelationWords(word: tag.word) {
@@ -292,10 +314,12 @@ class WordAnalyze {
     func analyzeInOutTag() {
         for tag in analyzeTags {
             if type == nil, WordAnalyzeHelp.shared.isInAccountWords(word: tag.word) {
+                tag.confidence = 1
                 type = .inAccount
                 break
             }
             if type == nil, WordAnalyzeHelp.shared.isOutAccountWords(word: tag.word) {
+                tag.confidence = 1
                 type = .outAccount
                 break
             }
