@@ -196,7 +196,9 @@ class SpeechButtonView: UIView {
             self.animateView.transform = CGAffineTransform.identity
             self.logoImage.alpha = 0
         }
-        if let text = self.textLabel.text, !text.isEmpty, let result = JieBaBridge.jiebaTag(text) as? Array<JieBaTag> {
+        
+        let sentence = self.textLabel.text ?? ""
+        if !sentence.isEmpty, let result = JieBaBridge.jiebaTag(sentence) as? Array<JieBaTag> {
             let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
             if analyzeResult.name.isEmpty || analyzeResult.value.isEmpty {
                 analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音", code: 100)
