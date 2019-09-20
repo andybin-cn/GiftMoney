@@ -50,7 +50,7 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
                 return Disposables.create { }
             }
             recognitionRequest.shouldReportPartialResults = true
-            
+            var task: SFSpeechRecognitionTask?
             do {
                 let audioSession = AVAudioSession.sharedInstance()
                 try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
@@ -67,7 +67,7 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
                 
                 self.audioEngine.prepare()
                 try self.audioEngine.start()
-                _ = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+                task = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
                     var isFinal = false
                     
                     if let result = result {
@@ -92,6 +92,8 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
             return Disposables.create {
                 self.audioEngine.stop()
                 self.audioEngine.inputNode.removeTap(onBus: 0)
+                self.recognitionRequest?.endAudio()
+                task?.finish()
                 self.recognitionRequest = nil
             }
         }
