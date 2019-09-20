@@ -237,7 +237,14 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             } else {
                 self.nameField.fieldValue = result.name
                 if self.eventNameField.textfield.text?.isEmpty ?? true {
-                    self.eventNameField.fieldValue = result.event
+                    var eventName = result.event
+                    if eventName.isEmpty, let latestusedEvent = Event.latestusedEvents.first {
+                        eventName = latestusedEvent.name
+                        if (self.eventTimeField.fieldValue as? Date)?.toString(withFormat: "yyyy-MM-dd") == Date().toString(withFormat: "yyyy-MM-dd") {
+                            self.eventTimeField.fieldValue = latestusedEvent.time ?? Date()
+                        }
+                    }
+                    self.eventNameField.fieldValue = eventName
                 }
                 if self.relationshipField.textfield.text?.isEmpty ?? true {
                     let relation = result.relation.isEmpty ? "朋友" : result.relation
