@@ -243,6 +243,9 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                     let relation = result.relation.isEmpty ? "朋友" : result.relation
                     self.relationshipField.fieldValue = relation
                 }
+                if let type = result.type {
+                    self.typeSwitch.fieldValue = type.rawValue
+                }
                 
                 let row = TradeItemRow(name: "tradeItems",tradeItem: nil, canDelete: false)
                 row.delegate = self

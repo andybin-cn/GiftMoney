@@ -22,7 +22,6 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
     var speechAvailable = BehaviorRelay<Bool>(value: true)
     var peakPower = PublishRelay<Float>()
     
-    
     private override init() {
         fftSize = 2048
         audioAnalyzer = RealtimeAnalyzer(fftSize: Int(fftSize))

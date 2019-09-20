@@ -41,6 +41,7 @@
 		369DFF2522F7094F0005B67D /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; };
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36B90A152333B3CF00F77DDA /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90A142333B3CF00F77DDA /* ContactManager.swift */; };
+		36B90A202333CC1D00F77DDA /* UserGuideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90A1F2333CC1D00F77DDA /* UserGuideManager.swift */; };
 		380259C223272EF400C50090 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C123272EF400C50090 /* SpeechManager.swift */; };
 		380259C42327461C00C50090 /* SpeechButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C32327461C00C50090 /* SpeechButtonView.swift */; };
 		380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259DE2328F24700C50090 /* CoreTelephony.framework */; };
@@ -210,6 +211,7 @@
 		369DFE3622F6CD930005B67D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
 		36B90A142333B3CF00F77DDA /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
+		36B90A1F2333CC1D00F77DDA /* UserGuideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideManager.swift; sourceTree = "<group>"; };
 		380259C123272EF400C50090 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		380259C32327461C00C50090 /* SpeechButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechButtonView.swift; sourceTree = "<group>"; };
 		380259C82328BC5400C50090 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				38220DFA232F612C007955D0 /* WordAnalyze.swift */,
 				38220DFF23307724007955D0 /* OptionalService.swift */,
 				36B90A142333B3CF00F77DDA /* ContactManager.swift */,
+				36B90A1F2333CC1D00F77DDA /* UserGuideManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1021,6 +1024,7 @@
 				3620B8AF232B8CC000393329 /* RealtimeAnalyzer.swift in Sources */,
 				3870C2D9230A8766000C1996 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
 				3649C75922F67FB9009AF83F /* AppDelegate.swift in Sources */,
+				36B90A202333CC1D00F77DDA /* UserGuideManager.swift in Sources */,
 				3649C75B22F67FB9009AF83F /* SceneDelegate.swift in Sources */,
 				38970F3B2316412A004E2660 /* AccountManager.swift in Sources */,
 				380259C223272EF400C50090 /* SpeechManager.swift in Sources */,

@@ -72,13 +72,11 @@ class WordAnalyzeHelp {
             return word.contains(name)
         }) != nil
     }
+    func isInAccountWords(word: String) -> Bool {
+        return ["收到", "收了", "送来", "收礼", "收入", "入账"].contains(word)
+    }
     func isOutAccountWords(word: String) -> Bool {
-        if word.count > 2 {
-            return false
-        }
-        return ["送", "给", "出"].findFirst(predicate: { (name) -> Bool in
-            return word.contains(name)
-        }) != nil
+        return ["送出", "送给", "发给", "发了", "给了", "送礼"].contains(word)
     }
     func isNumberValue(word: String) -> Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", "^[1-9][0-9]*$")
