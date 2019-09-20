@@ -293,13 +293,13 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
             self.showLoadingIndicator(text: "已恢复\(progress.finishCount)条数据")
             SLog.info("recoverTradesFromCloud progress:\(progress.finishCount)/\(progress.totoalCount)")
         }, onError: { (error) in
-            self.showTipsView(text: "恢复失败")
+            self.catchError(error: error)
             SLog.error(error.localizedDescription)
         }, onCompleted: {
             if let progress = tempProgress {
                 self.showAlertView(title: "一共恢复了\(progress.finishCount)条数据，跳过了\(progress.totoalCount - progress.finishCount)条数据")
             } else {
-                self.showTipsView(text: "恢复完成")
+                self.showTipsView(text: "已经是最新的数据了")
             }
         }).disposed(by: disposeBag)
     }
