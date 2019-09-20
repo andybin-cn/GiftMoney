@@ -230,14 +230,17 @@ class WordAnalyze {
                         }
                     }
                 }
+                if tag.type == .giftUnit {
+                    confidence -= 3
+                }
                 if tag.jieBaTag == "relation" || tag.jieBaTag == "event" {
-                    confidence = -1
+                    confidence = -2
+                }
+                if tag.jieBaTag == "h" {
+                    confidence += 2
                 }
                 if tag.jieBaTag == "nr" {
                     confidence += 3
-                }
-                if tag.jieBaTag == "n" {
-                    confidence += 1
                 }
                 if index > unitTag.index {
                     confidence -= 1

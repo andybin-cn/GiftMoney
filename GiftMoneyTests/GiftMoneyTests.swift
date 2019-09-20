@@ -31,13 +31,15 @@ class GiftMoneyTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         JieBaBridge.insertUserWord("顾子銍", tag: "nr")
+//        JieBaBridge.insertUserWord("曾显添", tag: "nr")
 //        let str = "李大强结婚送给他1套房子."
 //        let str = "李大强结婚送给他1套房子."
 //        let str = "李大强同学3000块."
-        let str = "顾子銍，¥200。"
+//        let str = "顾子銍，¥200。"
 //        let str = "结婚典礼收到同事李大强300元."
 //        let str = "结婚典礼收到李大强同事300元."
 //        let str = "亲戚李中中结婚典礼送礼300元."
+        let str = "大学同学曾显添，¥300红包。"
         guard let result = JieBaBridge.jiebaTag(str) as? Array<JieBaTag> else {
             return
         }

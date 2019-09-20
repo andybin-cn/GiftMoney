@@ -236,20 +236,27 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 }
             } else {
                 self.nameField.fieldValue = result.name
-                if self.eventNameField.textfield.text?.isEmpty ?? true {
-                    var eventName = result.event
-                    if eventName.isEmpty, let latestusedEvent = Event.latestusedEvents.first {
-                        eventName = latestusedEvent.name
-                        if (self.eventTimeField.fieldValue as? Date)?.toString(withFormat: "yyyy-MM-dd") == Date().toString(withFormat: "yyyy-MM-dd") {
-                            self.eventTimeField.fieldValue = latestusedEvent.time ?? Date()
-                        }
+                var eventName = result.event
+                if eventName.isEmpty, let latestusedEvent = Event.latestusedEvents.first {
+                    eventName = latestusedEvent.name
+                    if (self.eventTimeField.fieldValue as? Date)?.toString(withFormat: "yyyy-MM-dd") == Date().toString(withFormat: "yyyy-MM-dd") {
+                        self.eventTimeField.fieldValue = latestusedEvent.time ?? Date()
                     }
-                    self.eventNameField.fieldValue = eventName
                 }
-                if self.relationshipField.textfield.text?.isEmpty ?? true {
-                    let relation = result.relation.isEmpty ? "朋友" : result.relation
-                    self.relationshipField.fieldValue = relation
+                if eventName.isEmpty {
+                    eventName = "其他"
                 }
+                self.eventNameField.fieldValue = eventName
+                
+                var relation = result.relation
+                if relation.isEmpty {
+                    relation = OptionalService.shared.allNames[result.name] ?? ""
+                }
+                if relation.isEmpty {
+                    relation = self.relationshipField.textfield.text ?? "朋友"
+                }
+                self.relationshipField.fieldValue = relation
+                
                 if let type = result.type {
                     self.typeSwitch.fieldValue = type.rawValue
                 }

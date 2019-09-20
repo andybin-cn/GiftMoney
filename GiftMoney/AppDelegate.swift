@@ -106,12 +106,17 @@ extension AppDelegate {
                 JieBaBridge.insertUserWord(name, tag: "nr")
             })
         })
-        _ = ContactManager.shared.allFirstNameDictEmit.subscribe(onNext: { (names) in
+        _ = ContactManager.shared.allFullNameDictEmit.subscribe(onNext: { (names) in
             names.forEach({ (name) in
                 JieBaBridge.insertUserWord(name, tag: "nr")
             })
         })
         _ = ContactManager.shared.allFirstNameDictEmit.subscribe(onNext: { (names) in
+            names.forEach({ (name) in
+                JieBaBridge.insertUserWord(name, tag: "nr")
+            })
+        })
+        _ = ContactManager.shared.allLastNameDictEmit.subscribe(onNext: { (names) in
             names.forEach({ (name) in
                 JieBaBridge.insertUserWord(name, tag: "nr")
             })
