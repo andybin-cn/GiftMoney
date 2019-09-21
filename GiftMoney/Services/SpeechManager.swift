@@ -92,8 +92,8 @@ class SpeechManager: NSObject, SFSpeechRecognizerDelegate {
             return Disposables.create {
                 self.audioEngine.stop()
                 self.audioEngine.inputNode.removeTap(onBus: 0)
-                self.recognitionRequest?.endAudio()
                 task?.finish()
+                self.recognitionRequest?.endAudio()
                 self.recognitionRequest = nil
             }
         }
