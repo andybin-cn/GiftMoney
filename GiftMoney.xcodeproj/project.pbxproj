@@ -84,6 +84,8 @@
 		3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870C2F7230CDD2A000C1996 /* XLSXManager.swift */; };
 		38775E26230E753800B697F5 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38775E25230E753800B697F5 /* CloudManager.swift */; };
 		38775E4C230FEDDB00B697F5 /* AboutUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */; };
+		387F53BE233A078100FF4769 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F53BD233A078100FF4769 /* IntentHandler.swift */; };
+		387F53C2233A078100FF4769 /* SiriHander.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 387F53BB233A078100FF4769 /* SiriHander.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		387F6101230E333D0057D48F /* ImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F6100230E333D0057D48F /* ImagesManager.swift */; };
 		38970F252313CA76004E2660 /* TradeFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F242313CA76004E2660 /* TradeFunctionHeader.swift */; };
 		38970F332314BCDE004E2660 /* TradeFunctionContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */; };
@@ -154,6 +156,13 @@
 			remoteGlobalIDString = 45B6E2391A148F7500288A78;
 			remoteInfo = XlsxReaderWriter;
 		};
+		387F53C0233A078100FF4769 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3649C74D22F67FB9009AF83F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 387F53BA233A078100FF4769;
+			remoteInfo = SiriHander;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -166,6 +175,17 @@
 				369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		387F53C3233A078100FF4769 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				387F53C2233A078100FF4769 /* SiriHander.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -295,6 +315,9 @@
 		3870C2F9230CDEBB000C1996 /* GiftMoney-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GiftMoney-Bridging-Header.h"; sourceTree = "<group>"; };
 		38775E25230E753800B697F5 /* CloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		38775E4B230FEDDB00B697F5 /* AboutUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsVC.swift; sourceTree = "<group>"; };
+		387F53BB233A078100FF4769 /* SiriHander.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SiriHander.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		387F53BD233A078100FF4769 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		387F53BF233A078100FF4769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		387F6100230E333D0057D48F /* ImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesManager.swift; sourceTree = "<group>"; };
 		38970F242313CA76004E2660 /* TradeFunctionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionHeader.swift; sourceTree = "<group>"; };
 		38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeFunctionContainerView.swift; sourceTree = "<group>"; };
@@ -343,6 +366,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		387F53B8233A078100FF4769 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +428,7 @@
 				3649C75722F67FB9009AF83F /* GiftMoney */,
 				3649C77122F67FBD009AF83F /* GiftMoneyTests */,
 				3649C77C22F67FBD009AF83F /* GiftMoneyUITests */,
+				387F53BC233A078100FF4769 /* SiriHander */,
 				3649C75622F67FB9009AF83F /* Products */,
 				71B545BC70EC9E6699DCFCAF /* Pods */,
 				E63782FD40E14AE5A4748D9A /* Frameworks */,
@@ -409,6 +440,7 @@
 			children = (
 				3649C75522F67FB9009AF83F /* GiftMoney.app */,
 				3649C76E22F67FBD009AF83F /* GiftMoneyTests.xctest */,
+				387F53BB233A078100FF4769 /* SiriHander.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -653,6 +685,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		387F53BC233A078100FF4769 /* SiriHander */ = {
+			isa = PBXGroup;
+			children = (
+				387F53BD233A078100FF4769 /* IntentHandler.swift */,
+				387F53BF233A078100FF4769 /* Info.plist */,
+			);
+			path = SiriHander;
+			sourceTree = "<group>";
+		};
 		38EF4A7022F7C9A6007BB28A /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,12 +759,14 @@
 				369DFF2222F708D70005B67D /* [CP] Copy Carthage Frameworks */,
 				369DFF2722F7094F0005B67D /* Embed Frameworks */,
 				4CD2F51439ED1C411DE930BF /* [CP] Embed Pods Frameworks */,
+				387F53C3233A078100FF4769 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				384CCA1F230D362B006F0E3E /* PBXTargetDependency */,
 				369DFF2422F7093E0005B67D /* PBXTargetDependency */,
+				387F53C1233A078100FF4769 /* PBXTargetDependency */,
 			);
 			name = GiftMoney;
 			productName = GiftMoney;
@@ -748,6 +791,23 @@
 			productName = GiftMoneyTests;
 			productReference = 3649C76E22F67FBD009AF83F /* GiftMoneyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		387F53BA233A078100FF4769 /* SiriHander */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 387F53C8233A078100FF4769 /* Build configuration list for PBXNativeTarget "SiriHander" */;
+			buildPhases = (
+				387F53B7233A078100FF4769 /* Sources */,
+				387F53B8233A078100FF4769 /* Frameworks */,
+				387F53B9233A078100FF4769 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SiriHander;
+			productName = SiriHander;
+			productReference = 387F53BB233A078100FF4769 /* SiriHander.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -778,6 +838,9 @@
 						CreatedOnToolsVersion = 11.0;
 						TestTargetID = 3649C75422F67FB9009AF83F;
 					};
+					387F53BA233A078100FF4769 = {
+						CreatedOnToolsVersion = 11.0;
+					};
 				};
 			};
 			buildConfigurationList = 3649C75022F67FB9009AF83F /* Build configuration list for PBXProject "GiftMoney" */;
@@ -806,6 +869,7 @@
 			targets = (
 				3649C75422F67FB9009AF83F /* GiftMoney */,
 				3649C76D22F67FBD009AF83F /* GiftMoneyTests */,
+				387F53BA233A078100FF4769 /* SiriHander */,
 			);
 		};
 /* End PBXProject section */
@@ -854,6 +918,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3649C76C22F67FBD009AF83F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		387F53B9233A078100FF4769 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1056,6 +1127,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		387F53B7233A078100FF4769 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				387F53BE233A078100FF4769 /* IntentHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1073,6 +1152,11 @@
 			isa = PBXTargetDependency;
 			name = XlsxReaderWriter;
 			targetProxy = 384CCA1E230D362B006F0E3E /* PBXContainerItemProxy */;
+		};
+		387F53C1233A078100FF4769 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 387F53BA233A078100FF4769 /* SiriHander */;
+			targetProxy = 387F53C0233A078100FF4769 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1211,6 +1295,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B12DA1992B17A1CABDA11D8E /* Pods-GiftMoney.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
@@ -1253,6 +1338,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FE4753A816F5D3C0997C58EC /* Pods-GiftMoney.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
@@ -1352,6 +1438,48 @@
 			};
 			name = Release;
 		};
+		387F53C4233A078100FF4769 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = EG49RAY3R6;
+				INFOPLIST_FILE = SiriHander/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = andybin.giftmoney.SiriHander;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = SiriHander_Dev;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		387F53C5233A078100FF4769 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = EG49RAY3R6;
+				INFOPLIST_FILE = SiriHander/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = andybin.giftmoney.SiriHander;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = SiriHander_AppStore;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1378,6 +1506,15 @@
 			buildConfigurations = (
 				3649C78622F67FBD009AF83F /* Debug */,
 				3649C78722F67FBD009AF83F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		387F53C8233A078100FF4769 /* Build configuration list for PBXNativeTarget "SiriHander" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				387F53C4233A078100FF4769 /* Debug */,
+				387F53C5233A078100FF4769 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
