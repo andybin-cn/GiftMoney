@@ -243,13 +243,13 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
                 break
             case .restored, .purchased:
                 SLog.info("updatedTransactions: success： \(productID)")
-                if transaction.transactionState == .purchased {
-                    MobClick.event("purchSuccess-\(productID)")
-                }
                 //购买成功
                 //恢复用户先前购买的内容。 可查看originalTransaction属性以获取有关原始购买的信息。
                 if !paidProducts.contains(productID) {
                     paidProducts.append(productID)
+                    if transaction.transactionState == .purchased {
+                        MobClick.event("purchSuccess-\(productID)")
+                    }
                 }
                 self.payObserver?.onNext((productID, transaction.transactionState))
                 self.payObserver?.onCompleted()
