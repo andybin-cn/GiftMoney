@@ -37,7 +37,7 @@ class InviteManager {
         }
     }
     var hasUsedCode: Bool {
-        return !(usedCode?.isEmpty ?? true)
+        return !(usedCode?.isEmptyString ?? true)
     }
     
     private init() {
@@ -51,7 +51,7 @@ class InviteManager {
         return AccountManager.shared.fetchUserInfo().flatMap { (record) -> Observable<String> in
             let hasUsedInvitedCode = record.object(forKey: "hasUsedInvitedCode") as? Bool ?? false
             let usedInvitedCode = record.object(forKey: "usedInvitedCode") as? String ?? ""
-            if hasUsedInvitedCode, !usedInvitedCode.isEmpty {
+            if hasUsedInvitedCode, !usedInvitedCode.isEmptyString {
                 self.usedCode = usedInvitedCode
                 return Observable<String>.error(CommonError(message: "已经使用过邀请码，无法再次使用"))
             } else {
@@ -153,7 +153,7 @@ class InviteManager {
     
     private func fetchInviteCode() -> Observable<(String, Int)> {
         return AccountManager.shared.fetchInviteCode().flatMap { (code) -> Observable<(String, Int)> in
-            if let code = code, !code.isEmpty {
+            if let code = code, !code.isEmptyString {
                 return self.fetchInviteCodeUseCount(inviteCode: code).map { (code, $0) }
             } else {
                 return Observable<(String, Int)>.error(CommonError.init(message: "还没有创建记录", code: 1))

@@ -44,4 +44,8 @@ extension String {
         return "\(yStr)-\(mStr)-\(dStr)".toDate(withFormat: "yyyy-MM-dd")
     }
     
+    
+    public var isEmptyString: Bool {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
 }

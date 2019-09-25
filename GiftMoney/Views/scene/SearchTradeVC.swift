@@ -52,14 +52,14 @@ class SearchTradeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         inputField.rx.text.asObservable().debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] (text) in
-            if let keyword = text, !keyword.isEmpty {
+            if let keyword = text, !keyword.isEmptyString {
                 self?.searchTrade(keyword: keyword)
             }
         }).disposed(by: disposeBag)
     }
     
     @objc func onSearchButtonTapped() {
-        if let keyword = inputField.text, !keyword.isEmpty {
+        if let keyword = inputField.text, !keyword.isEmptyString {
             searchTrade(keyword: keyword)
         } else {
             self.showTipsView(text: "请输入关键字")

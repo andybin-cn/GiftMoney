@@ -114,7 +114,7 @@ class InputField: UIView, FormInput, UITextFieldDelegate {
     
     
     @objc func textfieldChanged() {
-        let isEmpty = textfield.text?.isEmpty ?? true
+        let isEmpty = textfield.text?.isEmptyString ?? true
         if textfield.isEditing || !isEmpty {
             labelPosition = .top
         } else {

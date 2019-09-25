@@ -114,7 +114,7 @@ class TextInput: UIView, FormInput, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        let isEmpty = textfield.text?.isEmpty ?? true
+        let isEmpty = textfield.text?.isEmptyString ?? true
         if isEmpty {
             labelPosition = .center
         } else {

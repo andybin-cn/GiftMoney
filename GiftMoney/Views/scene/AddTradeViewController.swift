@@ -237,13 +237,13 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             } else {
                 self.nameField.fieldValue = result.name
                 var eventName = result.event
-                if eventName.isEmpty, let latestusedEvent = Event.latestusedEvents.first {
+                if eventName.isEmptyString, let latestusedEvent = Event.latestusedEvents.first {
                     eventName = latestusedEvent.name
                     if (self.eventTimeField.fieldValue as? Date)?.toString(withFormat: "yyyy-MM-dd") == Date().toString(withFormat: "yyyy-MM-dd") {
                         self.eventTimeField.fieldValue = latestusedEvent.time ?? Date()
                     }
                 }
-                if eventName.isEmpty {
+                if eventName.isEmptyString {
                     eventName = "其他"
                 }
                 self.eventNameField.fieldValue = eventName
@@ -252,13 +252,13 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                 }
                 
                 var relation = result.relation
-                if relation.isEmpty {
+                if relation.isEmptyString {
                     relation = OptionalService.shared.allNames[result.name] ?? ""
                 }
-                if relation.isEmpty {
+                if relation.isEmptyString {
                     relation = self.relationshipField.textfield.text ?? ""
                 }
-                if relation.isEmpty {
+                if relation.isEmptyString {
                     relation = "朋友"
                 }
                 self.relationshipField.fieldValue = relation
@@ -299,15 +299,15 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     @objc func saveButtonTapped() {
         do {
-            if nameField.textfield.text?.isEmpty ?? true {
+            if nameField.textfield.text?.isEmptyString ?? true {
                 self.showTipsView(text: "请输入姓名")
                 return
             }
-            guard let eventName = eventNameField.textfield.text, !eventName.isEmpty else {
+            guard let eventName = eventNameField.textfield.text, !eventName.isEmptyString else {
                 self.showTipsView(text: "请输入事件名称")
                 return
             }
-            guard let relation = relationshipField.textfield.text, !relation.isEmpty else {
+            guard let relation = relationshipField.textfield.text, !relation.isEmptyString else {
                 self.showTipsView(text: "请选择关系")
                 return
             }

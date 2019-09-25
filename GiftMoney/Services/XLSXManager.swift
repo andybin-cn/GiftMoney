@@ -41,7 +41,7 @@ private class XLSHeader {
     init(worksheet: BRAWorksheet) {
         let columns: [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
         for column in columns {
-            guard let cell = worksheet.cell(forCellReference: "\(column)1"), !cell.hasError, let value = cell.stringValue(), !value.isEmpty else {
+            guard let cell = worksheet.cell(forCellReference: "\(column)1"), !cell.hasError, let value = cell.stringValue(), !value.isEmptyString else {
                 continue
             }
             if idCloums.contains(value) {
@@ -93,7 +93,7 @@ private class XLSBodyPaser {
     }
     
     func cell(forColumn column: String, row: Int) -> BRACell? {
-        if column.isEmpty {
+        if column.isEmptyString {
             return nil
         }
         if row <= 0 {
@@ -118,9 +118,15 @@ private class XLSBodyPaser {
     
     func stringValue(forCell cell: BRACell) -> String? {
         if cell.stringValue() == "General" {
-            return cell.originValue()
+            if let value = cell.originValue(), !value.isEmptyString {
+                return value
+            }
+            return nil
         }
-        return cell.stringValue()
+        if let value = cell.stringValue(), !value.isEmptyString {
+            return value
+        }
+        return nil
     }
     
     func uuid(forRow index: Int) -> String? {
@@ -152,11 +158,11 @@ private class XLSBodyPaser {
         }
         return Trade.TradeType.inAccount
     }
-    func eventName(forRow index: Int) -> String {
+    func eventName(forRow index: Int) -> String? {
         guard let cell = cell(forColumn: header.eventName, row: index) else {
-            return ""
+            return nil
         }
-        return stringValue(forCell: cell) ?? ""
+        return stringValue(forCell: cell)
     }
     func eventTime(forRow index: Int) -> Date? {
         guard let cell = cell(forColumn: header.eventTime, row: index) else {
@@ -321,13 +327,13 @@ class XLSXManager {
                 let parser = XLSBodyPaser(worksheet: firstWorksheet)
                 var trades = [Trade]()
                 var index = 2
-                while !parser.name(forRow: index).isEmpty, !parser.eventName(forRow: index).isEmpty {
+                while !parser.name(forRow: index).isEmptyString {
                     let trade = Trade()
                     trade.id = parser.uuid(forRow: index) ?? UUID().uuidString
                     trade.name = parser.name(forRow: index)
-                    trade.relationship = parser.relation(forRow: index) ?? ""
+                    trade.relationship = parser.relation(forRow: index) ?? "朋友"
                     trade.type = parser.type(forRow: index)
-                    trade.eventName = parser.eventName(forRow: index)
+                    trade.eventName = parser.eventName(forRow: index) ?? "其他"
                     trade.eventTime = parser.eventTime(forRow: index) ?? Date()
                     trade.remark = parser.remark(forRow: index) ?? ""
                     trade.createTime = parser.createTime(forRow: index) ?? Date()
