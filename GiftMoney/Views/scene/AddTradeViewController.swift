@@ -37,13 +37,17 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
     
     var defaultType: Trade.TradeType?
     var defaultEvent: Event?
+    var onCompleted: ((Trade) -> Void)?
     
-    init(trade: Trade? = nil) {
+    
+    init(trade: Trade? = nil, onCompleted: ((Trade) -> Void)? = nil) {
         self.trade = trade
+        self.onCompleted = onCompleted
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(tradeType: Trade.TradeType, event: Event?) {
+    init(tradeType: Trade.TradeType, event: Event?, onCompleted: ((Trade) -> Void)? = nil) {
+        self.onCompleted = onCompleted
         self.defaultType = tradeType
         self.defaultEvent = event
         super.init(nibName: nil, bundle: nil)
@@ -326,12 +330,13 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
             }
             newTrade.tradeMedias.append(objectsIn: medias)
             self.showLoadingIndicator()
-            TradeManger.shared.saveTrade(trade: newTrade, oldTrade: self.trade).subscribe(onCompleted: { [weak self] in
+            TradeManger.shared.saveTrade(trade: newTrade, oldTrade: self.trade).subscribe(onNext: { [weak self] (trade) in
                 self?.navigationController?.popViewController(animated: true)
                 self?.showTipsView(text: "保存成功")
-            }) { [weak self] (error) in
+                self?.onCompleted?(trade)
+            }, onError: { [weak self] (error) in
                 self?.catchError(error: error)
-            }.disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         } catch let err as NSError {
             self.showTipsView(text: err.localizedDescription)
         }

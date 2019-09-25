@@ -19,7 +19,7 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     let header = TradeFunctionHeader(frame: CGRect(x: 0, y: 0, width: ScreenHelp.windowWidth, height: 70))
     
     var filter: FilterOption?
-    var sortType: TradeFuntionSort?
+    var sortType: TradeFuntionSort = TradeFuntionSort.timeDescending
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,11 +62,10 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
     
     func loadData() {
         let trades = TradeManger.shared.searchTrades(tradeType: .inAccount, filter: filter, sortType: sortType)
-        let sortType = self.sortType ?? TradeFuntionSort.timeDescending
         eventsGroup = TradeManger.shared.eventsGroup(trades: trades)
         
         keys = eventsGroup.keys.sorted { (a, b) -> Bool in
-            switch sortType {
+            switch self.sortType {
             case .timeDescending:
                 guard let t1 = a.time else {
                     return false
@@ -121,7 +120,7 @@ class InAccountEventGroupVC: BaseViewController, UITableViewDelegate, UITableVie
         let value = eventsGroup[event]
         event = value?.0 ?? event
         let trades = value?.1
-        let controller = InAccountTradeVC(event: event, trades: trades)
+        let controller = InAccountTradeVC(sortType: sortType, event: event, trades: trades)
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

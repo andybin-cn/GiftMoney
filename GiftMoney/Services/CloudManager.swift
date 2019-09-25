@@ -393,13 +393,13 @@ class CloudManager {
         let result = TradeManger.shared.saveTrade(trade: newTrade, oldTrade: oldTrade, hasBackuped: true)
         
         return Observable<Trade?>.create { (observer) -> Disposable in
-            _ = result.subscribe(onCompleted: {
+            _ = result.subscribe(onNext: { (_) in
                 observer.onNext(newTrade)
                 observer.onCompleted()
-            }) { (error) in
+            }, onError: { (error) in
                 observer.onNext(nil)
                 observer.onCompleted()
-            }
+            })
             return Disposables.create { }
         }
     }

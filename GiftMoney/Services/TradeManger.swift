@@ -55,6 +55,42 @@ class TradeManger {
         return trades
     }
     
+    func searchTrades(event: Event?, tradeType: Trade.TradeType, sortType: TradeFuntionSort?) -> [Trade] {
+        var trades = [Trade]()
+        var result = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", tradeType.rawValue))
+        if let event = event {
+            result = result.filter("eventName == %@", event.name)
+            
+            if let time = event.time {
+                let daySecends = 60 * 60 * 24
+                let minTime = Int(time.timeIntervalSince1970) / daySecends * daySecends
+                let maxtime = minTime + daySecends
+                let minDate = NSDate(timeIntervalSince1970: TimeInterval(minTime))
+                let maxDate = NSDate(timeIntervalSince1970: TimeInterval(maxtime))
+                
+                result = result.filter("eventTime >= %@", minDate)
+                result = result.filter("eventTime < %@", maxDate)
+            }
+        }
+        
+        let sort = sortType ?? TradeFuntionSort.timeDescending
+        switch sort {
+        case .timeDescending:
+            trades = result.sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
+        case .timeAscending:
+            trades = result.sorted(byKeyPath: "eventTime", ascending: true).map{ $0 }
+        case .amountAscending:
+            trades = result.sorted(by: { (t1, t2) -> Bool in
+                return t1.totalMoney < t2.totalMoney
+            })
+        case .amountDescending:
+            trades = result.sorted(by: { (t1, t2) -> Bool in
+                return t1.totalMoney > t2.totalMoney
+            })
+        }
+        return trades
+    }
+    
     func eventsGroup(trades: [Trade]) -> Dictionary<Event, (Event, [Trade])> {
         var tradeGroups = Dictionary<Event, (Event, [Trade])>()
         trades.forEach { (trade) in
@@ -75,7 +111,7 @@ class TradeManger {
         return tradeGroups
     }
     
-    func saveTrade(trade: Trade, oldTrade: Trade?, hasBackuped: Bool = false) -> Completable {
+    func saveTrade(trade: Trade, oldTrade: Trade?, hasBackuped: Bool = false) -> Observable<Trade> {
         RealmManager.share.realm.beginWrite()
         if let oldTrade = oldTrade {
             trade.id = oldTrade.id
@@ -89,13 +125,13 @@ class TradeManger {
         do {
             try RealmManager.share.realm.commitWrite()
         } catch let error {
-            return Completable.error(error)
+            return Observable<Trade>.error(error)
         }
         if !hasBackuped, AccountManager.shared.autoSyncToiCloudEnable {
             _ = CloudBackupQueue.shared.backupTradeInQueue(tradeID: trade.id)
         }
         OptionalService.shared.onTradeAdd(trade: trade)
-        return Completable.empty()
+        return Observable<Trade>.from(optional: trade)
         
     }
     

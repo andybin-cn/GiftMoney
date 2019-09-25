@@ -14,10 +14,13 @@ class InAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewData
     let tableView = UITableView()
     var trades = [Trade]()
     var event: Event?
+    var sortType: TradeFuntionSort
+    var shouldRefreshWhenAppear = false
     
-    init(event: Event? = nil, trades: [Trade]? = nil) {
+    init(sortType: TradeFuntionSort, event: Event? = nil, trades: [Trade]? = nil) {
         self.event = event
         self.trades = trades ?? [Trade]()
+        self.sortType = sortType
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,25 +55,14 @@ class InAccountTradeVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        loadData()
+        if shouldRefreshWhenAppear {
+            loadData()
+        }
+        shouldRefreshWhenAppear = true
     }
     
     func loadData() {
-        if let event = self.event {
-            if let time = event.time {
-                let daySecends = 60 * 60 * 24
-                let minTime = Int(time.timeIntervalSince1970) / daySecends * daySecends
-                let maxtime = minTime + daySecends
-                let minDate = NSDate(timeIntervalSince1970: TimeInterval(minTime))
-                let maxDate = NSDate(timeIntervalSince1970: TimeInterval(maxtime))
-                trades = RealmManager.share.realm.objects(Trade.self).filter(
-                    NSPredicate(format: "typeString == %@ AND eventName == %@ AND eventTime >= %@ AND eventTime < %@", Trade.TradeType.inAccount.rawValue, event.name, minDate, maxDate)).sorted(byKeyPath: "updateTime", ascending: false).map{ $0 }
-            } else {
-                trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName == %@", Trade.TradeType.inAccount.rawValue, event.name)).sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
-            }
-        } else {
-            trades = RealmManager.share.realm.objects(Trade.self).filter(NSPredicate(format: "typeString == %@ AND eventName != ''", Trade.TradeType.inAccount.rawValue)).sorted(byKeyPath: "eventTime", ascending: false).map{ $0 }
-        }
+        trades = TradeManger.shared.searchTrades(event: self.event, tradeType: .inAccount, sortType: self.sortType)
         tableView.reloadData()
     }
     
