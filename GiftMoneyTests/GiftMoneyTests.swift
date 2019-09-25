@@ -19,17 +19,23 @@ class GiftMoneyTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testStringToDate() {
+        let sentence = "19年10月份4号收到李师，¥300红包。"
+        let regex = try! NSRegularExpression(pattern: "[0-9]+[年|/|-| ][0-9]+[月|/|-| ]([0-9]+[|日|号|/|-| ])?", options:[])
+        let matches = regex.matches(in: sentence, options: [], range: NSRange(sentence.startIndex...,in: sentence))
+        if matches.count >= 1 {
+            let dateStr = String(sentence[Range(matches[0].range, in: sentence)!])
+        }
+        
+    }
 
     func testJieBaCut() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
         let string = JieBaBridge.jiebaCut("19年3月10号收到朋友李大强¥500红包.")
         print("JieBaBridge.jiebaCut:\(string)")
     }
     
     func testJieBaTag() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
         JieBaBridge.insertUserWord("顾子銍", tag: "nr")
 //        JieBaBridge.insertUserWord("曾显添", tag: "nr")
 //        let str = "李大强结婚送给他1套房子."
@@ -40,11 +46,7 @@ class GiftMoneyTests: XCTestCase {
 //        let str = "结婚典礼收到李大强同事300元."
 //        let str = "亲戚李中中结婚典礼送礼300元."
         let str = "大学同学曾显添，¥300红包。"
-        guard let result = JieBaBridge.jiebaTag(str) as? Array<JieBaTag> else {
-            return
-        }
-        let analyzeResult = WordAnalyze(tags: result).analyzeSentence()
-        print("JieBaBridge.jiebaTag:\(String(describing: result))")
+        let analyzeResult = WordAnalyze(sentence: str).analyzeSentence()
         print("analyzeResult:\(analyzeResult)")
     }
 

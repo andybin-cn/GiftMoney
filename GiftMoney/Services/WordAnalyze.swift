@@ -55,11 +55,12 @@ class AnalyzeTag {
 
 
 class WordAnalyze {
-    let analyzeTags: [AnalyzeTag]
-    let sentence: String
-    init(tags: Array<JieBaTag>, sentence: String) {
+    var analyzeTags: [AnalyzeTag]
+    var sentence: String
+    var eventTime: Date?
+    init(sentence: String) {
         self.sentence = sentence
-        analyzeTags = tags.map{ AnalyzeTag(tag: $0) }
+        analyzeTags = [AnalyzeTag]()
     }
     
     func findMaxConfidenceFor(type: AnalyzeTagType) -> AnalyzeTag? {
@@ -109,6 +110,14 @@ class WordAnalyze {
     
     
     func analyzeSentence() -> AnalyzeResult {
+        let result = AnalyzeResult()
+        self.sentence = takeOutEventTime(sentence: self.sentence)
+        guard let tags = JieBaBridge.jiebaTag(sentence) as? Array<JieBaTag> else {
+            result.error = CommonError(message: "无法理解您的意思，请您尽量按照例句表达")
+            return result
+        }
+        self.analyzeTags = tags.map{ AnalyzeTag(tag: $0) }
+        
         analyzeTradeUnitTag()
         printAnalyzeTags()
         
@@ -133,7 +142,7 @@ class WordAnalyze {
         analyzePepoleLastNameTag()
         printAnalyzeTags()
         
-        let result = AnalyzeResult()
+        
         if let nameTag = nameTag {
             result.name = nameTag.word
             if let lastName = self.lastNameTag {
@@ -147,7 +156,7 @@ class WordAnalyze {
             result.relation = relationTag.word
         }
         result.type = type
-        result.eventTime = analyzeEventTime()
+        result.eventTime = eventTime
         if unitType == .gift {
             result.unitType = .gift
             if let giftName = giftNameTag, let giftValue = valueTag {
@@ -421,14 +430,15 @@ class WordAnalyze {
         }
     }
     
-    func analyzeEventTime() -> Date? {
-        let regex = try! NSRegularExpression(pattern: "[0-9]+[年|/|-| ][0-9]+[月|/|-| ]([0-9]+[|日|/|-| ])?", options:[])
+    func takeOutEventTime(sentence: String) -> String {
+        let regex = try! NSRegularExpression(pattern: "[0-9]+[年|/|-| ][0-9]+[月|/|-| ]([0-9]+[|日|号|/|-| ])?", options:[])
         let matches = regex.matches(in: sentence, options: [], range: NSRange(sentence.startIndex...,in: sentence))
         if matches.count >= 1 {
             let dateStr = String(sentence[Range(matches[0].range, in: sentence)!])
-            return dateStr.toDate()
+            eventTime = dateStr.toDate()
+            return sentence.replacingOccurrences(of: dateStr, with: " ")
         }
-        return nil
+        return sentence
     }
     
     func printAnalyzeTags() {

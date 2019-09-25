@@ -208,8 +208,8 @@ class SpeechButtonView: UIView {
         }
         
         let sentence = self.textLabel.text ?? ""
-        if !sentence.isEmptyString, let result = JieBaBridge.jiebaTag(sentence) as? Array<JieBaTag> {
-            let analyzeResult = WordAnalyze(tags: result, sentence: sentence).analyzeSentence()
+        if !sentence.isEmptyString {
+            let analyzeResult = WordAnalyze(sentence: sentence).analyzeSentence()
             analyzeResult.originSentence = sentence
             if analyzeResult.name.isEmptyString || analyzeResult.value.isEmptyString {
                 analyzeResult.error = CommonError(message: "无法识别的句子，请尽量按照例句中的格式录入语音", code: 100)
