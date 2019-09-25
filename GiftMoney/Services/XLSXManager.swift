@@ -124,38 +124,41 @@ class XLSXManager {
                     return
                 }
                 var trades = [Trade]()
-                var index = 1
+                var index = 2
                 while let cell = firstWorksheet.cell(forCellReference: "A\(index)"), !cell.hasError, let firstValue = cell.stringValue(), !firstValue.isEmpty {
                     let trade = Trade()
-                    trade.id = firstWorksheet.cell(forCellReference: "A\(index)")?.stringValue() ?? ""
+                    trade.id = firstWorksheet.cell(forCellReference: "A\(index)")?.stringValue() ?? UUID().uuidString
                     trade.name = firstWorksheet.cell(forCellReference: "B\(index)")?.stringValue() ?? ""
                     trade.relationship = firstWorksheet.cell(forCellReference: "C\(index)")?.stringValue() ?? ""
                     trade.eventName = firstWorksheet.cell(forCellReference: "D\(index)")?.stringValue() ?? ""
-                    let eventTime = firstWorksheet.cell(forCellReference: "E\(index)")?.stringValue()?.toDate(withFormat: "yyyy-MM-dd")
+                    let eventCell = firstWorksheet.cell(forCellReference: "E\(index)")
+                    let eventTime = eventCell?.dateValue() ?? eventCell?.stringValue()?.toDate() ?? Date()
                     trade.remark = firstWorksheet.cell(forCellReference: "F\(index)")?.stringValue() ?? ""
                     let typeString = firstWorksheet.cell(forCellReference: "G\(index)")?.stringValue() ?? ""
-                    let createTime = firstWorksheet.cell(forCellReference: "H\(index)")?.stringValue()?.toDate(withFormat: "yyyy-MM-dd")
-                    let updateTime = firstWorksheet.cell(forCellReference: "I\(index)")?.stringValue()?.toDate(withFormat: "yyyy-MM-dd")
+                    let createTime = firstWorksheet.cell(forCellReference: "H\(index)")?.stringValue()?.toDate() ?? Date()
+                    let updateTime = firstWorksheet.cell(forCellReference: "I\(index)")?.stringValue()?.toDate() ?? Date()
                     let tradeItemsString = firstWorksheet.cell(forCellReference: "J\(index)")?.stringValue() ?? ""
                     let tradeMediasString = firstWorksheet.cell(forCellReference: "K\(index)")?.stringValue() ?? ""
+                    let totalMoney = firstWorksheet.cell(forCellReference: "L\(index)")?.stringValue() ?? ""
                     index += 1
-                    guard let eventTime1 = eventTime, let createTime1 = createTime, let updateTime1 = updateTime else {
-                        continue
-                    }
-                    guard let type = Trade.TradeType(rawValue: typeString) else {
-                        continue
-                    }
+                    let type = Trade.TradeType(rawValue: typeString) ?? Trade.TradeType.inAccount
                     if RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: trade.id) != nil {
                         continue
                     }
                     
-                    let tradeItems = [TradeItem].init(JSONString: tradeItemsString) ?? [TradeItem]()
+                    var tradeItems = [TradeItem].init(JSONString: tradeItemsString) ?? [TradeItem]()
                     let tradeMedias = [TradeMedia].init(JSONString: tradeMediasString) ?? [TradeMedia]()
+                    if tradeItems.count == 0, !totalMoney.isEmpty {
+                        let item = TradeItem()
+                        item.type = .money
+                        item.value = totalMoney
+                        tradeItems = [item]
+                    }
                     
                     trade.type = type
-                    trade.eventTime = eventTime1
-                    trade.createTime = createTime1
-                    trade.updateTime = updateTime1
+                    trade.eventTime = eventTime
+                    trade.createTime = createTime
+                    trade.updateTime = updateTime
                     trade.tradeItems.append(objectsIn: tradeItems)
                     trade.tradeMedias.append(objectsIn: tradeMedias)
                     
