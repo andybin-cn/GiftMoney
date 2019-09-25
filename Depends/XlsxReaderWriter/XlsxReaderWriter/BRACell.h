@@ -64,6 +64,7 @@ typedef enum : NSUInteger {
 - (NSDate *)dateValue;
 - (NSString *)formulaString;
 - (NSString *)errorValue;
+- (NSString *)originValue;
 
 
 

@@ -10,7 +10,192 @@ import Foundation
 import RxSwift
 import Common
 
+
+private class XLSHeader {
+    var uuid = ""
+    var name = ""
+    var relation = ""
+    var type = ""
+    var eventName = ""
+    var eventTime = ""
+    var totoalMoney = ""
+    var remark = ""
+    var createTime = ""
+    var updateTime = ""
+    var tradeItems = ""
+    var tradeMedias = ""
+    
+    let idCloums: Set<String> = ["ID", "UUID", "Id", "uuid", "id"]
+    let nameCloums: Set<String> = ["姓名", "名字"]
+    let relationCloums: Set<String> = ["关系"]
+    let typeCloums: Set<String> = ["类型", "类别", "收支"]
+    let eventNameCloums: Set<String> = ["事件", "事件名称"]
+    let eventTimeCloums: Set<String> = ["事件时间"]
+    let totoalMoneyCloums: Set<String> = ["金额", "红包", "总金额(元)", "总金额"]
+    let remarkCloums: Set<String> = ["备注"]
+    let createTimeCloums: Set<String> = ["创建时间"]
+    let updateTimeCloums: Set<String> = ["最近修改时间", "修改时间"]
+    let tradeItemsCloums: Set<String> = ["记录详情"]
+    let tradeMediasCloums: Set<String> = ["图片和视频"]
+    
+    init(worksheet: BRAWorksheet) {
+        let columns: [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        for column in columns {
+            guard let cell = worksheet.cell(forCellReference: "\(column)1"), !cell.hasError, let value = cell.stringValue(), !value.isEmpty else {
+                continue
+            }
+            if idCloums.contains(value) {
+                self.uuid = column
+            }
+            if nameCloums.contains(value) {
+                self.name = column
+            }
+            if relationCloums.contains(value) {
+                self.relation = column
+            }
+            if typeCloums.contains(value) {
+                self.type = column
+            }
+            if eventNameCloums.contains(value) {
+                self.eventName = column
+            }
+            if eventTimeCloums.contains(value) {
+                self.eventTime = column
+            }
+            if totoalMoneyCloums.contains(value) {
+                self.totoalMoney = column
+            }
+            if remarkCloums.contains(value) {
+                self.remark = column
+            }
+            if createTimeCloums.contains(value) {
+                self.createTime = column
+            }
+            if updateTimeCloums.contains(value) {
+                self.updateTime = column
+            }
+            if tradeItemsCloums.contains(value) {
+                self.tradeItems = column
+            }
+            if tradeMediasCloums.contains(value) {
+                self.tradeMedias = column
+            }
+        }
+    }
+    
+}
+
+private class XLSBodyPaser {
+    let worksheet: BRAWorksheet
+    let header: XLSHeader
+    init(worksheet: BRAWorksheet) {
+        header = XLSHeader(worksheet: worksheet)
+        self.worksheet = worksheet
+    }
+    
+    func cell(forColumn column: String, row: Int) -> BRACell? {
+        if column.isEmpty {
+            return nil
+        }
+        if row <= 0 {
+            return nil
+        }
+        guard let cell = worksheet.cell(forCellReference: "\(column)\(row)"), !cell.hasError else {
+            return nil
+        }
+        return cell
+    }
+    
+    func uuid(forRow index: Int) -> String? {
+        guard let cell = cell(forColumn: header.uuid, row: index) else {
+            return nil
+        }
+        return cell.stringValue()
+    }
+    func name(forRow index: Int) -> String {
+        guard let cell = cell(forColumn: header.name, row: index) else {
+            return ""
+        }
+        return cell.stringValue() ?? ""
+    }
+    func relation(forRow index: Int) -> String? {
+        guard let cell = cell(forColumn: header.relation, row: index) else {
+            return nil
+        }
+        return cell.stringValue()
+    }
+    func type(forRow index: Int) -> Trade.TradeType {
+        guard let cell = cell(forColumn: header.type, row: index), let value = cell.stringValue() else {
+            return Trade.TradeType.inAccount
+        }
+        if let _ = ["出", "送", "支", "out"].findFirst(predicate: { (keyWord) -> Bool in
+            return value.contains(keyWord)
+        }) {
+            return Trade.TradeType.outAccount
+        }
+        return Trade.TradeType.inAccount
+    }
+    func eventName(forRow index: Int) -> String {
+        guard let cell = cell(forColumn: header.eventName, row: index) else {
+            return ""
+        }
+        return cell.stringValue() ?? ""
+    }
+    func eventTime(forRow index: Int) -> Date? {
+        guard let cell = cell(forColumn: header.eventTime, row: index) else {
+            return nil
+        }
+        if let date = cell.dateValue() {
+            return date
+        }
+        if cell.stringValue() == "General", let originValue = cell.originValue(), let dateValue = TimeInterval(originValue), let since = "1900-1-1".toDate(withFormat: "yyyy-MM-dd") {
+            //mac导出的Excel格式无法识别，需要自己处理一下，详情参见Excel的datevalue函数
+            return Date(timeInterval: (dateValue - 1) * 24 * 60 * 60, since: since)
+        }
+        return cell.stringValue()?.toDate()
+    }
+    func totoalMoney(forRow index: Int) -> String? {
+        guard let cell = cell(forColumn: header.totoalMoney, row: index) else {
+            return nil
+        }
+        return cell.stringValue()
+    }
+    func remark(forRow index: Int) -> String? {
+        guard let cell = cell(forColumn: header.remark, row: index) else {
+            return nil
+        }
+        return cell.stringValue()
+    }
+    func createTime(forRow index: Int) -> Date? {
+        guard let cell = cell(forColumn: header.createTime, row: index) else {
+            return nil
+        }
+        return cell.dateValue() ?? cell.stringValue()?.toDate()
+    }
+    func updateTime(forRow index: Int) -> Date? {
+        guard let cell = cell(forColumn: header.updateTime, row: index) else {
+            return nil
+        }
+        return cell.dateValue() ?? cell.stringValue()?.toDate()
+    }
+    func tradeItems(forRow index: Int) -> [TradeItem] {
+        guard let cell = cell(forColumn: header.tradeItems, row: index) else {
+            return [TradeItem]()
+        }
+        let value = cell.stringValue() ?? ""
+        return [TradeItem].init(JSONString: value) ?? [TradeItem]()
+    }
+    func tradeMedias(forRow index: Int) -> [TradeMedia] {
+        guard let cell = cell(forColumn: header.tradeMedias, row: index) else {
+            return [TradeMedia]()
+        }
+        let value = cell.stringValue() ?? ""
+        return [TradeMedia].init(JSONString: value) ?? [TradeMedia]()
+    }
+}
+
 class XLSXManager {
+    
     static let shared = XLSXManager()
     
     private init() {
@@ -43,7 +228,7 @@ class XLSXManager {
                     }
                     return
                 }
-                let headers = ["id", "姓名", "关系", "事件名称", "事件时间", "备注", "类别", "创建时间", "最近修改时间", "记录详情", "图片和视频", "总金额(元)"]
+                let headers = ["uuid", "姓名", "关系", "类别", "事件名称", "事件时间", "总金额(元)", "备注", "创建时间", "最近修改时间", "记录详情", "图片和视频"]
                 
                 headers.enumerated().forEach { (arg0) in
                     let (index, name) = arg0
@@ -79,15 +264,15 @@ class XLSXManager {
             trade.id,
             trade.name,
             trade.relationship,
+            trade.type?.rawValue ?? "",
             trade.eventName,
             trade.eventTime.toString(withFormat: "yyyy-MM-dd"),
+            String(format: "%0.0f", trade.totalMoney),
             trade.remark,
-            trade.type?.rawValue ?? "",
             trade.createTime.toString(withFormat: "yyyy-MM-dd"),
             trade.updateTime.toString(withFormat: "yyyy-MM-dd"),
             tradeItemsValue,
             tradeMediasValue,
-            String(format: "%0.0f", trade.totalMoney)
         ]
         
         values.enumerated().forEach { (col, item) in
@@ -123,42 +308,43 @@ class XLSXManager {
                     }
                     return
                 }
+                let parser = XLSBodyPaser(worksheet: firstWorksheet)
                 var trades = [Trade]()
                 var index = 2
-                while let cell = firstWorksheet.cell(forCellReference: "A\(index)"), !cell.hasError, let firstValue = cell.stringValue(), !firstValue.isEmpty {
+                while !parser.name(forRow: index).isEmpty, !parser.eventName(forRow: index).isEmpty {
                     let trade = Trade()
-                    trade.id = firstWorksheet.cell(forCellReference: "A\(index)")?.stringValue() ?? UUID().uuidString
-                    trade.name = firstWorksheet.cell(forCellReference: "B\(index)")?.stringValue() ?? ""
-                    trade.relationship = firstWorksheet.cell(forCellReference: "C\(index)")?.stringValue() ?? ""
-                    trade.eventName = firstWorksheet.cell(forCellReference: "D\(index)")?.stringValue() ?? ""
-                    let eventCell = firstWorksheet.cell(forCellReference: "E\(index)")
-                    let eventTime = eventCell?.dateValue() ?? eventCell?.stringValue()?.toDate() ?? Date()
-                    trade.remark = firstWorksheet.cell(forCellReference: "F\(index)")?.stringValue() ?? ""
-                    let typeString = firstWorksheet.cell(forCellReference: "G\(index)")?.stringValue() ?? ""
-                    let createTime = firstWorksheet.cell(forCellReference: "H\(index)")?.stringValue()?.toDate() ?? Date()
-                    let updateTime = firstWorksheet.cell(forCellReference: "I\(index)")?.stringValue()?.toDate() ?? Date()
-                    let tradeItemsString = firstWorksheet.cell(forCellReference: "J\(index)")?.stringValue() ?? ""
-                    let tradeMediasString = firstWorksheet.cell(forCellReference: "K\(index)")?.stringValue() ?? ""
-                    let totalMoney = firstWorksheet.cell(forCellReference: "L\(index)")?.stringValue() ?? ""
+                    trade.id = parser.uuid(forRow: index) ?? UUID().uuidString
+                    trade.name = parser.name(forRow: index)
+                    trade.relationship = parser.relation(forRow: index) ?? ""
+                    trade.type = parser.type(forRow: index)
+                    trade.eventName = parser.eventName(forRow: index)
+                    trade.eventTime = parser.eventTime(forRow: index) ?? Date()
+                    trade.remark = parser.remark(forRow: index) ?? ""
+                    trade.createTime = parser.createTime(forRow: index) ?? Date()
+                    trade.updateTime = parser.updateTime(forRow: index) ?? Date()
+                    var tradeItems = parser.tradeItems(forRow: index)
+                    let tradeMedias = parser.tradeMedias(forRow: index)
+                    
+                    let totalMoneyStr = parser.totoalMoney(forRow: index) ?? "0"
+                    
                     index += 1
-                    let type = Trade.TradeType(rawValue: typeString) ?? Trade.TradeType.inAccount
                     if RealmManager.share.realm.object(ofType: Trade.self, forPrimaryKey: trade.id) != nil {
                         continue
                     }
                     
-                    var tradeItems = [TradeItem].init(JSONString: tradeItemsString) ?? [TradeItem]()
-                    let tradeMedias = [TradeMedia].init(JSONString: tradeMediasString) ?? [TradeMedia]()
-                    if tradeItems.count == 0, !totalMoney.isEmpty {
+                    let tradeItemsMoney = tradeItems.reduce(0.0) { (r, item) -> Float in
+                        guard item.type == .money, let money = Float(item.value) else {
+                            return r
+                        }
+                        return r + money
+                    }
+                    let totalMoney = Float(totalMoneyStr) ?? 0
+                    if (tradeItems.count == 0 || tradeItemsMoney != totalMoney ), totalMoney > 0 {
                         let item = TradeItem()
                         item.type = .money
-                        item.value = totalMoney
-                        tradeItems = [item]
+                        item.value = String(format: "%0.0f", totalMoney)
+                        tradeItems = [item] + tradeItems.filter{ $0.type == .gift }
                     }
-                    
-                    trade.type = type
-                    trade.eventTime = eventTime
-                    trade.createTime = createTime
-                    trade.updateTime = updateTime
                     trade.tradeItems.append(objectsIn: tradeItems)
                     trade.tradeMedias.append(objectsIn: tradeMedias)
                     

@@ -297,6 +297,9 @@
     return [[self attributedStringValue] string];
 }
 
+- (NSString *)originValue {
+    return _value;
+}
 - (NSAttributedString *)attributedStringValue {
     NSMutableDictionary *attributedTextAttributes = [_worksheet.styles.cellFormats[_styleId] textAttributes].mutableCopy;
     if (attributedTextAttributes == nil) {
