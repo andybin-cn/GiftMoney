@@ -121,7 +121,7 @@ class TradeManger {
     }
     
     func deleteTrades(trades: [Trade]) -> Completable {
-        return Observable<Trade>.from(trades).flatMapLatest { (trade) -> Observable<String> in
+        return Observable<Trade>.from(trades).flatMap { (trade) -> Observable<String> in
             return self.deleteTrade(tradeID: trade.id)
         }.ignoreElements()
     }
