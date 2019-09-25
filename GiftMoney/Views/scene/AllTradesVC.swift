@@ -49,12 +49,11 @@ class AllTradesVC: BaseViewController {
         segmented.selectedSegmentIndex = 0
         segmented.tintColor = .appSecondaryYellow
         segmented.addTarget(self, action: #selector(onSegmentedChanged), for: UIControl.Event.valueChanged)
-        segmented.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .normal)
+        segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 18)], for: .selected)
+        segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow, NSAttributedString.Key.font : UIFont.appFont(ofSize: 13)], for: .normal)
         if #available(iOS 13, *) {
             segmented.layer.borderColor = UIColor.appSecondaryYellow.cgColor
             segmented.layer.borderWidth = 1
-            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .selected)
-            segmented.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow, NSAttributedString.Key.font : UIFont.appBoldFont(ofSize: 16)], for: .normal)
             segmented.setBackgroundImage(UIColor.appSecondaryYellow.toImage(), for: .selected, barMetrics: .default)
             segmented.setBackgroundImage(UIColor.appMainRed.toImage(), for: .normal, barMetrics: .default)
         }
