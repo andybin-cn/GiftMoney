@@ -22,7 +22,7 @@ class TradeItemRow: UIView, FormInput {
             return switcher.selectedSegmentIndex == 0 ? TradeItem.ItemType.money : TradeItem.ItemType.gift
         }
         set {
-            switcher.selectedSegmentIndex = tradeItemType == .money ? 0 : 1
+            switcher.selectedSegmentIndex = newValue == .money ? 0 : 1
         }
     }
     var tradeItemName: String {
@@ -99,10 +99,11 @@ class TradeItemRow: UIView, FormInput {
         switcher.layer.masksToBounds = true
         switcher.selectedSegmentIndex = 0
         switcher.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        switcher.tintColor = UIColor.appGrayBackground
-        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        switcher.setBackgroundImage(UIColor.appSecondaryYellow.toImage(), for: .selected, barMetrics: .default)
-        switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
+        switcher.tintColor = UIColor.appSecondaryRed
+        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appGrayText, NSAttributedString.Key.font: UIFont.appFont(ofSize: 11)], for: .normal)
+        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow, NSAttributedString.Key.font: UIFont.appBoldFont(ofSize: 15)], for: .selected)
+        switcher.setBackgroundImage(UIColor.appSecondaryRed.toImage(), for: .selected, barMetrics: .default)
+        switcher.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal, barMetrics: .default)
         
         switcher.addTarget(self, action: #selector(onSwitcherValueChanged), for: .valueChanged)
         

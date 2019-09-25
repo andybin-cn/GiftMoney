@@ -71,10 +71,11 @@ class SwitchInput: UIView, FormInput {
         switcher.layer.cornerRadius = 6
         switcher.layer.masksToBounds = true
         switcher.selectedSegmentIndex = 0
-        switcher.tintColor = UIColor.appGrayBackground
-        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        switcher.setBackgroundImage(UIColor.appSecondaryYellow.toImage(), for: .selected, barMetrics: .default)
-        switcher.setBackgroundImage(UIColor.appGrayBackground.toImage(), for: .normal, barMetrics: .default)
+        switcher.tintColor = UIColor.appSecondaryRed
+        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appGrayText, NSAttributedString.Key.font: UIFont.appFont(ofSize: 12)], for: .normal)
+        switcher.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appSecondaryYellow, NSAttributedString.Key.font: UIFont.appBoldFont(ofSize: 17)], for: .selected)
+        switcher.setBackgroundImage(UIColor.appSecondaryRed.toImage(), for: .selected, barMetrics: .default)
+        switcher.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal, barMetrics: .default)
         
         addSubview(switcher) { (make) in
             make.top.bottom.right.equalToSuperview()
