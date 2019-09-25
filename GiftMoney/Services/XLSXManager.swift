@@ -106,26 +106,44 @@ private class XLSBodyPaser {
         return cell
     }
     
+    func dateTime(forCell cell: BRACell) -> Date? {
+        if let date = cell.dateValue() {
+            return date
+        }
+        if cell.stringValue() == "General", let originValue = cell.originValue(), let dateValue = TimeInterval(originValue), let since = "1900-1-1".toDate(withFormat: "yyyy-MM-dd") {
+            //mac导出的Excel格式无法识别，需要自己处理一下，详情参见Excel的datevalue函数
+            return Date(timeInterval: (dateValue - 1) * 24 * 60 * 60, since: since)
+        }
+        return cell.stringValue()?.toDate()
+    }
+    
+    func stringValue(forCell cell: BRACell) -> String? {
+        if cell.stringValue() == "General" {
+            return cell.originValue()
+        }
+        return cell.stringValue()
+    }
+    
     func uuid(forRow index: Int) -> String? {
         guard let cell = cell(forColumn: header.uuid, row: index) else {
             return nil
         }
-        return cell.stringValue()
+        return stringValue(forCell: cell)
     }
     func name(forRow index: Int) -> String {
         guard let cell = cell(forColumn: header.name, row: index) else {
             return ""
         }
-        return cell.stringValue() ?? ""
+        return stringValue(forCell: cell) ?? ""
     }
     func relation(forRow index: Int) -> String? {
         guard let cell = cell(forColumn: header.relation, row: index) else {
             return nil
         }
-        return cell.stringValue()
+        return stringValue(forCell: cell)
     }
     func type(forRow index: Int) -> Trade.TradeType {
-        guard let cell = cell(forColumn: header.type, row: index), let value = cell.stringValue() else {
+        guard let cell = cell(forColumn: header.type, row: index), let value = stringValue(forCell: cell) else {
             return Trade.TradeType.inAccount
         }
         if let _ = ["出", "送", "支", "out"].findFirst(predicate: { (keyWord) -> Bool in
@@ -139,57 +157,50 @@ private class XLSBodyPaser {
         guard let cell = cell(forColumn: header.eventName, row: index) else {
             return ""
         }
-        return cell.stringValue() ?? ""
+        return stringValue(forCell: cell) ?? ""
     }
     func eventTime(forRow index: Int) -> Date? {
         guard let cell = cell(forColumn: header.eventTime, row: index) else {
             return nil
         }
-        if let date = cell.dateValue() {
-            return date
-        }
-        if cell.stringValue() == "General", let originValue = cell.originValue(), let dateValue = TimeInterval(originValue), let since = "1900-1-1".toDate(withFormat: "yyyy-MM-dd") {
-            //mac导出的Excel格式无法识别，需要自己处理一下，详情参见Excel的datevalue函数
-            return Date(timeInterval: (dateValue - 1) * 24 * 60 * 60, since: since)
-        }
-        return cell.stringValue()?.toDate()
+        return dateTime(forCell: cell)
     }
     func totoalMoney(forRow index: Int) -> String? {
         guard let cell = cell(forColumn: header.totoalMoney, row: index) else {
             return nil
         }
-        return cell.stringValue()
+        return stringValue(forCell: cell)
     }
     func remark(forRow index: Int) -> String? {
         guard let cell = cell(forColumn: header.remark, row: index) else {
             return nil
         }
-        return cell.stringValue()
+        return stringValue(forCell: cell)
     }
     func createTime(forRow index: Int) -> Date? {
         guard let cell = cell(forColumn: header.createTime, row: index) else {
             return nil
         }
-        return cell.dateValue() ?? cell.stringValue()?.toDate()
+        return dateTime(forCell: cell)
     }
     func updateTime(forRow index: Int) -> Date? {
         guard let cell = cell(forColumn: header.updateTime, row: index) else {
             return nil
         }
-        return cell.dateValue() ?? cell.stringValue()?.toDate()
+        return dateTime(forCell: cell)
     }
     func tradeItems(forRow index: Int) -> [TradeItem] {
         guard let cell = cell(forColumn: header.tradeItems, row: index) else {
             return [TradeItem]()
         }
-        let value = cell.stringValue() ?? ""
+        let value = stringValue(forCell: cell) ?? ""
         return [TradeItem].init(JSONString: value) ?? [TradeItem]()
     }
     func tradeMedias(forRow index: Int) -> [TradeMedia] {
         guard let cell = cell(forColumn: header.tradeMedias, row: index) else {
             return [TradeMedia]()
         }
-        let value = cell.stringValue() ?? ""
+        let value = stringValue(forCell: cell) ?? ""
         return [TradeMedia].init(JSONString: value) ?? [TradeMedia]()
     }
 }
