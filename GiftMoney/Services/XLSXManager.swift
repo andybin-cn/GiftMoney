@@ -82,7 +82,6 @@ private class XLSHeader {
             }
         }
     }
-    
 }
 
 private class XLSBodyPaser {

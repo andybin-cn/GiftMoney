@@ -18,6 +18,7 @@ class AnalyzeResult {
     var type: Trade.TradeType? = nil
     var error: Error? = nil
     var event: String = ""
+    var eventTime: Date? = nil
     var relation: String = ""
     var originSentence: String = ""
 }
@@ -55,7 +56,9 @@ class AnalyzeTag {
 
 class WordAnalyze {
     let analyzeTags: [AnalyzeTag]
-    init(tags: Array<JieBaTag>) {
+    let sentence: String
+    init(tags: Array<JieBaTag>, sentence: String) {
+        self.sentence = sentence
         analyzeTags = tags.map{ AnalyzeTag(tag: $0) }
     }
     
@@ -144,6 +147,7 @@ class WordAnalyze {
             result.relation = relationTag.word
         }
         result.type = type
+        result.eventTime = analyzeEventTime()
         if unitType == .gift {
             result.unitType = .gift
             if let giftName = giftNameTag, let giftValue = valueTag {
@@ -415,6 +419,16 @@ class WordAnalyze {
                 }
             }
         }
+    }
+    
+    func analyzeEventTime() -> Date? {
+        let regex = try! NSRegularExpression(pattern: "[0-9]+[年|/|-| ][0-9]+[月|/|-| ]([0-9]+[|日|/|-| ])?", options:[])
+        let matches = regex.matches(in: sentence, options: [], range: NSRange(sentence.startIndex...,in: sentence))
+        if matches.count >= 1 {
+            let dateStr = String(sentence[Range(matches[0].range, in: sentence)!])
+            return dateStr.toDate()
+        }
+        return nil
     }
     
     func printAnalyzeTags() {
