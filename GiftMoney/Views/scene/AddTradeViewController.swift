@@ -247,6 +247,9 @@ class AddTradeViewController: BaseViewController, TradeItemRowDelegate, ImageSet
                     eventName = "其他"
                 }
                 self.eventNameField.fieldValue = eventName
+                if let eventTime = result.eventTime {
+                    self.eventTimeField.fieldValue = eventTime
+                }
                 
                 var relation = result.relation
                 if relation.isEmpty {
