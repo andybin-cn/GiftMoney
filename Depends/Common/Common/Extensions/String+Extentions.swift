@@ -37,6 +37,19 @@ extension String {
         }
         yStr = String(self[Range(matches[0].range, in: self)!])
         mStr = String(self[Range(matches[1].range, in: self)!])
+        if yStr.count == 2, let yValue = Int(yStr) {
+            if yValue > 30 {
+                yStr = "19\(yStr)"
+            } else {
+                yStr = "20\(yStr)"
+            }
+        } else if yStr.count == 3, let yValue = Int(yStr) {
+            if yValue > 200 {
+                yStr = "1\(yStr)"
+            } else {
+                yStr = "2\(yStr)"
+            }
+        }
         if matches.count < 3 {
             return "\(yStr)-\(mStr)".toDate(withFormat: "yyyy-MM")
         }
