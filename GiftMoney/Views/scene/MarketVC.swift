@@ -185,7 +185,9 @@ class MarketVC: BaseViewController {
     func payForProduct(code: String) {
         self.showLoadingIndicator(text: "正在生成订单")
         MarketManager.shared.fetchProductForCode(code: code).flatMap { (product) -> Observable<(String, SKPaymentTransactionState)> in
-            self.showLoadingIndicator(text: "正在生成订单", afterDelay: 60)
+            DispatchQueue.main.async {
+                self.showLoadingIndicator(text: "正在生成订单", afterDelay: 60)
+            }
             return MarketManager.shared.payFor(product: product)
         }.subscribe(onNext: { [weak self] (productID, state) in
             if state == .purchasing {

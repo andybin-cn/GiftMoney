@@ -202,7 +202,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
             return Disposables.create {
                 self.payObserver = nil
             }
-        }
+        }.observeOn(MainScheduler.instance)
     }
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
