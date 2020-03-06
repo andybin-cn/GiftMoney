@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360266A7241280FE000A9F6D /* RewardAdvertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360266A5241280FE000A9F6D /* RewardAdvertManager.swift */; };
+		360266A8241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360266A6241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift */; };
 		360E722B231ACE3B001842EE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360E722A231ACE3B001842EE /* CloudKit.framework */; };
 		36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2222F7289800D17330 /* ScreenHelp.swift */; };
 		36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2622F728AC00D17330 /* UIFont+appTheme.swift */; };
@@ -172,6 +174,8 @@
 
 /* Begin PBXFileReference section */
 		0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoneyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		360266A5241280FE000A9F6D /* RewardAdvertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardAdvertManager.swift; sourceTree = "<group>"; };
+		360266A6241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAdvertSupportPlugin.swift; sourceTree = "<group>"; };
 		360E722A231ACE3B001842EE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		36135D2222F7289800D17330 /* ScreenHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelp.swift; sourceTree = "<group>"; };
 		36135D2622F728AC00D17330 /* UIFont+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appTheme.swift"; sourceTree = "<group>"; };
@@ -349,6 +353,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		360266A2241280EC000A9F6D /* advert */ = {
+			isa = PBXGroup;
+			children = (
+				360266A5241280FE000A9F6D /* RewardAdvertManager.swift */,
+				360266A6241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift */,
+			);
+			path = advert;
+			sourceTree = "<group>";
+		};
 		36135D2122F7289800D17330 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +429,7 @@
 		3649C75722F67FB9009AF83F /* GiftMoney */ = {
 			isa = PBXGroup;
 			children = (
+				360266A2241280EC000A9F6D /* advert */,
 				3849261823179DB50012D775 /* GiftMoney.entitlements */,
 				3870C2CE230A8766000C1996 /* Extensions */,
 				38236C64230105D700B67B8D /* Services */,
@@ -924,13 +938,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GiftMoney/Pods-GiftMoney-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1011,6 +1021,7 @@
 				361DC9F323312FAB0025F3E1 /* SpeechHelpVC.swift in Sources */,
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */,
+				360266A8241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
 				3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */,
@@ -1040,6 +1051,7 @@
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
 				386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */,
 				38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */,
+				360266A7241280FE000A9F6D /* RewardAdvertManager.swift in Sources */,
 				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
 				387F6101230E333D0057D48F /* ImagesManager.swift in Sources */,
 				38220E0023307724007955D0 /* OptionalService.swift in Sources */,
