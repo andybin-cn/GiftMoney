@@ -14,6 +14,7 @@ class MainTabViewController: UITabBarController {
     
     let inoutRecordsVC = AllTradesVC()
 //    let statisticsVC = StatisticsViewController()
+    let toolVC = ToolsViewController()
     let mineVC = MineViewController()
     
     override func viewDidLoad() {
@@ -33,17 +34,17 @@ class MainTabViewController: UITabBarController {
         inoutRecordsNav.tabBarItem = barItem1
 
         
-//        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
-//        let barItem2 = UITabBarItem(title: "统计", image: UIImage(named: "icons8-financial_analytics")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-financial_analytics")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
-//        barItem2.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
-//        statisticsNav.tabBarItem = barItem2
+        let toolsNav = BaseNavigationController(rootViewController: toolVC)
+        let barItem2 = UITabBarItem(title: "工具", image: UIImage(named: "icons8-financial_analytics")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-financial_analytics")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
+        barItem2.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
+        toolVC.tabBarItem = barItem2
 
-        let barItem3 = UITabBarItem(title: "辅助功能", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
+        let barItem3 = UITabBarItem(title: "我的", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
         barItem3.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
         
         mineNav.tabBarItem = barItem3
 
-        self.viewControllers = [inoutRecordsNav, mineNav]
+        self.viewControllers = [inoutRecordsNav, toolsNav, mineNav]
     }
     
     var localAuthVC: LocalAuthVC?

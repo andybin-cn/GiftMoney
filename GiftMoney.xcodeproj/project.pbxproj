@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		360266A7241280FE000A9F6D /* RewardAdvertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360266A5241280FE000A9F6D /* RewardAdvertManager.swift */; };
-		360266A8241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360266A6241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift */; };
+		360266A7241280FE000A9F6D /* RewardAdvertPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360266A5241280FE000A9F6D /* RewardAdvertPool.swift */; };
+		360266A8241280FE000A9F6D /* RewardAdvertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360266A6241280FE000A9F6D /* RewardAdvertManager.swift */; };
 		360E722B231ACE3B001842EE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360E722A231ACE3B001842EE /* CloudKit.framework */; };
 		36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2222F7289800D17330 /* ScreenHelp.swift */; };
 		36135D2722F728AC00D17330 /* UIFont+appTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36135D2622F728AC00D17330 /* UIFont+appTheme.swift */; };
@@ -44,6 +44,7 @@
 		369DFF2622F7094F0005B67D /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 369DFEBA22F708600005B67D /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36B90A152333B3CF00F77DDA /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90A142333B3CF00F77DDA /* ContactManager.swift */; };
 		36B90A202333CC1D00F77DDA /* UserGuideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B90A1F2333CC1D00F77DDA /* UserGuideManager.swift */; };
+		36CC6CB62413424C0003B0D1 /* ToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CC6CB52413424C0003B0D1 /* ToolsViewController.swift */; };
 		380259C223272EF400C50090 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C123272EF400C50090 /* SpeechManager.swift */; };
 		380259C42327461C00C50090 /* SpeechButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380259C32327461C00C50090 /* SpeechButtonView.swift */; };
 		380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380259DE2328F24700C50090 /* CoreTelephony.framework */; };
@@ -174,8 +175,8 @@
 
 /* Begin PBXFileReference section */
 		0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftMoneyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		360266A5241280FE000A9F6D /* RewardAdvertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardAdvertManager.swift; sourceTree = "<group>"; };
-		360266A6241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAdvertSupportPlugin.swift; sourceTree = "<group>"; };
+		360266A5241280FE000A9F6D /* RewardAdvertPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardAdvertPool.swift; sourceTree = "<group>"; };
+		360266A6241280FE000A9F6D /* RewardAdvertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardAdvertManager.swift; sourceTree = "<group>"; };
 		360E722A231ACE3B001842EE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		36135D2222F7289800D17330 /* ScreenHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenHelp.swift; sourceTree = "<group>"; };
 		36135D2622F728AC00D17330 /* UIFont+appTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+appTheme.swift"; sourceTree = "<group>"; };
@@ -216,6 +217,7 @@
 		369DFE3F22F708600005B67D /* Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Common.xcodeproj; sourceTree = "<group>"; };
 		36B90A142333B3CF00F77DDA /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		36B90A1F2333CC1D00F77DDA /* UserGuideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideManager.swift; sourceTree = "<group>"; };
+		36CC6CB52413424C0003B0D1 /* ToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsViewController.swift; sourceTree = "<group>"; };
 		380259C123272EF400C50090 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		380259C32327461C00C50090 /* SpeechButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechButtonView.swift; sourceTree = "<group>"; };
 		380259C82328BC5400C50090 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -356,8 +358,8 @@
 		360266A2241280EC000A9F6D /* advert */ = {
 			isa = PBXGroup;
 			children = (
-				360266A5241280FE000A9F6D /* RewardAdvertManager.swift */,
-				360266A6241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift */,
+				360266A5241280FE000A9F6D /* RewardAdvertPool.swift */,
+				360266A6241280FE000A9F6D /* RewardAdvertManager.swift */,
 			);
 			path = advert;
 			sourceTree = "<group>";
@@ -400,6 +402,7 @@
 				38970F3E231647AD004E2660 /* InviteCodeVC.swift */,
 				38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */,
 				361DC9F223312FAB0025F3E1 /* SpeechHelpVC.swift */,
+				36CC6CB52413424C0003B0D1 /* ToolsViewController.swift */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				38970F3F231647AD004E2660 /* InviteCodeVC.swift in Sources */,
 				3870C2DA230A8766000C1996 /* UILabel+Extensions.swift in Sources */,
 				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,
+				36CC6CB62413424C0003B0D1 /* ToolsViewController.swift in Sources */,
 				38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */,
 				369DFE1F22F6BD8A0005B67D /* AddTradeViewController.swift in Sources */,
 				3870C2C7230A3C79000C1996 /* SearchTradeVC.swift in Sources */,
@@ -1021,7 +1025,7 @@
 				361DC9F323312FAB0025F3E1 /* SpeechHelpVC.swift in Sources */,
 				38EF4A7A22F7D2D6007BB28A /* RealmManager.swift in Sources */,
 				3870C2E9230B9BFA000C1996 /* MarketServiceGroup.swift in Sources */,
-				360266A8241280FE000A9F6D /* SwiftAdvertSupportPlugin.swift in Sources */,
+				360266A8241280FE000A9F6D /* RewardAdvertManager.swift in Sources */,
 				369DFE3822F6CD930005B67D /* BaseNavigationController.swift in Sources */,
 				3649C79222F68679009AF83F /* MineViewController.swift in Sources */,
 				3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */,
@@ -1051,7 +1055,7 @@
 				36135D2422F7289800D17330 /* ScreenHelp.swift in Sources */,
 				386865842302A1F9000BBD85 /* AllTradesVC.swift in Sources */,
 				38C8491E230D0E7B00900E88 /* TempExcelPreviewVC.swift in Sources */,
-				360266A7241280FE000A9F6D /* RewardAdvertManager.swift in Sources */,
+				360266A7241280FE000A9F6D /* RewardAdvertPool.swift in Sources */,
 				36135D5722FB214700D17330 /* DateInputField.swift in Sources */,
 				387F6101230E333D0057D48F /* ImagesManager.swift in Sources */,
 				38220E0023307724007955D0 /* OptionalService.swift in Sources */,
