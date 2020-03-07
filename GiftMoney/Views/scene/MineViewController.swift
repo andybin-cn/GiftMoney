@@ -19,8 +19,6 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
-    let desc3 = MineDescriptionRow(text: "隐私安全")
-    let faceID: MineSwitchRow
     let desc4 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石VIP】会员资格")
     let inviteCodeRow = MineTextRow(title: "填写邀请码", image: UIImage(named: "icons8-invite"))
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
@@ -32,7 +30,6 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
     
     init() {
         let biometryString = LocalAuthManager.shared.biometryType == .faceID ? "FaceID解锁" : "指纹解锁"
-        faceID = MineSwitchRow(title: biometryString, image: UIImage(named: "icons8-lock2"))
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -85,9 +82,6 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
         
         inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
         
-        stackView.addArrangedSubview(desc3)
-        stackView.addArrangedSubview(faceID)
-        
         stackView.addArrangedSubview(desc4)
         stackView.addArrangedSubview(inviteCodeRow)
         stackView.addArrangedSubview(share)
@@ -96,8 +90,6 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
         stackView.addArrangedSubview(praiseRow)
         stackView.addArrangedSubview(feedBack)
         stackView.addArrangedSubview(aboutUs)
-        
-        faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
         
         addEvents()
         
@@ -121,24 +113,9 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
         
         self.navigationItem.title = dynamicTitle
         inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
-        faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
     }
     
     func addEvents() {
-        
-        faceID.switcher.rx.controlEvent(.valueChanged).subscribe(onNext: { [unowned self] (_) in
-            let isOn = self.faceID.switcher.isOn
-            if isOn {
-                if !LocalAuthManager.shared.localAuthAvailability {
-                    self.faceID.switcher.isOn = false
-                } else if !LocalAuthManager.shared.localAuthEnabled {
-                    MainTabViewController.shared.showLocalAuthView(viewMode: .open)
-                }
-            } else if LocalAuthManager.shared.localAuthAvailability && LocalAuthManager.shared.localAuthEnabled {
-                MainTabViewController.shared.showLocalAuthView(viewMode: .close)
-            }
-        }).disposed(by: disposeBag)
-        
         inviteCodeRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
             MobClick.event("inviteCodeButtonTapped")
             if InviteManager.shared.hasUsedCode {

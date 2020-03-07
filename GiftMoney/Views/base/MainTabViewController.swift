@@ -21,11 +21,11 @@ class MainTabViewController: UITabBarController {
         super.viewDidLoad()
         
         inoutRecordsVC.hidesBottomBarWhenPushed = false
-//        statisticsVC.hidesBottomBarWhenPushed = false
+        toolVC.hidesBottomBarWhenPushed = false
         mineVC.hidesBottomBarWhenPushed = false
         
         let inoutRecordsNav = BaseNavigationController(rootViewController: inoutRecordsVC)
-//        let statisticsNav = BaseNavigationController(rootViewController: statisticsVC)
+        let toolsNav = BaseNavigationController(rootViewController: toolVC)
         let mineNav = BaseNavigationController(rootViewController: mineVC)
 
         let barItem1 = UITabBarItem(title: "礼金记录", image: UIImage(named: "icons8-wish_list")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-wish_list")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
@@ -34,10 +34,10 @@ class MainTabViewController: UITabBarController {
         inoutRecordsNav.tabBarItem = barItem1
 
         
-        let toolsNav = BaseNavigationController(rootViewController: toolVC)
+        
         let barItem2 = UITabBarItem(title: "工具", image: UIImage(named: "icons8-financial_analytics")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-financial_analytics")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
         barItem2.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)
-        toolVC.tabBarItem = barItem2
+        toolsNav.tabBarItem = barItem2
 
         let barItem3 = UITabBarItem(title: "我的", image: UIImage(named: "icons8-settings")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "icons8-settings")?.ui_renderImage(tintColor: UIColor.appMainRed).withRenderingMode(.alwaysOriginal))
         barItem3.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.appMainRed], for: UIControl.State.selected)

@@ -26,9 +26,9 @@ class ToolsViewController: BaseViewController, UIDocumentPickerDelegate {
     let autoSyncToiCloudRow = MineSwitchRow(title: "自动同步数据至iCloud", image: UIImage(named: "icons8-cloud_refresh"))
     let recoverAndBackupData = MineTextRow(title: "手动从iCloud备份/恢复数据", image: UIImage(named: "icons8-data_recovery"))
     let desc2 = MineDescriptionRow(text: "购买服务，永久备份和恢复功能。此功能不会收集用户的任何数据，备份功能会将数据保存至iCloud上，请放心使用！")
+    let desc3 = MineDescriptionRow(text: "隐私安全")
+    let faceID: MineSwitchRow
     
-//    let desc3 = MineDescriptionRow(text: "隐私安全")
-//    let faceID: MineSwitchRow
 //    let desc4 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石VIP】会员资格")
 //    let inviteCodeRow = MineTextRow(title: "填写邀请码", image: UIImage(named: "icons8-invite"))
 //    let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
@@ -39,8 +39,8 @@ class ToolsViewController: BaseViewController, UIDocumentPickerDelegate {
 //    let aboutUs = MineTextRow(title: "关于我们", image: UIImage(named: "icons8-about"))
     
     init() {
-//        let biometryString = LocalAuthManager.shared.biometryType == .faceID ? "FaceID解锁" : "指纹解锁"
-//        faceID = MineSwitchRow(title: biometryString, image: UIImage(named: "icons8-lock2"))
+        let biometryString = LocalAuthManager.shared.biometryType == .faceID ? "FaceID解锁" : "指纹解锁"
+        faceID = MineSwitchRow(title: biometryString, image: UIImage(named: "icons8-lock2"))
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -92,7 +92,11 @@ class ToolsViewController: BaseViewController, UIDocumentPickerDelegate {
         stackView.addArrangedSubview(autoSyncToiCloudRow)
         stackView.addArrangedSubview(recoverAndBackupData)
         
+        stackView.addArrangedSubview(desc3)
+        stackView.addArrangedSubview(faceID)
+        
         autoSyncToiCloudRow.switcher.isOn = AccountManager.shared.autoSyncToiCloudEnable
+        faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
         
         addEvents()
         
@@ -116,6 +120,7 @@ class ToolsViewController: BaseViewController, UIDocumentPickerDelegate {
         
         self.navigationItem.title = dynamicTitle
         autoSyncToiCloudRow.switcher.isOn = AccountManager.shared.autoSyncToiCloudEnable
+        faceID.switcher.isOn = LocalAuthManager.shared.localAuthEnabled
     }
     
     func addEvents() {
@@ -173,6 +178,20 @@ class ToolsViewController: BaseViewController, UIDocumentPickerDelegate {
                 })
             ])
         }).disposed(by: disposeBag)
+        
+        faceID.switcher.rx.controlEvent(.valueChanged).subscribe(onNext: { [unowned self] (_) in
+            let isOn = self.faceID.switcher.isOn
+            if isOn {
+                if !LocalAuthManager.shared.localAuthAvailability {
+                    self.faceID.switcher.isOn = false
+                } else if !LocalAuthManager.shared.localAuthEnabled {
+                    MainTabViewController.shared.showLocalAuthView(viewMode: .open)
+                }
+            } else if LocalAuthManager.shared.localAuthAvailability && LocalAuthManager.shared.localAuthEnabled {
+                MainTabViewController.shared.showLocalAuthView(viewMode: .close)
+            }
+        }).disposed(by: disposeBag)
+        
     }
     
     func backupTradesToCloud() {
