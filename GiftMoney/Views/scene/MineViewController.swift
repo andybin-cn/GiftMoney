@@ -12,7 +12,7 @@ import RxCocoa
 import MessageUI
 import Social
 import Common
-import StoreKit
+//import StoreKit
 
 class MineViewController: BaseViewController, UIDocumentPickerDelegate {
     
@@ -29,7 +29,6 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
     let aboutUs = MineTextRow(title: "关于我们", image: UIImage(named: "icons8-about"))
     
     init() {
-        let biometryString = LocalAuthManager.shared.biometryType == .faceID ? "FaceID解锁" : "指纹解锁"
         super.init(nibName: nil, bundle: nil)
     }
     
