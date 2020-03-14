@@ -83,6 +83,7 @@ class AllTradesVC: BaseViewController, GADBannerViewDelegate {
         view.bringSubviewToFront(tabbar)
         
         onSegmentedChanged()
+        setupBannerAdvert()
     }
     
     @objc func searchButtonTapped() {
@@ -116,7 +117,7 @@ class AllTradesVC: BaseViewController, GADBannerViewDelegate {
         if MarketManager.shared.currentLevel != .free {
             return
         }
-        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         bannerView.addTo(self.view) { (make) in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-ScreenHelp.tabBarHeight)

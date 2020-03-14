@@ -123,15 +123,15 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate, GADBanne
     }
     
     func addEvents() {
-        aboutScoreRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+        aboutScoreRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { (_) in
             MobClick.event("aboutScoreRowTapped")
-            let controller = MarketVC(superVC: self)
-            self?.present(controller, animated: true, completion: nil)
+            let controller = MarketVC(superVC: MainTabViewController.shared)
+            MainTabViewController.shared.present(controller, animated: true, completion: nil)
         }).disposed(by: disposeBag)
-        helpRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+        helpRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { (_) in
             MobClick.event("helpRowTapped")
             let controller = SpeechHelpVC()
-            self?.present(controller, animated: true, completion: nil)
+            MainTabViewController.shared.present(controller, animated: true, completion: nil)
         }).disposed(by: disposeBag)
         
         inviteCodeRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in

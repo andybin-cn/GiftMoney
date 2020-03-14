@@ -64,11 +64,13 @@ class MarketVC: BaseViewController {
 //            make.width.equalTo(120)
 //        }
         
+        
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = UIColor.purple.withAlphaComponent(0.2)
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .crossDissolve
     }
+    let removeAdvertButton = UIButton(type: UIButton.ButtonType.system)
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -130,6 +132,15 @@ class MarketVC: BaseViewController {
                 make.right.equalTo(-15)
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             }
+        }
+        
+        removeAdvertButton.apply { (button) in
+            button.setTitle("去除广告", for: UIControl.State.normal)
+            button.addTarget(self, action: #selector(onRemoveAdvertButtonTapped), for: .touchUpInside)
+        }
+        if MarketManager.shared.currentLevel == .free {
+            stackView.addArrangedSubview(UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 80)))
+            stackView.addArrangedSubview(removeAdvertButton)
         }
         
         addEvents()
@@ -217,6 +228,10 @@ class MarketVC: BaseViewController {
                 self?.showAlertView(title: "恢复完成，已经将您的账号升级为\(MarketManager.shared.currentLevel.label)")
             }
         }).disposed(by: self.disposeBag)
+    }
+    
+    @objc func onRemoveAdvertButtonTapped() {
+        self.payForProduct(code: "vip002")
     }
     
     
