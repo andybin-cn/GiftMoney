@@ -81,6 +81,7 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
         
         inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
         
+        stackView.addArrangedSubview(AccountHeader(mode: .home, viewController: self))
         stackView.addArrangedSubview(desc4)
         stackView.addArrangedSubview(inviteCodeRow)
         stackView.addArrangedSubview(share)

@@ -89,71 +89,73 @@ class SpeechHelpVC: BaseViewController {
         
         stackView.addArrangedSubview(examplesGroup)
         stackView.addArrangedSubview(tipsGroup)
+        stackView.addArrangedSubview(UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 60)))
+        stackView.addArrangedSubview(AccountHeader(mode: .help, viewController: self))
         
-        
-        let experienceView = UIView().then { (experienceView) in
-            let image = MarketManager.shared.currentLevel == .free ? UIImage(named: "icons8-info")?.ui_renderImage(tintColor: .appSecondaryYellow) : UIImage(named: "icons8-approval")
-            let icon = UIImageView(image: image)
-            icon.addTo(experienceView, layout: { (make) in
-                make.left.equalToSuperview()
-                make.centerY.equalToSuperview()
-                make.width.height.equalTo(26)
-            })
-            
-            UILabel().apply({ (label) in
-                label.numberOfLines = 0
-                label.lineBreakMode = .byWordWrapping
-                label.attributedText = authorityDesc
-                label.textAlignment = .left
-                label.addTo(experienceView, layout: { (make) in
-                    make.left.equalTo(icon.snp.right).offset(5)
-                    make.centerY.equalToSuperview()
-                    make.right.equalTo(0)
-                    make.bottom.lessThanOrEqualToSuperview()
-                })
-            })
-            
-            experienceView.addTo(scrollView, layout: { (make) in
-                make.left.equalTo(20)
-                make.top.equalTo(stackView.snp.bottom).offset(40)
-                make.right.equalTo(-20)
-                make.bottom.lessThanOrEqualTo(-40).priority(.low)
-            })
-        }
-        
-        
-        if MarketManager.shared.currentLevel == .free {
-            let buyButton = UIButton()
-            buyButton.setTitle("立即获得无限使用次数", for: .normal)
-            buyButton.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal)
-            buyButton.setTitleColor(.appMainRed, for: .normal)
-            buyButton.layer.cornerRadius = 4
-            buyButton.layer.masksToBounds = true
-            buyButton.addTarget(self, action: #selector(onBuyButtonTapped), for: .touchUpInside)
-            
-            buyButton.addTo(scrollView) { (make) in
-                make.left.equalTo(20)
-                make.top.equalTo(experienceView.snp.bottom).offset(50)
-                make.right.equalTo(-20)
-                make.height.equalTo(35)
-            }
-            
-            let experienceButton = UIButton()
-            experienceButton.setTitle("先体验一番", for: .normal)
-            experienceButton.setBackgroundImage(UIColor.appSecondaryBlue.toImage(), for: .normal)
-            experienceButton.setTitleColor(.appSecondaryYellow, for: .normal)
-            experienceButton.layer.cornerRadius = 4
-            experienceButton.layer.masksToBounds = true
-            experienceButton.addTarget(self, action: #selector(onExperienceButton), for: .touchUpInside)
-            
-            experienceButton.addTo(scrollView) { (make) in
-                make.left.equalTo(20)
-                make.top.equalTo(buyButton.snp.bottom).offset(20)
-                make.right.equalTo(-20)
-                make.bottom.lessThanOrEqualTo(-60).priority(.low)
-                make.height.equalTo(35)
-            }
-        }
+//
+//        let experienceView = UIView().then { (experienceView) in
+//            let image = MarketManager.shared.currentLevel == .free ? UIImage(named: "icons8-info")?.ui_renderImage(tintColor: .appSecondaryYellow) : UIImage(named: "icons8-approval")
+//            let icon = UIImageView(image: image)
+//            icon.addTo(experienceView, layout: { (make) in
+//                make.left.equalToSuperview()
+//                make.centerY.equalToSuperview()
+//                make.width.height.equalTo(26)
+//            })
+//
+//            UILabel().apply({ (label) in
+//                label.numberOfLines = 0
+//                label.lineBreakMode = .byWordWrapping
+//                label.attributedText = authorityDesc
+//                label.textAlignment = .left
+//                label.addTo(experienceView, layout: { (make) in
+//                    make.left.equalTo(icon.snp.right).offset(5)
+//                    make.centerY.equalToSuperview()
+//                    make.right.equalTo(0)
+//                    make.bottom.lessThanOrEqualToSuperview()
+//                })
+//            })
+//
+//            experienceView.addTo(scrollView, layout: { (make) in
+//                make.left.equalTo(20)
+//                make.top.equalTo(stackView.snp.bottom).offset(40)
+//                make.right.equalTo(-20)
+//                make.bottom.lessThanOrEqualTo(-40).priority(.low)
+//            })
+//        }
+//
+//
+//        if MarketManager.shared.currentLevel == .free {
+//            let buyButton = UIButton()
+//            buyButton.setTitle("立即获得无限使用次数", for: .normal)
+//            buyButton.setBackgroundImage(UIColor.appSecondaryGray.toImage(), for: .normal)
+//            buyButton.setTitleColor(.appMainRed, for: .normal)
+//            buyButton.layer.cornerRadius = 4
+//            buyButton.layer.masksToBounds = true
+//            buyButton.addTarget(self, action: #selector(onBuyButtonTapped), for: .touchUpInside)
+//
+//            buyButton.addTo(scrollView) { (make) in
+//                make.left.equalTo(20)
+//                make.top.equalTo(experienceView.snp.bottom).offset(50)
+//                make.right.equalTo(-20)
+//                make.height.equalTo(35)
+//            }
+//
+//            let experienceButton = UIButton()
+//            experienceButton.setTitle("先体验一番", for: .normal)
+//            experienceButton.setBackgroundImage(UIColor.appSecondaryBlue.toImage(), for: .normal)
+//            experienceButton.setTitleColor(.appSecondaryYellow, for: .normal)
+//            experienceButton.layer.cornerRadius = 4
+//            experienceButton.layer.masksToBounds = true
+//            experienceButton.addTarget(self, action: #selector(onExperienceButton), for: .touchUpInside)
+//
+//            experienceButton.addTo(scrollView) { (make) in
+//                make.left.equalTo(20)
+//                make.top.equalTo(buyButton.snp.bottom).offset(20)
+//                make.right.equalTo(-20)
+//                make.bottom.lessThanOrEqualTo(-60).priority(.low)
+//                make.height.equalTo(35)
+//            }
+//        }
         
     }
     

@@ -112,6 +112,7 @@ class MarketVC: BaseViewController {
         }
         stackView.addArrangedSubview(ruleGroup)
         stackView.addArrangedSubview(scoreGroup)
+        stackView.addArrangedSubview(AccountHeader(mode: .help, viewController: self))
         
         closeButton.apply { (button) in
             button.setTitle("关闭", for: UIControl.State.normal)

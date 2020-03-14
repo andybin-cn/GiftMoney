@@ -7,6 +7,8 @@
 
 import Foundation
 import GoogleMobileAds
+import RxSwift
+import Common
 
 enum AdvertResult: String {
     case onADLoad
@@ -23,7 +25,7 @@ class GADRewardedAdHandler: NSObject, GADRewardedAdDelegate {
         
     }
     func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
-        self.handler?(Result<GADAdReward, Error>.failure(error))
+        self.handler?(Result<GADAdReward, Error>.failure(CommonError(message: "无法加载广告", code: -3)))
         self.handler = nil
     }
     func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
@@ -31,7 +33,7 @@ class GADRewardedAdHandler: NSObject, GADRewardedAdDelegate {
         self.handler = nil
     }
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
-        self.handler?(Result<GADAdReward, Error>.failure(NSError(domain: "rewardedAdDidDismiss", code: -2, userInfo: nil)))
+        self.handler?(Result<GADAdReward, Error>.failure(CommonError(message: "取消观看广告", code: -2)))
         self.handler = nil
     }
 }
@@ -42,25 +44,40 @@ class RewardAdvertPool {
     
     init(adUnitID: String) {
         self.adUnitID = adUnitID
-        DispatchQueue.global().async {
-            self.preLoadRewardVideo()
-        }
+        self.preLoadRewardVideo()
     }
     
     func preLoadRewardVideo(count: Int = 1) {
-        for index in 0...count {
-            let result = self.loadRewardVideo()
-            switch result {
-            case .success(let data):
-                NSLog("RewardAdvertManager preLoadRewardVideo success \(index + 1)/\(count)")
-                self.loadedAds.append(data)
-            case .failure(_):
-                NSLog("RewardAdvertManager preLoadRewardVideo failure \(index + 1)/\(count)")
+        for index in 1...count {
+            _ = self.loadRewardVideo().subscribe(onNext: { (advert) in
+                NSLog("RewardAdvertManager preLoadRewardVideo success \(index)/\(count)")
+                self.loadedAds.append(advert)
+            }, onError: { (error) in
+                NSLog("RewardAdvertManager preLoadRewardVideo failure \(index)/\(count)")
+                NSLog("RewardAdvertManager preLoadRewardVideo failure \(error)")
+            })
+        }
+    }
+    
+    func loadRewardVideo() -> Observable<GADRewardedAd> {
+        return Observable<GADRewardedAd>.create { [unowned self] (observer) -> Disposable in
+            let rewardedAd = GADRewardedAd(adUnitID: self.adUnitID)
+            rewardedAd.load(GADRequest()) { (error) in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onNext(rewardedAd)
+                    observer.onCompleted()
+                }
+            }
+            
+            return Disposables.create {
+                
             }
         }
     }
     
-    func loadRewardVideo() -> Result<GADRewardedAd, Error> {
+    private func loadRewardVideo1() -> Result<GADRewardedAd, Error> {
         var result: Result<GADRewardedAd, Error>!
         let semaphore = DispatchSemaphore(value: 0)
         let rewardedAd = GADRewardedAd(adUnitID: adUnitID)
@@ -76,29 +93,32 @@ class RewardAdvertPool {
         return result
     }
     
-    func showRewardVideo(controller: UIViewController) -> Result<GADAdReward, Error> {
-        var rewardAd: GADRewardedAd?
-        if loadedAds.isEmpty {
-            let result = loadRewardVideo()
-            if case let .success(adItem) = result {
-                rewardAd = adItem
+    private func showRewardAdvert(rewardAd: GADRewardedAd, controller: UIViewController) -> Observable<GADAdReward> {
+        return Observable<GADAdReward>.create { (observer) -> Disposable in
+            rewardAd.present(fromRootViewController: controller, delegate: GADRewardedAdHandler(handler: { (showResult) in
+                switch showResult {
+                case .success(let data):
+                    observer.onNext(data)
+                    observer.onCompleted()
+                case .failure(let error):
+                    observer.onError(error)
+                }
+            }))
+            return Disposables.create {
+            }
+        }.timeout(DispatchTimeInterval.seconds(50), scheduler: MainScheduler.instance)
+    }
+    func showRewardVideo(controller: UIViewController) -> Observable<GADAdReward> {
+        if self.loadedAds.isEmpty {
+            return self.loadRewardVideo().flatMap { (rewardAd) -> Observable<GADAdReward> in
+                return self.showRewardAdvert(rewardAd: rewardAd, controller: controller)
             }
         } else {
-            rewardAd = loadedAds.remove(at: 0)
+            let rewardAd = loadedAds.remove(at: 0)
             DispatchQueue.global().async {
                 self.preLoadRewardVideo(count: 1)
             }
+            return self.showRewardAdvert(rewardAd: rewardAd, controller: controller)
         }
-        guard rewardAd != nil else {
-            return Result<GADAdReward, Error>.failure(NSError(domain: "can not got a GADRewardedAd", code: -3, userInfo: nil))
-        }
-        let semaphore = DispatchSemaphore(value: 0)
-        var result: Result<GADAdReward, Error>!
-        rewardAd?.present(fromRootViewController: controller, delegate: GADRewardedAdHandler(handler: { (showResult) in
-            result = showResult
-            semaphore.signal()
-        }))
-        semaphore.wait()
-        return result
     }
 }

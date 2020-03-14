@@ -11,6 +11,7 @@ import CloudKit
 import Common
 import RxSwift
 import RxRelay
+import GoogleMobileAds
 
 class AccountManager {
     static let shared = AccountManager()
@@ -32,6 +33,16 @@ class AccountManager {
         }
     }
     var score: BehaviorRelay<Int>
+    private var lastCheckInTime: Date {
+        didSet {
+            UserDefaults.standard.set(lastCheckInTime, forKey: "AccountManager_lastCheckInTime")
+        }
+    }
+    private var checkInCount: Int {
+        didSet {
+            UserDefaults.standard.set(checkInCount, forKey: "AccountManager_checkInCount")
+        }
+    }
     
     private init() {
         autoSyncToiCloudEnable = UserDefaults.standard.bool(forKey: "autoSyncToiCloudEnable")
@@ -45,6 +56,9 @@ class AccountManager {
         score.subscribe(onNext: { (newValue) in
             UserDefaults.standard.set(newValue, forKey: "AccountManager_score")
         }).disposed(by: disposeBag)
+        
+        lastCheckInTime = UserDefaults.standard.value(forKey: "AccountManager_lastCheckInTime") as? Date ?? Date(timeIntervalSinceNow: -1000000000)
+        checkInCount = UserDefaults.standard.integer(forKey: "AccountManager_checkInCount")
     }
     
     func fetchAndCreateUserInfoZone() -> Observable<CKRecordZone> {
@@ -76,6 +90,27 @@ class AccountManager {
         }
     }
     
+    func hasCheckIn() -> Bool {
+        return abs(lastCheckInTime.daysBetweenDate(toDate: Date())) == 0
+    }
+    
+    func checkIn() -> Int {
+        var addScore = 0
+        let now = Date()
+        let days = abs(lastCheckInTime.daysBetweenDate(toDate: now))
+        lastCheckInTime = now
+        if days > 1 {
+            //超过一天
+            checkInCount = 1
+            addScore = 5
+        } else {
+            checkInCount = checkInCount + 1
+            addScore = 5 + min((checkInCount-1), 7) * 2
+        }
+        score.accept(score.value + addScore)
+        return addScore
+    }
+    
     func fetchUserInfo() -> Observable<CKRecord> {
         if let record = self.userInfo {
             return Observable<CKRecord>.from(optional: record)
@@ -84,6 +119,13 @@ class AccountManager {
                 self.fetchAndCreateUserInfoRecord(zone: $0)
             }
         }
+    }
+    
+    func showRewardAdvert(controller: UIViewController) -> Observable<Int> {
+        return RewardAdvertManager.shared.showRewardVideoAD(controller: controller).map({ (reward) -> Int in
+            self.score.accept(self.score.value + reward.amount.intValue)
+            return reward.amount.intValue
+            })
     }
     
     func fetchAndCreateUserInfoRecord(zone: CKRecordZone) -> Observable<CKRecord> {
@@ -152,4 +194,12 @@ class AccountManager {
         }
     }
     
+}
+
+extension Date {
+    func daysBetweenDate(toDate: Date) -> Int {
+        let components = Calendar.current.dateComponents([.day], from: self, to: toDate)
+        return components.day ?? 0
+        
+    }
 }

@@ -10,6 +10,7 @@ import UIKit
 import Common
 import IQKeyboardManagerSwift
 import RxSwift
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -89,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func setupService() {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         //加载自定义词典
         JieBaBridge.initJieBa()
         _ = OptionalService.shared.newEventsEmit.subscribe(onNext: { (events) in

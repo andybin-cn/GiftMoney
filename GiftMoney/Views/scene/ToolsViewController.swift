@@ -84,6 +84,8 @@ class ToolsViewController: BaseViewController, UIDocumentPickerDelegate {
             }
         }
         
+        stackView.addArrangedSubview(AccountHeader(mode: .home, viewController: self))
+        
         stackView.addArrangedSubview(desc1)
         stackView.addArrangedSubview(excelImportAndExport)
         stackView.addArrangedSubview(imageImportAndExport)
