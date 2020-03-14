@@ -10,9 +10,11 @@ import Foundation
 import CloudKit
 import Common
 import RxSwift
+import RxRelay
 
 class AccountManager {
     static let shared = AccountManager()
+    var disposeBag = DisposeBag()
     
     var userInfo: CKRecord?
     var autoSyncToiCloudEnable: Bool {
@@ -29,9 +31,20 @@ class AccountManager {
             }
         }
     }
+    var score: BehaviorRelay<Int>
     
     private init() {
         autoSyncToiCloudEnable = UserDefaults.standard.bool(forKey: "autoSyncToiCloudEnable")
+        if let scoreValue = UserDefaults.standard.string(forKey: "AccountManager_score") {
+            score = BehaviorRelay<Int>(value: Int(scoreValue) ?? 100)
+        } else {
+            score = BehaviorRelay<Int>(value: 100)
+            UserDefaults.standard.set(score.value, forKey: "AccountManager_score")
+        }
+        
+        score.subscribe(onNext: { (newValue) in
+            UserDefaults.standard.set(newValue, forKey: "AccountManager_score")
+        }).disposed(by: disposeBag)
     }
     
     func fetchAndCreateUserInfoZone() -> Observable<CKRecordZone> {

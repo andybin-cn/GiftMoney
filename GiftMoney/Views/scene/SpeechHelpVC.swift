@@ -77,7 +77,7 @@ class SpeechHelpVC: BaseViewController {
             MarketServiceItem(title: "李萌萌200元"),
             MarketServiceItem(title: "李萌萌同学结婚送给她200元红包")
         ]
-        let examplesGroup = MarketServiceGroup(header: examplesHeader, items: exampleItems, showPay: false)
+        let examplesGroup = MarketServiceGroup(header: examplesHeader, items: exampleItems)
         
         let tipsHeader = MarketServiceHeader(title: "使用技巧：", image: nil)
         let tipsItems: [MarketServiceItem] = [
@@ -85,7 +85,7 @@ class SpeechHelpVC: BaseViewController {
             MarketServiceItem(title: "从【收到的】事件详情界面进行添加可以直接带入事件信息。"),
             MarketServiceItem(title: "从【收到的】事件列表界面进行添加可以直接带入事件信息。")
         ]
-        let tipsGroup = MarketServiceGroup(header: tipsHeader, items: tipsItems, showPay: false)
+        let tipsGroup = MarketServiceGroup(header: tipsHeader, items: tipsItems)
         
         stackView.addArrangedSubview(examplesGroup)
         stackView.addArrangedSubview(tipsGroup)

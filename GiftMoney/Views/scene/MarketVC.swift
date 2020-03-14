@@ -20,57 +20,49 @@ class MarketVC: BaseViewController {
     let recoverButton = UIButton()
     let stackView = UIStackView()
     
-    let freeGroup: MarketServiceGroup
-    let vip1Group: MarketServiceGroup
-    let vip2Group: MarketServiceGroup
-    let inviteGroup: MarketServiceGroup
+    let ruleGroup: MarketServiceGroup
+    let scoreGroup: MarketServiceGroup
+//    let vip2Group: MarketServiceGroup
+//    let inviteGroup: MarketServiceGroup
     
     weak var superVC: UIViewController?
     
     init(superVC: UIViewController?) {
         self.superVC = superVC
-        let freeHeader = MarketServiceHeader(title: "免费试用", image: UIImage(named: "icons8-trial_version")?.ui_renderImage(tintColor: UIColor.white))
+        
+        let headerTitle = MarketServiceHeader(title: "活跃积分使用规则：", image: nil)
         let freeItems: [MarketServiceItem] = [
-            MarketServiceItem(title: "免费体验语音录入功能 \(MarketManager.shared.speechRecognizedLimit)次"),
-            MarketServiceItem(title: "自定义关系 1个"),
-            MarketServiceItem(title: "自定义事件 1个"),
-            MarketServiceItem(title: "每条记录最多添加 1张 图片或视频"),
+            MarketServiceItem(title: "启用iCloud自动同步功能（5积分/次）"),
+            MarketServiceItem(title: "iCloud备份恢复功能（5积分/次）"),
+            MarketServiceItem(title: "自定义关系（5积分/个）"),
+            MarketServiceItem(title: "自定义事件（5积分/个）"),
+            MarketServiceItem(title: "附加图片或视频（2积分/个）"),
+            MarketServiceItem(title: "语音识别录入功能（1积分/次）"),
+            MarketServiceItem(title: "附加图片或视频（1积分/个）"),
+            MarketServiceItem(title: "数据导入导出功能（50积分/次）"),
         ]
-        freeGroup = MarketServiceGroup(header: freeHeader, items: freeItems, showPay: false)
+        ruleGroup = MarketServiceGroup(header: headerTitle, items: freeItems)
         
-        let vip1Header = MarketServiceHeader(title: "购买【黄金VIP】  （¥3元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.appSecondaryYellow))
+        let scoreTitle = MarketServiceHeader(title: "如何获取活跃积分：", image: nil)
         let vip1Items: [MarketServiceItem] = [
-            MarketServiceItem(title: "语音录入功能无限制！"),
-            MarketServiceItem(title: "自定义关系 5个"),
-            MarketServiceItem(title: "自定义事件 5个"),
-            MarketServiceItem(title: "解锁批量修改事件名称"),
-            MarketServiceItem(title: "每条记录最多添加 5 张图片或视频"),
+            MarketServiceItem(title: "每日登陆签到获取积分"),
+            MarketServiceItem(title: "分享好友获取积分"),
+            MarketServiceItem(title: "观看广告获取积分")
         ]
-        vip1Group = MarketServiceGroup(header: vip1Header, items: vip1Items, showPay: true)
+        scoreGroup = MarketServiceGroup(header: scoreTitle, items: vip1Items)
         
-        let vip2Header = MarketServiceHeader(title: "购买【钻石VIP】  （¥12元）", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
-        let vip2Items: [MarketServiceItem] = [
-            MarketServiceItem(title: "黄金VIP的所有功能"),
-            MarketServiceItem(title: "iCloud自动同步（备份）功能"),
-            MarketServiceItem(title: "数据导入导出功能"),
-            MarketServiceItem(title: "不限自定义关系个数"),
-            MarketServiceItem(title: "不限自定义事件个数"),
-            MarketServiceItem(title: "不限图片或视频个数"),
-        ]
-        vip2Group = MarketServiceGroup(header: vip2Header, items: vip2Items, showPay: true)
-        
-        let inviteHeader = MarketServiceHeader(title: "邀请好友获取会员资格", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
-        let inviteItems: [MarketServiceItem] = [
-            MarketServiceItem(title: "成功邀请5位好友，解锁【黄金VIP】所有功能"),
-            MarketServiceItem(title: "成功邀请20位好友，解锁【钻石VIP】所有功能")
-        ]
-        inviteGroup = MarketServiceGroup(header: inviteHeader, items: inviteItems, showPay: true)
-        inviteGroup.buyButton.setTitle("立即邀请", for: .normal)
-        inviteGroup.buyButton.setTitle("立即邀请", for: .disabled)
-        inviteGroup.buyButton.setImage(UIImage(named: "icons8-invite")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .normal)
-        inviteGroup.buyButton.snp.updateConstraints { (make) in
-            make.width.equalTo(120)
-        }
+//        let inviteHeader = MarketServiceHeader(title: "邀请好友获取会员资格", image: UIImage(named: "icons8-vip")?.ui_renderImage(tintColor: UIColor.from(hexString: "#FF6100")))
+//        let inviteItems: [MarketServiceItem] = [
+//            MarketServiceItem(title: "成功邀请5位好友，解锁【黄金VIP】所有功能"),
+//            MarketServiceItem(title: "成功邀请20位好友，解锁【钻石VIP】所有功能")
+//        ]
+//        inviteGroup = MarketServiceGroup(header: inviteHeader, items: inviteItems, showPay: true)
+//        inviteGroup.buyButton.setTitle("立即邀请", for: .normal)
+//        inviteGroup.buyButton.setTitle("立即邀请", for: .disabled)
+//        inviteGroup.buyButton.setImage(UIImage(named: "icons8-invite")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .normal)
+//        inviteGroup.buyButton.snp.updateConstraints { (make) in
+//            make.width.equalTo(120)
+//        }
         
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = UIColor.purple.withAlphaComponent(0.2)
@@ -118,10 +110,8 @@ class MarketVC: BaseViewController {
                 make.bottom.equalToSuperview().offset(-40).priority(ConstraintPriority.low)
             }
         }
-        stackView.addArrangedSubview(freeGroup)
-        stackView.addArrangedSubview(vip1Group)
-        stackView.addArrangedSubview(vip2Group)
-        stackView.addArrangedSubview(inviteGroup)
+        stackView.addArrangedSubview(ruleGroup)
+        stackView.addArrangedSubview(scoreGroup)
         
         closeButton.apply { (button) in
             button.setTitle("关闭", for: UIControl.State.normal)
@@ -150,36 +140,35 @@ class MarketVC: BaseViewController {
     }
     
     func refreshUI() {
-        vip1Group.buyButton.isEnabled = !MarketManager.shared.hasVip1Paid
-        vip2Group.buyButton.isEnabled = !MarketManager.shared.hasVip2Paid
+//        scoreGroup.buyButton.isEnabled = !MarketManager.shared.hasVip1Paid
     }
     
     func addEvents() {
-        vip1Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
-            MobClick.event("buyVIP1BtnTapped")
-            self?.payForProduct(code: "vip001")
-        }).disposed(by: disposeBag)
-        vip2Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
-            MobClick.event("buyVIP2BtnTapped")
-            self?.payForProduct(code: "vip002")
-        }).disposed(by: disposeBag)
-        
-        inviteGroup.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
-            MobClick.event("buyInviteBtnTapped")
-            self?.onInviteButtonTapped()
-        }).disposed(by: disposeBag)
+//        scoreGroup.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+//            MobClick.event("buyVIP1BtnTapped")
+//            self?.payForProduct(code: "vip001")
+//        }).disposed(by: disposeBag)
+//        vip2Group.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+//            MobClick.event("buyVIP2BtnTapped")
+//            self?.payForProduct(code: "vip002")
+//        }).disposed(by: disposeBag)
+//
+//        inviteGroup.buyButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+//            MobClick.event("buyInviteBtnTapped")
+//            self?.onInviteButtonTapped()
+//        }).disposed(by: disposeBag)
     }
     
     func onInviteButtonTapped() {
-        self.showLoadingIndicator(text: "正在获取邀请码")
-        InviteManager.shared.fetchAndGeneratorInviteCode().subscribe(onNext: { [weak self] (_, _) in
-            self?.hiddenLoadingIndicator()
-            let controller = InviteCodeVC()
-            self?.present(BaseNavigationController(rootViewController: controller), animated: true, completion: nil)
-        }, onError: { (error) in
-            SLog.error("fetchAndGeneratorInviteCode error:\(error)")
-            self.catchError(error: error)
-        }).disposed(by: self.disposeBag)
+//        self.showLoadingIndicator(text: "正在获取邀请码")
+//        InviteManager.shared.fetchAndGeneratorInviteCode().subscribe(onNext: { [weak self] (_, _) in
+//            self?.hiddenLoadingIndicator()
+//            let controller = InviteCodeVC()
+//            self?.present(BaseNavigationController(rootViewController: controller), animated: true, completion: nil)
+//        }, onError: { (error) in
+//            SLog.error("fetchAndGeneratorInviteCode error:\(error)")
+//            self.catchError(error: error)
+//        }).disposed(by: self.disposeBag)
     }
     
     func payForProduct(code: String) {

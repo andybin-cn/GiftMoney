@@ -85,77 +85,49 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
     var currentLevel = Level.free
     
     func checkAuth(type: MarketServiceType, controller: UIViewController, count: Int = 0, formValue: String = "") -> Bool {
+        if currentLevel != .free {
+            return true
+        }
+        if scoreFor(type: type, count: count, formValue: formValue) < AccountManager.shared.score.value {
+            self.showPayMessage(msg: "您的活跃积分已不足，快去获取活跃积分吧！", controller: controller)
+            return false
+        }
+        return true
+    }
+    
+    func scoreFor(type: MarketServiceType, count: Int = 0, formValue: String = "") -> Int {
         switch type {
-        case .exportAndImport, .backupAndRecover, .autoSyncToiCloud:
-            if currentLevel != .paid2 {
-                controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
-                return false
-            }
+        case .autoSyncToiCloud:
+            return 5
+        case .backupAndRecover:
+            return 5
+        case .exportAndImport:
+            return 50
         case .relation:
             if Relationship.systemRelationship.contains(Relationship(name: formValue)) {
-                return true
+                return 0
             }
             let latestusedRelationships = Relationship.latestusedRelationships
             if latestusedRelationships.contains(Relationship(name: formValue)) {
-                return true
+                return 0
             }
-            let customCount = latestusedRelationships.filter { (relation) -> Bool in
-                return !Relationship.systemRelationship.contains(relation)
-            }.count
-            if currentLevel == .free && customCount >= 1 {
-                self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1个自定义关系，快去购买Vip解除限制吧", controller: controller)
-                return false
-            } else if currentLevel == .paid1 && customCount >= 5 {
-                self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5个自定义关系，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
-                return false
-            }
+            return 5
         case .event:
             if Event.systemEvents.contains(Event(name: formValue, time: nil, lastUseTime: nil, compareWithTime: false)) {
-                return true
+                return 0
             }
             let latestusedEvents = Event.latestusedEvents
             if latestusedEvents.contains(Event(name: formValue, time: nil, lastUseTime: nil, compareWithTime: false)) {
-                return true
+                return 0
             }
-            let customCount = latestusedEvents.filter { (event) -> Bool in
-                return !Event.systemEvents.contains(event)
-            }.count
-            
-            if currentLevel == .free && customCount >= 1 {
-                self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1个自定义事件，快去购买Vip解除限制吧", controller: controller)
-                return false
-            } else if currentLevel == .paid1 && customCount >= 5 {
-                self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5个自定义事件，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
-                return false
-            }
+            return 5
         case .media:
-            if currentLevel == .free && count >= 1 {
-                self.showPayMessage(msg: "\(Level.free.label)最多只能添加 1张图片或视频，快去购买Vip解除限制吧", controller: controller)
-                return false
-            } else if currentLevel == .paid1 && count >= 5 {
-                self.showPayMessage(msg: "\(Level.paid1.label)最多只能添加 5张图片或视频，快去升级\(Level.paid2.label)解除限制吧", controller: controller)
-                return false
-            }
+            return count * 2
         case .modifyEvent:
-            if currentLevel == .free {
-                self.showPayMessage(msg: "免费账号不支持批量修改事件信息，快去购买Vip解除限制吧", controller: controller)
-                return false
-            }
+            return 0
         case .speechRecognize:
-            if currentLevel == .free && speechRecognizedCount >= speechRecognizedLimit {
-                controller.showAlertView(title: "您的【语音识别功能】免费体验次数已用完，快去购买Vip解除限制吧", message: nil, actions: [
-                    UIAlertAction(title: "立即解锁", style: .destructive, handler: { (_) in
-                        controller.present(MarketVC(superVC: controller), animated: true, completion: nil)
-                    }),
-                    UIAlertAction(title: "查看帮助", style: .cancel, handler: { (_) in
-                        controller.present(SpeechHelpVC(), animated: true, completion: nil)
-                    })
-                ])
-                return false
-            }
-            return true
+            return 1
         }
-        return true
     }
     
     func showPayMessage(msg: String, controller: UIViewController) {

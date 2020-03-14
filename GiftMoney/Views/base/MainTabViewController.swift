@@ -20,6 +20,7 @@ class MainTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBar.tintColor = UIColor.appMainRed
         inoutRecordsVC.hidesBottomBarWhenPushed = false
         toolVC.hidesBottomBarWhenPushed = false
         mineVC.hidesBottomBarWhenPushed = false

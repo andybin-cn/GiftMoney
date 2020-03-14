@@ -28,6 +28,7 @@
 		3649C79022F68644009AF83F /* InAccountTradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C78F22F68644009AF83F /* InAccountTradeVC.swift */; };
 		3649C79222F68679009AF83F /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79122F68679009AF83F /* MineViewController.swift */; };
 		3649C79422F6869B009AF83F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3649C79322F6869B009AF83F /* StatisticsViewController.swift */; };
+		365F3F74241C9F530083D7F0 /* AccountHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F3F73241C9F530083D7F0 /* AccountHeader.swift */; };
 		3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */; };
 		3695D2DA2309112600AC2044 /* EventsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2D92309112600AC2044 /* EventsGroupCell.swift */; };
 		3695D2DD23093E6D00AC2044 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695D2DC23093E6D00AC2044 /* TextInput.swift */; };
@@ -202,6 +203,7 @@
 		3649C78F22F68644009AF83F /* InAccountTradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountTradeVC.swift; sourceTree = "<group>"; };
 		3649C79122F68679009AF83F /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		3649C79322F6869B009AF83F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		365F3F73241C9F530083D7F0 /* AccountHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeader.swift; sourceTree = "<group>"; };
 		3695D2D623090B3600AC2044 /* InAccountEventGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAccountEventGroupVC.swift; sourceTree = "<group>"; };
 		3695D2D92309112600AC2044 /* EventsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsGroupCell.swift; sourceTree = "<group>"; };
 		3695D2DC23093E6D00AC2044 /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				38970F322314BCDE004E2660 /* TradeFunctionContainerView.swift */,
 				38970F3823151E9C004E2660 /* TradeFunctionTimeView.swift */,
 				361DC9F0233114910025F3E1 /* UploadStateButton.swift */,
+				365F3F73241C9F530083D7F0 /* AccountHeader.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				3649C75D22F67FB9009AF83F /* ViewController.swift in Sources */,
 				38970F372314CDC9004E2660 /* TradeFuntionSortView.swift in Sources */,
 				3870C2F8230CDD2A000C1996 /* XLSXManager.swift in Sources */,
+				365F3F74241C9F530083D7F0 /* AccountHeader.swift in Sources */,
 				38970F3F231647AD004E2660 /* InviteCodeVC.swift in Sources */,
 				3870C2DA230A8766000C1996 /* UILabel+Extensions.swift in Sources */,
 				3695D2D723090B3600AC2044 /* InAccountEventGroupVC.swift in Sources */,

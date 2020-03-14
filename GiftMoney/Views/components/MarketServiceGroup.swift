@@ -68,12 +68,12 @@ class MarketServiceItem: UIView {
 class MarketServiceGroup: UIView {
     
     let stackView = UIStackView()
-    let buyButton = UIButton()
-    init(header: MarketServiceHeader, items: [MarketServiceItem], showPay: Bool, isPaid: Bool = false) {
+//    let buyButton = UIButton()
+    init(header: UIView, items: [MarketServiceItem]) {
         super.init(frame: .zero)
         
         header.addTo(self) { (make) in
-            make.left.equalTo(20)
+            make.left.equalToSuperview()
             make.top.equalToSuperview()
         }
         
@@ -85,36 +85,36 @@ class MarketServiceGroup: UIView {
             stackView.addTo(self) { (make) in
                 make.left.equalTo(40)
                 make.top.equalTo(header.snp.bottom)
-                make.bottom.equalToSuperview()
+                make.bottom.right.equalToSuperview()
             }
         }
         
         items.forEach { (item) in
             stackView.addArrangedSubview(item)
         }
-        
-        buyButton.apply { (button) in
-            button.setTitle("购买", for: .normal)
-            button.setTitleColor(UIColor.white, for: .normal)
-            button.setImage(UIImage(named: "icons8-buy")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .normal)
-            
-            button.setTitle("已购买", for: .disabled)
-            button.setTitleColor(UIColor.green, for: .disabled)
-            button.setImage(UIImage(named: "icons8-checked")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .disabled)
-            
-            button.imageView?.contentMode = .scaleAspectFit
-            
-            button.addTo(self) { (make) in
-                make.centerY.equalTo(header)
-                make.right.equalTo(-20)
-//                make.left.greaterThanOrEqualTo(stackView.snp.right).offset(30)
-                make.height.equalTo(35)
-                make.width.equalTo(100)
-            }
-        }
-        buyButton.setEnlargeEdge(top: 0, right: 20, bottom: 50, left: 400)
-        buyButton.isHidden = !showPay
-        buyButton.isEnabled = !isPaid
+//
+//        buyButton.apply { (button) in
+//            button.setTitle("购买", for: .normal)
+//            button.setTitleColor(UIColor.white, for: .normal)
+//            button.setImage(UIImage(named: "icons8-buy")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .normal)
+//
+//            button.setTitle("已购买", for: .disabled)
+//            button.setTitleColor(UIColor.green, for: .disabled)
+//            button.setImage(UIImage(named: "icons8-checked")?.ui_resizeImage(to: CGSize(width: 20, height: 20)), for: .disabled)
+//
+//            button.imageView?.contentMode = .scaleAspectFit
+//
+//            button.addTo(self) { (make) in
+//                make.centerY.equalTo(header)
+//                make.right.equalTo(-20)
+////                make.left.greaterThanOrEqualTo(stackView.snp.right).offset(30)
+//                make.height.equalTo(35)
+//                make.width.equalTo(100)
+//            }
+//        }
+//        buyButton.setEnlargeEdge(top: 0, right: 20, bottom: 50, left: 400)
+//        buyButton.isHidden = !showPay
+//        buyButton.isEnabled = !isPaid
     }
     
     required init?(coder: NSCoder) {

@@ -47,7 +47,7 @@ class RewardAdvertPool {
         }
     }
     
-    func preLoadRewardVideo(count: Int = 2) {
+    func preLoadRewardVideo(count: Int = 1) {
         for index in 0...count {
             let result = self.loadRewardVideo()
             switch result {
