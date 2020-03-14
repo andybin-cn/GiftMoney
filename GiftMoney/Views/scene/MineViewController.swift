@@ -12,13 +12,16 @@ import RxCocoa
 import MessageUI
 import Social
 import Common
+import GoogleMobileAds
 //import StoreKit
 
-class MineViewController: BaseViewController, UIDocumentPickerDelegate {
+class MineViewController: BaseViewController, UIDocumentPickerDelegate, GADBannerViewDelegate {
     
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     
+    let aboutScoreRow = MineTextRow(title: "关于活跃积分的说明", image: UIImage(named: "icons8-fire_element"))
+    let helpRow = MineTextRow(title: "使用帮助", image: UIImage(named: "icons8-help"))
     let desc4 = MineDescriptionRow(text: "邀请好友下载App，解锁【钻石VIP】会员资格")
     let inviteCodeRow = MineTextRow(title: "填写邀请码", image: UIImage(named: "icons8-invite"))
     let share = MineTextRow(title: "分享给好友", image: UIImage(named: "icons8-share"))
@@ -39,7 +42,7 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
     var dynamicTitle: String {
         switch MarketManager.shared.currentLevel {
         case .free:
-            return "普通用户（升级VIP体验更多功能）"
+            return "我的"
         case .paid1:
             return "黄金VIP用户"
         case .paid2:
@@ -75,13 +78,15 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
             stackView.addTo(scrollView) { (make) in
                 make.top.equalTo(20)
                 make.left.right.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-40).priority(ConstraintPriority.low)
+                make.bottom.equalToSuperview().offset(-100).priority(ConstraintPriority.low)
             }
         }
         
         inviteCodeRow.subLabel.text = InviteManager.shared.usedCode
         
         stackView.addArrangedSubview(AccountHeader(mode: .home, viewController: self))
+        stackView.addArrangedSubview(aboutScoreRow)
+        stackView.addArrangedSubview(helpRow)
         stackView.addArrangedSubview(desc4)
         stackView.addArrangedSubview(inviteCodeRow)
         stackView.addArrangedSubview(share)
@@ -96,6 +101,8 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
         #if DEBUG
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "测试", style: .done, target: self, action: #selector(onTestButtonTapped))
         #endif
+        
+        setupBannerAdvert()
     }
     
     @objc func onTestButtonTapped() {
@@ -116,6 +123,17 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
     }
     
     func addEvents() {
+        aboutScoreRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("aboutScoreRowTapped")
+            let controller = MarketVC(superVC: self)
+            self?.present(controller, animated: true, completion: nil)
+        }).disposed(by: disposeBag)
+        helpRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
+            MobClick.event("helpRowTapped")
+            let controller = SpeechHelpVC()
+            self?.present(controller, animated: true, completion: nil)
+        }).disposed(by: disposeBag)
+        
         inviteCodeRow.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] (_) in
             MobClick.event("inviteCodeButtonTapped")
             if InviteManager.shared.hasUsedCode {
@@ -175,6 +193,60 @@ class MineViewController: BaseViewController, UIDocumentPickerDelegate {
             MobClick.event("aboutUsButtonTapped")
             self?.navigationController?.pushViewController(AboutUsVC(), animated: true)
         }).disposed(by: disposeBag)
+    }
+    
+    //MARK: - GADBannerView
+    var bannerView: GADBannerView!
+    func setupBannerAdvert() {
+        if MarketManager.shared.currentLevel != .free {
+            return
+        }
+        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
+        bannerView.addTo(self.view) { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(-ScreenHelp.tabBarHeight)
+        }
+        #if DEBUG
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        #else
+        bannerView.adUnitID = "ca-app-pub-3156075797045250/2998326874"
+        #endif
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
+    }
+    //MARK: - GADBannerViewDelegate
+    /// Tells the delegate an ad request loaded an ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("adViewDidReceiveAd")
+    }
+
+    /// Tells the delegate an ad request failed.
+    func adView(_ bannerView: GADBannerView,
+        didFailToReceiveAdWithError error: GADRequestError) {
+      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+
+    /// Tells the delegate that a full-screen view will be presented in response
+    /// to the user clicking on an ad.
+    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
+      print("adViewWillPresentScreen")
+    }
+
+    /// Tells the delegate that the full-screen view will be dismissed.
+    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
+      print("adViewWillDismissScreen")
+    }
+
+    /// Tells the delegate that the full-screen view has been dismissed.
+    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
+      print("adViewDidDismissScreen")
+    }
+
+    /// Tells the delegate that a user click will open another app (such as
+    /// the App Store), backgrounding the current app.
+    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+      print("adViewWillLeaveApplication")
     }
 
 }

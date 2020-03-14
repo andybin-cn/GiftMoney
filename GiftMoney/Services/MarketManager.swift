@@ -88,7 +88,7 @@ class MarketManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDe
         if currentLevel != .free {
             return true
         }
-        if scoreFor(type: type, count: count, formValue: formValue) < AccountManager.shared.score.value {
+        if scoreFor(type: type, count: count, formValue: formValue) > AccountManager.shared.score.value {
             self.showPayMessage(msg: "您的活跃积分已不足，快去获取活跃积分吧！", controller: controller)
             return false
         }

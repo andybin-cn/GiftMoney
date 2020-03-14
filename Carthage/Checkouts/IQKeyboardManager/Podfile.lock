@@ -1,19 +1,16 @@
 PODS:
   - IQDropDownTextField (1.1.1)
-  - IQKeyboardManager (6.2.0)
-  - IQKeyboardManagerSwift (6.2.0)
-  - YYText (1.0.7)
+  - IQKeyboardManager (6.5.5)
+  - IQKeyboardManagerSwift (6.5.5)
 
 DEPENDENCIES:
   - IQDropDownTextField
   - IQKeyboardManager (from `.`)
   - IQKeyboardManagerSwift (from `.`)
-  - YYText
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - IQDropDownTextField
-    - YYText
 
 EXTERNAL SOURCES:
   IQKeyboardManager:
@@ -23,10 +20,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
-  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
-  IQKeyboardManagerSwift: 295c57e511a04177077780eb50f141b1670dffe5
-  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
 
-PODFILE CHECKSUM: f0cfee8989504b0e144cce04af943f540a0a24f1
+PODFILE CHECKSUM: 8213d203d0ee1c26652ada8ddf82a497746d9712
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.8.4
