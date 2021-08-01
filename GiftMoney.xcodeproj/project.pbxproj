@@ -102,7 +102,6 @@
 		38EF4A7B22F7D2D6007BB28A /* PrimaryKeyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */; };
 		38EF4A7D22F82CFB007BB28A /* SwitchInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */; };
 		38FAD6302317BE2300F28AA0 /* FillInviteCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */; };
-		38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FAD6362319057400F28AA0 /* StoreKit.framework */; };
 		38FECDA32330C4F900232A9A /* WordAnalyzeHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FECDA22330C4F900232A9A /* WordAnalyzeHelp.swift */; };
 		9131A2B286AAF38AC6E07A30 /* Pods_GiftMoneyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */; };
 		CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */; };
@@ -317,7 +316,6 @@
 		38EF4A7922F7D2D6007BB28A /* PrimaryKeyTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryKeyTable.swift; sourceTree = "<group>"; };
 		38EF4A7C22F82CFB007BB28A /* SwitchInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInput.swift; sourceTree = "<group>"; };
 		38FAD62F2317BE2300F28AA0 /* FillInviteCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillInviteCodeVC.swift; sourceTree = "<group>"; };
-		38FAD6362319057400F28AA0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		38FECDA22330C4F900232A9A /* WordAnalyzeHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAnalyzeHelp.swift; sourceTree = "<group>"; };
 		77429951A2D4E665BC0D3F1C /* Pods-GiftMoneyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyTests.debug.xcconfig"; path = "Target Support Files/Pods-GiftMoneyTests/Pods-GiftMoneyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B0213D6FF91967F5765DFA8 /* Pods-GiftMoneyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftMoneyUITests.release.xcconfig"; path = "Target Support Files/Pods-GiftMoneyUITests/Pods-GiftMoneyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 				380259E12328F24700C50090 /* CoreTelephony.framework in Frameworks */,
 				384CCA22230D3643006F0E3E /* libz.tbd in Frameworks */,
 				384CCA20230D3634006F0E3E /* libXlsxReaderWriter.a in Frameworks */,
-				38FAD6372319057400F28AA0 /* StoreKit.framework in Frameworks */,
 				360E722B231ACE3B001842EE /* CloudKit.framework in Frameworks */,
 				CA2D5E3412DF8FDF1099AEF6 /* Pods_GiftMoney.framework in Frameworks */,
 				369DFF2522F7094F0005B67D /* Common.framework in Frameworks */,
@@ -715,7 +712,6 @@
 				380259E22328F25900C50090 /* libsqlite3.tbd */,
 				380259DE2328F24700C50090 /* CoreTelephony.framework */,
 				360E722A231ACE3B001842EE /* CloudKit.framework */,
-				38FAD6362319057400F28AA0 /* StoreKit.framework */,
 				384CCA21230D3643006F0E3E /* libz.tbd */,
 				7CFC11492E154530B342BA1B /* Pods_GiftMoney.framework */,
 				0CD9619697E07FCCA3869C7E /* Pods_GiftMoneyTests.framework */,
@@ -735,7 +731,6 @@
 				3649C75122F67FB9009AF83F /* Sources */,
 				3649C75222F67FB9009AF83F /* Frameworks */,
 				3649C75322F67FB9009AF83F /* Resources */,
-				369DFF2222F708D70005B67D /* [CP] Copy Carthage Frameworks */,
 				369DFF2722F7094F0005B67D /* Embed Frameworks */,
 				4CD2F51439ED1C411DE930BF /* [CP] Embed Pods Frameworks */,
 			);
@@ -904,37 +899,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		369DFF2222F708D70005B67D /* [CP] Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/TZImagePickerController.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SKPhotoBrowser.framework",
-			);
-			name = "[CP] Copy Carthage Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		4CD2F51439ED1C411DE930BF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1146,7 +1110,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1208,7 +1172,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1238,7 +1202,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = EG49RAY3R6;
+				DEVELOPMENT_TEAM = 46JADMRASF;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1262,7 +1226,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = andybin.giftmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = GiftMoney_DEV;
+				PROVISIONING_PROFILE_SPECIFIER = dev_All;
 				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1281,7 +1245,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = EG49RAY3R6;
+				DEVELOPMENT_TEAM = 46JADMRASF;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1305,7 +1269,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = andybin.giftmoney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = GiftMoney_AppStore;
+				PROVISIONING_PROFILE_SPECIFIER = adhoc_All;
 				SWIFT_OBJC_BRIDGING_HEADER = "GiftMoney/GiftMoney-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
