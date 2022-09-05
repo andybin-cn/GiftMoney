@@ -19,10 +19,10 @@
 
 ## App 截图
 
-![image](https://user-images.githubusercontent.com/13436526/188384814-39dbc516-fb06-4685-ad00-53c8ab1a7b69.png)
-![image](https://user-images.githubusercontent.com/13436526/188384852-cfdd43f1-fed0-4e34-a41e-76aac8820f44.png)
-![image](https://user-images.githubusercontent.com/13436526/188384885-3697b469-09ef-46ba-8edc-3a4844130fe6.png)
-![image](https://user-images.githubusercontent.com/13436526/188384908-904b44f5-f355-4593-907b-96dd306ac9c9.png)
-![image](https://user-images.githubusercontent.com/13436526/188384935-b8be5c8e-2e51-4c37-a1f3-35ba537edb72.png)
-![image](https://user-images.githubusercontent.com/13436526/188384961-7c735e1c-1c1a-41f8-8817-4c344ec71923.png)
+<img src="https://user-images.githubusercontent.com/13436526/188384814-39dbc516-fb06-4685-ad00-53c8ab1a7b69.png" width="30%">   <img src="https://user-images.githubusercontent.com/13436526/188384852-cfdd43f1-fed0-4e34-a41e-76aac8820f44.png" width="30%">
+
+<img src="https://user-images.githubusercontent.com/13436526/188384885-3697b469-09ef-46ba-8edc-3a4844130fe6.png" width="30%">   <img src="https://user-images.githubusercontent.com/13436526/188384908-904b44f5-f355-4593-907b-96dd306ac9c9.png" width="30%">
+
+<img src="https://user-images.githubusercontent.com/13436526/188384935-b8be5c8e-2e51-4c37-a1f3-35ba537edb72.png" width="30%">   <img src="https://user-images.githubusercontent.com/13436526/188384961-7c735e1c-1c1a-41f8-8817-4c344ec71923.png" width="30%">
+
 
